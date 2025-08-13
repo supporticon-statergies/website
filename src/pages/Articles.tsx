@@ -3,8 +3,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import ImageWithLoader from "@/components/ImageWithLoader";
 import { Link } from "react-router-dom";
 import { articles } from "@/data/articles";
+import { useScrollToTop } from "@/hooks/use-scroll-to-top";
 
 const Articles = () => {
+  useScrollToTop();
+  
   return (
     <main>
       <SEO
