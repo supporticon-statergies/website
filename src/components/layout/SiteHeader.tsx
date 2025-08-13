@@ -17,11 +17,15 @@ export const SiteHeader = () => {
   return (
     <header className="sticky top-0 z-40 border-b bg-background/80 backdrop-blur">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
-        <Link to="/" aria-label="Supporticon home" className="flex items-center gap-2">
+        <Link
+          to="/"
+          aria-label="Supporticon home"
+          className="flex items-center gap-2 mr-8"
+        >
           <img
             src="/lovable-uploads/2765a5e9-465e-4f44-a546-edc0809cfc34.png"
             alt="Supporticon logo"
-            className="h-7 w-auto"
+            className="h-11 w-auto"
             loading="eager"
           />
         </Link>

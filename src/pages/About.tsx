@@ -1,12 +1,16 @@
 import { SEO } from "@/components/SEO";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import ImageWithLoader from "../components/ImageWithLoader";
 import { Mail, Phone, MapPin, Clock, Linkedin, Users, Target, Zap } from "lucide-react";
+import { useScrollToTop } from "@/hooks/use-scroll-to-top";
 
 const About = () => {
+  useScrollToTop();
+  
   return (
     <main>
       <SEO
-        title="About — Help Dude"
+        title="About — Supporticon"
         description="Our mission is to empower support engineers with AI that removes busywork and accelerates answers."
         canonicalPath="/about"
       />
@@ -15,7 +19,7 @@ const About = () => {
       <section className="container mx-auto px-4 py-16">
         <div className="grid gap-12 lg:grid-cols-2 items-center">
           <div>
-            <h1 className="font-display text-4xl font-bold mb-6">About Help Dude</h1>
+            <h1 className="font-display text-4xl font-bold mb-6">About Supporticon</h1>
             <p className="text-lg text-muted-foreground mb-6">
               We build SaaS products that deeply understand the day-to-day workflows of support engineers. Our aim is simple: reduce toil, increase clarity, and help teams delight customers.
             </p>
@@ -24,8 +28,12 @@ const About = () => {
             </p>
           </div>
           <div className="flex justify-center">
-            <div className="w-64 h-64 bg-gradient-to-br from-primary/20 to-primary/5 rounded-full flex items-center justify-center">
-              <Users className="w-32 h-32 text-primary/60" />
+            <div className="w-auto h-auto overflow-hidden">
+              <ImageWithLoader
+                src="/src/assets/about_image.jpg"
+                alt="About SupportIcon"
+                className="w-full h-full object-cover"
+              />
             </div>
           </div>
         </div>
@@ -41,8 +49,7 @@ const About = () => {
             </CardTitle>
           </CardHeader>
           <CardContent className="text-muted-foreground">
-            Bring the right information to support engineers at the right time, using secure AI systems that respect privacy and context.
-          </CardContent>
+          We create intelligent, secure AI tools that work with humans — not against them — to enhance the support experience. Through personalization, enterprise-grade security, and measurable ROI, we empower organizations to elevate both customer and agent satisfaction, transforming support from a cost center into a powerful growth engine.          </CardContent>
         </Card>
         <Card>
           <CardHeader>
@@ -52,9 +59,46 @@ const About = () => {
             </CardTitle>
           </CardHeader>
           <CardContent className="text-muted-foreground">
-            A world where support teams never have to hunt for answers — knowledge flows to them and every customer gets fast, accurate responses.
-          </CardContent>
+          To make customer support a source of pride, joy, and growth — for both the people who deliver it and the customers who experience it, ensuring each interaction fosters trust, value, and satisfaction while strengthening long-term relationships and organizational success.            </CardContent>
         </Card>
+      </section>
+
+      {/* Support Icon Origin Story */}
+      <section className="container mx-auto px-4 pb-20">
+        <h2 className="font-display text-3xl font-bold text-center mb-12">Support Icon Origin Story</h2>
+        <div className="max-w-4xl mx-auto">
+          <Card className="p-8">
+            <div className="prose prose-lg max-w-none text-muted-foreground">
+              <p className="mb-6">
+                As a founder, every journey has its origin story, and mine began with observing someone I deeply admire 😍 —my husband Manikandan S A💡❤️
+              </p>
+              
+              <p className="mb-6">
+                Through his work in Customer Support, I witnessed firsthand the daily struggles he faced: the long hours ⏳, the difficult customers 😓, and the never-ending tasks 📞.
+              </p>
+              
+              <p className="mb-6">
+                Yet, at the end of the day, when he received a simple email of appreciation 📧 or had a fruitful call where he truly made a difference, his face would light up ✨.
+              </p>
+              
+              <p className="mb-6">
+                He would say, "This call made my day." 😊 Those moments of joy were the highlights of his hard work.
+              </p>
+              
+              <p className="mb-6">
+                What struck me the most was "How meaningful those moments were 😇 "—not just for him, but for the customer he was able to help. It was in these moments I realized something: customer support is not just about solving problems; it's about creating connections 🤝 and making people feel valued 💖.
+              </p>
+              
+              <p className="mb-6">
+                Inspired by his journey, I thought, "What if I could make his life easier?" 💭 That simple idea turned into a mission to improve the customer support experience. Over time, that idea took shape 🛠️, and I validated it with him—since he's an expert in the field, I knew his feedback would be invaluable.
+              </p>
+              
+              <p className="mb-0">
+                And that's how the vision behind Supporticon Strategies Private Limited was born 🚀. We're here to empower customer support professionals with tools that streamline their work 🧑‍💻, so they can focus on what truly matters—creating meaningful connections and making their clients' day. 🌟
+              </p>
+            </div>
+          </Card>
+        </div>
       </section>
 
       {/* Leadership Section */}
@@ -67,13 +111,13 @@ const About = () => {
                 <Users className="w-16 h-16 text-primary/60" />
               </div>
               <div className="text-center md:text-left">
-                <h3 className="text-2xl font-bold mb-2">Gowthami</h3>
+                <h3 className="text-2xl font-bold mb-2">Gowthami Manikandan</h3>
                 <p className="text-lg text-primary font-semibold mb-3">CEO & Founder</p>
                 <p className="text-muted-foreground mb-4">
                   Leading the vision to transform customer support through AI-powered solutions that empower support engineers and delight customers.
                 </p>
                 <a 
-                  href="https://www.linkedin.com/in/your-linkedin-profile" 
+                  href="https://www.linkedin.com/in/supporticon-gowthami" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
@@ -97,9 +141,9 @@ const About = () => {
                 <Users className="w-12 h-12 text-blue-600" />
               </div>
               <h3 className="text-xl font-bold mb-2">Sarguru</h3>
-              <p className="text-muted-foreground mb-4">Full Stack Developer</p>
+              <p className="text-muted-foreground mb-4">AI/ML Developer</p>
               <a 
-                href="https://www.linkedin.com/in/sarguru" 
+                href="https://www.linkedin.com/in/sarguru-i-169308255" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
@@ -118,7 +162,7 @@ const About = () => {
               <h3 className="text-xl font-bold mb-2">Sudhan</h3>
               <p className="text-muted-foreground mb-4">Backend Developer</p>
               <a 
-                href="https://www.linkedin.com/in/sudhan" 
+                href="https://www.linkedin.com/in/shanmuga-sudhan-k-237947256" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
@@ -145,8 +189,8 @@ const About = () => {
                     <div>
                       <p className="font-medium">Address</p>
                       <p className="text-muted-foreground">
-                        [Your Complete Company Address]<br />
-                        City, State, PIN Code<br />
+                      7-14/4, Madam Sandhu, Tharamangalam,<br />
+                      Salem, TamilNadu<br />
                         India
                       </p>
                     </div>
@@ -156,7 +200,7 @@ const About = () => {
                     <Phone className="h-5 w-5 text-primary" />
                     <div>
                       <p className="font-medium">Mobile</p>
-                      <p className="text-muted-foreground">[Your Mobile Number]</p>
+                      <p className="text-muted-foreground">+91 866 734 7679</p>
                     </div>
                   </div>
 
@@ -164,7 +208,7 @@ const About = () => {
                     <Clock className="h-5 w-5 text-primary" />
                     <div>
                       <p className="font-medium">Business Hours</p>
-                      <p className="text-muted-foreground">Monday–Friday, 9:30 AM to 6:30 PM (IST)</p>
+                      <p className="text-muted-foreground">Monday–Friday, 10:00 AM to 7:00 PM (IST)</p>
                     </div>
                   </div>
                 </div>
@@ -178,7 +222,7 @@ const About = () => {
                     <div>
                       <p className="font-medium">Company LinkedIn</p>
                       <a 
-                        href="https://www.linkedin.com/company/your-company" 
+                        href="https://www.linkedin.com/company/supporticon-strategies-private-limited/" 
                         target="_blank" 
                         rel="noopener noreferrer"
                         className="text-primary hover:text-primary/80 transition-colors"

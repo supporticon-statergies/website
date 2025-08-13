@@ -1,6 +1,9 @@
 import { SEO } from "@/components/SEO";
+import { useScrollToTop } from "@/hooks/use-scroll-to-top";
 
 const SME = () => {
+  useScrollToTop();
+  
   return (
     <main>
       <SEO

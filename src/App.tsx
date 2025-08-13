@@ -13,6 +13,7 @@ import Privacy from "./pages/Privacy";
 import ArticleDetail from "./pages/ArticleDetail";
 
 import Terms from "./pages/Terms";
+import Legal from "./pages/Legal";
 import SiteHeader from "./components/layout/SiteHeader";
 import SiteFooter from "./components/layout/SiteFooter";
 
@@ -35,6 +36,7 @@ const App = () => (
             
             <Route path="/privacy-policy" element={<Privacy />} />
             <Route path="/terms" element={<Terms />} />
+            <Route path="/legal" element={<Legal />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
