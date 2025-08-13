@@ -1,0 +1,196 @@
+import { SEO } from "@/components/SEO";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+
+const Privacy = () => {
+  return (
+    <main>
+      <SEO
+        title="Privacy Policy — Help Dude"
+        description="Learn how Help Dude collects, uses and protects your data."
+        canonicalPath="/privacy-policy"
+      />
+
+      <section className="container mx-auto px-4 py-16">
+        <h1 className="font-display text-4xl font-bold">Privacy Policy</h1>
+        <p className="mt-4 text-muted-foreground max-w-3xl">
+          We are committed to data privacy through robust security measures, operational transparency, and regulatory compliance.
+        </p>
+
+        <div className="mt-8 max-w-4xl">
+          <Accordion type="single" collapsible className="w-full space-y-4">
+            <AccordionItem value="about" className="border rounded-lg px-6">
+              <AccordionTrigger className="text-left text-xl font-semibold py-4 hover:no-underline">
+                About Supporticon
+              </AccordionTrigger>
+              <AccordionContent className="pb-4">
+                <p className="text-muted-foreground leading-relaxed">
+                  Supporticon is a strategy-first SaaS company focused on elevating customer support through AI-driven automation and seamless platform integration. Our AI assistant, HelpDude, empowers agents—not replaces them—by drafting intelligent replies, surfacing relevant KB and past ticket solutions, and maintaining response consistency. Built to work across systems like Freshdesk and ZohoDesk, HelpDude enhances support efficiency and accuracy. Real-time insights are powered by unencrypted vector processing via Quadrant DB, without storing raw user data or PII. Sensitive data is securely stored in MongoDB Atlas and hosted on AWS with enterprise-grade safeguards. This Privacy Policy outlines how we handle your data in accordance with Indian regulatory standards. By using Supporticon, you agree to these terms.
+                </p>
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="information-collection" className="border rounded-lg px-6">
+              <AccordionTrigger className="text-left text-xl font-semibold py-4 hover:no-underline">
+                Information We Collect
+              </AccordionTrigger>
+              <AccordionContent className="pb-4 space-y-4">
+                <div>
+                  <h4 className="font-semibold text-foreground mb-2">Personal Information</h4>
+                  <ul className="list-disc pl-5 text-muted-foreground">
+                    <li>Name and contact information (full name, email address, phone number, postal address).</li>
+                    <li>Payment information (credit/debit cards, billing details) processed securely via Stripe or Razorpay.</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 className="font-semibold text-foreground mb-2">Sensitive Personal Data or Information (SPDI)</h4>
+                  <p className="text-muted-foreground">
+                    In compliance with Indian law, SPDI may include financial information such as bank account or card numbers processed via payment providers (e.g., Razorpay). Such data is handled with heightened safeguards.
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="font-semibold text-foreground mb-2">Usage Data</h4>
+                  <ul className="list-disc pl-5 text-muted-foreground">
+                    <li>Technical data: IP address, browser type, device specs, operating system.</li>
+                    <li>
+                      Interaction data: pages visited, features used, session duration. Our AI, powered by Ollama-hosted LLMs, also processes past tickets, KT documents, and KB articles to generate contextual email drafts and suggestions.
+                    </li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 className="font-semibold text-foreground mb-2">Cookies</h4>
+                  <p className="text-muted-foreground">Cookies help us improve functionality, personalize content, and provide relevant communications.</p>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="how-we-use" className="border rounded-lg px-6">
+              <AccordionTrigger className="text-left text-xl font-semibold py-4 hover:no-underline">
+                How We Use Your Information
+              </AccordionTrigger>
+              <AccordionContent className="pb-4 space-y-4">
+                <div>
+                  <h4 className="font-semibold text-foreground mb-2">Service Delivery</h4>
+                  <p className="text-muted-foreground">
+                    We operate and maintain our services, including automated email drafts generated by referencing internal training docs, KB articles, and related materials via LLMs (Ollama) and RAG.
+                  </p>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-foreground mb-2">Account Management</h4>
+                  <p className="text-muted-foreground">We manage your account, verify identity, process payments, and respond to inquiries.</p>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-foreground mb-2">Service Improvement</h4>
+                  <p className="text-muted-foreground">We analyze usage to enhance performance, functionality, and security.</p>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-foreground mb-2">Communication</h4>
+                  <p className="text-muted-foreground">With consent, we may send emails and updates about our services. You can opt out anytime.</p>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-foreground mb-2">Legal Compliance</h4>
+                  <p className="text-muted-foreground">We process data to comply with legal obligations under Indian law, including fraud prevention and security.</p>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="data-storage" className="border rounded-lg px-6">
+              <AccordionTrigger className="text-left text-xl font-semibold py-4 hover:no-underline">
+                Data Storage and Security
+              </AccordionTrigger>
+              <AccordionContent className="pb-4 space-y-4">
+                <div>
+                  <h4 className="font-semibold text-foreground mb-2">Data Storage Locations</h4>
+                  <p className="text-muted-foreground">
+                    All personal data, including SPDI, is securely stored on AWS (in India or other regions as required). We apply robust encryption, access controls, and continuous monitoring in line with applicable data protection laws.
+                  </p>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-foreground mb-2">Data Security Measures</h4>
+                  <p className="text-muted-foreground">We use encryption, access controls, and regular assessments aligned with the IT Rules, 2011.</p>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-foreground mb-2">Data Retention</h4>
+                  <p className="text-muted-foreground">We retain data only as long as necessary for stated purposes or legal obligations and review retention periodically.</p>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="data-sharing" className="border rounded-lg px-6">
+              <AccordionTrigger className="text-left text-xl font-semibold py-4 hover:no-underline">
+                Data Sharing and Disclosure
+              </AccordionTrigger>
+              <AccordionContent className="pb-4 space-y-4">
+                <div>
+                  <h4 className="font-semibold text-foreground mb-2">Third-Party Service Providers</h4>
+                  <p className="text-muted-foreground">
+                    We may share data with vetted providers (e.g., Razorpay, AWS, analytics) bound by confidentiality and limited-use agreements.
+                  </p>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-foreground mb-2">Legal Obligations and Enforcement</h4>
+                  <p className="text-muted-foreground">We may disclose information as required by law or valid legal process.</p>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-foreground mb-2">Business Transfers</h4>
+                  <p className="text-muted-foreground">In a merger, acquisition, or restructuring, data may transfer with notice and continued protection.</p>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="user-rights" className="border rounded-lg px-6">
+              <AccordionTrigger className="text-left text-xl font-semibold py-4 hover:no-underline">
+                User Rights and Control
+              </AccordionTrigger>
+              <AccordionContent className="pb-4">
+                <ul className="list-disc pl-5 text-muted-foreground space-y-2 leading-relaxed">
+                  <li>Access and correction of your account data (domain, email, API key, credentials).</li>
+                  <li>Withdrawal of consent at any time (may limit functionality).</li>
+                  <li>Purpose-based processing control for AI drafting features.</li>
+                  <li>Objection to analytics or automated decision-making where permitted by law.</li>
+                </ul>
+                <p className="mt-4">To exercise rights, contact us at <a href="mailto:founder@supporticon.com" className="text-primary underline">founder@supporticon.com</a>.</p>
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="international-transfers" className="border rounded-lg px-6">
+              <AccordionTrigger className="text-left text-xl font-semibold py-4 hover:no-underline">
+                International Data Transfers
+              </AccordionTrigger>
+              <AccordionContent className="pb-4">
+                <p className="text-muted-foreground leading-relaxed">
+                  As a globally integrated application, your data may be processed outside India with appropriate safeguards (e.g., standard contractual clauses) consistent with Indian data protection laws.
+                </p>
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="changes" className="border rounded-lg px-6">
+              <AccordionTrigger className="text-left text-xl font-semibold py-4 hover:no-underline">
+                Changes to This Privacy Policy
+              </AccordionTrigger>
+              <AccordionContent className="pb-4">
+                <p className="text-muted-foreground leading-relaxed">We may revise this policy and will notify you of material changes via email or in-app notices.</p>
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="contact" className="border rounded-lg px-6">
+              <AccordionTrigger className="text-left text-xl font-semibold py-4 hover:no-underline">
+                Contact Information
+              </AccordionTrigger>
+              <AccordionContent className="pb-4">
+                <p className="text-muted-foreground leading-relaxed">For questions or requests, contact <a href="mailto:founder@supporticon.com" className="text-primary underline">founder@supporticon.com</a>.</p>
+                <p className="mt-4 text-sm text-muted-foreground">
+                  Limitation of Liability: To the fullest extent permitted by law, Supporticon is not liable for direct, indirect, incidental, special, or consequential damages arising from the use of our services.
+                </p>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </div>
+      </section>
+    </main>
+  );
+};
+
+export default Privacy;
