@@ -10,10 +10,9 @@ export const SiteFooter = () => {
               <img
                 src="/lovable-uploads/2765a5e9-465e-4f44-a546-edc0809cfc34.png"
                 alt="Supporticon logo"
-                className="h-6 w-6"
+                className="h-10 w-auto"
                 loading="lazy"
               />
-              <span className="font-display text-lg font-bold">Supporticon</span>
             </div>
             <p className="mt-3 text-sm text-muted-foreground max-w-sm">
               Strategy-first SaaS improving customer support with AI-driven automation.

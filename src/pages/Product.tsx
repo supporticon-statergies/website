@@ -25,7 +25,7 @@ const Product = () => {
   return (
     <main>
       <SEO
-        title="Help Dude Product"
+        title="Help Dude"
         description="Reduce file-searching time with unified search and AI answers. Available as a Freshdesk plugin."
         canonicalPath="/product"
         jsonLd={{

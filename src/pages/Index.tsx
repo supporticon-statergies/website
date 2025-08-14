@@ -1,7 +1,7 @@
 import { SEO } from "@/components/SEO";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import heroImage from "@/assets/hero-helpdude.jpg";
+import heroImage from "@/assets/home-imge.png";
 import Spotlight from "@/components/Spotlight";
 import { Brain, Timer, Search, Plug, Heart, Shield, Users, Zap, Clock, Star, ArrowRight, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
