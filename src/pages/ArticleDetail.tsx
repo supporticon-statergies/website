@@ -3,8 +3,10 @@ import ImageWithLoader from "@/components/ImageWithLoader";
 import { articles } from "@/data/articles";
 import { Link, useParams } from "react-router-dom";
 import { ArticleContentBlock } from "@/data/articles";
+import { useScrollToTop } from "@/hooks/use-scroll-to-top";
 
 const ArticleDetail = () => {
+  useScrollToTop();
   const { slug = "" } = useParams();
   const article = articles.find((a) => a.slug === slug);
 
