@@ -40,7 +40,7 @@ const Home = () => {
                   <Link to="/product">Join the Movement</Link>
                 </Button>
                 <Button asChild variant="outline" size="lg">
-                  <Link to="/about">Learn Our Story</Link>
+                  <Link to="/about">Born from experience</Link>
                 </Button>
               </div>
             </div>
