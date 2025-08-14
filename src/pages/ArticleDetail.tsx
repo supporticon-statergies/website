@@ -70,7 +70,7 @@ const ArticleDetail = () => {
   return (
     <main>
       <SEO
-        title={`${article.title} — Help Dude`}
+        title={`${article.title} — SupportIcon`}
         description={article.excerpt}
         canonicalPath={`/articles/${article.slug}`}
         image={article.image}

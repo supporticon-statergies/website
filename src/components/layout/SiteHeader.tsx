@@ -2,6 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import RequestDemoDialog from "@/components/RequestDemoDialog";
+import { Menu, X } from "lucide-react";
 
 const nav = [
   { to: "/", label: "Home" },
@@ -12,7 +13,8 @@ const nav = [
 ];
 
 export const SiteHeader = () => {
-  const [open, setOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [demoDialogOpen, setDemoDialogOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-40 border-b bg-background/80 backdrop-blur">
@@ -43,13 +45,49 @@ export const SiteHeader = () => {
             </NavLink>
           ))}
         </nav>
+        
+        {/* Mobile menu button */}
+        <Button
+          variant="ghost"
+          size="sm"
+          className="md:hidden"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Toggle menu"
+        >
+          {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </Button>
+        
         <div className="flex items-center gap-2">
-          <Button variant="hero" size="sm" aria-label="Request a demo" onClick={() => setOpen(true)}>
+          <Button variant="hero" size="sm" aria-label="Request a demo" onClick={() => setDemoDialogOpen(true)}>
             Request Demo
           </Button>
         </div>
       </div>
-      <RequestDemoDialog open={open} onOpenChange={setOpen} />
+      
+      {/* Mobile navigation menu */}
+      {mobileMenuOpen && (
+        <div className="md:hidden border-t bg-background/95 backdrop-blur">
+          <nav className="container mx-auto px-4 py-4 space-y-3">
+            {nav.map((n) => (
+              <NavLink
+                key={n.to}
+                to={n.to}
+                end={n.to === "/"}
+                className={({ isActive }) =>
+                  `block py-2 text-base transition-colors ${
+                    isActive ? "text-primary font-medium" : "text-muted-foreground hover:text-foreground"
+                  }`
+                }
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {n.label}
+              </NavLink>
+            ))}
+          </nav>
+        </div>
+      )}
+      
+      <RequestDemoDialog open={demoDialogOpen} onOpenChange={setDemoDialogOpen} />
     </header>
   );
 };
