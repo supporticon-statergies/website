@@ -30,7 +30,7 @@ const About = () => {
           <div className="flex justify-center">
             <div className="w-auto h-auto overflow-hidden">
               <ImageWithLoader
-                src="/src/assets/about_image.jpg"
+                src="./assets/about_image.jpg"
                 alt="About SupportIcon"
                 className="w-full h-full object-cover"
               />

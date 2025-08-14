@@ -23,7 +23,7 @@ export const SiteHeader = () => {
           className="flex items-center gap-2 mr-8"
         >
           <img
-            src="/lovable-uploads/2765a5e9-465e-4f44-a546-edc0809cfc34.png"
+            src="./lovable-uploads/2765a5e9-465e-4f44-a546-edc0809cfc34.png"
             alt="Supporticon logo"
             className="h-11 w-auto"
             loading="eager"
