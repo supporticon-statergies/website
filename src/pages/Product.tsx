@@ -7,6 +7,7 @@ import RequestDemoDialog from "@/components/RequestDemoDialog";
 import ImageWithLoader from "@/components/ImageWithLoader";
 import productDemoVideo from "@/assets/product-demo.mp4";
 import { useScrollToTop } from "@/hooks/use-scroll-to-top";
+import postImage from "@/assets/post_image.jpg";
 
 const features = [
   "Unified search across knowledge base, internal articles and knowledge transfer articles",
@@ -71,7 +72,7 @@ const Product = () => {
                   controls
                   onPlay={() => setIsVideoPlaying(true)}
                   onPause={() => setIsVideoPlaying(false)}
-                  poster="/video_placeholder.jpg"
+                  poster={postImage}
                 >
                   <source src={productDemoVideo} type="video/mp4" />
                   <track 
