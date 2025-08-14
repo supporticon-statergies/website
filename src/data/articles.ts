@@ -1,5 +1,15 @@
 // articles.ts
-// Remove image imports and use relative paths instead
+// Import all article images properly
+import mentalResilienceImage from "@/assets/articles/mental-resilience.webp";
+import customerMindsetsImage from "@/assets/articles/customer-mindsets.webp";
+import agentWellbeingImage from "@/assets/articles/agent-wellbeing.webp";
+import humansAndAiImage from "@/assets/articles/humans-and-ai.webp";
+import fightDistractionsImage from "@/assets/articles/fightdistractions.webp";
+import humanIntelligenceImage from "@/assets/articles/humanintelligence.webp";
+import aiCopilotWarriorImage from "@/assets/articles/aicopilotwarrior.webp";
+import frontlineHeroesImage from "@/assets/articles/frontlineheroes.webp";
+import futureAiHumanImage from "@/assets/articles/futureaihuman.webp";
+
 export interface ArticleContentBlock {
   type: "heading" | "subheading" | "paragraph" | "list";
   text?: string;
@@ -28,7 +38,7 @@ export const articles: Article[] = [
     dateLabel: "9 July 2025",
     isoDate: "2025-07-09",
     author: "Help Dude",
-    image: "./assets/articles/mental-resilience.webp",
+    image: mentalResilienceImage,
     alt: "Calm support agent with icons for focus, empathy, batching, and breathing techniques",
     excerpt:
       "Five science-backed habits to protect your energy and prevent burnout: focus sprints, emotional checkpoints, batching, peer check-ins, and micro-breaks.",
@@ -94,7 +104,7 @@ export const articles: Article[] = [
     dateLabel: "13 December 2024",
     isoDate: "2024-12-13",
     author: "Help Dude",
-    image: "./assets/articles/customer-mindsets.webp",
+    image: customerMindsetsImage,
     alt: "Two customer mindsets: informed customer and anxious customer with a supportive agent",
     excerpt:
       "Recognize two customer mindsets — Informed and Anxious — and adapt your approach to deliver unforgettable experiences.",
@@ -195,7 +205,7 @@ export const articles: Article[] = [
     dateLabel: "23 July 2025",
     isoDate: "2025-07-23",
     author: "Help Dude",
-    image: "./assets/articles/agent-wellbeing.webp",
+    image: agentWellbeingImage,
     alt: "Support agent dashboard with personal wins and positive nudges, no leaderboards",
     excerpt:
       "Bring humanity back into support metrics with well-being nudges that recognize impact without pressure.",
@@ -322,7 +332,7 @@ export const articles: Article[] = [
     dateLabel: "18 December 2024",
     isoDate: "2024-12-18",
     author: "AI Support Team",
-    image: "./assets/articles/humans-and-ai.webp",
+    image: humansAndAiImage,
     alt: "Human and AI hands collaborating over a modern support dashboard",
     excerpt:
       "SupportIcon augments — not replaces — human agents by combining AI efficiency with human empathy.",
@@ -405,7 +415,7 @@ export const articles: Article[] = [
     dateLabel: "16 July 2025",
     isoDate: "2025-07-16",
     author: "Help Dude",
-    image: "./assets/articles/fightdistractions.webp",
+    image: fightDistractionsImage,
     alt: "Support agent staying focused with minimal distractions",
     excerpt:
       "Battle-tested tips for support agents to protect focus, reduce overwhelm, and work with calm clarity.",
@@ -454,7 +464,7 @@ export const articles: Article[] = [
     dateLabel: "20 July 2025",
     isoDate: "2025-07-20",
     author: "Help Dude",
-    image: "./assets/articles/humanintelligence.webp",
+    image: humanIntelligenceImage,
     alt: "Support agent using human empathy in conversation",
     excerpt:
       "In the age of AI, human intelligence remains the secret ingredient for world-class customer support.",
@@ -538,7 +548,7 @@ export const articles: Article[] = [
     dateLabel: "25 July 2025",
     isoDate: "2025-07-25",
     author: "Help Dude",
-    image: "./assets/articles/aicopilotwarrior.webp",
+    image: aiCopilotWarriorImage,
     alt: "AI assisting a support agent with live suggestions",
     excerpt:
       "Discover how AI can reduce repetitive tasks and free support agents to focus on what really matters.",
@@ -582,7 +592,7 @@ export const articles: Article[] = [
     dateLabel: "29 July 2025",
     isoDate: "2025-07-29",
     author: "Help Dude",
-    image: "./assets/articles/frontlineheroes.webp",
+    image: frontlineHeroesImage,
     alt: "Support engineer managing tickets with AI dashboard",
     excerpt:
       "In the battlefield of customer expectations, support engineers are the first and last line of defense.",
@@ -623,7 +633,7 @@ export const articles: Article[] = [
     dateLabel: "3 August 2025",
     isoDate: "2025-08-03",
     author: "Help Dude",
-    image: "./assets/articles/futureaihuman.webp",
+    image: futureAiHumanImage,
     alt: "AI and human working together in a customer support center",
     excerpt:
       "AI is rewriting the rules of support — but the best results come when humans and AI work hand in hand.",
