@@ -10,13 +10,13 @@ const Articles = () => {
   return (
     <main>
       <SEO
-        title="Articles — SupportIcon"
+        title="Articles — Help Dude"
         description="Insights and guides for support engineering leaders and practitioners."
         canonicalPath="/articles"
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "Blog",
-          name: "SupportIcon Articles",
+          name: "Help Dude Articles",
         }}
       />
 
