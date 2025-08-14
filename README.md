@@ -1,5 +1,15 @@
 # Welcome to your Lovable project
 
+## 🚀 Deployment Status
+
+**Live Website**: [https://supporticon-statergies.github.io/website/](https://supporticon-statergies.github.io/website/)
+
+**Build Status**: ![Deploy to GitHub Pages](https://github.com/supporticon-statergies/website/workflows/Deploy%20to%20GitHub%20Pages/badge.svg)
+
+**Last Deployed**: Automatically deployed on every push to main branch
+
+---
+
 ## Project info
 
 **URL**: https://lovable.dev/projects/0f5042aa-0269-498f-811e-e9fabdd9d511
