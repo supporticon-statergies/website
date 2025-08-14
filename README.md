@@ -8,6 +8,8 @@
 
 **Last Deployed**: Automatically deployed on every push to main branch
 
+**Last Deployment Trigger**: 2024-12-19 15:30:00 UTC
+
 ---
 
 ## Project info
