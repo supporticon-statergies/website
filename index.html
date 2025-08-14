@@ -22,34 +22,6 @@
 
   <body>
     <div id="root"></div>
-    <script>
-      // GitHub Pages SPA routing fix
-      // This script handles client-side routing for GitHub Pages
-      (function() {
-        var redirect = function() {
-          var l = window.location;
-          var path = l.pathname;
-          
-          // Only redirect if we're not already at the base path
-          if (path !== '/website/' && path !== '/website' && path !== '/') {
-            // Extract the actual route from the path
-            var route = path.replace('/website', '').replace(/^\//, '');
-            
-            // Redirect to the base path with the route as a query parameter
-            var newUrl = '/website/?route=' + encodeURIComponent(route);
-            
-            // Only redirect if we haven't already done so
-            if (!l.search.includes('route=')) {
-              window.location.replace(newUrl);
-              return;
-            }
-          }
-        };
-        
-        // Run the redirect check
-        redirect();
-      })();
-    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

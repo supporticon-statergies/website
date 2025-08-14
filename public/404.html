@@ -3,17 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Page Not Found</title>
-    <script>
-      // Simple redirect to main page for GitHub Pages
-      // This prevents the complex query string issues
-      var currentPath = window.location.pathname;
-      var basePath = '/website/';
-      
-      // If we're not already at the base path, redirect there
-      if (currentPath !== basePath && currentPath !== '/website') {
-        window.location.replace(basePath);
-      }
-    </script>
+    <meta http-equiv="refresh" content="0;url=/website/">
   </head>
   <body>
     <p>Redirecting to main page...</p>
