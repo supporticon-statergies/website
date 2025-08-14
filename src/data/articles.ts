@@ -1,14 +1,5 @@
 // articles.ts
-import mentalResilienceImg from "@/assets/articles/mental-resilience.webp";
-import customerMindsetsImg from "@/assets/articles/customer-mindsets.webp";
-import agentWellbeingImg from "@/assets/articles/agent-wellbeing.webp";
-import humansAndAiImg from "@/assets/articles/humans-and-ai.webp";
-import humanintelligence from "@/assets/articles/humanintelligence.webp";
-import fightdistractions from "@/assets/articles/fightdistractions.webp";
-import aicopilotwarrior from "@/assets/articles/aicopilotwarrior.webp";
-import frontlineheroes from "@/assets/articles/frontlineheroes.webp";
-import futureaihuman from "@/assets/articles/futureaihuman.webp";
-
+// Remove image imports and use relative paths instead
 export interface ArticleContentBlock {
   type: "heading" | "subheading" | "paragraph" | "list";
   text?: string;
@@ -37,7 +28,7 @@ export const articles: Article[] = [
     dateLabel: "9 July 2025",
     isoDate: "2025-07-09",
     author: "Help Dude",
-    image: mentalResilienceImg,
+    image: "./assets/articles/mental-resilience.webp",
     alt: "Calm support agent with icons for focus, empathy, batching, and breathing techniques",
     excerpt:
       "Five science-backed habits to protect your energy and prevent burnout: focus sprints, emotional checkpoints, batching, peer check-ins, and micro-breaks.",
@@ -103,7 +94,7 @@ export const articles: Article[] = [
     dateLabel: "13 December 2024",
     isoDate: "2024-12-13",
     author: "Help Dude",
-    image: customerMindsetsImg,
+    image: "./assets/articles/customer-mindsets.webp",
     alt: "Two customer mindsets: informed customer and anxious customer with a supportive agent",
     excerpt:
       "Recognize two customer mindsets — Informed and Anxious — and adapt your approach to deliver unforgettable experiences.",
@@ -204,7 +195,7 @@ export const articles: Article[] = [
     dateLabel: "23 July 2025",
     isoDate: "2025-07-23",
     author: "Help Dude",
-    image: agentWellbeingImg,
+    image: "./assets/articles/agent-wellbeing.webp",
     alt: "Support agent dashboard with personal wins and positive nudges, no leaderboards",
     excerpt:
       "Bring humanity back into support metrics with well-being nudges that recognize impact without pressure.",
@@ -331,7 +322,7 @@ export const articles: Article[] = [
     dateLabel: "18 December 2024",
     isoDate: "2024-12-18",
     author: "AI Support Team",
-    image: humansAndAiImg,
+    image: "./assets/articles/humans-and-ai.webp",
     alt: "Human and AI hands collaborating over a modern support dashboard",
     excerpt:
       "SupportIcon augments — not replaces — human agents by combining AI efficiency with human empathy.",
@@ -414,24 +405,24 @@ export const articles: Article[] = [
     dateLabel: "16 July 2025",
     isoDate: "2025-07-16",
     author: "Help Dude",
-    image: fightdistractions,
+    image: "./assets/articles/fightdistractions.webp",
     alt: "Support agent staying focused with minimal distractions",
     excerpt:
       "Battle-tested tips for support agents to protect focus, reduce overwhelm, and work with calm clarity.",
     content: [
       { type: "heading", text: "Introduction" },
-      { type: "paragraph", text: "If you’ve ever opened your inbox and somehow ended up watching “Top 10 Cats Who Think They’re Ninjas” on YouTube… you’re not alone." },
-      { type: "paragraph", text: "Modern support work is a constant balancing act — juggling tickets, calming frustrated customers, and answering pings that never seem to stop. Add to that the digital noise of today’s world, and focus starts slipping away before you even notice." },
-      { type: "paragraph", text: "Here’s the truth: focus isn’t something you’re born with — it’s something you train, like a muscle. And the stronger it gets, the more you protect your time, energy, and sanity." },
+      { type: "paragraph", text: "If you've ever opened your inbox and somehow ended up watching \"Top 10 Cats Who Think They're Ninjas\" on YouTube… you're not alone." },
+      { type: "paragraph", text: "Modern support work is a constant balancing act — juggling tickets, calming frustrated customers, and answering pings that never seem to stop. Add to that the digital noise of today's world, and focus starts slipping away before you even notice." },
+      { type: "paragraph", text: "Here's the truth: focus isn't something you're born with — it's something you train, like a muscle. And the stronger it gets, the more you protect your time, energy, and sanity." },
       { type: "paragraph", text: "Here are six battle-tested, support-agent-approved ways to protect your attention and work with more calm, clarity, and control." },
       { type: "subheading", text: "🔁 1. Sprint, Then Breathe (The Gentle Pomodoro)" },
-      { type: "paragraph", text: "Work in 25-minute deep-focus bursts followed by 5 minutes of genuine rest. After four rounds, take a longer break to truly recharge. You’ll be amazed at how much mental clarity you get when your brain knows it only has to push for a short sprint before it rests." },
-      { type: "paragraph", text: "💡 Human Tip: Use a visible timer — it’s like having a silent coach reminding you, “We’ve got this.”" },
+      { type: "paragraph", text: "Work in 25-minute deep-focus bursts followed by 5 minutes of genuine rest. After four rounds, take a longer break to truly recharge. You'll be amazed at how much mental clarity you get when your brain knows it only has to push for a short sprint before it rests." },
+      { type: "paragraph", text: "💡 Human Tip: Use a visible timer — it's like having a silent coach reminding you, \"We've got this.\"" },
       { type: "subheading", text: "🚫 2. Declutter Your Digital Universe" },
-      { type: "paragraph", text: "Distractions hide in plain sight — your favorite news site, that tempting Instagram tab, or even Slack when you’re not in active collaboration. Use tools like Freedom, Cold Turkey, or browser blockers to make distractions invisible during focus time." },
-      { type: "paragraph", text: "📌 Why it works: What you can’t see, you won’t chase. Out of sight, out of mind — and out of your mental space." },
+      { type: "paragraph", text: "Distractions hide in plain sight — your favorite news site, that tempting Instagram tab, or even Slack when you're not in active collaboration. Use tools like Freedom, Cold Turkey, or browser blockers to make distractions invisible during focus time." },
+      { type: "paragraph", text: "📌 Why it works: What you can't see, you won't chase. Out of sight, out of mind — and out of your mental space." },
       { type: "subheading", text: "🎯 3. The Magic Rule of 3" },
-      { type: "paragraph", text: "At the start of each day, choose only three high-impact tasks. Not fifteen. Not everything in your inbox. Just the three that will make you feel proud at day’s end." },
+      { type: "paragraph", text: "At the start of each day, choose only three high-impact tasks. Not fifteen. Not everything in your inbox. Just the three that will make you feel proud at day's end." },
       { type: "paragraph", text: "Everything else? Bonus points. This keeps you working with intention, not just reacting to whatever pops up." },
       { type: "subheading", text: "🎧 4. Build Your Focus Bubble" },
       { type: "list", items: [
@@ -439,9 +430,9 @@ export const articles: Article[] = [
         "A clear, tidy desk to keep your mind uncluttered",
         "Lo-Fi beats or Brain.fm to keep your mind gently engaged"
       ]},
-      { type: "paragraph", text: "Even in a bustling support floor, your environment can whisper, “This is your calm zone.”" },
+      { type: "paragraph", text: "Even in a bustling support floor, your environment can whisper, \"This is your calm zone.\"" },
       { type: "subheading", text: "🔕 5. Tame the Ping Monster" },
-      { type: "paragraph", text: "You don’t have to be a slave to every notification. Turn off non-essential alerts. Use Do Not Disturb during deep work blocks. Let colleagues know when you’ll be fully available again." },
+      { type: "paragraph", text: "You don't have to be a slave to every notification. Turn off non-essential alerts. Use Do Not Disturb during deep work blocks. Let colleagues know when you'll be fully available again." },
       { type: "paragraph", text: "⏳ Truth: Urgency is often an illusion — most things can wait 20 minutes. Your brain deserves that peace." },
       { type: "subheading", text: "🧘‍♀️ 6. Master the Micro Reset" },
       { type: "list", items: [
@@ -451,8 +442,8 @@ export const articles: Article[] = [
       ]},
       { type: "paragraph", text: "These little acts flush mental fatigue before it becomes burnout. Remember: rest is part of the job, not an interruption to it." },
       { type: "subheading", text: "🧩 Final Word for Support Professionals" },
-      { type: "paragraph", text: "Your job isn’t just answering questions — it’s carrying the weight of customers’ frustrations and turning them into trust. That’s emotional labor. That’s skill. And that’s why your focus needs protection." },
-      { type: "paragraph", text: "This week, try just one or two of these techniques. Notice the difference. Then build from there. And if you drift? That’s okay. Focus is a living skill — it grows with kindness, patience, and practice." }
+      { type: "paragraph", text: "Your job isn't just answering questions — it's carrying the weight of customers' frustrations and turning them into trust. That's emotional labor. That's skill. And that's why your focus needs protection." },
+      { type: "paragraph", text: "This week, try just one or two of these techniques. Notice the difference. Then build from there. And if you drift? That's okay. Focus is a living skill — it grows with kindness, patience, and practice." }
     ],
     category: "Secret to Elevate Experience"
   },
@@ -463,7 +454,7 @@ export const articles: Article[] = [
     dateLabel: "20 July 2025",
     isoDate: "2025-07-20",
     author: "Help Dude",
-    image: humanintelligence,
+    image: "./assets/articles/humanintelligence.webp",
     alt: "Support agent using human empathy in conversation",
     excerpt:
       "In the age of AI, human intelligence remains the secret ingredient for world-class customer support.",
@@ -475,7 +466,7 @@ export const articles: Article[] = [
       },
       {
         type: "paragraph",
-        text: "Support engineers who combine AI-powered efficiency with emotional intelligence don’t just resolve tickets — they create memorable moments that turn frustrated users into loyal fans."
+        text: "Support engineers who combine AI-powered efficiency with emotional intelligence don't just resolve tickets — they create memorable moments that turn frustrated users into loyal fans."
       },
 
       { type: "subheading", text: "🧠 1. Emotional Context Matters" },
@@ -485,23 +476,23 @@ export const articles: Article[] = [
       },
       {
         type: "paragraph",
-        text: "Example: When a customer says, 'I’ve been waiting forever,' AI may just read this as a delay complaint. A human hears the disappointment and urgency — and responds with understanding, not just information."
+        text: "Example: When a customer says, 'I've been waiting forever,' AI may just read this as a delay complaint. A human hears the disappointment and urgency — and responds with understanding, not just information."
       },
 
       { type: "subheading", text: "🤝 2. Balancing Logic & Care" },
       {
         type: "paragraph",
-        text: "Solving a problem is only half the job. The other half is making the customer feel respected, valued, and heard. Humans naturally know how to add warmth to communication — using reassuring language, humor when appropriate, and a tone that adapts to the customer’s mood."
+        text: "Solving a problem is only half the job. The other half is making the customer feel respected, valued, and heard. Humans naturally know how to add warmth to communication — using reassuring language, humor when appropriate, and a tone that adapts to the customer's mood."
       },
       {
         type: "paragraph",
-        text: "This is the difference between: 'Your issue is resolved' and 'I’ve personally fixed this for you, and I’ll be here if you run into anything else.' One solves the ticket. The other strengthens the relationship."
+        text: "This is the difference between: 'Your issue is resolved' and 'I've personally fixed this for you, and I'll be here if you run into anything else.' One solves the ticket. The other strengthens the relationship."
       },
 
       { type: "subheading", text: "⚖️ 3. When Rules Need Bending" },
       {
         type: "paragraph",
-        text: "AI follows rules. Humans understand when it’s worth bending them. A customer who’s had multiple bad experiences may deserve a faster escalation, a goodwill credit, or even an exception to policy — decisions that require human judgment."
+        text: "AI follows rules. Humans understand when it's worth bending them. A customer who's had multiple bad experiences may deserve a faster escalation, a goodwill credit, or even an exception to policy — decisions that require human judgment."
       },
       {
         type: "paragraph",
@@ -511,7 +502,7 @@ export const articles: Article[] = [
       { type: "subheading", text: "💡 4. Translating Tech for Humans" },
       {
         type: "paragraph",
-        text: "AI can provide technical solutions, but humans know how to explain them in a way that matches the customer’s knowledge level. They know when to avoid jargon, when to use an analogy, and when to simply walk the customer through step-by-step."
+        text: "AI can provide technical solutions, but humans know how to explain them in a way that matches the customer's knowledge level. They know when to avoid jargon, when to use an analogy, and when to simply walk the customer through step-by-step."
       },
       {
         type: "paragraph",
@@ -531,7 +522,7 @@ export const articles: Article[] = [
       { type: "subheading", text: "🚀 Final Thought" },
       {
         type: "paragraph",
-        text: "The future of support isn’t AI vs. human — it’s AI + human. AI handles the repetitive, high-speed, data-heavy work. Humans bring empathy, creativity, and judgment. Together, they create support experiences that are both fast and deeply human."
+        text: "The future of support isn't AI vs. human — it's AI + human. AI handles the repetitive, high-speed, data-heavy work. Humans bring empathy, creativity, and judgment. Together, they create support experiences that are both fast and deeply human."
       },
       {
         type: "paragraph",
@@ -547,7 +538,7 @@ export const articles: Article[] = [
     dateLabel: "25 July 2025",
     isoDate: "2025-07-25",
     author: "Help Dude",
-    image: aicopilotwarrior,
+    image: "./assets/articles/aicopilotwarrior.webp",
     alt: "AI assisting a support agent with live suggestions",
     excerpt:
       "Discover how AI can reduce repetitive tasks and free support agents to focus on what really matters.",
@@ -565,7 +556,7 @@ export const articles: Article[] = [
       { type: "paragraph", text: "Think of it as offloading mental clutter. Every click AI does for you is one more click you can use to add value to the conversation." },
 
       { type: "subheading", text: "🧩 3. AI as a Silent Partner" },
-      { type: "paragraph", text: "Your AI co-pilot never gets tired, never misses a pattern, and never forgets a single piece of historical context. It’s the colleague who remembers everything." },
+      { type: "paragraph", text: "Your AI co-pilot never gets tired, never misses a pattern, and never forgets a single piece of historical context. It's the colleague who remembers everything." },
 
       { type: "subheading", text: "🔍 Self-Analysis: Where Are You Losing Time?" },
       { type: "paragraph", text: "Be brutally honest with yourself. Review your last 20 tickets — how much time did you spend searching for info, formatting replies, or doing repetitive admin? These are prime candidates for AI automation." },
@@ -579,8 +570,8 @@ export const articles: Article[] = [
       ]},
 
       { type: "subheading", text: "🏆 Final Word" },
-      { type: "paragraph", text: "AI doesn’t just make support faster — it gives you back the time and energy to be the human customers remember." },
-      { type: "paragraph", text: "Your productivity isn’t about working harder — it’s about working with a partner who never sleeps, so you can focus on the parts of support that truly need a human brain and heart." }
+      { type: "paragraph", text: "AI doesn't just make support faster — it gives you back the time and energy to be the human customers remember." },
+      { type: "paragraph", text: "Your productivity isn't about working harder — it's about working with a partner who never sleeps, so you can focus on the parts of support that truly need a human brain and heart." }
     ],
     category: "Secret to Elevate Experience"
   },
@@ -591,7 +582,7 @@ export const articles: Article[] = [
     dateLabel: "29 July 2025",
     isoDate: "2025-07-29",
     author: "Help Dude",
-    image: frontlineheroes,
+    image: "./assets/articles/frontlineheroes.webp",
     alt: "Support engineer managing tickets with AI dashboard",
     excerpt:
       "In the battlefield of customer expectations, support engineers are the first and last line of defense.",
@@ -602,11 +593,11 @@ export const articles: Article[] = [
 
       { type: "subheading", text: "🔥 1. Calm in Chaos" },
       { type: "paragraph", text: "In the middle of a crisis, support engineers stay collected, listening and acting with precision." },
-      { type: "paragraph", text: "AI can help filter the noise, but it’s your decision-making that turns chaos into calm." },
+      { type: "paragraph", text: "AI can help filter the noise, but it's your decision-making that turns chaos into calm." },
 
       { type: "subheading", text: "🛠 2. Tools of the Trade" },
       { type: "paragraph", text: "With AI dashboards, predictive analytics, and auto-summaries, they can focus on what truly matters — solutions." },
-      { type: "paragraph", text: "Every new AI feature should be seen as a tool in your belt, not a threat to your role." },
+      { type: "paragraph", text: "paragraph", text: "Every new AI feature should be seen as a tool in your belt, not a threat to your role." },
 
       { type: "subheading", text: "💭 Self-Reflection: Are You Leveraging AI Enough?" },
       { type: "paragraph", text: "Ask yourself: Am I still doing tasks manually that AI could do better and faster? Every minute you save is a minute you can use to deepen customer relationships." },
@@ -621,7 +612,7 @@ export const articles: Article[] = [
 
       { type: "subheading", text: "💡 Final Reflection" },
       { type: "paragraph", text: "Technology will evolve, but the courage and care of the human on the front line will always be irreplaceable." },
-      { type: "paragraph", text: "When AI handles the grunt work, you’re free to be the calm, empathetic problem-solver customers trust." }
+      { type: "paragraph", text: "When AI handles the grunt work, you're free to be the calm, empathetic problem-solver customers trust." }
     ],
     category: "Elevate Your Support"
   },
@@ -632,7 +623,7 @@ export const articles: Article[] = [
     dateLabel: "3 August 2025",
     isoDate: "2025-08-03",
     author: "Help Dude",
-    image: futureaihuman,
+    image: "./assets/articles/futureaihuman.webp",
     alt: "AI and human working together in a customer support center",
     excerpt:
       "AI is rewriting the rules of support — but the best results come when humans and AI work hand in hand.",
@@ -643,25 +634,25 @@ export const articles: Article[] = [
 
       { type: "subheading", text: "🔍 1. Anticipating Issues" },
       { type: "paragraph", text: "Predictive AI can warn about common issues before customers even report them." },
-      { type: "paragraph", text: "Imagine being able to send a fix or helpful article before the customer even realizes there’s a problem." },
+      { type: "paragraph", text: "Imagine being able to send a fix or helpful article before the customer even realizes there's a problem." },
 
       { type: "subheading", text: "💬 2. Personalizing Responses" },
       { type: "paragraph", text: "AI drafts the message, but humans add the warmth and understanding that makes it land." },
-      { type: "paragraph", text: "The tone you choose, the empathy you display — that’s what makes the customer feel heard, not just answered." },
+      { type: "paragraph", text: "The tone you choose, the empathy you display — that's what makes the customer feel heard, not just answered." },
 
       { type: "subheading", text: "🧠 3. Continuous Self-Analysis" },
       { type: "paragraph", text: "Review how you interact with AI daily. Are you accepting its suggestions blindly, or refining them for maximum customer impact?" },
 
       { type: "subheading", text: "📌 Productivity Playbook for the AI-Enhanced Future" },
       { type: "list", items: [
-        "Set aside 15 minutes daily to review AI suggestions you didn’t use — learn from them.",
-        "Create a shared repository of ‘human touch’ improvements so your whole team benefits.",
+        "Set aside 15 minutes daily to review AI suggestions you didn't use — learn from them.",
+        "Create a shared repository of 'human touch' improvements so your whole team benefits.",
         "Let AI handle monitoring so you can focus on strategic, high-impact cases.",
-        "Pair AI’s speed with your judgment to close tickets faster without losing quality."
+        "Pair AI's speed with your judgment to close tickets faster without losing quality."
       ]},
 
       { type: "subheading", text: "🚀 Final Word" },
-      { type: "paragraph", text: "The real magic isn’t in AI or humans alone — it’s in their partnership, elevating the customer experience to new heights." },
+      { type: "paragraph", text: "The real magic isn't in AI or humans alone — it's in their partnership, elevating the customer experience to new heights." },
       { type: "paragraph", text: "Future-proof your role by mastering both — the tech that predicts and the empathy that connects." }
     ],
     category: "Secret to Elevate Experience"
