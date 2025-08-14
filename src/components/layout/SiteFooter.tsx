@@ -26,9 +26,9 @@ export const SiteFooter = () => {
             <Link to="/terms" className="hover:text-foreground">
               Terms of Service
             </Link>
-            <Link to="/legal" className="hover:text-foreground">
+            {/* <Link to="/legal" className="hover:text-foreground">
               Legal
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>

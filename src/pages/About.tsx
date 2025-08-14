@@ -3,6 +3,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import ImageWithLoader from "../components/ImageWithLoader";
 import { Mail, Phone, MapPin, Clock, Linkedin, Users, Target, Zap } from "lucide-react";
 import { useScrollToTop } from "@/hooks/use-scroll-to-top";
+import aboutImage from "@/assets/about_image.jpg";
 
 const About = () => {
   useScrollToTop();
@@ -30,7 +31,7 @@ const About = () => {
           <div className="flex justify-center">
             <div className="w-auto h-auto overflow-hidden">
               <ImageWithLoader
-                src="./assets/about_image.jpg"
+                src={aboutImage}
                 alt="About SupportIcon"
                 className="w-full h-full object-cover"
               />
