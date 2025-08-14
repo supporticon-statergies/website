@@ -23,6 +23,10 @@ const Product = () => {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [showVideoModal, setShowVideoModal] = useState(false);
 
+  // Debug logging for poster image
+  console.log('Poster image path:', postImage);
+  console.log('Product demo video path:', productDemoVideo);
+
   return (
     <main>
       <SEO
@@ -56,23 +60,23 @@ const Product = () => {
             {/* Right Side - Video */}
             <div className="relative">
               <div className="relative aspect-video rounded-2xl overflow-hidden bg-gradient-to-br from-slate-900 to-slate-800 shadow-2xl cursor-pointer" onClick={() => setShowVideoModal(true)}>
-                {!isVideoPlaying ? (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-center">
-                      <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-white/10 backdrop-blur-sm">
-                        <Play className="h-8 w-8 text-white ml-1" />
-                      </div>
-                      <p className="text-white/80 text-sm">Click to play demo video</p>
-                    </div>
-                  </div>
-                ) : null}
+                {/* Fallback image that shows when video is not loaded */}
+                <img 
+                  src={postImage} 
+                  alt="Help Dude Product Demo" 
+                  className="w-full h-full object-cover"
+                  style={{ display: isVideoPlaying ? 'none' : 'block' }}
+                />
                 
                 <video
-                  className="w-full h-full object-contain bg-black"
+                  className="w-full h-full object-contain"
                   controls
                   onPlay={() => setIsVideoPlaying(true)}
                   onPause={() => setIsVideoPlaying(false)}
                   poster={postImage}
+                  onLoadStart={() => console.log('Video loading started, poster:', postImage)}
+                  onLoadedData={() => console.log('Video data loaded')}
+                  style={{ display: isVideoPlaying ? 'block' : 'none' }}
                 >
                   <source src={productDemoVideo} type="video/mp4" />
                   <track 
@@ -84,6 +88,17 @@ const Product = () => {
                   />
                   Your browser does not support the video tag.
                 </video>
+                
+                {!isVideoPlaying ? (
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                    <div className="text-center">
+                      <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm">
+                        <Play className="h-8 w-8 text-white ml-1" />
+                      </div>
+                      <p className="text-white/90 text-sm font-medium">Click to play demo video</p>
+                    </div>
+                  </div>
+                ) : null}
               </div>
             </div>
           </div>
