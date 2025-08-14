@@ -17,7 +17,7 @@ export const SiteFooter = () => {
             />
           </Link>
           <p className="text-sm text-muted-foreground">
-            © 2024 Supporticon. All rights reserved.
+            © 2025 Supporticon. All rights reserved.
           </p>
           <div className="flex gap-4 text-sm text-muted-foreground">
             <Link to="/privacy-policy" className="hover:text-foreground">
