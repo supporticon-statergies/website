@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { lovableUploads } from "@/assets/lovable-uploads";
 
 export const SiteFooter = () => {
   return (
@@ -11,7 +12,7 @@ export const SiteFooter = () => {
             className="flex items-center gap-2"
           >
             <img
-              src="./lovable-uploads/2765a5e9-465e-4f44-a546-edc0809cfc34.png"
+              src={lovableUploads.logo}
               alt="Supporticon logo"
               className="h-8 w-auto"
             />

@@ -8,6 +8,7 @@ import ImageWithLoader from "@/components/ImageWithLoader";
 import productDemoVideo from "@/assets/product-demo.mp4";
 import { useScrollToTop } from "@/hooks/use-scroll-to-top";
 import postImage from "@/assets/post_image.jpg";
+import { lovableUploads } from "@/assets/lovable-uploads";
 
 const features = [
   "Unified search across knowledge base, internal articles and knowledge transfer articles",
@@ -187,7 +188,7 @@ const Product = () => {
           </div>
           <div className="relative">
             <ImageWithLoader
-              src="./lovable-uploads/a0f67e57-b75c-41ee-9b13-ea3833ba8c08.png"
+              src={lovableUploads.image3}
               alt="Help Dude in Freshdesk: email draft generated from a ticket with cited best document"
               className="w-full rounded-xl border shadow-brand"
               loading="lazy"
@@ -198,7 +199,7 @@ const Product = () => {
       <section className="container mx-auto grid items-center gap-8 px-4 pb-20 md:grid-cols-2">
         <div className="relative md:order-first">
           <ImageWithLoader
-            src="./lovable-uploads/314b183e-d63e-4dee-89fa-eebe141f06d0.png"
+            src={lovableUploads.image1}
             alt="SME Admin Console dashboard: configure KB, internal articles, KT documents, QA/Dev POCs"
             className="w-full rounded-xl border shadow-brand"
             loading="lazy"

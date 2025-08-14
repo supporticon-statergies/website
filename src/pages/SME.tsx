@@ -1,5 +1,6 @@
 import { SEO } from "@/components/SEO";
 import { useScrollToTop } from "@/hooks/use-scroll-to-top";
+import { lovableUploads } from "@/assets/lovable-uploads";
 
 const SME = () => {
   useScrollToTop();
@@ -41,7 +42,7 @@ const SME = () => {
         </div>
         <div className="relative md:order-last">
           <img
-            src="./lovable-uploads/b9a509ee-6eef-484f-bfe7-03bd697db110.png"
+            src={lovableUploads.image4}
             alt="Help Dude email drafting inputs: issue and solution fields with submit and send actions"
             className="w-full rounded-xl border shadow-brand"
             loading="lazy"
@@ -53,7 +54,7 @@ const SME = () => {
       <section className="container mx-auto grid items-center gap-8 px-4 py-12 md:grid-cols-2">
         <div className="relative md:order-first">
           <img
-            src="./lovable-uploads/314b183e-d63e-4dee-89fa-eebe141f06d0.png"
+            src={lovableUploads.image1}
             alt="Dashboard with sections for KB, Internal Articles, KT Documents, QA POCs, Dev POCs and more"
             className="w-full rounded-xl border shadow-brand"
             loading="lazy"
@@ -89,7 +90,7 @@ const SME = () => {
         </div>
         <div className="relative md:order-last">
           <img
-            src="./lovable-uploads/b9a509ee-6eef-484f-bfe7-03bd697db110.png"
+            src={lovableUploads.image4}
             alt="Inputs and controls used by SMEs to configure email drafting rules and articles"
             className="w-full rounded-xl border shadow-brand"
             loading="lazy"
