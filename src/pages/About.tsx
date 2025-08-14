@@ -65,7 +65,7 @@ const About = () => {
 
       {/* Support Icon Origin Story */}
       <section className="container mx-auto px-4 pb-20">
-        <h2 className="font-display text-3xl font-bold text-center mb-12">Support Icon Origin Story</h2>
+        <h2 className="font-display text-3xl font-bold text-center mb-12">SupportIcon Origin Story</h2>
         <div className="max-w-4xl mx-auto">
           <Card className="p-8">
             <div className="prose prose-lg max-w-none text-muted-foreground">
