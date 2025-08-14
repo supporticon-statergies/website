@@ -597,7 +597,7 @@ export const articles: Article[] = [
 
       { type: "subheading", text: "🛠 2. Tools of the Trade" },
       { type: "paragraph", text: "With AI dashboards, predictive analytics, and auto-summaries, they can focus on what truly matters — solutions." },
-      { type: "paragraph", text: "paragraph", text: "Every new AI feature should be seen as a tool in your belt, not a threat to your role." },
+      { type: "paragraph", text: "paragraph Every new AI feature should be seen as a tool in your belt, not a threat to your role." },
 
       { type: "subheading", text: "💭 Self-Reflection: Are You Leveraging AI Enough?" },
       { type: "paragraph", text: "Ask yourself: Am I still doing tasks manually that AI could do better and faster? Every minute you save is a minute you can use to deepen customer relationships." },
