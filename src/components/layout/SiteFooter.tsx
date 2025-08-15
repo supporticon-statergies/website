@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { lovableUploads } from "@/assets/lovable-uploads";
+import { supporticonUploads } from "@/assets/supporticon-uploads";
 
 export const SiteFooter = () => {
   return (
@@ -12,7 +12,7 @@ export const SiteFooter = () => {
             className="flex items-center gap-2"
           >
             <img
-              src={lovableUploads.logo}
+              src={supporticonUploads.logo}
               alt="Supporticon logo"
               className="h-8 w-auto"
             />

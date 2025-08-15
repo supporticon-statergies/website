@@ -1,12 +1,12 @@
 import { SEO } from "@/components/SEO";
 import { useScrollToTop } from "@/hooks/use-scroll-to-top";
-import { lovableUploads } from "@/assets/lovable-uploads";
+import { supporticonUploads } from "@/assets/supporticon-uploads";
 
 const SME = () => {
   useScrollToTop();
   
   return (
-    <main>
+    <main>  
       <SEO
         title="SME — Supporticon"
         description="Configure articles, define POCs, and understand natural-language drafting and assignment workflows."
@@ -18,7 +18,7 @@ const SME = () => {
         }}
       />
 
-      <section className="container mx-auto px-4 py-16">
+      <section className="container mx-auto px-4 py-12 md:py-16">
         <h1 className="font-display text-4xl font-bold">SME Tools & Configuration</h1>
         <p className="mt-4 max-w-3xl text-muted-foreground">
           Guide for Subject Matter Experts to manage knowledge, POCs, and workflows that power HelpDude in the Freshdesk marketplace.
@@ -42,7 +42,7 @@ const SME = () => {
         </div>
         <div className="relative md:order-last">
           <img
-            src={lovableUploads.image4}
+            src={supporticonUploads.image4}
             alt="Help Dude email drafting inputs: issue and solution fields with submit and send actions"
             className="w-full rounded-xl border shadow-brand"
             loading="lazy"
@@ -54,7 +54,7 @@ const SME = () => {
       <section className="container mx-auto grid items-center gap-8 px-4 py-12 md:grid-cols-2">
         <div className="relative md:order-first">
           <img
-            src={lovableUploads.image1}
+            src={supporticonUploads.image1}
             alt="Dashboard with sections for KB, Internal Articles, KT Documents, QA POCs, Dev POCs and more"
             className="w-full rounded-xl border shadow-brand"
             loading="lazy"
@@ -90,7 +90,7 @@ const SME = () => {
         </div>
         <div className="relative md:order-last">
           <img
-            src={lovableUploads.image4}
+            src={supporticonUploads.image4}
             alt="Inputs and controls used by SMEs to configure email drafting rules and articles"
             className="w-full rounded-xl border shadow-brand"
             loading="lazy"

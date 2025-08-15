@@ -12,7 +12,7 @@ const ArticleDetail = () => {
 
   if (!article) {
     return (
-      <main className="container mx-auto px-4 py-16">
+      <main className="container mx-auto px-4 py-3 md:py-16">
         <h1 className="font-display text-3xl font-bold">Article not found</h1>
         <p className="mt-4 text-muted-foreground">The article you are looking for doesn't exist.</p>
         <Link to="/articles" className="text-primary mt-6 inline-block">← Back to Articles</Link>
@@ -77,7 +77,7 @@ const ArticleDetail = () => {
         jsonLd={jsonLd}
       />
 
-      <article className="container mx-auto px-4 py-12">
+      <article className="container mx-auto px-4 py-3 md:py-16">
         <header className="max-w-3xl">
           <h1 className="font-display text-4xl font-bold">{article.title}</h1>
           {article.subtitle && (

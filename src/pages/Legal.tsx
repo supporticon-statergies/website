@@ -298,7 +298,7 @@ const Legal = () => {
         canonicalPath="/legal"
       />
 
-      <section className="container mx-auto px-4 py-16">
+      <section className="container mx-auto px-4 py-12 md:py-16">
         <div className="mb-8">
           <h1 className="font-display text-4xl font-bold">Legal Information</h1>
           <p className="mt-4 max-w-3xl text-muted-foreground">

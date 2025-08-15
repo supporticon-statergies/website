@@ -21,13 +21,13 @@ const Home = () => {
           "@type": "Organization",
           name: "Supporticon Strategies Private Limited",
           url: typeof window !== "undefined" ? window.location.origin : undefined,
-          logo: "/lovable-uploads/8a9c0dca-e50e-459a-afc4-1e08634ad78b.png",
+          logo: "/supporticon-uploads/8a9c0dca-e50e-459a-afc4-1e08634ad78b.png",
         }}
-      />
+      />  
       <main>
         {/* Hero Section */}
         <section className="relative overflow-hidden bg-subtle-gradient">
-          <div className="container mx-auto grid items-center gap-10 px-4 py-20 md:grid-cols-2">
+          <div className="container mx-auto grid items-center gap-10 px-4 py-3 md:py-20 md:grid-cols-2">
             <div>
               <h1 className="font-display text-4xl font-extrabold leading-tight md:text-5xl lg:text-6xl">
                 <span className="text-brand-gradient">Who supports</span> the support team?
@@ -57,7 +57,7 @@ const Home = () => {
         </section>
 
         {/* The Problem Section */}
-        <section className="py-20 bg-muted/30">
+        <section className="py-12 md:py-20 bg-muted/30">
           <div className="container mx-auto px-4">
             <div className="mx-auto max-w-4xl text-center">
               <h2 className="font-display text-4xl font-bold mb-6">
@@ -96,7 +96,7 @@ const Home = () => {
         </section>
 
         {/* Our Mission Section */}
-        <section className="py-20">
+        <section className="py-12 md:py-20">
           <div className="container mx-auto px-4">
             <div className="mx-auto max-w-4xl">
               <div className="text-center mb-16">
@@ -137,7 +137,7 @@ const Home = () => {
         </section>
 
         {/* What We're Building Section */}
-        <section className="py-20 bg-muted/30">
+        <section className="py-12 md:py-20 bg-muted/30">
           <div className="container mx-auto px-4">
             <div className="mx-auto max-w-4xl text-center">
               <h2 className="font-display text-4xl font-bold mb-6">
@@ -171,7 +171,7 @@ const Home = () => {
         </section>
 
         {/* Coming Soon Section */}
-        <section className="py-20">
+        <section className="py-12 md:py-20">
           <div className="container mx-auto px-4 text-center">
             <div className="mx-auto max-w-3xl">
               <h2 className="font-display text-5xl font-bold mb-6">
@@ -189,7 +189,7 @@ const Home = () => {
         </section>
 
         {/* Features Section */}
-        <section className="py-20 bg-muted/30">
+        <section className="py-12 md:py-20 bg-muted/30">
           <div className="container mx-auto px-4">
             <div className="mx-auto max-w-2xl text-center mb-16">
               <h2 className="font-display text-3xl font-bold">Why teams choose Supporticon</h2>
@@ -217,7 +217,7 @@ const Home = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20">
+        <section className="py-12 md:py-20">
           <div className="container mx-auto px-4 text-center">
             <div className="mx-auto max-w-3xl">
               <h2 className="font-display text-4xl font-bold mb-6">

@@ -20,7 +20,7 @@ const Articles = () => {
         }}
       />
 
-      <section className="container mx-auto px-4 py-16">
+      <section className="container mx-auto px-4 py-3 md:py-16">
         <h1 className="font-display text-4xl font-bold">Articles</h1>
         <p className="mt-4 text-lg text-muted-foreground max-w-2xl">
           Knowledge for support engineers: workflows, tooling and AI best practices.

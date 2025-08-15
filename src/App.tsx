@@ -26,21 +26,23 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <SiteHeader />
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/product" element={<Product />} />
-            <Route path="/articles" element={<Articles />} />
-            <Route path="/articles/:slug" element={<ArticleDetail />} />
-            
-            <Route path="/privacy-policy" element={<Privacy />} />
-            <Route path="/terms" element={<Terms />} />
-            <Route path="/legal" element={<Legal />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          <SiteFooter />
+         
+            <SiteHeader />
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/product" element={<Product />} />
+              <Route path="/articles" element={<Articles />} />
+              <Route path="/articles/:slug" element={<ArticleDetail />} />
+              
+              <Route path="/privacy-policy" element={<Privacy />} />
+              <Route path="/terms" element={<Terms />} />
+              <Route path="/legal" element={<Legal />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+            <SiteFooter />
+         
         </BrowserRouter>
       </TooltipProvider>
     </HelmetProvider>

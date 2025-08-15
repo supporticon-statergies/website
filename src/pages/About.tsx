@@ -17,7 +17,7 @@ const About = () => {
       />
       
       {/* Hero Section */}
-      <section className="container mx-auto px-4 py-16">
+      <section className="container mx-auto px-4 py-3 md:py-16">
         <div className="grid gap-12 lg:grid-cols-2 items-center">
           <div>
             <h1 className="font-display text-4xl font-bold mb-6">About Supporticon</h1>

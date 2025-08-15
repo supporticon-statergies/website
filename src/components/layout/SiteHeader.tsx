@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import RequestDemoDialog from "@/components/RequestDemoDialog";
 import { Menu, X } from "lucide-react";
-import { lovableUploads } from "@/assets/lovable-uploads";
+import { supporticonUploads } from "@/assets/supporticon-uploads";
 
 const nav = [
   { to: "/", label: "Home" },
@@ -26,7 +26,7 @@ export const SiteHeader = () => {
           className="flex items-center gap-2 mr-8"
         >
           <img
-            src={lovableUploads.logo}
+            src={supporticonUploads.logo}
             alt="Supporticon logo"
             className="h-11 w-auto"
             loading="eager"
@@ -51,11 +51,22 @@ export const SiteHeader = () => {
         <Button
           variant="ghost"
           size="sm"
-          className="md:hidden"
+          className="md:hidden transition-all duration-200 hover:bg-muted/50"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle menu"
         >
-          {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          <div className="relative">
+            <Menu 
+              className={`h-5 w-5 transition-all duration-200 ${
+                mobileMenuOpen ? 'opacity-0 rotate-90 scale-75' : 'opacity-100 rotate-0 scale-100'
+              }`} 
+            />
+            <X 
+              className={`h-5 w-5 absolute inset-0 transition-all duration-200 ${
+                mobileMenuOpen ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 -rotate-90 scale-75'
+              }`} 
+            />
+          </div>
         </Button>
         
         <div className="flex items-center gap-2">
@@ -67,19 +78,29 @@ export const SiteHeader = () => {
       
       {/* Mobile navigation menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t bg-background/95 backdrop-blur">
-          <nav className="container mx-auto px-4 py-4 space-y-3">
-            {nav.map((n) => (
+        <div className="md:hidden border-t bg-background/95 backdrop-blur overflow-hidden animate-in slide-in-from-top-2 duration-300 ease-out">
+          <nav 
+            className="container mx-auto px-4 py-4 space-y-3"
+            style={{
+              animation: 'slideDown 0.3s ease-out forwards'
+            }}
+          >
+            {nav.map((n, index) => (
               <NavLink
                 key={n.to}
                 to={n.to}
                 end={n.to === "/"}
                 className={({ isActive }) =>
-                  `block py-2 text-base transition-colors ${
-                    isActive ? "text-primary font-medium" : "text-muted-foreground hover:text-foreground"
+                  `block py-2 text-base transition-all duration-200 transform hover:bg-muted/30 rounded-md px-2 ${
+                    isActive ? "text-primary font-medium bg-primary/10" : "text-muted-foreground hover:text-foreground"
                   }`
                 }
                 onClick={() => setMobileMenuOpen(false)}
+                style={{
+                  animation: `slideInFromTop 0.3s ease-out ${index * 0.1}s forwards`,
+                  opacity: 0,
+                  transform: 'translateY(-20px)'
+                }}
               >
                 {n.label}
               </NavLink>
