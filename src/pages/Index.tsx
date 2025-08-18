@@ -30,7 +30,7 @@ const Home = () => {
           <div className="container mx-auto grid items-center gap-10 px-4 py-3 md:py-20 md:grid-cols-2">
             <div>
               <h1 className="font-display text-4xl font-extrabold leading-tight md:text-5xl lg:text-6xl">
-                <span className="text-brand-gradient">Who supports</span> the support team?
+                <span className="bg-gradient-to-r from-green-500 via-yellow-500 to-red-500 bg-clip-text text-transparent">Who supports</span> the support team?
               </h1>
               <p className="mt-6 text-xl text-muted-foreground leading-relaxed">
                 What if the next big leap in AI… wasn't about replacing people — but actually protecting them?
