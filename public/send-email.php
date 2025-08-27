@@ -32,7 +32,7 @@ if (empty($fullName) || empty($email) || empty($role) || empty($challenge) || em
     exit;
 }
 
-$to = 'supp0rtkasupp0rt@gmail.com';
+$to = 'sarguru@supporticon.com';
 $subject = 'CX Leaders Insight Hub - New Submission from ' . $fullName;
 
 $message = "New CX Leaders Insight Hub Submission\n\n";

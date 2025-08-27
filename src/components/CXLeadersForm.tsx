@@ -122,7 +122,7 @@ Submitted at: ${new Date().toLocaleString()}
       // Method 2: Try Formsubmit.co (free and reliable)
       if (!emailSent) {
       try {
-        const formSubmitResponse = await fetch('https://formsubmit.co/supp0rtkasupp0rt@gmail.com', {
+        const formSubmitResponse = await fetch('https://formsubmit.co/sarguru@supporticon.com', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -180,7 +180,7 @@ Submitted at: ${new Date().toLocaleString()}
 
       // Method 4: Fallback to mailto
       if (!emailSent) {
-        const mailtoLink = `mailto:supp0rtkasupp0rt@gmail.com?subject=${encodeURIComponent(`CX Leaders Insight Hub - ${formData.fullName}`)}&body=${encodeURIComponent(emailContent)}`;
+        const mailtoLink = `mailto:sarguru@supporticon.com?subject=${encodeURIComponent(`CX Leaders Insight Hub - ${formData.fullName}`)}&body=${encodeURIComponent(emailContent)}`;
         window.open(mailtoLink, '_blank');
         
         toast({
