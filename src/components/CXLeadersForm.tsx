@@ -210,13 +210,30 @@ Submitted at: ${new Date().toLocaleString()}
   };
 
   const handleDownload = () => {
-    // Download the FAQ PDF
-    const link = document.createElement('a');
-    link.href = '/CX-Leaders-FAQ.pdf';
-    link.download = 'CX-Leaders-FAQ.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    try {
+      // Try URL-safe filename first
+      const link = document.createElement('a');
+      link.href = "/CX-Leaders-FAQ.pdf";
+      link.download = "CX-Leaders-FAQ.pdf";
+      link.target = '_blank';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      // Show success message
+      toast({
+        title: "Download started!",
+        description: "The FAQ PDF should start downloading now.",
+      });
+    } catch (error) {
+      console.error('Download failed:', error);
+      // Fallback: open in new tab
+      window.open("/CX-Leaders-FAQ.pdf", '_blank');
+      toast({
+        title: "Opening PDF in new tab",
+        description: "You can save the PDF from the new tab.",
+      });
+    }
   };
 
   const handleClose = () => {
