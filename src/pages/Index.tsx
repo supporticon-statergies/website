@@ -3,12 +3,20 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/home-imge.png";
 import Spotlight from "@/components/Spotlight";
-import { Brain, Timer, Search, Plug, Heart, Shield, Users, Zap, Clock, Star, ArrowRight, CheckCircle } from "lucide-react";
+import { Brain, Timer, Search, Plug, Heart, Shield, Users, Zap, Clock, Star, ArrowRight, CheckCircle, Play, X, FileText, Download } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useScrollToTop } from "@/hooks/use-scroll-to-top";
+import { useState } from "react";
+import productDemoVideo from "@/assets/product-demo.mp4";
+import { CXLeadersForm } from "../components/CXLeadersForm";
 
 const Home = () => {
   useScrollToTop();
+  
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const [isVideoPaused, setIsVideoPaused] = useState(false);
+  const [showVideoModal, setShowVideoModal] = useState(false);
+  const [showCXForm, setShowCXForm] = useState(false);
   
   return (
     <>
@@ -28,7 +36,7 @@ const Home = () => {
         {/* Hero Section */}
         <section className="relative overflow-hidden bg-subtle-gradient">
           <div className="container mx-auto grid items-center gap-10 px-4 py-3 md:py-20 md:grid-cols-2">
-            <div>
+            <div className="order-2 md:order-1">
               <h1 className="font-display text-4xl font-extrabold leading-tight md:text-5xl lg:text-6xl">
                 <span className="bg-gradient-to-r from-green-500 via-yellow-500 to-red-500 bg-clip-text text-transparent">Who supports</span> the support team?
               </h1>
@@ -44,13 +52,103 @@ const Home = () => {
                 </Button>
               </div>
             </div>
-            <div className="relative">
-              <img
-                src={heroImage}
-                alt="Support team collaboration and empowerment"
-                className="w-full rounded-xl border shadow-brand"
-                loading="eager"
-              />
+            <div className="relative order-1 md:order-2">
+              <div
+                className="relative aspect-video rounded-xl overflow-hidden bg-gradient-to-br from-slate-900 to-slate-800 shadow-brand cursor-pointer"
+                onClick={() => setShowVideoModal(true)}
+              >
+                {/* Fallback image that shows when video is not loaded */}
+                                 <img
+                   src={heroImage}
+                   alt="Support team collaboration and empowerment"
+                   className="w-full h-full object-cover"
+                   style={{
+                     display: isVideoPlaying || isVideoPaused ? "none" : "block",
+                   }}
+                 />
+
+                                 <video
+                   className="w-full h-full object-contain"
+                   controls
+                   onPlay={() => {
+                     setIsVideoPlaying(true);
+                     setIsVideoPaused(false);
+                   }}
+                   onPause={() => {
+                     setIsVideoPlaying(false);
+                     setIsVideoPaused(true);
+                   }}
+                   onEnded={() => {
+                     setIsVideoPlaying(false);
+                     setIsVideoPaused(false);
+                   }}
+                   poster={heroImage}
+                   style={{
+                     display: isVideoPlaying || isVideoPaused ? "block" : "none",
+                   }}
+                 >
+                  <source src={productDemoVideo} type="video/mp4" />
+                  <track
+                    kind="captions"
+                    src="/product-demo-captions.vtt"
+                    srcLang="en"
+                    label="English"
+                    default
+                  />
+                  Your browser does not support the video tag.
+                </video>
+
+                                 {(!isVideoPlaying || isVideoPaused) ? (
+                   <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                     <div className="text-center space-y-6">
+                       {!isVideoPaused && !isVideoPlaying && (
+                         <div>
+                           <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm">
+                             <Play className="h-8 w-8 text-white ml-1" />
+                           </div>
+                           <p className="text-white/90 text-sm font-medium">
+                             Click to play demo video
+                           </p>
+                         </div>
+                       )}
+
+                       {isVideoPaused && (
+                         <div>
+                           <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm cursor-pointer hover:bg-white/30 transition-colors"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  const video = e.currentTarget.closest('.relative')?.querySelector('video') as HTMLVideoElement;
+                                  if (video) {
+                                    video.play();
+                                  }
+                                }}>
+                             <Play className="h-8 w-8 text-white ml-1" />
+                           </div>
+                           <p className="text-white/90 text-sm font-medium">
+                             Continue watching
+                           </p>
+                         </div>
+                       )}
+                       
+                       {/* CX Leaders Insight Hub Button in Video Overlay */}
+                       <div className={isVideoPaused ? "mt-4" : "mt-6"}>
+                         <Button 
+                           onClick={(e) => {
+                             e.stopPropagation();
+                             setShowCXForm(true);
+                           }}
+                           variant="hero" 
+                           size="lg"
+                           className="text-white border-none shadow-brand hover:shadow-glow transition-all duration-300 transform hover:scale-105"
+                         >
+                           <FileText className="w-5 h-5 mr-2" />
+                           CX Leaders Insight Hub
+                         </Button>
+                       </div>
+                     </div>
+                   </div>
+                 ) : null}
+              </div>
               <Spotlight className="absolute inset-0" />
             </div>
           </div>
@@ -240,6 +338,92 @@ const Home = () => {
             </div>
           </div>
         </section>
+
+        {/* Video Modal */}
+        {showVideoModal && (
+          <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+            <div className="relative w-full max-w-6xl aspect-video bg-black rounded-2xl overflow-hidden">
+              <button
+                onClick={() => setShowVideoModal(false)}
+                className="absolute top-4 right-4 z-10 w-10 h-10 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center text-white transition-colors"
+              >
+                <X className="h-6 w-6" />
+              </button>
+              
+              <video
+                className="w-full h-full object-contain"
+                controls
+                autoPlay
+                onPlay={() => {
+                  setIsVideoPlaying(true);
+                  setIsVideoPaused(false);
+                }}
+                onPause={() => {
+                  setIsVideoPlaying(false);
+                  setIsVideoPaused(true);
+                }}
+                onEnded={() => {
+                  setIsVideoPlaying(false);
+                  setIsVideoPaused(false);
+                }}
+              >
+                <source src={productDemoVideo} type="video/mp4" />
+                <track
+                  kind="captions"
+                  src="/product-demo-captions.vtt"
+                  srcLang="en"
+                  label="English"
+                  default
+                />
+                Your browser does not support the video tag.
+              </video>
+
+              {/* Modal Video Overlay for Paused State */}
+              {isVideoPaused && (
+                <div className="absolute inset-0 flex items-center justify-center bg-black/50">
+                  <div className="text-center space-y-6">
+                    <div>
+                      <div className="mx-auto mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm cursor-pointer hover:bg-white/30 transition-colors"
+                           onClick={() => {
+                             const video = document.querySelector('.fixed video') as HTMLVideoElement;
+                             if (video) {
+                               video.play();
+                             }
+                           }}>
+                        <Play className="h-10 w-10 text-white ml-1" />
+                      </div>
+                      <p className="text-white/90 text-lg font-medium">
+                        Continue watching
+                      </p>
+                    </div>
+                    
+                    {/* CX Leaders Insight Hub Button in Modal */}
+                    <div className="mt-6">
+                      <Button 
+                        onClick={() => {
+                          setShowCXForm(true);
+                          setShowVideoModal(false); // Close modal when opening form
+                        }}
+                        variant="hero" 
+                        size="lg"
+                        className="text-white border-none shadow-brand hover:shadow-glow transition-all duration-300 transform hover:scale-105"
+                      >
+                        <FileText className="w-5 h-5 mr-2" />
+                        CX Leaders Insight Hub
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* CX Leaders Form */}
+        <CXLeadersForm 
+          open={showCXForm} 
+          onOpenChange={setShowCXForm}
+        />
       </main>
     </>
   );
