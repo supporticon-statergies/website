@@ -6,7 +6,7 @@ import Spotlight from "@/components/Spotlight";
 import { Brain, Timer, Search, Plug, Heart, Shield, Users, Zap, Clock, Star, ArrowRight, CheckCircle, Play, X, FileText, Download } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useScrollToTop } from "@/hooks/use-scroll-to-top";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import productDemoVideo from "@/assets/product-demo.mp4";
 import { CXLeadersForm } from "../components/CXLeadersForm";
 
@@ -17,6 +17,19 @@ const Home = () => {
   const [isVideoPaused, setIsVideoPaused] = useState(false);
   const [showVideoModal, setShowVideoModal] = useState(false);
   const [showCXForm, setShowCXForm] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check if device is mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
   
   return (
     <>
@@ -69,7 +82,7 @@ const Home = () => {
 
                                  <video
                    className="w-full h-full object-contain"
-                   controls
+                   controls={!isMobile || !isVideoPaused}
                    onPlay={() => {
                      setIsVideoPlaying(true);
                      setIsVideoPaused(false);
