@@ -81,8 +81,12 @@ const Home = () => {
                  />
 
                                  <video
-                   className="w-full h-full object-contain"
+                   className={`w-full h-full object-contain ${
+                     isMobile && isVideoPaused ? 'mobile-video-paused' : ''
+                   }`}
                    controls={!isMobile || !isVideoPaused}
+                   controlsList={isMobile && isVideoPaused ? "nodownload nofullscreen noremoteplayback" : undefined}
+                   disablePictureInPicture={isMobile && isVideoPaused}
                    onPlay={() => {
                      setIsVideoPlaying(true);
                      setIsVideoPaused(false);
@@ -98,6 +102,9 @@ const Home = () => {
                    poster={heroImage}
                    style={{
                      display: isVideoPlaying || isVideoPaused ? "block" : "none",
+                     ...(isMobile && isVideoPaused && {
+                       pointerEvents: 'none',
+                     })
                    }}
                  >
                   <source src={productDemoVideo} type="video/mp4" />

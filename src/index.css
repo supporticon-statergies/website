@@ -159,4 +159,38 @@ All colors MUST be HSL.
   .hover-scale {
     @apply transition-transform duration-200 hover:scale-105;
   }
+  
+  /* Hide native video controls on mobile when paused */
+  .mobile-video-paused::-webkit-media-controls {
+    display: none !important;
+    opacity: 0 !important;
+  }
+  
+  .mobile-video-paused::-webkit-media-controls-enclosure {
+    display: none !important;
+  }
+  
+  .mobile-video-paused::-webkit-media-controls-panel {
+    display: none !important;
+  }
+  
+  .mobile-video-paused::-webkit-media-controls-play-button {
+    display: none !important;
+  }
+  
+  .mobile-video-paused::-webkit-media-controls-start-playback-button {
+    display: none !important;
+  }
+  
+  /* For Firefox */
+  @-moz-document url-prefix() {
+    .mobile-video-paused::-moz-media-controls {
+      display: none !important;
+    }
+  }
+  
+  /* For other browsers */
+  .mobile-video-paused[controls] {
+    color: transparent;
+  }
 }
