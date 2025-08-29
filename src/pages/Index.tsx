@@ -371,8 +371,12 @@ const Home = () => {
               </button>
               
               <video
-                className="w-full h-full object-contain"
-                controls
+                className={`w-full h-full object-contain ${
+                  isMobile && isVideoPaused ? 'mobile-video-paused' : ''
+                }`}
+                controls={!isMobile || !isVideoPaused}
+                controlsList={isMobile && isVideoPaused ? "nodownload nofullscreen noremoteplayback" : undefined}
+                disablePictureInPicture={isMobile && isVideoPaused}
                 autoPlay
                 onPlay={() => {
                   setIsVideoPlaying(true);
@@ -385,6 +389,11 @@ const Home = () => {
                 onEnded={() => {
                   setIsVideoPlaying(false);
                   setIsVideoPaused(false);
+                }}
+                style={{
+                  ...(isMobile && isVideoPaused && {
+                    pointerEvents: 'none',
+                  })
                 }}
               >
                 <source src={productDemoVideo} type="video/mp4" />

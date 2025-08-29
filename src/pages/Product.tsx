@@ -2,7 +2,7 @@ import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle2, Play, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import RequestDemoDialog from "@/components/RequestDemoDialog";
 import ImageWithLoader from "@/components/ImageWithLoader";
 import productDemoVideo from "@/assets/product-demo.mp4";
@@ -23,7 +23,21 @@ const Product = () => {
 
 	const [open, setOpen] = useState(false);
 	const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+	const [isVideoPaused, setIsVideoPaused] = useState(false);
 	const [showVideoModal, setShowVideoModal] = useState(false);
+	const [isMobile, setIsMobile] = useState(false);
+
+	// Check if device is mobile
+	useEffect(() => {
+		const checkMobile = () => {
+			setIsMobile(window.innerWidth < 768);
+		};
+		
+		checkMobile();
+		window.addEventListener('resize', checkMobile);
+		
+		return () => window.removeEventListener('resize', checkMobile);
+	}, []);
 
 	// Debug logging for poster image
 	console.log("Poster image path:", postImage);
@@ -82,15 +96,29 @@ const Product = () => {
 									alt="Help Dude Product Demo"
 									className="w-full h-full object-cover"
 									style={{
-										display: isVideoPlaying ? "none" : "block",
+										display: isVideoPlaying || isVideoPaused ? "none" : "block",
 									}}
 								/>
 
 								<video
-									className="w-full h-full object-contain"
-									controls
-									onPlay={() => setIsVideoPlaying(true)}
-									onPause={() => setIsVideoPlaying(false)}
+									className={`w-full h-full object-contain ${
+										isMobile && isVideoPaused ? 'mobile-video-paused' : ''
+									}`}
+									controls={!isMobile || !isVideoPaused}
+									controlsList={isMobile && isVideoPaused ? "nodownload nofullscreen noremoteplayback" : undefined}
+									disablePictureInPicture={isMobile && isVideoPaused}
+									onPlay={() => {
+										setIsVideoPlaying(true);
+										setIsVideoPaused(false);
+									}}
+									onPause={() => {
+										setIsVideoPlaying(false);
+										setIsVideoPaused(true);
+									}}
+									onEnded={() => {
+										setIsVideoPlaying(false);
+										setIsVideoPaused(false);
+									}}
 									poster={postImage}
 									onLoadStart={() =>
 										console.log(
@@ -102,7 +130,10 @@ const Product = () => {
 										console.log("Video data loaded")
 									}
 									style={{
-										display: isVideoPlaying ? "block" : "none",
+										display: isVideoPlaying || isVideoPaused ? "block" : "none",
+										...(isMobile && isVideoPaused && {
+											pointerEvents: 'none',
+										})
 									}}
 								>
 									<source src={productDemoVideo} type="video/mp4" />
@@ -116,15 +147,37 @@ const Product = () => {
 									Your browser does not support the video tag.
 								</video>
 
-								{!isVideoPlaying ? (
+								{(!isVideoPlaying || isVideoPaused) ? (
 									<div className="absolute inset-0 flex items-center justify-center bg-black/30">
 										<div className="text-center">
-											<div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm">
-												<Play className="h-8 w-8 text-white ml-1" />
-											</div>
-											<p className="text-white/90 text-sm font-medium">
-												Click to play demo video
-											</p>
+											{!isVideoPaused && !isVideoPlaying && (
+												<div>
+													<div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm">
+														<Play className="h-8 w-8 text-white ml-1" />
+													</div>
+													<p className="text-white/90 text-sm font-medium">
+														Click to play demo video
+													</p>
+												</div>
+											)}
+											
+											{isVideoPaused && (
+												<div>
+													<div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm cursor-pointer hover:bg-white/30 transition-colors"
+														 onClick={(e) => {
+															e.stopPropagation();
+															const video = e.currentTarget.closest('.relative')?.querySelector('video') as HTMLVideoElement;
+															if (video) {
+																video.play();
+															}
+														}}>
+														<Play className="h-8 w-8 text-white ml-1" />
+													</div>
+													<p className="text-white/90 text-sm font-medium">
+														Continue watching
+													</p>
+												</div>
+											)}
 										</div>
 									</div>
 								) : null}
@@ -145,11 +198,30 @@ const Product = () => {
 							<X className="h-6 w-6" />
 						</button>
 						<video
-							className="w-full h-full object-contain"
-							controls
+							className={`w-full h-full object-contain ${
+								isMobile && isVideoPaused ? 'mobile-video-paused' : ''
+							}`}
+							controls={!isMobile || !isVideoPaused}
+							controlsList={isMobile && isVideoPaused ? "nodownload nofullscreen noremoteplayback" : undefined}
+							disablePictureInPicture={isMobile && isVideoPaused}
 							autoPlay
-							onPlay={() => setIsVideoPlaying(true)}
-							onPause={() => setIsVideoPlaying(false)}
+							onPlay={() => {
+								setIsVideoPlaying(true);
+								setIsVideoPaused(false);
+							}}
+							onPause={() => {
+								setIsVideoPlaying(false);
+								setIsVideoPaused(true);
+							}}
+							onEnded={() => {
+								setIsVideoPlaying(false);
+								setIsVideoPaused(false);
+							}}
+							style={{
+								...(isMobile && isVideoPaused && {
+									pointerEvents: 'none',
+								})
+							}}
 						>
 							<source src={productDemoVideo} type="video/mp4" />
 							<track
@@ -161,6 +233,26 @@ const Product = () => {
 							/>
 							Your browser does not support the video tag.
 						</video>
+						
+						{/* Modal Video Overlay for Paused State */}
+						{isVideoPaused && (
+							<div className="absolute inset-0 flex items-center justify-center bg-black/50">
+								<div className="text-center">
+									<div className="mx-auto mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm cursor-pointer hover:bg-white/30 transition-colors"
+										 onClick={() => {
+											const video = document.querySelector('.fixed video') as HTMLVideoElement;
+											if (video) {
+												video.play();
+											}
+										}}>
+										<Play className="h-10 w-10 text-white ml-1" />
+									</div>
+									<p className="text-white/90 text-lg font-medium">
+										Continue watching
+									</p>
+								</div>
+							</div>
+						)}
 					</div>
 				</div>
 			)}
