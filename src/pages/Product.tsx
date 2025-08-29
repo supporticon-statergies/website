@@ -7,7 +7,7 @@ import RequestDemoDialog from "@/components/RequestDemoDialog";
 import ImageWithLoader from "@/components/ImageWithLoader";
 import productDemoVideo from "@/assets/product-demo.mp4";
 import { useScrollToTop } from "@/hooks/use-scroll-to-top";
-import postImage from "@/assets/post_image.jpg";
+import postImage from "@/assets/post_image.png";
 import { supporticonUploads } from "@/assets/supporticon-uploads";
 import ImageZoom from "@/components/ui/image-zoom";
 
