@@ -144,7 +144,7 @@ const About = () => {
               <h3 className="text-xl font-bold mb-2">Sarguru</h3>
               <p className="text-muted-foreground mb-4">AI/ML Developer</p>
               <a 
-                href="https://www.linkedin.com/in/sarguru-i-169308255" 
+                href="https://www.linkedin.com/in/sarguru-i" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
@@ -163,7 +163,7 @@ const About = () => {
               <h3 className="text-xl font-bold mb-2">Sudhan</h3>
               <p className="text-muted-foreground mb-4">Backend Developer</p>
               <a 
-                href="https://www.linkedin.com/in/shanmuga-sudhan-k-237947256" 
+                href="https://www.linkedin.com/in/shanmuga-sudhan-k" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
