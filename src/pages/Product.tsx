@@ -78,9 +78,9 @@ const Product = () => {
 							<Button
 								variant="hero"
 								size="lg"
-								onClick={() => setOpen(true)}
+								onClick={() => window.open('https://www.freshworks.com/apps/helpdude_1/', '_blank', 'noopener,noreferrer')}
 							>
-								Request Demo
+								Try Exclusive Trial
 							</Button>
 						</div>
 
