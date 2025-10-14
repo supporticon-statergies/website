@@ -1,0 +1,59 @@
+.marquee-container {
+  width: 100%;
+  overflow: hidden;
+  background: linear-gradient(135deg, #5aade1c5 0%, #9bc699d7 100%);
+  padding: 10px 0;
+  border-top: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: center; /* center content horizontally */
+  align-items: center;     /* center content vertically */
+}
+
+.marquee {
+  display: flex;
+  align-items: center;
+  gap: 50px; /* space between items */
+  white-space: nowrap;
+}
+
+.marquee-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.marquee-text {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.marquee-text strong {
+  color: #6A1B9A;
+  text-shadow: 0 0 8px rgba(106, 27, 154, 0.6);
+}
+
+.marquee-icon {
+  height: 35px;
+  width: auto;
+  object-fit: contain;
+  vertical-align: middle;
+  opacity: 0.95;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.marquee-icon:hover {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+@media (max-width: 600px) {
+  .marquee-text {
+    font-size: 0.9rem;
+  }
+
+  .marquee-icon {
+    height: 30px;
+  }
+}
