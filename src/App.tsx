@@ -11,42 +11,45 @@ import Product from "./pages/Product";
 import Articles from "./pages/Articles";
 import Privacy from "./pages/Privacy";
 import ArticleDetail from "./pages/ArticleDetail";
-
 import Terms from "./pages/Terms";
 import Legal from "./pages/Legal";
 import SiteHeader from "./components/layout/SiteHeader";
 import SiteFooter from "./components/layout/SiteFooter";
+import Marquee from "./components/Marquee"; // ✅ Added import
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <HelmetProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-         
-            <SiteHeader />
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/product" element={<Product />} />
-              <Route path="/articles" element={<Articles />} />
-              <Route path="/articles/:slug" element={<ArticleDetail />} />
-              
-              <Route path="/privacy-policy" element={<Privacy />} />
-              <Route path="/terms" element={<Terms />} />
-              <Route path="/legal" element={<Legal />} />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-            <SiteFooter />
-         
-        </BrowserRouter>
-      </TooltipProvider>
-    </HelmetProvider>
-  </QueryClientProvider>
-);
+function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <HelmetProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <div>
+              <SiteHeader />
+              <Marquee /> {/* ✅ Added Marquee below SiteHeader */}
+
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/product" element={<Product />} />
+                <Route path="/articles" element={<Articles />} />
+                <Route path="/articles/:slug" element={<ArticleDetail />} />
+                <Route path="/privacy-policy" element={<Privacy />} />
+                <Route path="/terms" element={<Terms />} />
+                <Route path="/legal" element={<Legal />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+
+              <SiteFooter />
+            </div>
+          </BrowserRouter>
+        </TooltipProvider>
+      </HelmetProvider>
+    </QueryClientProvider>
+  );
+}
 
 export default App;
