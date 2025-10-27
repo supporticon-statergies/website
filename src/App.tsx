@@ -9,6 +9,7 @@ import NotFound from "./pages/NotFound";
 import About from "./pages/About";
 import Product from "./pages/Product";
 import Articles from "./pages/Articles";
+import Events from "./pages/Events";
 import Privacy from "./pages/Privacy";
 import ArticleDetail from "./pages/ArticleDetail";
 import Terms from "./pages/Terms";
@@ -37,6 +38,7 @@ function App() {
                 <Route path="/product" element={<Product />} />
                 <Route path="/articles" element={<Articles />} />
                 <Route path="/articles/:slug" element={<ArticleDetail />} />
+                <Route path="/events" element={<Events />} />
                 <Route path="/privacy-policy" element={<Privacy />} />
                 <Route path="/terms" element={<Terms />} />
                 <Route path="/legal" element={<Legal />} />
