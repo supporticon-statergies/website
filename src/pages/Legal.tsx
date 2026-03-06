@@ -22,117 +22,130 @@ const Legal = () => {
   const sections = [
     {
       id: 'terms',
-      title: 'Terms & Conditions',
+      title: 'Terms of Service (Data & Privacy)',
       content: (
         <div className="space-y-8">
           <div>
             <h2 className="text-2xl font-semibold mb-4">Introduction</h2>
             <p className="text-muted-foreground leading-relaxed">
-              Supporticon is a strategy-first SaaS company focused on elevating customer support through AI-driven automation and seamless platform integration. Our AI assistant, HelpDude, empowers agents—not replaces them—by drafting intelligent replies, surfacing relevant KB and past ticket solutions, and maintaining response consistency. Built to work across systems like Freshdesk and ZohoDesk, HelpDude enhances support efficiency and accuracy. Real-time insights are powered by unencrypted vector processing via Quadrant DB, without storing raw user data or PII. Sensitive data is securely stored in MongoDB Atlas and hosted on AWS with enterprise-grade safeguards. By using Supporticon, you agree to these terms.
+              These Terms of Service describe how Supporticon handles end-user data when you use our applications and integrations. They are intentionally focused on data: what we collect, where it is stored, how it is protected, and when it is deleted. By installing or using our app, you agree to these data and privacy terms.
             </p>
           </div>
 
           <div>
-            <h2 className="text-2xl font-semibold mb-4">Scope of Services</h2>
-            <p className="text-muted-foreground leading-relaxed">
-              Supporticon is a cloud‑deployed, AI‑powered customer support platform that streamlines ticket resolution. Incoming emails are captured and responded to using LLMs (via Ollama) with RAG, backed by vector databases, MongoDB, and Clearly. The platform pulls relevant KB content, internal documentation, and KT notes to generate accurate replies. It supports multi‑channel input, role‑based access, smart filtering, lifecycle tracking, and is designed for high scalability and reliability.
-            </p>
-          </div>
-
-          <div>
-            <h2 className="text-2xl font-semibold mb-4">User Account Responsibilities</h2>
-            <ul className="list-disc pl-5 text-muted-foreground space-y-2 leading-relaxed">
-              <li>Keep domain name, API key, username, password, and email ID confidential and secure.</li>
-              <li>Ensure all provided information is accurate and up to date.</li>
-              <li>Report any unauthorized access or suspicious activity immediately.</li>
-            </ul>
-            <p className="mt-4 text-muted-foreground">Failure to comply may lead to suspension or termination.</p>
-          </div>
-
-          <div>
-            <h2 className="text-2xl font-semibold mb-4">Data Practices</h2>
+            <h2 className="text-2xl font-semibold mb-4">Types of Data We Process</h2>
             <div className="space-y-4">
               <div>
                 <h4 className="font-semibold text-foreground mb-2">Data Collection</h4>
-                <p className="text-muted-foreground">We collect only data essential for operating and improving Supporticon, including domain details, API keys, user credentials, and email IDs.</p>
+                <p className="text-muted-foreground">
+                  We collect and process only the data needed to operate our app and provide AI-assisted customer support features. This may include:
+                </p>
+                <ul className="list-disc pl-5 text-muted-foreground mt-2 space-y-1">
+                  <li>Name and email address of your users or agents.</li>
+                  <li>Helpdesk domain or subdomain (for example, your Freshdesk domain) and configuration details required for integration.</li>
+                  <li>Support-related content and metadata (such as tickets, messages, knowledge base content, and similar material) needed to power AI responses.</li>
+                  <li>Basic usage and diagnostic information (such as logs and performance metrics) to keep the service reliable and secure.</li>
+                </ul>
               </div>
               <div>
-                <h4 className="font-semibold text-foreground mb-2">Data Usage</h4>
-                <p className="text-muted-foreground">Data is used solely for delivering services—ticket generation, AI responses, and knowledge suggestions—aligned with GDPR, SOC 2 Type II, ISO/IEC 27001, and applicable Indian regulations.</p>
-              </div>
-              <div>
-                <h4 className="font-semibold text-foreground mb-2">Data Storage</h4>
-                <p className="text-muted-foreground">Sensitive data is stored securely on AWS. MongoDB Atlas stores encrypted credentials and metadata. Quadrant DB handles unencrypted AI vectors without storing PII.</p>
-              </div>
-              <div>
-                <h4 className="font-semibold text-foreground mb-2">Data Security</h4>
-                <p className="text-muted-foreground">We apply enterprise‑grade security (SSL/TLS, encryption at rest, access controls) following AWS Compliance, ISO 27001, and MongoDB Atlas security best practices.</p>
+                <h4 className="font-semibold text-foreground mb-2">Purpose of Use</h4>
+                <p className="text-muted-foreground">
+                  We use this data only to operate, maintain, and improve our app for your company—such as generating AI-assisted responses based solely on your company&apos;s data, surfacing relevant content from your own systems, and securing the service. We do not sell or rent end-user data, we do not use your data to train models that serve other companies, and we do not use it for unrelated advertising or marketing.
+                </p>
               </div>
             </div>
           </div>
 
           <div>
-            <h2 className="text-2xl font-semibold mb-4">User Obligations and Conduct</h2>
+            <h2 className="text-2xl font-semibold mb-4">Data Storage, Location & Security</h2>
+            <div className="space-y-4">
+              <div>
+                <h4 className="font-semibold text-foreground mb-2">Where Data Is Stored</h4>
+                <p className="text-muted-foreground">
+                  All end-user data processed by our app, including data in DynamoDB and our vector database, is stored only in Amazon Web Services (AWS) data centers located in India. We do not store end-user data in any other country.
+                </p>
+              </div>
+              <div>
+                <h4 className="font-semibold text-foreground mb-2">Encryption at Rest</h4>
+                <p className="text-muted-foreground">
+                  All end-user data stored in AWS services (including DynamoDB and our vector database) is encrypted at rest using AWS-managed encryption with AES-256 or equivalent industry-standard algorithms.
+                </p>
+              </div>
+              <div>
+                <h4 className="font-semibold text-foreground mb-2">Encryption in Transit</h4>
+                <p className="text-muted-foreground">
+                  All data transmitted between your systems and our services is encrypted in transit using HTTPS (TLS). We do not permit unencrypted connections for production use.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h2 className="text-2xl font-semibold mb-4">Data Sharing & Transfers</h2>
+            <div className="space-y-4">
+              <div>
+                <h4 className="font-semibold text-foreground mb-2">Third-Party Sharing</h4>
+                <p className="text-muted-foreground">
+                  We do not share end-user data with any third-party entities for their own purposes. End-user data is used only within our AWS environment to operate the app and is not sold, rented, or disclosed to external parties, except where we are legally required to do so.
+                </p>
+              </div>
+              <div>
+                <h4 className="font-semibold text-foreground mb-2">EEA Data Transfers</h4>
+                <p className="text-muted-foreground">
+                  We do not transfer end-user data of residents of the European Economic Area (EEA) outside the EEA. Our app is designed so that all stored end-user data remains within AWS India.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h2 className="text-2xl font-semibold mb-4">Data Retention & Deletion</h2>
+            <div className="space-y-4">
+              <div>
+                <h4 className="font-semibold text-foreground mb-2">Retention</h4>
+                <p className="text-muted-foreground">
+                  We keep end-user data only for as long as it is needed to provide the app and fulfill the purposes described above, or as required by applicable law.
+                </p>
+              </div>
+              <div>
+                <h4 className="font-semibold text-foreground mb-2">Uninstall & Account Closure</h4>
+                <p className="text-muted-foreground">
+                  When you uninstall the app or request closure of your account, we delete or irreversibly anonymize associated end-user data within 30 days, unless we are required by law to retain it for a longer period.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h2 className="text-2xl font-semibold mb-4">Your Responsibilities</h2>
             <ul className="list-disc pl-5 text-muted-foreground space-y-2 leading-relaxed">
-              <li>Do not disrupt, damage, or interfere with the platform.</li>
-              <li>Do not share or generate harmful, abusive, unlawful, or infringing content.</li>
-              <li>Do not access or tamper with servers, APIs, databases, or systems without authorization.</li>
-            </ul>
-            <p className="mt-4 text-muted-foreground">Supporticon may suspend or terminate access for violations.</p>
-          </div>
-
-          <div>
-            <h2 className="text-2xl font-semibold mb-4">Compliance Commitment</h2>
-            <ul className="list-disc pl-5 text-muted-foreground space-y-2 leading-relaxed">
-              <li>GDPR</li>
-              <li>Indian Laws</li>
-              <li>ISO/IEC 27001</li>
-              <li>SOC 2 Type II</li>
-              <li>MongoDB Atlas (GDPR‑compliant)</li>
-              <li>AWS Security & Compliance</li>
-              <li>Quadrant DB (no raw content or PII stored)</li>
+              <li>Provide accurate integration details (such as helpdesk domain and API credentials) and keep them up to date.</li>
+              <li>Maintain the security of your accounts, credentials, and access tokens that connect your systems to our app.</li>
+              <li>Ensure you have appropriate rights and consents to send end-user data to our app for processing.</li>
             </ul>
           </div>
 
           <div>
-            <h2 className="text-2xl font-semibold mb-4">Payment Processing</h2>
+            <h2 className="text-2xl font-semibold mb-4">Limitation of Liability</h2>
             <p className="text-muted-foreground leading-relaxed">
-              Supporticon uses Zeropay as the official payment gateway. We do not store card information; all payment data is handled by Zeropay under their policies.
+              To the maximum extent permitted by law, Supporticon is not liable for any indirect, incidental, special, or consequential damages arising from the use of our services or from data processing activities carried out in accordance with these Terms.
             </p>
           </div>
 
           <div>
-            <h2 className="text-2xl font-semibold mb-4">Indemnification</h2>
+            <h2 className="text-2xl font-semibold mb-4">Changes to These Terms</h2>
             <p className="text-muted-foreground leading-relaxed">
-              Users agree to indemnify and hold harmless Supporticon from claims arising out of platform use, violations of these Terms, or misuse of accounts.
+              We may update these Terms from time to time to reflect changes in our services or legal requirements. When we make material changes, we will notify you via in-app notice or email, and your continued use of the app after the effective date constitutes acceptance of the updated Terms.
             </p>
           </div>
 
           <div>
-            <h2 className="text-2xl font-semibold mb-4">Termination of Services</h2>
+            <h2 className="text-2xl font-semibold mb-4">Governing Law & Contact</h2>
             <p className="text-muted-foreground leading-relaxed">
-              We may suspend or terminate access for violations. Upon termination, all rights and licenses are revoked and use must cease immediately.
-            </p>
-          </div>
-
-          <div>
-            <h2 className="text-2xl font-semibold mb-4">Amendments to Terms</h2>
-            <p className="text-muted-foreground leading-relaxed">
-              We may update these Terms to reflect changes in services, integrations, or legal obligations. Updates are effective upon publication; significant changes will be emailed.
-            </p>
-          </div>
-
-          <div>
-            <h2 className="text-2xl font-semibold mb-4">Governing Law</h2>
-            <p className="text-muted-foreground leading-relaxed">
-              These Terms are governed by the laws of India. Disputes are subject to the exclusive jurisdiction of Indian courts.
-            </p>
-          </div>
-
-          <div>
-            <h2 className="text-2xl font-semibold mb-4">Contact Information</h2>
-            <p className="text-muted-foreground leading-relaxed">
-              For questions about these Terms or compliance, contact <a className="text-primary underline" href="mailto:founder@supporticon.com">founder@supporticon.com</a>.
+              These Terms are governed by the laws of India, and any disputes will be subject to the exclusive jurisdiction of the courts in India. If you have questions about these Terms or our data handling practices, contact{" "}
+              <a className="text-primary underline" href="mailto:founder@supporticon.com">
+                founder@supporticon.com
+              </a>.
             </p>
           </div>
         </div>
@@ -144,9 +157,9 @@ const Legal = () => {
       content: (
         <div className="space-y-8">
           <div>
-            <h2 className="text-2xl font-semibold mb-4">About Supporticon</h2>
+            <h2 className="text-2xl font-semibold mb-4">Who We Are</h2>
             <p className="text-muted-foreground leading-relaxed">
-              Supporticon is a strategy-first SaaS company focused on elevating customer support through AI-driven automation and seamless platform integration. Our AI assistant, HelpDude, empowers agents—not replaces them—by drafting intelligent replies, surfacing relevant KB and past ticket solutions, and maintaining response consistency. Built to work across systems like Freshdesk and ZohoDesk, HelpDude enhances support efficiency and accuracy. Real-time insights are powered by unencrypted vector processing via Quadrant DB, without storing raw user data or PII. Sensitive data is securely stored in MongoDB Atlas and hosted on AWS with enterprise-grade safeguards. This Privacy Policy outlines how we handle your data in accordance with Indian regulatory standards. By using Supporticon, you agree to these terms.
+              This Privacy Policy explains how Supporticon collects, uses, stores, and protects end-user data when you use our applications and integrations. It is focused specifically on data handling and security. By installing or using our app, you agree to the practices described here.
             </p>
           </div>
 
@@ -156,31 +169,31 @@ const Legal = () => {
               <div>
                 <h4 className="font-semibold text-foreground mb-2">Personal Information</h4>
                 <ul className="list-disc pl-5 text-muted-foreground">
-                  <li>Name and contact information (full name, email address, phone number, postal address).</li>
-                  <li>Payment information (credit/debit cards, billing details) processed securely via Stripe or Razorpay.</li>
+                  <li>Name and email address of your users or agents.</li>
+                  <li>Account identifiers related to your helpdesk or support platform (such as your Freshdesk domain or similar identifiers).</li>
                 </ul>
               </div>
 
               <div>
-                <h4 className="font-semibold text-foreground mb-2">Sensitive Personal Data or Information (SPDI)</h4>
+                <h4 className="font-semibold text-foreground mb-2">Support Content & Metadata</h4>
                 <p className="text-muted-foreground">
-                  In compliance with Indian law, SPDI may include financial information such as bank account or card numbers processed via payment providers (e.g., Razorpay). Such data is handled with heightened safeguards.
+                  To provide AI-assisted responses and recommendations, we process support-related content that you choose to connect to our app. This may include tickets, conversations, knowledge base articles, and similar support data, along with metadata such as timestamps and tags.
                 </p>
               </div>
 
               <div>
                 <h4 className="font-semibold text-foreground mb-2">Usage Data</h4>
                 <ul className="list-disc pl-5 text-muted-foreground">
-                  <li>Technical data: IP address, browser type, device specs, operating system.</li>
-                  <li>
-                    Interaction data: pages visited, features used, session duration. Our AI, powered by Ollama-hosted LLMs, also processes past tickets, KT documents, and KB articles to generate contextual email drafts and suggestions.
-                  </li>
+                  <li>Technical information such as IP address, browser type, device type, and basic diagnostic logs.</li>
+                  <li>Interaction data such as which features you use and basic performance metrics, used to keep the service reliable and secure.</li>
                 </ul>
               </div>
 
               <div>
                 <h4 className="font-semibold text-foreground mb-2">Cookies</h4>
-                <p className="text-muted-foreground">Cookies help us improve functionality, personalize content, and provide relevant communications.</p>
+                <p className="text-muted-foreground">
+                  We may use cookies or similar technologies to maintain sessions, secure access, and understand basic usage. These do not give us access to your other systems or unrelated personal data.
+                </p>
               </div>
             </div>
           </div>
@@ -191,24 +204,32 @@ const Legal = () => {
               <div>
                 <h4 className="font-semibold text-foreground mb-2">Service Delivery</h4>
                 <p className="text-muted-foreground">
-                  We operate and maintain our services, including automated email drafts generated by referencing internal training docs, KB articles, and related materials via LLMs (Ollama) and RAG.
+                  We operate and maintain our app, including generating AI-assisted replies and suggestions based on the support content and configuration you connect to our service.
                 </p>
               </div>
               <div>
                 <h4 className="font-semibold text-foreground mb-2">Account Management</h4>
-                <p className="text-muted-foreground">We manage your account, verify identity, process payments, and respond to inquiries.</p>
+                <p className="text-muted-foreground">
+                  We use your contact and account information to manage your workspace or integration, authenticate access, and respond to support requests.
+                </p>
               </div>
               <div>
                 <h4 className="font-semibold text-foreground mb-2">Service Improvement</h4>
-                <p className="text-muted-foreground">We analyze usage to enhance performance, functionality, and security.</p>
+                <p className="text-muted-foreground">
+                  We analyze aggregated usage and diagnostic data to improve performance, stability, and user experience, and to prevent abuse.
+                </p>
               </div>
               <div>
                 <h4 className="font-semibold text-foreground mb-2">Communication</h4>
-                <p className="text-muted-foreground">With consent, we may send emails and updates about our services. You can opt out anytime.</p>
+                <p className="text-muted-foreground">
+                  We may send you service-related emails (such as important updates or security notices). Where required, we will obtain your consent for any optional communications, and you can opt out at any time.
+                </p>
               </div>
               <div>
                 <h4 className="font-semibold text-foreground mb-2">Legal Compliance</h4>
-                <p className="text-muted-foreground">We process data to comply with legal obligations under Indian law, including fraud prevention and security.</p>
+                <p className="text-muted-foreground">
+                  We may process and retain certain information as necessary to comply with applicable laws, enforce our terms, and protect our rights and the rights of others.
+                </p>
               </div>
             </div>
           </div>
@@ -219,16 +240,20 @@ const Legal = () => {
               <div>
                 <h4 className="font-semibold text-foreground mb-2">Data Storage Locations</h4>
                 <p className="text-muted-foreground">
-                  All personal data, including SPDI, is securely stored on AWS (in India or other regions as required). We apply robust encryption, access controls, and continuous monitoring in line with applicable data protection laws.
+                  All end-user data we store is hosted only in Amazon Web Services (AWS) data centers located in India. We do not store end-user data in any other geographic region.
                 </p>
               </div>
               <div>
                 <h4 className="font-semibold text-foreground mb-2">Data Security Measures</h4>
-                <p className="text-muted-foreground">We use encryption, access controls, and regular assessments aligned with the IT Rules, 2011.</p>
+                <p className="text-muted-foreground">
+                  All end-user data stored in AWS services (including DynamoDB and our vector database) is encrypted at rest using AWS-managed encryption (AES-256 or equivalent), and all data in transit between your systems and our services is encrypted using HTTPS (TLS). We apply access controls and logging to reduce the risk of unauthorized access.
+                </p>
               </div>
               <div>
                 <h4 className="font-semibold text-foreground mb-2">Data Retention</h4>
-                <p className="text-muted-foreground">We retain data only as long as necessary for stated purposes or legal obligations and review retention periodically.</p>
+                <p className="text-muted-foreground">
+                  We retain end-user data only for as long as necessary to provide the app and for other legitimate purposes (such as complying with legal obligations). When you uninstall the app or request closure of your account, we delete or irreversibly anonymize associated end-user data within 30 days, unless a longer retention period is required by law.
+                </p>
               </div>
             </div>
           </div>
@@ -237,18 +262,22 @@ const Legal = () => {
             <h2 className="text-2xl font-semibold mb-4">Data Sharing and Disclosure</h2>
             <div className="space-y-4">
               <div>
-                <h4 className="font-semibold text-foreground mb-2">Third-Party Service Providers</h4>
+                <h4 className="font-semibold text-foreground mb-2">Third-Party Sharing</h4>
                 <p className="text-muted-foreground">
-                  We may share data with vetted providers (e.g., Razorpay, AWS, analytics) bound by confidentiality and limited-use agreements.
+                  We do not share end-user data with third parties for their own independent purposes, and we do not sell or rent end-user data. End-user data is used only within our AWS environment to operate and secure the app, except where disclosure is strictly required by applicable law or legal process.
                 </p>
               </div>
               <div>
                 <h4 className="font-semibold text-foreground mb-2">Legal Obligations and Enforcement</h4>
-                <p className="text-muted-foreground">We may disclose information as required by law or valid legal process.</p>
+                <p className="text-muted-foreground">
+                  We may disclose information if required to do so by law, regulation, or valid legal request, or if we reasonably believe disclosure is necessary to protect our rights, users, or the public.
+                </p>
               </div>
               <div>
                 <h4 className="font-semibold text-foreground mb-2">Business Transfers</h4>
-                <p className="text-muted-foreground">In a merger, acquisition, or restructuring, data may transfer with notice and continued protection.</p>
+                <p className="text-muted-foreground">
+                  If we are involved in a merger, acquisition, or other corporate transaction, your data may be transferred as part of that transaction. We will continue to protect your data and will notify you of any material changes to how it is handled.
+                </p>
               </div>
             </div>
           </div>
@@ -256,18 +285,23 @@ const Legal = () => {
           <div>
             <h2 className="text-2xl font-semibold mb-4">User Rights and Control</h2>
             <ul className="list-disc pl-5 text-muted-foreground space-y-2 leading-relaxed">
-              <li>Access and correction of your account data (domain, email, API key, credentials).</li>
-              <li>Withdrawal of consent at any time (may limit functionality).</li>
-              <li>Purpose-based processing control for AI drafting features.</li>
-              <li>Objection to analytics or automated decision-making where permitted by law.</li>
+              <li>Access and correction of your account information (such as domain, email address, and configuration details) by contacting us.</li>
+              <li>Request deletion or anonymization of end-user data, subject to our legal obligations and technical feasibility.</li>
+              <li>Uninstall the app at any time, after which associated end-user data will be deleted or anonymized within 30 days (unless law requires otherwise).</li>
             </ul>
-            <p className="mt-4">To exercise rights, contact us at <a href="mailto:founder@supporticon.com" className="text-primary underline">founder@supporticon.com</a>.</p>
+            <p className="mt-4">
+              To exercise these rights or ask questions about your data, contact us at{" "}
+              <a href="mailto:founder@supporticon.com" className="text-primary underline">
+                founder@supporticon.com
+              </a>
+              .
+            </p>
           </div>
 
           <div>
             <h2 className="text-2xl font-semibold mb-4">International Data Transfers</h2>
             <p className="text-muted-foreground leading-relaxed">
-              As a globally integrated application, your data may be processed outside India with appropriate safeguards (e.g., standard contractual clauses) consistent with Indian data protection laws.
+              Our app is designed so that all stored end-user data remains in AWS data centers located in India. We do not transfer stored end-user data of European Economic Area (EEA) residents outside the EEA.
             </p>
           </div>
 
