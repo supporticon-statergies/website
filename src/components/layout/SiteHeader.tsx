@@ -70,7 +70,12 @@ export const SiteHeader = () => {
         </Button>
         
         <div className="flex items-center gap-2">
-          <Button variant="hero" size="sm" aria-label="Request a demo" onClick={() => setDemoDialogOpen(true)}>
+          <Button
+            variant="hero"
+            size="sm"
+            aria-label="Request a demo"
+            onClick={() => window.open("https://zbooking.in/PoPU8", "_blank", "noopener,noreferrer")}
+          >
             Request Demo
           </Button>
         </div>
