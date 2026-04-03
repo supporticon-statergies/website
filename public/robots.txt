@@ -12,3 +12,9 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+# Block optional pages (uncomment if needed)
+# Disallow: /admin/
+# Disallow: /login/
+
+Sitemap: https://supporticon.com/sitemap.xml
