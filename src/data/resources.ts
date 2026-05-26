@@ -16,6 +16,7 @@ export interface ResourceContentBlock {
   items?: string[];
 }
 
+
 export interface Resource {
   slug: string;
   title: string;
