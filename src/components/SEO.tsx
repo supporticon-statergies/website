@@ -6,7 +6,7 @@ interface SEOProps {
   description: string;
   canonicalPath?: string;
   image?: string;
-  jsonLd?: Record<string, any>;
+  jsonLd?: Record<string, unknown>;
 }
 
 export const SEO = ({

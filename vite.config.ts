@@ -19,9 +19,19 @@ export default defineConfig(({ mode }) => ({
     sourcemap: false,
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-          ui: ['@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu', '@radix-ui/react-navigation-menu']
+        manualChunks(id) {
+          if (id.includes("node_modules")) {
+            if (id.includes("react/") || id.includes("react-dom/")) {
+              return "vendor";
+            }
+            if (
+              id.includes("@radix-ui/react-dialog") ||
+              id.includes("@radix-ui/react-dropdown-menu") ||
+              id.includes("@radix-ui/react-navigation-menu")
+            ) {
+              return "ui";
+            }
+          }
         }
       }
     }
