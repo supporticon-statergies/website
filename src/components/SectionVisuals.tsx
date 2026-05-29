@@ -167,7 +167,7 @@ export function AISearchVisual() {
         </div>
 
         {/* Results area */}
-        <div className="px-5 py-4 space-y-2.5 min-h-[180px]">
+        <div className="px-5 py-4 space-y-2.5 h-[272px] relative">
           <AnimatePresence mode="wait">
             {showResults ? (
               <motion.div key="results" className="space-y-2.5">
@@ -205,7 +205,7 @@ export function AISearchVisual() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="flex flex-col items-center justify-center py-8 gap-3"
+                className="flex flex-col items-center justify-center h-full gap-3"
               >
                 <motion.div
                   animate={{ rotate: 360 }}
