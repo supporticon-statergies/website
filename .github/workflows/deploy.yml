@@ -36,7 +36,10 @@ jobs:
       - name: Resolve Vite base path
         id: base
         run: |
-          if [ -f public/CNAME ] || [ -f CNAME ]; then
+          if [ "${{ github.event.repository.name }}" = "testing_website" ]; then
+            echo "path=/${{ github.event.repository.name }}/" >> "$GITHUB_OUTPUT"
+            echo "Forcing repository subpath for testing website"
+          elif [ -f public/CNAME ] || [ -f CNAME ]; then
             echo "path=/" >> "$GITHUB_OUTPUT"
             echo "Using root base path (custom domain)"
           else
@@ -49,11 +52,18 @@ jobs:
           VITE_BASE_PATH: ${{ steps.base.outputs.path }}
         run: npm run build
 
+      - name: Remove CNAME for testing repository
+        run: |
+          if [ "${{ github.event.repository.name }}" = "testing_website" ]; then
+            rm -f dist/CNAME
+            echo "Removed CNAME from dist to avoid custom domain redirect on testing site"
+          fi
+
       - name: Verify build output
         run: |
           test -f dist/index.html
           test -f dist/404.html
-          if [ -f public/CNAME ]; then
+          if [ "${{ github.event.repository.name }}" != "testing_website" ] && [ -f public/CNAME ]; then
             test -f dist/CNAME
             echo "CNAME present in dist:"
             cat dist/CNAME
