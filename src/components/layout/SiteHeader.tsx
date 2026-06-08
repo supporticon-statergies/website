@@ -1,7 +1,8 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { useState, useEffect } from "react";
-import RequestDemoDialog from "@/components/RequestDemoDialog";
+import { useState, useEffect, lazy, Suspense } from "react";
+
+const RequestDemoDialog = lazy(() => import("@/components/RequestDemoDialog"));
 import {
   Menu,
   X,
@@ -403,7 +404,11 @@ export const SiteHeader = () => {
           )}
         </AnimatePresence>
 
-        <RequestDemoDialog open={demoDialogOpen} onOpenChange={setDemoDialogOpen} />
+        {demoDialogOpen && (
+          <Suspense fallback={null}>
+            <RequestDemoDialog open={demoDialogOpen} onOpenChange={setDemoDialogOpen} />
+          </Suspense>
+        )}
       </header>
     </>
   );

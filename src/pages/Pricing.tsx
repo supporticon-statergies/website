@@ -11,9 +11,15 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useScrollToTop } from "@/hooks/use-scroll-to-top";
-import { DotLottiePlayer } from "@dotlottie/react-player";
 import walletAnimation from "@/assets/wallet-animation.lottie";
 import { AmbientAccent } from "@/components/PageVisuals";
+import { lazy, Suspense } from "react";
+
+const LazyDotLottiePlayer = lazy(() =>
+  import("@dotlottie/react-player").then((module) => ({
+    default: module.DotLottiePlayer,
+  }))
+);
 
 const features = [
   { icon: Zap, text: "Instant ticket creation & assignment" },
@@ -86,13 +92,15 @@ const Pricing = () => {
             </p>
           </div>
           <div className="flex justify-center md:justify-end">
-            <div className="w-full max-w-[400px] aspect-square">
-              <DotLottiePlayer
-                src={walletAnimation}
-                autoplay
-                loop
-                className="w-full h-full"
-              />
+            <div className="w-full max-w-[400px] aspect-square flex items-center justify-center">
+              <Suspense fallback={<div className="w-full h-full bg-green-50/50 rounded-2xl animate-pulse" />}>
+                <LazyDotLottiePlayer
+                  src={walletAnimation}
+                  autoplay
+                  loop
+                  className="w-full h-full"
+                />
+              </Suspense>
             </div>
           </div>
         </div>

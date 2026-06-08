@@ -16,11 +16,10 @@ import {
   Users,
   CheckCircle2,
 } from "lucide-react";
-import { useState, useEffect } from "react";
-import RequestDemoDialog from "@/components/RequestDemoDialog";
+import { useState, useEffect, lazy, Suspense } from "react";
 import ImageWithLoader from "@/components/ImageWithLoader";
-import { DotLottiePlayer } from "@dotlottie/react-player";
-import businessTeamAnimation from "@/assets/business-team.lottie";
+
+const RequestDemoDialog = lazy(() => import("@/components/RequestDemoDialog"));
 import productDemoVideo from "@/assets/product-demo.mp4";
 import { useScrollToTop } from "@/hooks/use-scroll-to-top";
 import postImage from "@/assets/post_image.png";
@@ -64,7 +63,11 @@ const Product = () => {
       <AmbientAccent position="right" color="emerald" />
       <AmbientAccent position="left"  color="blue"    />
 
-      <RequestDemoDialog open={open} onOpenChange={setOpen} />
+      {open && (
+        <Suspense fallback={null}>
+          <RequestDemoDialog open={open} onOpenChange={setOpen} />
+        </Suspense>
+      )}
 
       {/* Technology Partner Banner — Product page only */}
       <Marquee />
@@ -469,7 +472,6 @@ const Product = () => {
       </section>
 
       {/* Video Modal Removed */}
-      <RequestDemoDialog open={open} onOpenChange={setOpen} />
     </main>
   );
 };

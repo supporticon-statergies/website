@@ -30,16 +30,6 @@ export default defineConfig(({ mode }) => ({
             if (id.includes("@dotlottie")) {
               return "lottie-player";
             }
-            if (id.includes("lucide-react")) {
-              return "lucide-icons";
-            }
-            if (
-              id.includes("@radix-ui/react-dialog") ||
-              id.includes("@radix-ui/react-dropdown-menu") ||
-              id.includes("@radix-ui/react-navigation-menu")
-            ) {
-              return "ui";
-            }
           }
         }
       }
