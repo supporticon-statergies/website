@@ -1,7 +1,6 @@
 import { useRef, useState } from "react";
 import { motion, useTransform, useScroll } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { FadeUp } from "@/components/ui/motion-utils";
 import {
   ArrowRight,
   CheckCircle,
@@ -96,34 +95,34 @@ export const HeroSection = () => {
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
 
           {/* Badge */}
-          <FadeUp delay={0}>
+          <div className="opacity-0 animate-css-fade-up-1">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 border border-emerald-200/70 text-emerald-700 text-xs font-bold uppercase tracking-widest mb-8">
               <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
               AI Powered Helpdesk Software
             </div>
-          </FadeUp>
+          </div>
 
           {/* Headline */}
-          <FadeUp delay={0.08}>
+          <div className="opacity-0 animate-css-fade-up-2">
             <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.06] text-slate-900 mb-6">
               <span className="bg-gradient-to-r from-green-500 via-emerald-500 to-teal-600 bg-clip-text text-transparent">
                 Who supports
               </span>
               <span className="block">the support team?</span>
             </h1>
-          </FadeUp>
+          </div>
 
           {/* Subtitle */}
-          <FadeUp delay={0.15}>
+          <div className="opacity-0 animate-css-fade-up-3">
             <p className="text-lg md:text-xl text-slate-500 leading-relaxed max-w-2xl mb-10">
               Supporticon gives your support engineers unified knowledge search,
               one-click AI email drafting, and intelligent escalation routing,
               so every ticket is resolved faster and every customer stays longer.
             </p>
-          </FadeUp>
+          </div>
 
           {/* CTA Buttons */}
-          <FadeUp delay={0.22}>
+          <div className="opacity-0 animate-css-fade-up-4">
             <div className="flex flex-col sm:flex-row gap-3 justify-center mb-10">
               <motion.div
                 whileHover={{ scale: 1.04, y: -2 }}
@@ -162,10 +161,10 @@ export const HeroSection = () => {
                 </Button>
               </motion.div>
             </div>
-          </FadeUp>
+          </div>
 
           {/* Full-width trust + proof strip */}
-          <FadeUp delay={0.30}>
+          <div className="opacity-0 animate-css-fade-up-5 w-full">
             <div className="w-full mt-2">
               {/* Row 1 — feature badges */}
               <div className="grid grid-cols-2 md:grid-cols-3 gap-3 w-full">
@@ -228,7 +227,7 @@ export const HeroSection = () => {
                 ))}
               </div>
             </div>
-          </FadeUp>
+          </div>
         </div>
       </div>
 

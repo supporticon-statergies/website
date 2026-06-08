@@ -163,12 +163,7 @@ export const SiteHeader = () => {
       </AnimatePresence>
 
       {/* ── Header ────────────────────────────────────────────────────── */}
-      <motion.header
-        initial={{ y: -20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        className="fixed top-0 inset-x-0 z-50"
-      >
+      <header className="fixed top-0 inset-x-0 z-50">
         {/* Inner pill — starts invisible, gains glass on scroll */}
         <div
           className={`mx-auto transition-all duration-500 ease-out ${
@@ -409,7 +404,7 @@ export const SiteHeader = () => {
         </AnimatePresence>
 
         <RequestDemoDialog open={demoDialogOpen} onOpenChange={setDemoDialogOpen} />
-      </motion.header>
+      </header>
     </>
   );
 };
