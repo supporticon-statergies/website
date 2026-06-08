@@ -23,28 +23,28 @@ class ErrorBoundary extends Component<{ children: ReactNode }, { error: Error | 
     return this.props.children;
   }
 }
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
-import About from "./pages/About";
-import Product from "./pages/Product";
-import Features from "./pages/Features";
-import Resources from "./pages/Resources";
-import Events from "./pages/Events";
-import EBooks from "./pages/EBooks";
-import Privacy from "./pages/Privacy";
-import ResourceDetail from "./pages/ResourceDetail";
-import CaseStudyDetail from "./pages/CaseStudyDetail";
-import Pricing from "./pages/Pricing";
-import Terms from "./pages/Terms";
-import Legal from "./pages/Legal";
+const Index = lazy(() => import("./pages/Index"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const About = lazy(() => import("./pages/About"));
+const Product = lazy(() => import("./pages/Product"));
+const Features = lazy(() => import("./pages/Features"));
+const Resources = lazy(() => import("./pages/Resources"));
+const Events = lazy(() => import("./pages/Events"));
+const EBooks = lazy(() => import("./pages/EBooks"));
+const Privacy = lazy(() => import("./pages/Privacy"));
+const ResourceDetail = lazy(() => import("./pages/ResourceDetail"));
+const CaseStudyDetail = lazy(() => import("./pages/CaseStudyDetail"));
+const Pricing = lazy(() => import("./pages/Pricing"));
+const Terms = lazy(() => import("./pages/Terms"));
+const Legal = lazy(() => import("./pages/Legal"));
 import SiteHeader from "./components/layout/SiteHeader";
 import SiteFooter from "./components/layout/SiteFooter";
 import { FinalCTASection } from "./components/FinalCTASection";
-import Chatbot from "./components/Chatbot";
+const Chatbot = lazy(() => import("./components/Chatbot"));
 import ScrollToTop from "./components/ScrollToTop";
 import { WaveBackground } from "./components/WaveBackground";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { supporticonUploads } from "@/assets/supporticon-uploads";
 import supporticonLogoIcon from "@/assets/supporticon_logo.png";
@@ -145,29 +145,33 @@ function App() {
               {/* Spacer so fixed navbar doesn't overlap page content */}
               <div className="h-[64px]" />
 
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/features" element={<Features />} />
-                <Route path="/product" element={<Product />} />
-                <Route path="/pricing" element={<Pricing />} />
-                <Route path="/resources" element={<Resources />} />
-                <Route path="/events" element={<Events />} />
-                <Route path="/sources" element={<EBooks />} />
-                <Route path="/resources/:slug" element={<ResourceDetail />} />
-                <Route
-                  path="/resources/case-study/:slug"
-                  element={<CaseStudyDetail />}
-                />
-                <Route path="/privacy-policy" element={<Privacy />} />
-                <Route path="/terms" element={<Terms />} />
-                <Route path="/legal" element={<Legal />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
+              <Suspense fallback={<div className="h-screen bg-transparent" />}>
+                <Routes>
+                  <Route path="/" element={<Index />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/features" element={<Features />} />
+                  <Route path="/product" element={<Product />} />
+                  <Route path="/pricing" element={<Pricing />} />
+                  <Route path="/resources" element={<Resources />} />
+                  <Route path="/events" element={<Events />} />
+                  <Route path="/sources" element={<EBooks />} />
+                  <Route path="/resources/:slug" element={<ResourceDetail />} />
+                  <Route
+                    path="/resources/case-study/:slug"
+                    element={<CaseStudyDetail />}
+                  />
+                  <Route path="/privacy-policy" element={<Privacy />} />
+                  <Route path="/terms" element={<Terms />} />
+                  <Route path="/legal" element={<Legal />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </Suspense>
 
               <FinalCTASection />
               <SiteFooter />
-              <Chatbot />
+              <Suspense fallback={null}>
+                <Chatbot />
+              </Suspense>
             </div>
           </BrowserRouter>
         </TooltipProvider>

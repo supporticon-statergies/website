@@ -19,10 +19,19 @@ export default defineConfig(({ mode }) => ({
     sourcemap: false,
     rollupOptions: {
       output: {
-        manualChunks(id) {
+        manualChunks(id: string) {
           if (id.includes("node_modules")) {
             if (id.includes("react/") || id.includes("react-dom/")) {
               return "vendor";
+            }
+            if (id.includes("framer-motion")) {
+              return "framer-motion";
+            }
+            if (id.includes("@dotlottie")) {
+              return "lottie-player";
+            }
+            if (id.includes("lucide-react")) {
+              return "lucide-icons";
             }
             if (
               id.includes("@radix-ui/react-dialog") ||
