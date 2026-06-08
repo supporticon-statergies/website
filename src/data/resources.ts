@@ -669,7 +669,7 @@ export const resources: Resource[] = [
     category: "Elevate Your Support",
   },
   {
-    slug: "ai as co pilot",
+    slug: "ai-as-co-pilot",
     title: "AI as Your Co Pilot: Supercharging the Front Line Support Warrior",
     subtitle: "Secret to Elevate Experience",
     dateLabel: "25 July 2025",
@@ -752,7 +752,7 @@ export const resources: Resource[] = [
     category: "Secret to Elevate Experience",
   },
   {
-    slug: "real frontline hero",
+    slug: "real-frontline-hero",
     title: "The Real Frontline Heroes: Support Engineers in the AI Era",
     subtitle: "Elevate Your Support",
     dateLabel: "29 July 2025",
