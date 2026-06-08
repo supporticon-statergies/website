@@ -59,9 +59,9 @@ const Product = () => {
         canonicalPath="/product"
       />
 
-      {/* Ambient accents */}
+
       <AmbientAccent position="right" color="emerald" />
-      <AmbientAccent position="left"  color="blue"    />
+      <AmbientAccent position="left" color="blue" />
 
       {open && (
         <Suspense fallback={null}>
@@ -171,11 +171,10 @@ const Product = () => {
           <div className="flex border-b border-slate-200 justify-center mb-12 gap-8">
             <button
               onClick={() => setActiveTab("freshdesk")}
-              className={`pb-4 text-lg font-semibold transition-all relative ${
-                activeTab === "freshdesk"
-                  ? "text-primary"
-                  : "text-slate-500 hover:text-slate-800"
-              }`}
+              className={`pb-4 text-lg font-semibold transition-all relative ${activeTab === "freshdesk"
+                ? "text-primary"
+                : "text-slate-500 hover:text-slate-800"
+                }`}
             >
               HelpDude for Freshdesk
               {activeTab === "freshdesk" && (
@@ -184,11 +183,10 @@ const Product = () => {
             </button>
             <button
               onClick={() => setActiveTab("standalone")}
-              className={`pb-4 text-lg font-semibold transition-all relative ${
-                activeTab === "standalone"
-                  ? "text-primary"
-                  : "text-slate-500 hover:text-slate-800"
-              }`}
+              className={`pb-4 text-lg font-semibold transition-all relative ${activeTab === "standalone"
+                ? "text-primary"
+                : "text-slate-500 hover:text-slate-800"
+                }`}
             >
               HelpDude standalone platform
               {activeTab === "standalone" && (
