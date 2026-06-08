@@ -123,6 +123,7 @@ const Chatbot = () => {
       {/* Floating Chat Button */}
       <button
         onClick={() => setIsOpen((prev) => !prev)}
+        aria-label={isOpen ? "Close Chatbot" : "Open Chatbot"}
         className={cn(
           "fixed bottom-6 right-6 p-4 rounded-full shadow-2xl transition-all duration-500 ease-in-out z-50 flex items-center justify-center text-white",
           !isVisible
@@ -156,6 +157,7 @@ const Chatbot = () => {
           </div>
           <button
             onClick={() => setIsOpen(false)}
+            aria-label="Close Chatbot"
             className="text-white hover:bg-white/20 p-1.5 rounded-full transition-colors"
           >
             <X size={20} />
@@ -240,11 +242,13 @@ const Chatbot = () => {
               onChange={(e) => setInputValue(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Type your message..."
+              aria-label="Type your message"
               className="flex-1 bg-gray-50 border border-gray-200 rounded-full px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all"
             />
             <button
               onClick={handleSend}
               disabled={!inputValue.trim() || isTyping}
+              aria-label="Send message"
               className="bg-primary hover:bg-primary/90 text-white p-2.5 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
             >
               <Send size={18} className="translate-x-[1px]" />

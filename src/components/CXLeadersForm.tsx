@@ -338,14 +338,14 @@ Submitted at: ${new Date().toLocaleString()}
 
               {/* Role */}
               <div className="space-y-2">
-                <Label className="text-sm font-medium">
+                <Label id="role-label" className="text-sm font-medium">
                   3. Role <span className="text-red-500">*</span>
                 </Label>
                 <Select
                   value={formData.role}
                   onValueChange={(value) => handleInputChange("role", value)}
                 >
-                  <SelectTrigger>
+                  <SelectTrigger aria-labelledby="role-label">
                     <SelectValue placeholder="Select your role" />
                   </SelectTrigger>
                   <SelectContent>
@@ -360,11 +360,11 @@ Submitted at: ${new Date().toLocaleString()}
 
               {/* Biggest Challenge */}
               <div className="space-y-3">
-                <Label className="text-sm font-medium">
+                <Label id="challenge-label" className="text-sm font-medium">
                   4. Biggest CX Challenge Today?{" "}
                   <span className="text-red-500">*</span>
                 </Label>
-                <div className="grid grid-cols-1 gap-2">
+                <div role="group" aria-labelledby="challenge-label" className="grid grid-cols-1 gap-2">
                   {challenges.map((challenge) => (
                     <Button
                       key={challenge}
@@ -387,6 +387,7 @@ Submitted at: ${new Date().toLocaleString()}
                 {formData.challenge === "Other" && (
                   <Textarea
                     placeholder="Please specify your challenge..."
+                    aria-label="Specify your challenge"
                     value={formData.challengeOther}
                     onChange={(e) =>
                       handleInputChange("challengeOther", e.target.value)
@@ -398,11 +399,11 @@ Submitted at: ${new Date().toLocaleString()}
 
               {/* Connect Method */}
               <div className="space-y-3">
-                <Label className="text-sm font-medium">
+                <Label id="connect-label" className="text-sm font-medium">
                   5. Best way to connect post event{" "}
                   <span className="text-red-500">*</span>
                 </Label>
-                <div className="grid grid-cols-1 gap-2">
+                <div role="group" aria-labelledby="connect-label" className="grid grid-cols-1 gap-2">
                   {connectMethods.map((method) => {
                     const IconComponent = method.icon;
                     return (

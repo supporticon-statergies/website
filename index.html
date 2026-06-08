@@ -51,43 +51,59 @@
       content="supporticon-uploads/8a9c0dca-e50e-459a-af4-1e08634ad78b.png"
     />
 
-    <!-- Instantly AI Tracking -->
-    <script
-      id="vtag-ai-js"
-      async
-      src="https://r2.leadsy.ai/tag.js"
-      data-pid="qqzNfbthUwHyUENK"
-      data-version="062024"
-    ></script>
-
     <meta
       name="google-site-verification"
       content="-PAq6DdgMAyjfFhvrTlzpu9E2Pr4WqLzEHPQ-bB5QX4"
     />
-    <!-- Leadfeeder Tracking -->
-    <script>
-      (function (ss, ex) {
-        window.ldfdr =
-          window.ldfdr ||
-          function () {
+
+    <!-- Defer-load Tracking Scripts until User Interaction or Timeout -->
+    <script type="text/javascript">
+      (function() {
+        var scriptsLoaded = false;
+        
+        function loadTrackingScripts() {
+          if (scriptsLoaded) return;
+          scriptsLoaded = true;
+
+          // 1. Load Leadsy / Instantly AI
+          var leadsyScript = document.createElement('script');
+          leadsyScript.id = 'vtag-ai-js';
+          leadsyScript.src = 'https://r2.leadsy.ai/tag.js';
+          leadsyScript.async = true;
+          leadsyScript.setAttribute('data-pid', 'qqzNfbthUwHyUENK');
+          leadsyScript.setAttribute('data-version', '062024');
+          document.head.appendChild(leadsyScript);
+
+          // 2. Load Leadfeeder
+          window.ldfdr = window.ldfdr || function () {
             (ldfdr._q = ldfdr._q || []).push([].slice.call(arguments));
           };
-        (function (d, s) {
-          fs = d.getElementsByTagName(s)[0];
-          function ce(src) {
-            var cs = d.createElement(s);
-            cs.src = src;
-            cs.async = 1;
-            fs.parentNode.insertBefore(cs, fs);
-          }
-          ce(
-            "https://sc.lfeeder.com/lftracker_v1_" +
-              ss +
-              (ex ? "_" + ex : "") +
-              ".js",
-          );
-        })(document, "script");
-      })("p1e024BXgEW8GB6d");
+          var leadfeederScript = document.createElement('script');
+          leadfeederScript.src = 'https://sc.lfeeder.com/lftracker_v1_p1e024BXgEW8GB6d.js';
+          leadfeederScript.async = true;
+          document.head.appendChild(leadfeederScript);
+
+          cleanupListeners();
+        }
+
+        var events = ['mousemove', 'touchstart', 'mousedown', 'keydown', 'scroll'];
+        
+        function cleanupListeners() {
+          events.forEach(function(event) {
+            window.removeEventListener(event, loadTrackingScripts, { passive: true });
+          });
+        }
+
+        // Listen for user interaction
+        events.forEach(function(event) {
+          window.addEventListener(event, loadTrackingScripts, { passive: true });
+        });
+
+        // Fallback: load after 4 seconds if no interaction occurs
+        window.addEventListener('load', function() {
+          setTimeout(loadTrackingScripts, 4000);
+        });
+      })();
     </script>
 
     <!-- Single Page Apps for GitHub Pages -->
