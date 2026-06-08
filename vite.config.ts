@@ -41,7 +41,7 @@ export default defineConfig(({ mode }) => ({
     mode === "development" && componentTagger(),
     {
       name: "html-base-path",
-      transformIndexHtml(html) {
+      transformIndexHtml(html: string) {
         if (mode !== "production" || basePath === "/") return html;
         return html
           .replace(
@@ -49,6 +49,21 @@ export default defineConfig(({ mode }) => ({
             `content="${basePath}supporticon-uploads/`
           )
           .replace(/href="favicon\.ico"/g, `href="${basePath}favicon.ico"`);
+      },
+    },
+    {
+      name: "defer-css-plugin",
+      enforce: "post",
+      transformIndexHtml(html: string) {
+        if (mode !== "production") return html;
+        return html.replace(
+          /<link rel="stylesheet"([^>]*?)href="([^"]+\.css)"([^>]*?)>/gi,
+          (match: string, beforeHref: string, href: string, afterHref: string) => {
+            const hasCrossorigin = beforeHref.includes("crossorigin") || afterHref.includes("crossorigin");
+            const crossoriginAttr = hasCrossorigin ? " crossorigin" : "";
+            return `<link rel="preload" href="${href}" as="style"${crossoriginAttr} onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet"${crossoriginAttr} href="${href}"></noscript>`;
+          }
+        );
       },
     },
   ].filter(Boolean),
