@@ -28,7 +28,7 @@ const About = () => {
 
       {/* Ambient accents */}
       <AmbientAccent position="right" color="emerald" />
-      <AmbientAccent position="left"  color="blue"    />
+      <AmbientAccent position="left" color="blue" />
 
       {/* Hero Section - Wrapped in white background card as requested */}
       <section className="container mx-auto px-4 py-8 md:py-20">
@@ -214,7 +214,7 @@ const About = () => {
 
       {/* Developers Section */}
 
-      {/* <section className="container mx-auto px-4 pb-24">
+      <section className="container mx-auto px-4 pb-24">
         <h2 className="font-display text-4xl font-bold text-center mb-16 text-slate-900 leading-tight">
           Development Team
         </h2>
@@ -228,6 +228,24 @@ const About = () => {
             },
             {
               name: "Sudhan",
+              role: "Backend Developer",
+              color: "green",
+              linkedin: "shanmuga-sudhan-k",
+            },
+            {
+              name: "Jai Manisa",
+              role: "SDR",
+              color: "green",
+              linkedin: "shanmuga-sudhan-k",
+            },
+            {
+              name: "Jai Sudharshan ",
+              role: "Backend Developer",
+              color: "green",
+              linkedin: "shanmuga-sudhan-k",
+            },
+            {
+              name: "MehaShree",
               role: "Backend Developer",
               color: "green",
               linkedin: "shanmuga-sudhan-k",
@@ -268,7 +286,7 @@ const About = () => {
             </Card>
           ))}
         </div>
-      </section> */}
+      </section>
 
       {/* Company Contact Info */}
       <section className="container mx-auto px-4 pb-24">

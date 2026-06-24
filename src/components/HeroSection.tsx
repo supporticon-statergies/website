@@ -94,13 +94,7 @@ export const HeroSection = () => {
       <div className="container mx-auto px-4 md:px-8 lg:px-12">
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
 
-          {/* Badge */}
-          <div className="opacity-0 animate-css-fade-up-1">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 border border-emerald-200/70 text-emerald-700 text-xs font-bold uppercase tracking-widest mb-8">
-              <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
-              AI Powered Helpdesk Software
-            </div>
-          </div>
+
 
           {/* Headline */}
           <div className="opacity-0 animate-css-fade-up-2">

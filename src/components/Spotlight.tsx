@@ -28,7 +28,7 @@ export const Spotlight = ({ className }: SpotlightProps) => {
       if (ref.current) {
         ref.current.style.setProperty(
           "background",
-          `radial-gradient(600px circle at ${x}px ${y}px, hsl(var(--brand-blue) / 0.15), transparent 60%)`,
+          `radial-gradient(600px circle at ${x}px ${y}px, hsl(var(--brand-green) / 0.15), transparent 60%)`,
         );
       }
     });

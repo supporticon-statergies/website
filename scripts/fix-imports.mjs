@@ -17,7 +17,7 @@ const replacements = [
   ['business team.lottie', 'business-team.lottie'],
   ['wallet animation.lottie', 'wallet-animation.lottie'],
   ['@dotlottie/react player', '@dotlottie/react-player'],
-  ['product demo.mp4', 'product-demo.mp4'],
+  ['product demo.mp4', 'product_demo.mp4'],
   ['home imge.png', 'home-imge.png'],
   ['image zoom', 'image-zoom'],
   ['mental resilience.webp', 'mental-resilience.webp'],

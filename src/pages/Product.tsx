@@ -20,7 +20,7 @@ import { useState, useEffect, lazy, Suspense } from "react";
 import ImageWithLoader from "@/components/ImageWithLoader";
 
 const RequestDemoDialog = lazy(() => import("@/components/RequestDemoDialog"));
-import productDemoVideo from "@/assets/product-demo.mp4";
+import productDemoVideo from "@/assets/product_demo.mp4";
 import { useScrollToTop } from "@/hooks/use-scroll-to-top";
 import postImage from "@/assets/post_image.png";
 import heroImage from "@/assets/home-imge.png";

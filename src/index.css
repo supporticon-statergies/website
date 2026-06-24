@@ -50,7 +50,7 @@ All colors MUST be HSL.
     --popover-foreground: 222.2 84% 4.9%;
 
     /* Primary leans towards brand blue for accessibility */
-    --primary: var(--brand-blue);
+    --primary: var(--brand-green);
     --primary-foreground: 210 40% 98%;
 
     --secondary: 210 40% 96.1%;
@@ -95,8 +95,8 @@ All colors MUST be HSL.
       hsl(210 40% 98%)
     );
 
-    --shadow-elegant: 0 10px 30px -10px hsl(var(--brand-blue) / 0.25);
-    --shadow-glow: 0 0 40px hsl(var(--brand-blue) / 0.35);
+    --shadow-elegant: 0 10px 30px -10px hsl(var(--brand-green) / 0.25);
+    --shadow-glow: 0 0 40px hsl(var(--brand-green) / 0.35);
   }
 
   .dark {
