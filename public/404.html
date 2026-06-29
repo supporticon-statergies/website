@@ -12,7 +12,14 @@
       // to the new url with only a query string and hash fragment.
       // 0 = custom domain or user site at domain root (supporticon.com)
       // 1 = project site at https://user.github.io/repo-name/
+      // Dynamic calculation of path segments to keep for GitHub Pages subfolder vs custom domain
       var pathSegmentsToKeep = 0;
+      if (window.location.hostname.indexOf('github.io') !== -1) {
+        var pathParts = window.location.pathname.split('/');
+        if (pathParts[1] && pathParts[1] !== 'index.html') {
+          pathSegmentsToKeep = 1;
+        }
+      }
 
       var l = window.location;
       l.replace(

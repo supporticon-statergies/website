@@ -127,10 +127,14 @@
               return s.replace(/~and~/g, "&");
             })
             .join("?");
+          var basePath = l.pathname;
+          if (basePath.slice(-1) === "/") {
+            basePath = basePath.slice(0, -1);
+          }
           window.history.replaceState(
             null,
             null,
-            l.pathname.slice(0, -1) + decoded + l.hash,
+            basePath + decoded + l.hash,
           );
         }
       })(window.location);
