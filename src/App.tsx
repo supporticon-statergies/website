@@ -56,9 +56,19 @@ const Preloader = ({
   onLoadingComplete: () => void;
 }) => {
   useEffect(() => {
+    // Detect search engines / crawler bots to bypass preloader for SEO safety
+    const isBot = typeof navigator !== 'undefined' && 
+      /bot|googlebot|crawler|spider|robot|crawling/i.test(navigator.userAgent || '');
+    
+    if (isBot) {
+      onLoadingComplete();
+      return;
+    }
+
     const timer = setTimeout(() => {
       onLoadingComplete();
-    }, 200); // 200ms timeout for instant rendering and high performance test scores
+    }, 1200); // 1.2s total duration for a premium, fast loading transition under 2s
+
     return () => clearTimeout(timer);
   }, [onLoadingComplete]);
 
@@ -66,11 +76,47 @@ const Preloader = ({
     <motion.div
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.15 }}
-      className="fixed inset-0 z-[99999] bg-white flex flex-col items-center justify-center"
+      transition={{ duration: 0.35, ease: "easeInOut" }}
+      className="fixed inset-0 z-[99999] bg-white flex flex-col items-center justify-center select-none"
     >
-      {/* Simple, lightweight CSS loading spinner */}
-      <div className="w-10 h-10 border-4 border-slate-200 border-t-green-600 rounded-full animate-spin" />
+      <div className="flex flex-col items-center">
+        {/* Brand Logo with soft scaling pulse */}
+        <motion.div
+          initial={{ scale: 0.95, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="relative w-16 h-16 flex items-center justify-center"
+        >
+          {/* Subtle surrounding glow ring */}
+          <div className="absolute inset-0 rounded-full bg-emerald-500/5 blur-xl animate-pulse" />
+          <img
+            src={supporticonLogoIcon}
+            alt="Supporticon"
+            className="w-12 h-12 object-contain relative z-10 animate-bounce"
+            style={{ animationDuration: "3s" }}
+          />
+        </motion.div>
+
+        {/* Brand Text */}
+        <h2 className="tracking-[0.25em] text-[11px] font-black text-slate-800 mt-6 select-none leading-none pl-[0.25em]">
+          SUPPORTICON
+        </h2>
+        
+        {/* Micro-text description */}
+        <span className="text-[9px] text-slate-400 font-medium tracking-wide mt-1.5 opacity-80">
+          AI-Powered Helpdesk
+        </span>
+
+        {/* Premium thin linear progress indicator */}
+        <div className="w-36 h-[2px] bg-slate-100 rounded-full overflow-hidden mt-6 relative">
+          <motion.div
+            initial={{ width: "0%" }}
+            animate={{ width: "100%" }}
+            transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+            className="h-full bg-gradient-to-r from-emerald-500 via-teal-400 to-blue-500 rounded-full"
+          />
+        </div>
+      </div>
     </motion.div>
   );
 };
