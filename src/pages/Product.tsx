@@ -29,6 +29,7 @@ import { supporticonUploads } from "@/assets/supporticon-uploads";
 import ImageZoom from "@/components/ui/image-zoom";
 import Marquee from "@/components/Marquee";
 import { ProductEcosystemVisual, AmbientAccent } from "@/components/PageVisuals";
+import { motion } from "framer-motion";
 
 const Product = () => {
   useScrollToTop();
@@ -168,42 +169,75 @@ const Product = () => {
           </div>
 
           {/* Tabs Navigation */}
-          <div className="flex border-b border-slate-200 justify-center mb-12 gap-8">
-            <button
-              onClick={() => setActiveTab("freshdesk")}
-              className={`pb-4 text-lg font-semibold transition-all relative ${activeTab === "freshdesk"
-                ? "text-primary"
-                : "text-slate-500 hover:text-slate-800"
+          <div className="flex justify-center mb-12">
+            <div className="inline-flex p-1.5 bg-slate-100/80 backdrop-blur-md rounded-2xl border border-slate-200/50 relative w-full max-w-xl shadow-inner">
+              <button
+                onClick={() => setActiveTab("freshdesk")}
+                className={`flex-1 py-3 px-4 md:px-6 text-sm md:text-base font-semibold rounded-xl transition-all duration-300 relative z-10 ${
+                  activeTab === "freshdesk"
+                    ? "text-white font-bold scale-102"
+                    : "text-slate-600 hover:text-slate-900"
                 }`}
-            >
-              HelpDude for Freshdesk
-              {activeTab === "freshdesk" && (
-                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-primary"></div>
-              )}
-            </button>
-            <button
-              onClick={() => setActiveTab("standalone")}
-              className={`pb-4 text-lg font-semibold transition-all relative ${activeTab === "standalone"
-                ? "text-primary"
-                : "text-slate-500 hover:text-slate-800"
+              >
+                HelpDude for Freshdesk
+                {activeTab === "freshdesk" && (
+                  <motion.div
+                    layoutId="activeTabBackground"
+                    className="absolute inset-0 bg-primary rounded-xl -z-10 shadow-md"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+              </button>
+              <button
+                onClick={() => setActiveTab("standalone")}
+                className={`flex-1 py-3 px-4 md:px-6 text-sm md:text-base font-semibold rounded-xl transition-all duration-300 relative z-10 ${
+                  activeTab === "standalone"
+                    ? "text-white font-bold scale-102"
+                    : "text-slate-600 hover:text-slate-900"
                 }`}
-            >
-              HelpDude standalone platform
-              {activeTab === "standalone" && (
-                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-primary"></div>
-              )}
-            </button>
+              >
+                HelpDude Platform
+                {activeTab === "standalone" && (
+                  <motion.div
+                    layoutId="activeTabBackground"
+                    className="absolute inset-0 bg-primary rounded-xl -z-10 shadow-md"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+              </button>
+            </div>
           </div>
 
           <div className="mt-8">
-            {activeTab === "freshdesk" ? (
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.35, ease: "easeOut" }}
+            >
+              {activeTab === "freshdesk" ? (
               <div className="bg-white p-8 md:p-12 rounded-[2.5rem] border border-slate-100 shadow-xl animate-in fade-in duration-300">
                 {/* Paragraph */}
-                <p className="text-lg text-slate-700 font-medium mb-12 max-w-4xl leading-relaxed">
-                  A Marketplace plugin that embeds directly into every Freshdesk
-                  ticket view. Zero workflow disruption. Install in 15 minutes,
-                  no IT project required.
-                </p>
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12 border-b border-slate-100 pb-8">
+                  <p className="text-lg text-slate-700 font-medium max-w-3xl leading-relaxed">
+                    A Marketplace plugin that embeds directly into every Freshdesk
+                    ticket view. Zero workflow disruption. Install in 15 minutes,
+                    no IT project required.
+                  </p>
+                  <Button
+                    size="lg"
+                    className="font-semibold px-6 py-5 rounded-xl transition-all duration-300 transform hover:scale-105 bg-emerald-600 hover:bg-emerald-700 text-white shrink-0 shadow-md"
+                    onClick={() =>
+                      window.open(
+                        "https://www.freshworks.com/apps/helpdude_1/",
+                        "_blank",
+                        "noopener,noreferrer",
+                      )
+                    }
+                  >
+                    Install on Freshdesk
+                  </Button>
+                </div>
 
                 {/* Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
@@ -255,17 +289,52 @@ const Product = () => {
                     </div>
                   ))}
                 </div>
+
+                {/* Freshdesk CTA Button at the bottom */}
+                <div className="mt-12 text-center border-t border-slate-100 pt-8 flex flex-col items-center">
+                  <p className="text-slate-600 mb-4 font-medium">
+                    Ready to embed HelpDude's intelligence directly into your Freshdesk ticket views?
+                  </p>
+                  <Button
+                    size="lg"
+                    className="font-semibold px-8 py-6 rounded-xl transition-all duration-300 transform hover:scale-105 bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg"
+                    onClick={() =>
+                      window.open(
+                        "https://www.freshworks.com/apps/helpdude_1/",
+                        "_blank",
+                        "noopener,noreferrer",
+                      )
+                    }
+                  >
+                    Install HelpDude on Freshdesk
+                  </Button>
+                </div>
               </div>
             ) : (
               <div className="bg-white p-8 md:p-12 rounded-[2.5rem] border border-slate-100 shadow-xl animate-in fade-in duration-300">
                 {/* Paragraph */}
-                <p className="text-lg text-slate-700 font-medium mb-12 max-w-4xl leading-relaxed">
-                  A complete, standalone email ticketing platform. No Freshdesk
-                  needed. Inbound emails become tickets. Autopilot resolves what
-                  it can. Co Pilot handles everything else.
-                </p>
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12 border-b border-slate-100 pb-8">
+                  <p className="text-lg text-slate-700 font-medium max-w-3xl leading-relaxed">
+                    A complete, standalone email ticketing platform. No Freshdesk
+                    needed. Inbound emails become tickets. Autopilot resolves what
+                    it can. Co Pilot handles everything else.
+                  </p>
+                  <Button
+                    size="lg"
+                    className="font-semibold px-6 py-5 rounded-xl transition-all duration-300 transform hover:scale-105 bg-emerald-600 hover:bg-emerald-700 text-white shrink-0 shadow-md"
+                    onClick={() =>
+                      window.open(
+                        "https://helpdude-ai.supporticon.com/",
+                        "_blank",
+                        "noopener,noreferrer",
+                      )
+                    }
+                  >
+                    Go to HelpDude
+                  </Button>
+                </div>
 
-                {/* 2 Column Autopilot / Co-Pilot Section */}
+                {/* 2 Column Autopilot / Co Pilot Section */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
                   {/* Left Column: Autopilot */}
                   <div className="flex flex-col bg-white p-6 md:p-8 rounded-2xl border border-slate-100 shadow-xl transition-all duration-300">
@@ -308,7 +377,7 @@ const Product = () => {
                     </ol>
                   </div>
 
-                  {/* Right Column: Co-Pilot */}
+                  {/* Right Column: Co Pilot */}
                   <div className="flex flex-col bg-white p-6 md:p-8 rounded-2xl border border-slate-100 shadow-xl transition-all duration-300">
                     <div className="bg-emerald-50/50 p-4 rounded-2xl flex items-center gap-4 mb-6 border border-emerald-100/50">
                       <div className="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-600 shrink-0">
@@ -413,8 +482,29 @@ const Product = () => {
                     </div>
                   ))}
                 </div>
+
+                {/* Standalone CTA Button at the bottom */}
+                <div className="mt-12 text-center border-t border-slate-100 pt-8 flex flex-col items-center">
+                  <p className="text-slate-600 mb-4 font-medium">
+                    Ready to streamline your support with our standalone ticketing platform?
+                  </p>
+                  <Button
+                    size="lg"
+                    className="font-semibold px-8 py-6 rounded-xl transition-all duration-300 transform hover:scale-105 bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg"
+                    onClick={() =>
+                      window.open(
+                        "https://helpdude-ai.supporticon.com/",
+                        "_blank",
+                        "noopener,noreferrer",
+                      )
+                    }
+                  >
+                    Get Started with HelpDude
+                  </Button>
+                </div>
               </div>
             )}
+            </motion.div>
           </div>
         </div>
       </section>
@@ -444,7 +534,7 @@ const Product = () => {
             {/* Description */}
             <p className="mt-6 text-lg md:text-xl text-slate-600 leading-relaxed max-w-4xl font-normal">
               HelpDude's AI engine automatically handles common tickets on
-              Autopilot and empowers agents with AI-drafted replies on Co-Pilot,
+              Autopilot and empowers agents with AI-drafted replies on Co Pilot,
               as a native Freshdesk plugin or a fully standalone platform.
             </p>
 

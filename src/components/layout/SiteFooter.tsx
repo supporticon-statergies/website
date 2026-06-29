@@ -42,12 +42,22 @@ export const SiteFooter = () => {
             {/* Socials */}
             <div className="flex gap-2.5 mt-1">
               {[
-                { icon: Linkedin, label: "LinkedIn", href: "#" },
-                { icon: Instagram, label: "Instagram", href: "#" },
+                { 
+                  icon: Linkedin, 
+                  label: "LinkedIn", 
+                  href: "https://www.linkedin.com/company/106249765/admin/?lipi=urn%3Ali%3Apage%3Ad_flagship3_feed%3BGfhHwxNXTL%2Buq%2BfN3HFQjQ%3D%3D" 
+                },
+                { 
+                  icon: Instagram, 
+                  label: "Instagram", 
+                  href: "https://www.instagram.com/supporticon/" 
+                },
               ].map((s) => (
                 <motion.a
                   key={s.label}
                   href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={s.label}
                   whileHover={{ scale: 1.12 }}
                   className="w-9 h-9 rounded-xl border border-white/20 flex items-center justify-center text-white/70 hover:text-white hover:border-white/50 hover:bg-white/10 transition-all duration-200"

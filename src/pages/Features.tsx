@@ -89,7 +89,7 @@ const Features = () => {
                 → Right answer, every time, in &lt;30 sec
               </div>
               <p className="text-sm md:text-base text-slate-600 leading-relaxed">
-                Searches across KB articles, internal docs, knowledge-transfer content, and past resolved tickets in a single AI-powered query.
+                Searches across KB articles, internal docs, knowledge transfer content, and past resolved tickets in a single AI powered query.
               </p>
             </div>
 
@@ -141,7 +141,7 @@ const Features = () => {
                 → CX consistency managed at scale
               </div>
               <p className="text-sm md:text-base text-slate-600 leading-relaxed">
-                Configure knowledge sources, define escalation ownership, and manage role-based permissions from a single control centre. No code required.
+                Configure knowledge sources, define escalation ownership, and manage role based permissions from a single control centre. No code required.
               </p>
             </div>
 

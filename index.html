@@ -135,6 +135,24 @@
         }
       })(window.location);
     </script>
+
+    <!-- HelpDude Chat Widget -->
+    <script>
+      window.HelpDudeConfig = {
+        widgetId: "supporticon",
+        apiBase: "https://api-helpdude.supporticon.com",
+        primaryColor: "#22c55e",
+        position: "right",
+        fontFamily: "Outfit",
+        welcomeTitle: "HelpDude Support",
+        welcomeText: "Hi there! Welcome to support. How can we help you today?",
+        launcherIcon: "chat",
+        bottomSpacing: 24,
+        roundedCorners: true,
+        suggestedQuestions: ["How can we help?", "Talk to support", "Pricing details"]
+      };
+    </script>
+    <script src="https://api-helpdude.supporticon.com/widget/helpdude-bot.js" async></script>
   </head>
 
   <body>

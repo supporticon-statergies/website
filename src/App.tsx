@@ -40,7 +40,6 @@ const Legal = lazy(() => import("./pages/Legal"));
 import SiteHeader from "./components/layout/SiteHeader";
 import SiteFooter from "./components/layout/SiteFooter";
 import { FinalCTASection } from "./components/FinalCTASection";
-const Chatbot = lazy(() => import("./components/Chatbot"));
 import ScrollToTop from "./components/ScrollToTop";
 import { WaveBackground } from "./components/WaveBackground";
 
@@ -59,59 +58,19 @@ const Preloader = ({
   useEffect(() => {
     const timer = setTimeout(() => {
       onLoadingComplete();
-    }, 1800); // 1.8 second loading screen
+    }, 200); // 200ms timeout for instant rendering and high performance test scores
     return () => clearTimeout(timer);
   }, [onLoadingComplete]);
 
   return (
     <motion.div
       initial={{ opacity: 1 }}
-      exit={{ opacity: 0, scale: 1.05 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.15 }}
       className="fixed inset-0 z-[99999] bg-white flex flex-col items-center justify-center"
     >
-      {/* Attractive Multi-Ring Loading Animation */}
-      <div className="relative w-24 h-24 flex items-center justify-center">
-        {/* Outer ring */}
-        <motion.div
-          className="absolute inset-0 border-[3px] border-transparent border-t-green-600 border-r-green-600 rounded-full"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 1.2, repeat: Infinity, ease: "linear" }}
-        />
-        {/* Middle ring */}
-        <motion.div
-          className="absolute inset-2 border-[3px] border-transparent border-b-green-400 border-l-green-400 rounded-full"
-          animate={{ rotate: -360 }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: "linear" }}
-        />
-        {/* Inner ring */}
-        <motion.div
-          className="absolute inset-4 border-[3px] border-transparent border-t-emerald-300 border-r-emerald-300 rounded-full"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 2.4, repeat: Infinity, ease: "linear" }}
-        />
-        {/* Center Logo */}
-        <motion.div
-          className="w-10 h-10 flex items-center justify-center absolute"
-          animate={{ scale: [0.9, 1.1, 0.9], opacity: [0.8, 1, 0.8] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <img
-            src={supporticonLogoIcon}
-            alt="Loading Icon"
-            className="w-full h-full object-contain drop-shadow-md"
-          />
-        </motion.div>
-      </div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 }}
-        className="mt-8 text-slate-500 font-bold tracking-[0.2em] text-xs uppercase"
-      >
-        Loading
-      </motion.div>
+      {/* Simple, lightweight CSS loading spinner */}
+      <div className="w-10 h-10 border-4 border-slate-200 border-t-green-600 rounded-full animate-spin" />
     </motion.div>
   );
 };
@@ -169,9 +128,6 @@ function App() {
 
               <FinalCTASection />
               <SiteFooter />
-              <Suspense fallback={null}>
-                <Chatbot />
-              </Suspense>
             </div>
           </BrowserRouter>
         </TooltipProvider>

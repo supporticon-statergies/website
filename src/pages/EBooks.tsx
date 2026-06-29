@@ -42,7 +42,7 @@ const ebookSections = [
 const faqs = [
   {
     q: "Who is this playbook for?",
-    a: "This playbook is for customer success leaders, CX directors, and operations managers at B2B SaaS and subscription businesses. If you're dealing with high churn, lack of visibility into customer health, or manual reactive processes, and want to build scalable, data-driven wins, this guide is built for you.",
+    a: "This playbook is for customer success leaders, CX directors, and operations managers at B2B SaaS and subscription businesses. If you're dealing with high churn, lack of visibility into customer health, or manual reactive processes, and want to build scalable, data driven wins, this guide is built for you.",
   },
   {
     q: "What business impact can I expect from these strategies?",
@@ -669,7 +669,7 @@ export default function EBooks() {
                 The evolution of every high-functioning customer success
                 strategy centers around three C's: connected experiences, an
                 engaging customer journey, and a culture built on
-                customer-centricity. Satisfaction won't cut it, quarterbacking
+                customer centricity. Satisfaction won't cut it, quarterbacking
                 your customers to long term success is proven to combat churn
                 and transform customer success teams into revenue drivers.
               </p>
@@ -684,7 +684,7 @@ export default function EBooks() {
                 According to <strong>ChurnZero</strong>, reducing customer churn
                 by just <strong>5%</strong> can increase profits from{" "}
                 <strong>25% to 125%</strong>. This playbook gives you the
-                data-driven strategies, automation plays, and segmentation
+                data driven strategies, automation plays, and segmentation
                 models to get there.{" "}
                 <Link
                   to="/resources"
@@ -1029,7 +1029,7 @@ export default function EBooks() {
                 lineHeight: 1.7,
               }}
             >
-              Download the free playbook and get proven, data-driven strategies
+              Download the free playbook and get proven, data driven strategies
               to reduce churn, drive adoption, and turn your customer success
               team into a revenue engine.
             </p>

@@ -202,7 +202,7 @@ export const SiteHeader = () => {
                 HelpDude
               </h3>
               <p className="text-[13px] text-slate-500 leading-relaxed mb-4 max-w-lg">
-                Our flagship AI-powered customer support platform, purpose-built for modern SaaS teams. It integrates unified knowledge search, AI-generated email responses, and automatic escalation routing.
+                Our flagship AI powered customer support platform, purpose-built for modern SaaS teams. It integrates unified knowledge search, AI-generated email responses, and automatic escalation routing.
               </p>
               <span className="inline-flex items-center gap-1.5 text-xs font-bold text-primary hover:underline">
                 Explore HelpDude Platform

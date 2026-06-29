@@ -445,7 +445,7 @@ export const resources: Resource[] = [
       },
       {
         type: "subheading",
-        text: "A Collaborative Human–AI Partnership",
+        text: "A Collaborative Human AI Partnership",
       },
       {
         type: "paragraph",

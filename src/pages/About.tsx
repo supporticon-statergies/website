@@ -1,3 +1,4 @@
+import { useState, useRef } from "react";
 import { SEO } from "@/components/SEO";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import ImageWithLoader from "../components/ImageWithLoader";
@@ -10,10 +11,257 @@ import {
   Users,
   Target,
   Zap,
+  ArrowRight,
 } from "lucide-react";
 import { useScrollToTop } from "@/hooks/use-scroll-to-top";
 import aboutImage from "@/assets/about.png";
 import { AmbientAccent } from "@/components/PageVisuals";
+import { StaggerContainer, StaggerItem } from "@/components/ui/motion-utils";
+
+interface TeamMember {
+  name: string;
+  role: string;
+  badge?: string;
+  linkedin: string;
+}
+
+const devTeam: TeamMember[] = [
+  {
+    name: "Sarguru",
+    role: "AI/ML Developer",
+    linkedin: "sarguru-i",
+  },
+  {
+    name: "Sudhan",
+    role: "AI Engineer",
+    linkedin: "shanmuga-sudhan-k",
+  },
+  {
+    name: "JaiManisha",
+    role: "Sales Development Representative",
+    linkedin: "https://www.linkedin.com/in/jaimanisa-kirubakaran-76b733346?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
+  },
+  {
+    name: "JaiSudharshan",
+    role: "ML Developer",
+    linkedin: "jaisudharshan-d",
+  },
+  {
+    name: "Mehashree",
+    role: "UI/UX Developer",
+    linkedin: "mehashree-r-05b4442bb",
+  },
+];
+
+const TeamCard = ({ dev }: { dev: TeamMember }) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const xc = rect.width / 2;
+    const yc = rect.height / 2;
+
+    const tiltX = ((yc - y) / yc) * 3;
+    const tiltY = ((x - xc) / xc) * 3;
+
+    setTilt({ x: tiltX, y: tiltY });
+    setMousePos({ x, y });
+  };
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    setTilt({ x: 0, y: 0 });
+    setMousePos({ x: 0, y: 0 });
+  };
+
+  const initials = dev.name
+    .trim()
+    .split(/\s+/)
+    .map((n) => n[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+
+  const avatarBgGradient = "from-emerald-500 to-teal-600 text-emerald-50";
+
+  const getLinkedinUrl = (handle: string) => {
+    if (!handle) return "";
+    if (handle.startsWith("http://") || handle.startsWith("https://")) {
+      return handle;
+    }
+    if (handle.includes("linkedin.com")) {
+      return handle.startsWith("www.") ? `https://${handle}` : `https://www.${handle}`;
+    }
+    return `https://www.linkedin.com/in/${handle}`;
+  };
+
+  return (
+    <StaggerItem className="w-full max-w-[370px] md:max-w-none md:w-[calc(50%-16px)] lg:w-[calc(33.333%-22px)] flex relative z-10">
+      {/* Outer glow wrapper — positioned outside framer-motion stacking context */}
+      <div className="relative w-full">
+        {/* External glow — static gradient */}
+        <div
+          className="absolute -inset-1 rounded-[26px] blur-xl transition-opacity duration-300 pointer-events-none"
+          style={{
+            background: "linear-gradient(135deg, rgba(16, 185, 129, 0.25) 0%, rgba(59, 130, 246, 0.2) 100%)",
+            opacity: isHovered ? 1 : 0,
+          }}
+        />
+        {/* External spotlight glow — follows cursor */}
+        <div
+          className="absolute -inset-1 rounded-[26px] blur-xl transition-opacity duration-300 pointer-events-none"
+          style={{
+            background: `radial-gradient(280px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(16, 185, 129, 0.22), rgba(59, 130, 246, 0.16) 50%, transparent 100%)`,
+            opacity: isHovered ? 1 : 0,
+          }}
+        />
+
+        {/* Main card shell */}
+        <div
+          ref={cardRef}
+          onMouseMove={handleMouseMove}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          className="relative w-full rounded-[24px] p-[1.5px] transition-all duration-300 ease-out select-none shadow-[0_12px_30px_rgba(0,0,0,0.04)] transform-gpu"
+          style={{
+            transform: isHovered
+              ? `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) translateY(-6px)`
+              : `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)`,
+            transition: isHovered
+              ? "transform 0.1s ease-out, box-shadow 0.3s ease"
+              : "transform 0.3s ease-out, box-shadow 0.3s ease",
+            ["--mouse-x" as any]: `${mousePos.x}px`,
+            ["--mouse-y" as any]: `${mousePos.y}px`,
+          }}
+        >
+          {/* Border: default subtle border */}
+          <div
+            className="absolute inset-0 rounded-[24px] border border-slate-200/60 transition-opacity duration-300 pointer-events-none"
+            style={{ opacity: isHovered ? 0 : 1 }}
+          />
+          {/* Border: animated gradient border on hover */}
+          <div
+            className="absolute inset-0 rounded-[24px] transition-opacity duration-300 pointer-events-none"
+            style={{
+              background: "linear-gradient(135deg, #10b981, #2dd4bf, #3b82f6)",
+              padding: "1.5px",
+              WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+              WebkitMaskComposite: "xor",
+              maskComposite: "exclude",
+              opacity: isHovered ? 1 : 0,
+            }}
+          />
+          {/* Border spotlight: cursor-following highlight on the border */}
+          <div
+            className="absolute inset-0 rounded-[24px] transition-opacity duration-300 pointer-events-none"
+            style={{
+              background: `radial-gradient(150px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(16, 185, 129, 0.7), rgba(59, 130, 246, 0.5) 50%, transparent 100%)`,
+              padding: "1.5px",
+              WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+              WebkitMaskComposite: "xor",
+              maskComposite: "exclude",
+              opacity: isHovered ? 1 : 0,
+            }}
+          />
+
+          {/* Glassmorphic Card Body */}
+          <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-6 bg-white/70 backdrop-blur-xl rounded-[22.5px] p-6 sm:p-8 relative overflow-hidden border border-white/40">
+            {/* Inner spotlight overlay following cursor */}
+            <div
+              className="absolute inset-0 pointer-events-none transition-opacity duration-300"
+              style={{
+                background: `radial-gradient(350px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(16, 185, 129, 0.12), rgba(59, 130, 246, 0.08) 40%, transparent 80%)`,
+                opacity: isHovered ? 1 : 0,
+              }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-tr from-white/20 via-transparent to-white/40 pointer-events-none" />
+
+
+          {/* Left Column: Avatar */}
+          <div className="flex-shrink-0 relative">
+            <div className="relative w-24 h-24 sm:w-26 sm:h-26 rounded-full p-0.5 bg-gradient-to-tr from-emerald-100 to-blue-100 shadow-inner transition-colors duration-500">
+              <div className="w-full h-full rounded-full overflow-hidden flex items-center justify-center bg-slate-50 relative">
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br ${avatarBgGradient} flex items-center justify-center font-display font-black text-3xl sm:text-4xl tracking-wider transition-transform duration-300 ${isHovered ? "scale-110" : "scale-100"
+                    }`}
+                >
+                  {initials}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column: Content */}
+          <div className="flex-grow flex flex-col justify-between min-w-0 w-full">
+            <div>
+              {/* Header */}
+              <div className="mb-2">
+                <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2.5">
+                  <h3 className="text-2xl font-bold text-slate-900 leading-tight">
+                    {dev.name}
+                  </h3>
+                  {dev.badge && (
+                    <span className="text-[8px] font-extrabold tracking-wider uppercase px-2 py-0.5 rounded-full bg-emerald-500 text-white shadow-sm shadow-emerald-500/30 whitespace-nowrap">
+                      {dev.badge}
+                    </span>
+                  )}
+                </div>
+                <p className="text-emerald-600 font-bold text-xs tracking-wider uppercase mt-1">
+                  {dev.role}
+                </p>
+              </div>
+            </div>
+
+            {/* Footer row containing link & social icons */}
+            <div className="border-t border-slate-100/50 pt-4 flex items-center justify-between w-full mt-4">
+              <a
+                href={getLinkedinUrl(dev.linkedin)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-600 hover:text-emerald-700 transition-colors group/btn"
+              >
+                View Profile
+                <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover/btn:translate-x-1" />
+              </a>
+
+              {/* Social links row — driven by isHovered state, not CSS group-hover */}
+              <div
+                className="flex items-center gap-2 transition-all duration-300"
+                style={{
+                  opacity: isHovered ? 1 : 0,
+                  transform: isHovered ? "translateY(0px)" : "translateY(6px)",
+                  pointerEvents: isHovered ? "auto" : "none",
+                }}
+              >
+                <a
+                  href={getLinkedinUrl(dev.linkedin)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${dev.name}'s LinkedIn`}
+                  className="w-7 h-7 rounded-full bg-slate-50 hover:bg-[#0077b5] hover:text-white text-slate-400 flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-sm border border-slate-100"
+                >
+                  <Linkedin className="w-3.5 h-3.5" />
+                </a>
+              </div>
+            </div>
+          </div>
+          </div>{/* end card body */}
+        </div>{/* end main card shell */}
+      </div>{/* end outer glow wrapper */}
+    </StaggerItem>
+  );
+};
 
 const About = () => {
   useScrollToTop();
@@ -212,79 +460,30 @@ const About = () => {
         </div>
       </section>
 
-      {/* Developers Section */}
+      {/* Premium Development Team Showcase Section */}
+      <section className="relative z-20 py-28 overflow-hidden bg-[radial-gradient(circle_at_50%_40%,rgba(240,253,250,0.5)_0%,rgba(255,255,255,0)_70%)]">
+        {/* Background Decorative Blobs */}
+        <div className="absolute top-1/3 left-10 w-[500px] h-[500px] rounded-full bg-emerald-50/40 blur-[130px] pointer-events-none -z-10 animate-pulse" style={{ animationDuration: "8s" }} />
+        <div className="absolute bottom-1/3 right-10 w-[500px] h-[500px] rounded-full bg-blue-50/40 blur-[130px] pointer-events-none -z-10 animate-pulse" style={{ animationDuration: "10s" }} />
 
-      <section className="container mx-auto px-4 pb-24">
-        <h2 className="font-display text-4xl font-bold text-center mb-16 text-slate-900 leading-tight">
-          Development Team
-        </h2>
-        <div className="grid gap-10 md:grid-cols-2 max-w-4xl mx-auto">
-          {[
-            {
-              name: "Sarguru",
-              role: "AI/ML Developer",
-              color: "#1A7FB5",
-              linkedin: "sarguru-i",
-            },
-            {
-              name: "Sudhan",
-              role: "Backend Developer",
-              color: "green",
-              linkedin: "shanmuga-sudhan-k",
-            },
-            {
-              name: "Jai Manisa",
-              role: "SDR",
-              color: "green",
-              linkedin: "shanmuga-sudhan-k",
-            },
-            {
-              name: "Jai Sudharshan ",
-              role: "Backend Developer",
-              color: "green",
-              linkedin: "shanmuga-sudhan-k",
-            },
-            {
-              name: "MehaShree",
-              role: "Backend Developer",
-              color: "green",
-              linkedin: "shanmuga-sudhan-k",
-            },
-          ].map((dev) => (
-            <Card
-              key={dev.name}
-              className="p-8 rounded-[2rem] border-green-50 shadow-lg hover:shadow-2xl transition-all duration-300 bg-white/80"
-            >
-              <div className="text-center">
-                <div
-                  className={`w-28 h-28 rounded-2xl flex items-center justify-center mx-auto mb-6 ${dev.color === "green" ? "bg-green-100" : ""}`}
-                  style={
-                    dev.color !== "green"
-                      ? { backgroundColor: dev.color + "22" }
-                      : {}
-                  }
-                >
-                  <Users
-                    className={`w-14 h-14 ${dev.color === "green" ? "text-green-600" : ""}`}
-                    style={dev.color !== "green" ? { color: dev.color } : {}}
-                  />
-                </div>
-                <h3 className="text-2xl font-bold text-slate-900 mb-2">
-                  {dev.name}
-                </h3>
-                <p className="text-slate-500 font-medium mb-6">{dev.role}</p>
-                <a
-                  href={`https://www.linkedin.com/in/${dev.linkedin}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-indigo-600 font-bold hover:gap-3 transition-all"
-                >
-                  <Linkedin className="h-4 w-4" />
-                  View Profile
-                </a>
-              </div>
-            </Card>
-          ))}
+        <div className="container mx-auto px-4 max-w-7xl">
+          <div className="text-center mb-20">
+            <h2 className="font-display text-4xl md:text-5xl font-black text-slate-900 leading-tight mb-4">
+              Meet the Team Behind Supporticon
+            </h2>
+            <p className="text-lg md:text-xl text-slate-500 max-w-3xl mx-auto font-medium">
+              Passionate engineers, designers, and AI specialists building the future of customer support.
+            </p>
+
+            {/* Decorative gradient line */}
+            <div className="w-24 h-1.5 bg-gradient-to-r from-emerald-500 via-teal-500 to-blue-500 mx-auto mt-6 rounded-full shadow-sm" />
+          </div>
+
+          <StaggerContainer className="flex flex-wrap gap-8 max-w-6xl mx-auto justify-center relative z-10">
+            {devTeam.map((dev) => (
+              <TeamCard key={dev.name} dev={dev} />
+            ))}
+          </StaggerContainer>
         </div>
       </section>
 
