@@ -143,7 +143,7 @@ function App() {
           >
             <ScrollToTop />
             <div
-              className={`relative min-h-screen ${isLoading ? "h-screen overflow-hidden" : ""}`}
+              className={`relative min-h-screen overflow-x-hidden ${isLoading ? "h-screen overflow-hidden" : ""}`}
             >
               <WaveBackground />
               <SiteHeader />

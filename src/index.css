@@ -143,11 +143,28 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
+  html,
+  body {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
   body {
     @apply text-foreground font-sans;
     background-color: #ffffff;
     min-height: 100vh;
-    overflow-x: hidden;
+  }
+
+  /* Ensure every major section does not overflow on mobile */
+  section, 
+  header, 
+  footer, 
+  main {
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
   }
 }
 

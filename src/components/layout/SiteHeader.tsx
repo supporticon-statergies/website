@@ -404,7 +404,7 @@ export const SiteHeader = () => {
               setActiveMenu(null);
               activeMenuRef.current = null;
             }}
-            className="flex items-center gap-2 mr-8 transition-opacity duration-200 hover:opacity-80"
+            className="flex items-center gap-2 mr-0 md:mr-8 transition-opacity duration-200 hover:opacity-80"
           >
             <img
               src={supporticonUploads.logo}
