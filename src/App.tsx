@@ -38,8 +38,8 @@ const Pricing = lazy(() => import("./pages/Pricing"));
 const Terms = lazy(() => import("./pages/Terms"));
 const Legal = lazy(() => import("./pages/Legal"));
 import SiteHeader from "./components/layout/SiteHeader";
-import SiteFooter from "./components/layout/SiteFooter";
-import { FinalCTASection } from "./components/FinalCTASection";
+const SiteFooter = lazy(() => import("./components/layout/SiteFooter"));
+const FinalCTASection = lazy(() => import("./components/FinalCTASection").then(m => ({ default: m.FinalCTASection })));
 import ScrollToTop from "./components/ScrollToTop";
 import { WaveBackground } from "./components/WaveBackground";
 
@@ -172,8 +172,10 @@ function App() {
                 </Routes>
               </Suspense>
 
-              <FinalCTASection />
-              <SiteFooter />
+              <Suspense fallback={<div className="h-48 bg-transparent" />}>
+                <FinalCTASection />
+                <SiteFooter />
+              </Suspense>
             </div>
           </BrowserRouter>
         </TooltipProvider>

@@ -50,6 +50,8 @@ export default function ImageWithLoader({
 
       <img
         {...imgProps}
+        decoding={imgProps.decoding ?? "async"}
+        loading={imgProps.loading ?? "lazy"}
         alt={alt}
         onLoad={handleLoad}
         onError={handleError}

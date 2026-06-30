@@ -1,6 +1,8 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
+import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
+import viteCompression from "vite-plugin-compression";
 import { componentTagger } from "lovable-tagger";
 
 // GitHub Pages project sites are served from /{repo-name}/ — set VITE_BASE_PATH in CI.
@@ -17,26 +19,17 @@ export default defineConfig(({ mode }) => ({
   build: {
     outDir: 'dist',
     sourcemap: false,
-    rollupOptions: {
-      output: {
-        manualChunks(id: string) {
-          if (id.includes("node_modules")) {
-            if (id.includes("react/") || id.includes("react-dom/")) {
-              return "vendor";
-            }
-            if (id.includes("framer-motion")) {
-              return "framer-motion";
-            }
-            if (id.includes("@dotlottie")) {
-              return "lottie-player";
-            }
-          }
-        }
-      }
-    }
   },
   plugins: [
     react(),
+    ViteImageOptimizer({
+      png: { quality: 80 },
+      jpeg: { quality: 80 },
+      webp: { quality: 80 },
+      avif: { quality: 70 },
+    }),
+    viteCompression({ algorithm: "gzip", ext: ".gz" }),
+    viteCompression({ algorithm: "brotliCompress", ext: ".br" }),
     mode === "development" && componentTagger(),
     {
       name: "html-base-path",
