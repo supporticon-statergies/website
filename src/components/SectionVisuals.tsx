@@ -305,7 +305,7 @@ export function WorkflowPipelineVisual() {
             const Icon = node.Icon;
             const isLast = i === PIPELINE_NODES.length - 1;
             return (
-              <div key={node.label} className="flex items-center flex-1 min-w-0">
+              <div key={node.label} className={`flex items-center ${isLast ? "" : "flex-1 min-w-0"}`}>
 
                 {/* Node */}
                 <motion.div

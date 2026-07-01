@@ -349,12 +349,19 @@ const About = () => {
                 both the people who deliver it and the customers who experience
                 it, ensuring each interaction fosters trust, value, and
                 satisfaction while strengthening long term relationships and
-                organizational success. We envision a world where every helpdesk
-                system interaction builds customer trust, deepens product
-                understanding, and strengthens the long term relationship
-                between a business and the people it serves.
+                organizational success.
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Central Quote */}
+        <div className="mt-12 max-w-5xl mx-auto px-4">
+          <div className="rounded-3xl bg-emerald-50/50 border border-emerald-100 shadow-lg p-8 md:p-10 text-center relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 to-teal-500"></div>
+            <p className="text-xl md:text-2xl font-display font-medium text-slate-800 leading-relaxed italic relative z-10">
+              "We envision a world where every helpdesk system interaction builds customer trust, deepens product understanding,<br className="hidden md:block" /> and strengthens the long term relationship between a business and the people it serves."
+            </p>
           </div>
         </div>
       </section>

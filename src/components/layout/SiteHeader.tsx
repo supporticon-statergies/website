@@ -187,7 +187,7 @@ export const SiteHeader = () => {
         {/* Left Side: Showcase card for HelpDude */}
         <div className="col-span-8 flex flex-col justify-center">
           <Link
-            to="/product"
+            to="/product?tab=standalone"
             onClick={() => setActiveMenu(null)}
             className="group flex items-start gap-5 p-6 rounded-2xl transition-all duration-200 hover:bg-slate-50 hover:scale-[1.01]"
           >
@@ -213,29 +213,31 @@ export const SiteHeader = () => {
         </div>
 
         {/* Right Side: Featured content */}
-        <div className="col-span-4 border-l border-slate-100/80 pl-8 flex flex-col justify-between">
-          <div>
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-emerald-500/20 bg-emerald-500/5 text-emerald-600 text-[10px] font-bold tracking-wider uppercase mb-4">
-              <Sparkles className="w-3 h-3 animate-pulse" />
-              Now Live
+        <div className="col-span-4 border-l border-slate-100/80 pl-8">
+          <Link
+            to="/product?tab=freshdesk"
+            onClick={() => setActiveMenu(null)}
+            className="group flex flex-col justify-between h-full p-6 rounded-2xl transition-all duration-200 hover:bg-slate-50 hover:scale-[1.01]"
+          >
+            <div>
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-emerald-500/20 bg-emerald-500/5 text-emerald-600 text-[10px] font-bold tracking-wider uppercase mb-4">
+                <Sparkles className="w-3 h-3 animate-pulse" />
+                Now Live
+              </div>
+              <h4 className="text-base font-bold text-slate-900 mb-2 leading-snug group-hover:text-primary transition-colors">
+                HelpDude for Freshdesk
+              </h4>
+              <p className="text-[12px] text-slate-400 leading-relaxed mb-4">
+                Our flagship plugin is now available in the Freshworks Marketplace. Start your 14-day free trial.
+              </p>
             </div>
-            <h4 className="text-base font-bold text-slate-900 mb-2 leading-snug">
-              HelpDude for Freshdesk
-            </h4>
-            <p className="text-[12px] text-slate-400 leading-relaxed mb-4">
-              Our flagship plugin is now available in the Freshworks Marketplace. Start your 14-day free trial.
-            </p>
-          </div>
-          <div className="p-4 bg-emerald-500/5 rounded-2xl border border-emerald-500/10">
-            <Link
-              to="/product"
-              onClick={() => setActiveMenu(null)}
-              className="flex items-center justify-between text-xs font-bold text-emerald-700 hover:underline"
-            >
-              <span>Install on Freshdesk</span>
-              <Zap className="w-3.5 h-3.5 text-emerald-600" />
-            </Link>
-          </div>
+            <div className="p-4 bg-emerald-500/5 rounded-2xl border border-emerald-500/10 transition-colors duration-200 group-hover:bg-emerald-500/10 w-full">
+              <div className="flex items-center justify-between text-xs font-bold text-emerald-700 group-hover:underline">
+                <span>Explore to Freshdesk</span>
+                <Zap className="w-3.5 h-3.5 text-emerald-600 transition-transform duration-200 group-hover:scale-110" />
+              </div>
+            </div>
+          </Link>
         </div>
       </div>
     );

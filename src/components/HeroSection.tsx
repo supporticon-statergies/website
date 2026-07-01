@@ -129,13 +129,13 @@ export const HeroSection = () => {
                   className="rounded-full px-9 py-6 text-base font-bold shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 w-full sm:w-auto"
                   onClick={() =>
                     window.open(
-                      "https://www.freshworks.com/apps/helpdude_1/",
+                      "https://zbooking.in/PoPU8",
                       "_blank",
                       "noopener,noreferrer",
                     )
                   }
                 >
-                  Start Your Free Trial
+                  Get Started
                   <ArrowRight className="w-4 h-4 ml-1" />
                 </Button>
               </motion.div>

@@ -33,7 +33,7 @@ const features = [
 const faqs = [
   {
     q: "What counts as one ticket?",
-    a: "A ticket is any support request created by a customer or agent, regardless of channel (email, chat, portal). Each unique case is billed as one ticket.",
+    a: "A ticket is any support request created by a customer or agent, regardless of channel (email, chat, portal). Until a ticket is resolved and closed, it is considered as one ticket.",
   },
   {
     q: "Do unused tickets roll over?",
@@ -56,7 +56,7 @@ const Pricing = () => {
     <main className="min-h-screen bg-transparent relative">
       <SEO
         title="Pricing, SupportIcon"
-        description="Simple, transparent pricing. Pay only for what you use, 1 ticket = ₹10. No hidden fees."
+        description="Simple, transparent pricing. Pay only for what you use, 1 ticket = ₹19. No hidden fees."
         canonicalPath="/pricing"
       />
 
@@ -133,7 +133,7 @@ const Pricing = () => {
                 </p>
                 <div className="flex items-end gap-2 justify-center md:justify-start">
                   <span className="text-7xl font-black text-slate-900 leading-none">
-                    ₹10
+                    ₹19
                   </span>
                   <div className="mb-2 text-left">
                     <span className="block text-slate-500 text-base font-medium">
@@ -185,7 +185,7 @@ const Pricing = () => {
                   <div className="relative flex flex-col items-center justify-center gap-1 mt-4">
                     <Mail className="w-7 h-7 text-white/80" />
                     <p className="text-white text-2xl font-black leading-none">
-                      ₹10
+                      ₹19
                     </p>
                     <p className="text-white/60 text-[9px] font-bold uppercase tracking-widest">
                       per ticket
@@ -262,7 +262,7 @@ const Pricing = () => {
             },
             {
               step: "02",
-              title: "₹10 is charged",
+              title: "₹19 is charged",
               desc: "One flat charge per unique ticket, regardless of resolution time or complexity.",
             },
             {

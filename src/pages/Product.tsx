@@ -15,8 +15,17 @@ import {
   BarChart,
   Users,
   CheckCircle2,
+  ArrowRight,
 } from "lucide-react";
 import { useState, useEffect, lazy, Suspense } from "react";
+import { useSearchParams, useLocation } from "react-router-dom";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 import ImageWithLoader from "@/components/ImageWithLoader";
 
 const RequestDemoDialog = lazy(() => import("@/components/RequestDemoDialog"));
@@ -32,6 +41,8 @@ import { ProductEcosystemVisual, AmbientAccent } from "@/components/PageVisuals"
 import { motion } from "framer-motion";
 
 const Product = () => {
+  const [searchParams] = useSearchParams();
+  const location = useLocation();
   useScrollToTop();
 
   const [open, setOpen] = useState(false);
@@ -39,6 +50,7 @@ const Product = () => {
   const [activeTab, setActiveTab] = useState<"freshdesk" | "standalone">(
     "freshdesk",
   );
+  const [showOptionDialog, setShowOptionDialog] = useState(false);
 
   // Check if device is mobile
   useEffect(() => {
@@ -51,6 +63,22 @@ const Product = () => {
 
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
+
+  // Handle URL tab parameter and scroll to section
+  useEffect(() => {
+    const tabParam = searchParams.get("tab");
+    if (tabParam === "freshdesk" || tabParam === "standalone") {
+      setActiveTab(tabParam);
+      
+      const element = document.getElementById("deployment-options");
+      if (element) {
+        const scrollTimeout = setTimeout(() => {
+          element.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 150);
+        return () => clearTimeout(scrollTimeout);
+      }
+    }
+  }, [searchParams, location.key]);
 
   return (
     <main className="overflow-x-hidden pb-12 bg-transparent relative">
@@ -148,15 +176,14 @@ const Product = () => {
           {/* New One line sentence spanning the entire width */}
           <div className="mt-12 w-full bg-white border-2 border-white p-6 rounded-2xl shadow-lg text-center animate-in fade-in slide-in-from-bottom-4 duration-700 delay-500">
             <p className="text-lg md:text-xl text-slate-800 font-semibold md:whitespace-nowrap">
-              Less time searching. Fewer inconsistent answers. Faster
-              resolutions. Customers who trust you enough to stay.
+              Reduce your search time. Faster Resolution. Improve customer Retention.
             </p>
           </div>
         </div>
       </section>
 
       {/* Deployment Options Section */}
-      <section className="container mx-auto px-4 py-16 animate-in fade-in duration-700 delay-500 fill-mode-both">
+      <section id="deployment-options" className="container mx-auto px-4 py-16 animate-in fade-in duration-700 delay-500 fill-mode-both">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <div className="text-center mb-12">
@@ -222,7 +249,7 @@ const Product = () => {
                   <p className="text-lg text-slate-700 font-medium max-w-3xl leading-relaxed">
                     A Marketplace plugin that embeds directly into every Freshdesk
                     ticket view. Zero workflow disruption. Install in 15 minutes,
-                    no IT project required.
+                    no IT involvment needed.
                   </p>
                   <Button
                     size="lg"
@@ -316,7 +343,7 @@ const Product = () => {
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12 border-b border-slate-100 pb-8">
                   <p className="text-lg text-slate-700 font-medium max-w-3xl leading-relaxed">
                     A complete, standalone email ticketing platform. No Freshdesk
-                    needed. Inbound emails become tickets. Autopilot resolves what
+                    needed. Support Tickets become tickets. Autopilot resolves what
                     it can. Co Pilot handles everything else.
                   </p>
                   <Button
@@ -344,28 +371,25 @@ const Product = () => {
                       </div>
                       <div>
                         <h4 className="text-lg font-bold text-slate-900 leading-tight">
-                          Autopilot mode
+                          Autopilot Mode
                         </h4>
                         <p className="text-sm text-primary font-semibold uppercase tracking-wider mt-0.5">
-                          Zero touch resolution
+                          AI handles customer tickets automatically
                         </p>
                       </div>
                     </div>
 
                     <p className="text-slate-600 mb-8 leading-relaxed">
-                      Inbound email arrives, AI searches your knowledge base,
-                      and, if confidence exceeds the threshold, sends a
-                      complete, professional reply to the customer
-                      automatically. No agent required.
+                      When a customer creates a ticket, HelpDude reads the question, finds the best answer from your company's information, and replies automatically if it's confident about the answer. Your team doesn't have to do anything.
                     </p>
 
                     <ol className="space-y-4">
                       {[
-                        "Email arrives at HelpDude support inbox",
-                        "AI embeds and vector searches knowledge base",
-                        "Match above 60% confidence threshold",
-                        "LLM generates reply, and SES dispatches to customer",
-                        "Response, match score, and metadata logged",
+                        "Customer creates a support ticket.",
+                        "HelpDude looks through your company's guides, FAQs, and documents.",
+                        "If it finds the correct answer with high confidence.",
+                        "It creates a professional reply and sends it to the customer automatically.",
+                        "The entire ticket and response are saved for future reference.",
                       ].map((step, idx) => (
                         <li key={idx} className="flex items-start gap-4">
                           <div className="w-6 h-6 rounded bg-primary/15 text-primary font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">
@@ -385,41 +409,39 @@ const Product = () => {
                       </div>
                       <div>
                         <h4 className="text-lg font-bold text-slate-900 leading-tight">
-                          Co Pilot mode
+                          Co-Pilot Mode
                         </h4>
                         <p className="text-sm text-emerald-600 font-semibold uppercase tracking-wider mt-0.5">
-                          Human in the loop
+                          AI helps your support team resolve tickets faster
                         </p>
                       </div>
                     </div>
 
                     <p className="text-slate-600 mb-8 leading-relaxed">
-                      Complex tickets route to agents with three AI drafted
-                      reply options ready. Agent selects, refines in one click,
-                      and sends, completing a 15-minute task in under 2 minutes.
+                      When a customer's ticket needs a human, HelpDude prepares the reply for your support team. The agent only needs to review it, make small changes if needed, and send it.
                     </p>
 
                     <ul className="space-y-4">
                       {[
                         {
                           letter: "A",
-                          text: "Agent opens ticket, clicks HelpDude button",
+                          text: "A support team member opens the customer's ticket.",
                         },
                         {
                           letter: "B",
-                          text: "AI surfaces top 3 drafts from full knowledge base",
+                          text: "HelpDude suggests the three best reply options.",
                         },
                         {
                           letter: "C",
-                          text: "Agent selects draft, refines tone/language/length",
+                          text: "The agent chooses one and edits it if needed.",
                         },
                         {
                           letter: "D",
-                          text: "Or: types solution, AI formats professionally",
+                          text: "Or the agent types a simple answer, and HelpDude turns it into a clear, professional response.",
                         },
                         {
                           letter: "E",
-                          text: "Or: escalates — AI auto routes to Dev/QA POC",
+                          text: "If the issue needs another team (like Developers or QA), HelpDude sends it to the right person automatically.",
                         },
                       ].map((step, idx) => (
                         <li key={idx} className="flex items-start gap-4">
@@ -435,53 +457,6 @@ const Product = () => {
                   </div>
                 </div>
 
-                {/* Subtitle */}
-                <div className="border-t border-slate-100 pt-12 mb-8">
-                  <h4 className="text-xl font-bold text-slate-900">
-                    Standalone feature set
-                  </h4>
-                </div>
-
-                {/* 4 Column Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-                  {[
-                    {
-                      icon: Mail,
-                      title: "Email to ticket ingestion",
-                      desc: "Inbound emails parsed via AWS SES, converted to tickets with full metadata extraction automatically.",
-                    },
-                    {
-                      icon: Zap,
-                      title: "Autopilot resolution",
-                      desc: "Common tickets resolved 24/7 without agent involvement. Configurable confidence threshold.",
-                    },
-                    {
-                      icon: BookOpen,
-                      title: "Self improving knowledge base",
-                      desc: "SME validated resolutions automatically promoted into the article pool, compounding AI accuracy over time.",
-                    },
-                    {
-                      icon: BarChart,
-                      title: "Analytics & reporting",
-                      desc: "Autopilot success rate, knowledge gap reports, SLA tracking, and agent performance metrics.",
-                    },
-                  ].map((item, idx) => (
-                    <div
-                      key={idx}
-                      className="flex flex-col bg-green-50/60 backdrop-blur-md p-6 md:p-8 rounded-2xl border border-green-100 shadow-xl hover:shadow-[0_8px_30px_rgba(26,127,181,0.15)] transition-all duration-300"
-                    >
-                      <div className="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center mb-5 text-emerald-600 shrink-0">
-                        <item.icon className="h-5 w-5" />
-                      </div>
-                      <h4 className="text-lg font-bold text-slate-900 mb-3 leading-snug">
-                        {item.title}
-                      </h4>
-                      <p className="text-sm md:text-base text-slate-600 leading-relaxed">
-                        {item.desc}
-                      </p>
-                    </div>
-                  ))}
-                </div>
 
                 {/* Standalone CTA Button at the bottom */}
                 <div className="mt-12 text-center border-t border-slate-100 pt-8 flex flex-col items-center">
@@ -525,7 +500,7 @@ const Product = () => {
 
             {/* Heading */}
             <h2 className="text-3xl md:text-5xl font-display font-bold tracking-tight text-slate-900 leading-tight mt-6 max-w-4xl">
-              Enterprise AI that resolves support tickets{" "}
+              Intelligent AI that resolves support tickets{" "}
               <span className="bg-gradient-to-r from-primary to-primary bg-clip-text text-transparent block md:inline">
                 before your team opens them
               </span>
@@ -544,15 +519,9 @@ const Product = () => {
                 size="lg"
                 variant="hero"
                 className="font-semibold px-8 py-6 rounded-xl transition-all duration-300 transform hover:scale-105"
-                onClick={() =>
-                  window.open(
-                    "https://www.freshworks.com/apps/helpdude_1/",
-                    "_blank",
-                    "noopener,noreferrer",
-                  )
-                }
+                onClick={() => setShowOptionDialog(true)}
               >
-                Install on Freshdesk
+                Install HelpDude
               </Button>
             </div>
           </div>
@@ -560,6 +529,78 @@ const Product = () => {
       </section>
 
       {/* Video Modal Removed */}
+      <Dialog open={showOptionDialog} onOpenChange={setShowOptionDialog}>
+        <DialogContent className="sm:max-w-xl p-8 rounded-3xl border border-slate-100/50 bg-white/95 backdrop-blur-xl shadow-2xl animate-in fade-in zoom-in-95 duration-200 text-left">
+          <DialogHeader className="text-center sm:text-center pb-4 border-b border-slate-100">
+            <DialogTitle className="text-2xl font-black text-slate-900 tracking-tight">
+              Get Started with HelpDude
+            </DialogTitle>
+            <DialogDescription className="text-sm text-slate-500 mt-2">
+              Choose the deployment model that best fits your support team's workflow.
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6">
+            {/* Option 1: HelpDude for Freshdesk */}
+            <button
+              onClick={() => {
+                setShowOptionDialog(false);
+                window.open(
+                  "https://www.freshworks.com/apps/helpdude_1/",
+                  "_blank",
+                  "noopener,noreferrer"
+                );
+              }}
+              className="group flex flex-col justify-between p-6 rounded-2xl border border-emerald-500/10 bg-emerald-500/5 hover:bg-emerald-500/10 hover:border-emerald-500/30 transition-all duration-300 text-left hover:scale-[1.02] shadow-sm hover:shadow-md"
+            >
+              <div>
+                <div className="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-600 mb-4 transition-transform duration-300 group-hover:scale-110">
+                  <Zap className="w-5 h-5" />
+                </div>
+                <h4 className="text-base font-bold text-slate-900 group-hover:text-emerald-700 transition-colors">
+                  HelpDude for Freshdesk
+                </h4>
+                <p className="text-xs text-slate-500 leading-relaxed mt-2">
+                  Marketplace plugin that embeds directly in Freshdesk ticket views. Zero workflow disruption.
+                </p>
+              </div>
+              <div className="mt-6 flex items-center gap-1.5 text-xs font-bold text-emerald-700 group-hover:underline">
+                Explore Freshdesk Integration
+                <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" />
+              </div>
+            </button>
+
+            {/* Option 2: HelpDude Standalone */}
+            <button
+              onClick={() => {
+                setShowOptionDialog(false);
+                window.open(
+                  "https://helpdude-ai.supporticon.com/",
+                  "_blank",
+                  "noopener,noreferrer"
+                );
+              }}
+              className="group flex flex-col justify-between p-6 rounded-2xl border border-slate-200/60 bg-slate-50/50 hover:bg-slate-50 hover:border-slate-300 transition-all duration-300 text-left hover:scale-[1.02] shadow-sm hover:shadow-md"
+            >
+              <div>
+                <div className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600 mb-4 transition-transform duration-300 group-hover:scale-110">
+                  <CheckCircle2 className="w-5 h-5" />
+                </div>
+                <h4 className="text-base font-bold text-slate-900 group-hover:text-primary transition-colors">
+                  HelpDude Standalone
+                </h4>
+                <p className="text-xs text-slate-500 leading-relaxed mt-2">
+                  A standalone AI ticketing platform. Inbound emails automatically converted, logged, and resolved.
+                </p>
+              </div>
+              <div className="mt-6 flex items-center gap-1.5 text-xs font-bold text-primary group-hover:underline">
+                Explore Standalone Platform
+                <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" />
+              </div>
+            </button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </main>
   );
 };

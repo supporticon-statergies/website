@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import videoThumbnail from "@/assets/thmb.png";
+import productDemoVideo from "@/assets/product_demo.mp4";
 import { SEO } from "@/components/SEO";
 import ImageWithLoader from "@/components/ImageWithLoader";
 import { Link, useSearchParams } from "react-router-dom";
@@ -388,7 +389,7 @@ const Resources = () => {
                   controlsList="nodownload"
                 >
                   <source
-                    src={assetUrl("/supporticon_video_720p.mp4")}
+                    src={productDemoVideo}
                     type="video/mp4"
                   />
                   Your browser does not support the video tag.

@@ -89,7 +89,7 @@ const Features = () => {
                 → Right answer, every time, in &lt;30 sec
               </div>
               <p className="text-sm md:text-base text-slate-600 leading-relaxed">
-                Searches across KB articles, internal docs, knowledge transfer content, and past resolved tickets in a single AI powered query.
+                Searches across KB articles, internal docs, knowledge transfer content, and past resolved tickets in a single AI powered query with citation.
               </p>
             </div>
 
@@ -169,7 +169,7 @@ const Features = () => {
             <div className="text-center mb-16">
               <div className="section-label mb-4 mx-auto w-fit">The Problem We Solve</div>
               <h2 className="font-display text-4xl md:text-5xl font-bold text-slate-900 mb-5">
-                Your Support Team Is Losing Customers, Silently.
+                Your SAAS company Is Losing Customers, Silently.
               </h2>
               <p className="text-xl text-slate-500 max-w-3xl mx-auto">
                 Slow replies. Inconsistent answers. Missed escalations. These aren't

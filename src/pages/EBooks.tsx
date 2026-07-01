@@ -253,7 +253,7 @@ export default function EBooks() {
     setSubmitted(true);
     // Trigger download
     const link = document.createElement("a");
-    link.href = "/modern customer success playbook.pdf";
+    link.href = "/modern-customer-success-playbook.pdf";
     link.download = "Modern Customer Success Playbook.pdf";
     document.body.appendChild(link);
     link.click();
