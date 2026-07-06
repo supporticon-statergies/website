@@ -14,12 +14,14 @@ import {
   Plug,
   Clock,
   Rocket,
+  ArrowRight,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useScrollToTop } from "@/hooks/use-scroll-to-top";
 import { useState, useEffect } from "react";
 import { HeroSection } from "@/components/HeroSection";
 import { CXLeadersForm } from "@/components/CXLeadersForm";
+import { Button } from "@/components/ui/button";
 import {
   AISearchVisual,
   WorkflowPipelineVisual,
@@ -226,6 +228,35 @@ const Home = () => {
 
             {/* Animated workflow pipeline — desktop only */}
             <WorkflowPipelineVisual />
+
+            {/* SaaS Support Readiness Assessment */}
+            <div className="mt-20 pt-16 border-t border-slate-100 max-w-4xl mx-auto text-center space-y-6">
+              <div className="section-label mx-auto mb-4">Readiness Assessment</div>
+              <h2 className="font-display text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
+                Is your support ready to scale?
+              </h2>
+              <p className="text-lg md:text-xl text-slate-500 leading-relaxed font-normal max-w-2xl mx-auto">
+                Answer 20 quick questions about your SaaS support operations.<br />
+                Get your overall readiness score and actionable insights instantly.
+              </p>
+              <div className="pt-6">
+                <Button
+                  size="lg"
+                  variant="hero"
+                  className="rounded-full px-10 py-6 text-base font-bold shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 group"
+                  onClick={() =>
+                    window.open(
+                      "https://q-a-website.onrender.com/",
+                      "_blank",
+                      "noopener,noreferrer"
+                    )
+                  }
+                >
+                  Assess Support Readiness
+                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1.5 transition-transform" />
+                </Button>
+              </div>
+            </div>
           </div>
         </section>
 
