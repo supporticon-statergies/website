@@ -195,13 +195,13 @@ export const SiteHeader = () => {
               <Package className="w-6 h-6" />
             </div>
             <div>
-              <p className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-slate-400">
+              <p className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-slate-600">
                 HelpDude Platform
               </p>
               <h3 className="text-lg font-bold text-slate-900 mt-1 mb-2 group-hover:text-primary transition-colors">
                 HelpDude
               </h3>
-              <p className="text-[13px] text-slate-500 leading-relaxed mb-4 max-w-lg">
+              <p className="text-[13px] text-slate-600 leading-relaxed mb-4 max-w-lg">
                 Our flagship AI powered customer support platform, purpose-built for modern SaaS teams. It integrates unified knowledge search, AI-generated email responses, and automatic escalation routing.
               </p>
               <span className="inline-flex items-center gap-1.5 text-xs font-bold text-primary hover:underline">
@@ -227,7 +227,7 @@ export const SiteHeader = () => {
               <h4 className="text-base font-bold text-slate-900 mb-2 leading-snug group-hover:text-primary transition-colors">
                 HelpDude for Freshdesk
               </h4>
-              <p className="text-[12px] text-slate-400 leading-relaxed mb-4">
+              <p className="text-[12px] text-slate-600 leading-relaxed mb-4">
                 Our flagship plugin is now available in the Freshworks Marketplace. Start your 14-day free trial.
               </p>
             </div>
@@ -246,7 +246,7 @@ export const SiteHeader = () => {
   const renderResourcesMegaMenu = () => {
     return (
       <div className="p-8 text-left">
-        <p className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-slate-400 mb-6">
+        <p className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-slate-600 mb-6">
           Learning & Knowledge
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
@@ -302,7 +302,7 @@ export const SiteHeader = () => {
                   <h4 className="text-sm font-bold text-slate-800 leading-snug group-hover:text-primary transition-colors">
                     {item.label}
                   </h4>
-                  <p className="text-[12px] text-slate-400 mt-1 leading-relaxed">
+                  <p className="text-[12px] text-slate-600 mt-1 leading-relaxed">
                     {item.desc}
                   </p>
                 </div>
@@ -359,7 +359,7 @@ export const SiteHeader = () => {
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.25 }}
-                className="mt-7 text-slate-400 font-bold tracking-[0.22em] text-[10px] uppercase"
+                className="mt-7 text-slate-600 font-bold tracking-[0.22em] text-[10px] uppercase"
               >
                 Loading
               </motion.p>
@@ -413,6 +413,7 @@ export const SiteHeader = () => {
               alt="Supporticon logo"
               className="h-10 w-auto"
               loading="eager"
+              fetchPriority="high"
             />
           </Link>
 

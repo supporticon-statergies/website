@@ -126,19 +126,19 @@ export const SiteFooter = () => {
 
         {/* Bottom bar */}
         <div className="pt-7 flex flex-col md:flex-row items-center justify-between gap-3 text-center">
-          <p className="text-xs text-white/50 font-medium">
+          <p className="text-xs text-white/80 font-medium">
             Copyright &copy; 2025 supporticon.com. All rights reserved.
           </p>
           <div className="flex items-center gap-5">
             <Link
               to="/legal"
-              className="text-xs text-white/50 hover:text-white transition-colors duration-200"
+              className="text-xs text-white/80 hover:text-white transition-colors duration-200"
             >
               Privacy Policy
             </Link>
             <Link
               to="/legal"
-              className="text-xs text-white/50 hover:text-white transition-colors duration-200"
+              className="text-xs text-white/80 hover:text-white transition-colors duration-200"
             >
               Terms of Service
             </Link>

@@ -103,7 +103,7 @@ export const HeroSection = () => {
 
 
           {/* Headline */}
-          <div className="opacity-0 animate-css-fade-up-2">
+          <div>
             <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.06] text-slate-900 mb-6">
               <span className="bg-gradient-to-r from-green-500 via-emerald-500 to-teal-600 bg-clip-text text-transparent">
                 Who supports
@@ -113,8 +113,8 @@ export const HeroSection = () => {
           </div>
 
           {/* Subtitle */}
-          <div className="opacity-0 animate-css-fade-up-3">
-            <p className="text-lg md:text-xl text-slate-500 leading-relaxed max-w-2xl mb-10">
+          <div>
+            <p className="text-lg md:text-xl text-slate-600 leading-relaxed max-w-2xl mb-10">
               Supporticon gives your support engineers unified knowledge search,
               one-click AI email drafting, and intelligent escalation routing,
               so every ticket is resolved faster and every customer stays longer.
@@ -122,7 +122,7 @@ export const HeroSection = () => {
           </div>
 
           {/* CTA Buttons */}
-          <div className="opacity-0 animate-css-fade-up-4">
+          <div>
             <div className="flex flex-col sm:flex-row gap-3 justify-center mb-10">
               <motion.div
                 whileHover={{ scale: 1.04, y: -2 }}
@@ -164,7 +164,7 @@ export const HeroSection = () => {
           </div>
 
           {/* Full-width trust + proof strip */}
-          <div className="opacity-0 animate-css-fade-up-5 w-full">
+          <div className="w-full">
             <div className="w-full mt-2">
               {/* Row 1 — feature badges */}
               <div className="grid grid-cols-2 md:grid-cols-3 gap-3 w-full">
