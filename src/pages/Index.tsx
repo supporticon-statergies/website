@@ -22,10 +22,9 @@ import { useState, useEffect } from "react";
 import { HeroSection } from "@/components/HeroSection";
 import { CXLeadersForm } from "@/components/CXLeadersForm";
 import { Button } from "@/components/ui/button";
-import {
-  AISearchVisual,
-  WorkflowPipelineVisual,
-} from "@/components/SectionVisuals";
+import { lazy, Suspense } from "react";
+const AISearchVisual = lazy(() => import("@/components/SectionVisuals").then(m => ({ default: m.AISearchVisual })));
+const WorkflowPipelineVisual = lazy(() => import("@/components/SectionVisuals").then(m => ({ default: m.WorkflowPipelineVisual })));
 
 const steps = [
   {
@@ -143,7 +142,9 @@ const Home = () => {
 
               {/* AI Search Visual */}
               <FadeIn delay={0.15}>
-                <AISearchVisual />
+                <Suspense fallback={<div className="h-[400px]" />}>
+                  <AISearchVisual />
+                </Suspense>
               </FadeIn>
             </div>
 
@@ -227,7 +228,9 @@ const Home = () => {
             </div>
 
             {/* Animated workflow pipeline — desktop only */}
-            <WorkflowPipelineVisual />
+            <Suspense fallback={<div className="h-20" />}>
+              <WorkflowPipelineVisual />
+            </Suspense>
 
             {/* SaaS Support Readiness Assessment */}
             <div className="mt-20 pt-16 border-t border-slate-100 max-w-4xl mx-auto text-center space-y-6">

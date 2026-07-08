@@ -57,16 +57,18 @@ import SiteHeader from "./components/layout/SiteHeader";
 const SiteFooter = lazy(() => import("./components/layout/SiteFooter"));
 const FinalCTASection = lazy(() => import("./components/FinalCTASection").then(m => ({ default: m.FinalCTASection })));
 import ScrollToTop from "./components/ScrollToTop";
-import { WaveBackground } from "./components/WaveBackground";
+const WaveBackground = lazy(() => import("./components/WaveBackground").then(m => ({ default: m.WaveBackground })));
 
 import { useState, useEffect, lazy, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { supporticonUploads } from "@/assets/supporticon-uploads";
 import supporticonLogoIcon from "@/assets/supporticon_logo.png";
 
 const queryClient = new QueryClient();
 
 function App() {
+  const isMobile = useIsMobile();
 
   return (
     <ErrorBoundary>
@@ -83,7 +85,11 @@ function App() {
             <div
               className={`relative min-h-screen overflow-x-hidden`}
             >
-              <WaveBackground />
+              {!isMobile && (
+                <Suspense fallback={null}>
+                  <WaveBackground />
+                </Suspense>
+              )}
               <SiteHeader />
               {/* Spacer so fixed navbar doesn't overlap page content */}
               <div className="h-[64px]" />
