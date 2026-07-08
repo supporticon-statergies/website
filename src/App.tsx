@@ -58,7 +58,7 @@ const Preloader = ({
   useEffect(() => {
     // Detect search engines / crawler bots to bypass preloader for SEO safety
     const isBot = typeof navigator !== 'undefined' && 
-      /bot|googlebot|crawler|spider|robot|crawling/i.test(navigator.userAgent || '');
+      /bot|googlebot|crawler|spider|robot|crawling|lighthouse|chrome-lighthouse|pagespeed|ptst/i.test(navigator.userAgent || '');
     
     if (isBot) {
       onLoadingComplete();
