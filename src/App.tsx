@@ -9,7 +9,17 @@ import { HelmetProvider } from "react-helmet-async";
 class ErrorBoundary extends Component<{ children: ReactNode }, { error: Error | null }> {
   state = { error: null };
   static getDerivedStateFromError(error: Error) { return { error }; }
-  componentDidCatch(error: Error, info: ErrorInfo) { console.error("App crash:", error, info); }
+  componentDidCatch(error: Error, info: ErrorInfo) { 
+    if (error.message.includes("Failed to fetch dynamically imported module")) {
+      const reloaded = sessionStorage.getItem("chunk_reloaded");
+      if (!reloaded) {
+        sessionStorage.setItem("chunk_reloaded", "true");
+        window.location.reload();
+        return;
+      }
+    }
+    console.error("App crash:", error, info); 
+  }
   render() {
     if (this.state.error) {
       const err = this.state.error as Error;
@@ -17,6 +27,12 @@ class ErrorBoundary extends Component<{ children: ReactNode }, { error: Error | 
         <div style={{ padding: "2rem", fontFamily: "monospace", color: "#dc2626", background: "#fff" }}>
           <h2 style={{ fontSize: "1.25rem", marginBottom: "0.5rem" }}>App Error (check console for details)</h2>
           <pre style={{ whiteSpace: "pre-wrap", fontSize: "0.8rem", color: "#374151" }}>{err.message}{"\n\n"}{err.stack}</pre>
+          <button 
+            onClick={() => { sessionStorage.removeItem("chunk_reloaded"); window.location.reload(); }}
+            style={{ marginTop: "1rem", padding: "0.5rem 1rem", background: "#059669", color: "#fff", border: "none", borderRadius: "0.25rem", cursor: "pointer" }}
+          >
+            Force Reload
+          </button>
         </div>
       );
     }
