@@ -19,6 +19,19 @@ export default defineConfig(({ mode }) => ({
   build: {
     outDir: 'dist',
     sourcemap: false,
+    rollupOptions: {
+      output: {
+        manualChunks: (id) => {
+          if (id.includes('node_modules')) {
+            if (id.includes('framer-motion')) return 'vendor-framer';
+            if (id.includes('@radix-ui')) return 'vendor-radix';
+            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router')) return 'vendor-react';
+            if (id.includes('@dotlottie')) return 'vendor-lottie';
+            return 'vendor';
+          }
+        }
+      }
+    }
   },
   plugins: [
     react(),

@@ -4,6 +4,7 @@
  */
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 import {
   Search,
   FileText,
@@ -65,6 +66,7 @@ const RESULTS = [
 export function AISearchVisual() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
+  const isMobile = useIsMobile();
 
   const [queryIdx, setQueryIdx] = useState(0);
   const [typed, setTyped]       = useState("");
@@ -74,6 +76,14 @@ export function AISearchVisual() {
   useEffect(() => {
     if (!inView) return;
     const query = QUERIES[queryIdx];
+
+    // On mobile, skip the typing animation and just show results to save CPU
+    if (isMobile) {
+      setTyped(query);
+      setShowResults(true);
+      return;
+    }
+
     let charIdx = 0;
     setTyped("");
     setShowResults(false);
@@ -90,7 +100,7 @@ export function AISearchVisual() {
     }, 42);
 
     return () => clearInterval(iv);
-  }, [inView, queryIdx]);
+  }, [inView, queryIdx, isMobile]);
 
   return (
     <motion.div
@@ -118,8 +128,8 @@ export function AISearchVisual() {
           </span>
           <div className="ml-auto flex items-center gap-1.5">
             <motion.div
-              animate={{ opacity: [1, 0.3, 1] }}
-              transition={{ duration: 1.6, repeat: Infinity }}
+              animate={isMobile ? { opacity: 1 } : { opacity: [1, 0.3, 1] }}
+              transition={isMobile ? {} : { duration: 1.6, repeat: Infinity }}
               className="w-2 h-2 rounded-full bg-emerald-400"
             />
             <span className="text-[10px] text-emerald-500 font-bold">LIVE</span>
@@ -133,8 +143,8 @@ export function AISearchVisual() {
             <span className="text-sm text-slate-700 font-medium flex-1 min-h-[1.25rem] leading-snug">
               {typed}
               <motion.span
-                animate={{ opacity: [1, 0, 1] }}
-                transition={{ duration: 0.9, repeat: Infinity }}
+                animate={isMobile ? { opacity: 1 } : { opacity: [1, 0, 1] }}
+                transition={isMobile ? {} : { duration: 0.9, repeat: Infinity }}
                 className="inline-block w-0.5 h-[13px] bg-emerald-500 ml-0.5 align-middle"
               />
             </span>

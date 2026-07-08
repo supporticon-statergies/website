@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { motion, useTransform, useScroll } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { useIsMobile } from "@/hooks/use-mobile";
 import {
   ArrowRight,
   CheckCircle,
@@ -27,6 +28,7 @@ export const HeroSection = () => {
   const navigate = useNavigate();
   const [showCXForm, setShowCXForm] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+  const isMobile = useIsMobile();
 
   const { scrollY } = useScroll();
   const bgY = useTransform(scrollY, [0, 600], [0, -22]);
@@ -40,8 +42,10 @@ export const HeroSection = () => {
       <motion.div style={{ y: bgY }} className="absolute inset-0 -z-10 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-br from-white via-slate-50/90 to-emerald-50/70" />
 
-        {/* Top-right glow */}
-        <motion.div
+        {!isMobile && (
+          <>
+            {/* Top-right glow */}
+            <motion.div
           animate={{ scale: [1, 1.12, 1], opacity: [0.45, 0.72, 0.45] }}
           transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
           className="absolute -top-20 -right-20 w-[600px] h-[600px] rounded-full"
@@ -86,8 +90,10 @@ export const HeroSection = () => {
               ease: "easeInOut",
               delay: p.delay,
             }}
-          />
-        ))}
+            />
+          ))}
+          </>
+        )}
       </motion.div>
 
       {/* ── Centered content ─────────────────────────────────────── */}
