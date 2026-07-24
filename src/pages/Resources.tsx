@@ -326,7 +326,7 @@ const Resources = () => {
         </div>
 
         {/* Filter tabs container - The "Whole Big Oval Shape" */}
-        <div className="relative mb-16 max-w-fit mx-auto bg-white/70 backdrop-blur-xl rounded-full border border-green-100 p-1.5 shadow-xl flex items-center gap-1">
+        <div className="relative mb-16 max-w-full sm:max-w-fit mx-auto bg-white/70 backdrop-blur-xl rounded-2xl sm:rounded-full border border-green-100 p-1.5 shadow-xl flex flex-wrap justify-center items-center gap-1">
           {categories.map((cat) => (
             <button
               key={cat.id}

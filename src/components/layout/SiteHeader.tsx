@@ -391,7 +391,7 @@ export const SiteHeader = () => {
         <div
           className={`mx-auto transition-all duration-500 ease-out relative ${
             scrolled
-              ? "max-w-5xl mt-3 rounded-2xl bg-white/80 backdrop-blur-2xl shadow-[0_4px_32px_rgba(0,0,0,0.08)] border border-white/60"
+              ? "max-w-[calc(100%-1rem)] lg:max-w-5xl mt-3 rounded-2xl bg-white/80 backdrop-blur-2xl shadow-[0_4px_32px_rgba(0,0,0,0.08)] border border-white/60"
               : "max-w-7xl mt-0 rounded-none bg-transparent backdrop-blur-none shadow-none border-transparent"
           }`}
         >
