@@ -128,7 +128,23 @@
     roundedCorners: true
   };
 </script>
-<script src="https://api-helpdude.supporticon.com/widget/helpdude-voice.js" async></script>
+<script>
+  (function() {
+    function loadVoiceWidget() {
+      if (document.getElementById('helpdude-voice-script')) return;
+      var s = document.createElement('script');
+      s.id = 'helpdude-voice-script';
+      s.src = 'https://api-helpdude.supporticon.com/widget/helpdude-voice.js';
+      s.async = true;
+      (document.body || document.head).appendChild(s);
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', loadVoiceWidget);
+    } else {
+      loadVoiceWidget();
+    }
+  })();
+</script>
    
     <!-- Single Page Apps for GitHub Pages -->
     <script type="text/javascript">
