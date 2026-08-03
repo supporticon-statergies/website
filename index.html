@@ -116,24 +116,19 @@
       })();
     </script>
 
-    <!-- HelpDude Chat Widget -->
-    <script>
-      window.HelpDudeConfig = {
-        widgetId: "supporticon",
-        apiBase: "https://api-helpdude.supporticon.com",
-        primaryColor: "#22c55e",
-        position: "right",
-        fontFamily: "Outfit",
-        welcomeTitle: "HelpDude Support",
-        welcomeText: "Hi there! Welcome to support. How can we help you today?",
-        launcherIcon: "sparkle",
-        bottomSpacing: 37,
-        roundedCorners: true,
-        suggestedQuestions: ["pricing", "product details", "features"]
-      };
-    </script>
-    <script src="https://api-helpdude.supporticon.com/widget/helpdude-bot.js" async></script>
-
+   add this script file in the in the index.html
+"<!-- HelpDude Voice Live Agent -->
+<script>
+  window.HelpDudeVoiceConfig = {
+    widgetId: "supporticon",
+    apiBase: "https://api-helpdude.supporticon.com",
+    primaryColor: "#0ea5e9",
+    position: "right",
+    bottomSpacing: 24,
+    roundedCorners: true
+  };
+</script>
+<script src="https://api-helpdude.supporticon.com/widget/helpdude-voice.js" async></script>" 
    
     <!-- Single Page Apps for GitHub Pages -->
     <script type="text/javascript">
