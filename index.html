@@ -1,170 +1,154 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VXH752WZ65"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
 
-      gtag('config', 'G-VXH752WZ65');
-    </script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VXH752WZ65"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    gtag('config', 'G-VXH752WZ65');
+  </script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+    rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript>
     <link
-      rel="preload"
-      as="style"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media='all'"
-    />
-    <noscript>
-      <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
-        rel="stylesheet"
-      />
-    </noscript>
-    <title>SupportIcon, AI for Support Engineers</title>
-    <meta
-      name="description"
-      content="AI powered tools for support engineers. Help Dude unifies search across Confluence, Jira, Freshdesk, and more."
-    />
-    <meta name="author" content="Help Dude" />
+      rel="stylesheet" />
+  </noscript>
+  <title>SupportIcon, AI for Support Engineers</title>
+  <meta name="description"
+    content="AI powered tools for support engineers. Help Dude unifies search across Confluence, Jira, Freshdesk, and more." />
+  <meta name="author" content="Help Dude" />
 
-    <meta property="og:title" content="SupportIcon, AI for Support Engineers" />
-    <meta
-      property="og:description"
-      content="AI powered tools that unify search across Confluence, Jira, Freshdesk, and more."
-    />
-    <meta property="og:type" content="website" />
-    <meta
-      property="og:image"
-      content="supporticon-uploads/8a9c0dca-e50e-459a-af4-1e08634ad78b.png"
-    />
+  <meta property="og:title" content="SupportIcon, AI for Support Engineers" />
+  <meta property="og:description"
+    content="AI powered tools that unify search across Confluence, Jira, Freshdesk, and more." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="supporticon-uploads/8a9c0dca-e50e-459a-af4-1e08634ad78b.png" />
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@lovable_dev" />
-    <meta
-      name="twitter:image"
-      content="supporticon-uploads/8a9c0dca-e50e-459a-af4-1e08634ad78b.png"
-    />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@lovable_dev" />
+  <meta name="twitter:image" content="supporticon-uploads/8a9c0dca-e50e-459a-af4-1e08634ad78b.png" />
 
-    <meta
-      name="google-site-verification"
-      content="-PAq6DdgMAyjfFhvrTlzpu9E2Pr4WqLzEHPQ-bB5QX4"
-    />
+  <meta name="google-site-verification" content="-PAq6DdgMAyjfFhvrTlzpu9E2Pr4WqLzEHPQ-bB5QX4" />
 
-    <!-- Defer-load Tracking Scripts until User Interaction or Timeout -->
-    <script type="text/javascript">
-      (function() {
-        var scriptsLoaded = false;
-        
-        function loadTrackingScripts() {
-          if (scriptsLoaded) return;
-          scriptsLoaded = true;
+  <!-- Defer-load Tracking Scripts until User Interaction or Timeout -->
+  <script type="text/javascript">
+    (function () {
+      var scriptsLoaded = false;
 
-          // 1. Load Leadsy / Instantly AI
-          var leadsyScript = document.createElement('script');
-          leadsyScript.id = 'vtag-ai-js';
-          leadsyScript.src = 'https://r2.leadsy.ai/tag.js';
-          leadsyScript.async = true;
-          leadsyScript.setAttribute('data-pid', 'qqzNfbthUwHyUENK');
-          leadsyScript.setAttribute('data-version', '062024');
-          document.head.appendChild(leadsyScript);
+      function loadTrackingScripts() {
+        if (scriptsLoaded) return;
+        scriptsLoaded = true;
 
-          // 2. Load Leadfeeder
-          window.ldfdr = window.ldfdr || function () {
-            (ldfdr._q = ldfdr._q || []).push([].slice.call(arguments));
-          };
-          var leadfeederScript = document.createElement('script');
-          leadfeederScript.src = 'https://sc.lfeeder.com/lftracker_v1_p1e024BXgEW8GB6d.js';
-          leadfeederScript.async = true;
-          document.head.appendChild(leadfeederScript);
+        // 1. Load Leadsy / Instantly AI
+        var leadsyScript = document.createElement('script');
+        leadsyScript.id = 'vtag-ai-js';
+        leadsyScript.src = 'https://r2.leadsy.ai/tag.js';
+        leadsyScript.async = true;
+        leadsyScript.setAttribute('data-pid', 'qqzNfbthUwHyUENK');
+        leadsyScript.setAttribute('data-version', '062024');
+        document.head.appendChild(leadsyScript);
 
-          cleanupListeners();
-        }
+        // 2. Load Leadfeeder
+        window.ldfdr = window.ldfdr || function () {
+          (ldfdr._q = ldfdr._q || []).push([].slice.call(arguments));
+        };
+        var leadfeederScript = document.createElement('script');
+        leadfeederScript.src = 'https://sc.lfeeder.com/lftracker_v1_p1e024BXgEW8GB6d.js';
+        leadfeederScript.async = true;
+        document.head.appendChild(leadfeederScript);
 
-        var events = ['mousemove', 'touchstart', 'mousedown', 'keydown', 'scroll'];
-        
-        function cleanupListeners() {
-          events.forEach(function(event) {
-            window.removeEventListener(event, loadTrackingScripts, { passive: true });
-          });
-        }
+        cleanupListeners();
+      }
 
-        // Listen for user interaction
-        events.forEach(function(event) {
-          window.addEventListener(event, loadTrackingScripts, { passive: true });
+      var events = ['mousemove', 'touchstart', 'mousedown', 'keydown', 'scroll'];
+
+      function cleanupListeners() {
+        events.forEach(function (event) {
+          window.removeEventListener(event, loadTrackingScripts, { passive: true });
         });
+      }
 
-        // Fallback: load after 4s on desktop, 8.5s on mobile if no interaction occurs
-        window.addEventListener('load', function() {
-          var isMobile = window.innerWidth < 768;
-          setTimeout(loadTrackingScripts, isMobile ? 8500 : 4000);
-        });
-      })();
-    </script>
+      // Listen for user interaction
+      events.forEach(function (event) {
+        window.addEventListener(event, loadTrackingScripts, { passive: true });
+      });
 
-<!-- HelpDude Voice Live Agent -->
-<script>
-  window.HelpDudeVoiceConfig = {
-    widgetId: "supporticon",
-    apiBase: "https://api-helpdude.supporticon.com",
-    primaryColor: "#22c55e",
-    position: "right",
-    bottomSpacing: 24,
-    roundedCorners: true
-  };
-</script>
-<script src="https://api-helpdude.supporticon.com/widget/helpdude-voice.js" async></script>
+      // Fallback: load after 4s on desktop, 8.5s on mobile if no interaction occurs
+      window.addEventListener('load', function () {
+        var isMobile = window.innerWidth < 768;
+        setTimeout(loadTrackingScripts, isMobile ? 8500 : 4000);
+      });
+    })();
+  </script>
 
-    <script type="text/javascript">
-      // Single Page Apps for GitHub Pages
-      // MIT License
-      // https://github.com/rafgraph/spa-github-pages
-      // This script checks to see if a redirect is present at the query string,
-      // converts it back into the correct url and adds it to the
-      // browser's history using window.history.replaceState(...),
-      // which won't cause the browser to attempt to load the new url.
-      // When the single page app is loaded further down in this file,
-      // the correct url will be waiting in the browser's history for
-      // the single page app to route accordingly.
-      (function (l) {
-        if (l.search[1] === "/") {
-          var decoded = l.search
-            .slice(1)
-            .split("&")
-            .map(function (s) {
-              return s.replace(/~and~/g, "&");
-            })
-            .join("?");
-          var basePath = l.pathname;
-          if (basePath.slice(-1) === "/") {
-            basePath = basePath.slice(0, -1);
-          }
-          window.history.replaceState(
-            null,
-            null,
-            basePath + decoded + l.hash,
-          );
+  <!-- HelpDude Voice Live Agent -->
+  <!-- HelpDude Voice Live Agent -->
+  <script>
+    window.HelpDudeVoiceConfig = {
+      widgetId: "supporticon",
+      apiBase: "https://api-helpdude.supporticon.com",
+      primaryColor: "#22c55e",
+      position: "right",
+      bottomSpacing: 24,
+      roundedCorners: true
+    };
+  </script>
+  <script src="https://api-helpdude.supporticon.com/widget/helpdude-voice.js" async></script>
+
+  <script type="text/javascript">
+    // Single Page Apps for GitHub Pages
+    // MIT License
+    // https://github.com/rafgraph/spa-github-pages
+    // This script checks to see if a redirect is present at the query string,
+    // converts it back into the correct url and adds it to the
+    // browser's history using window.history.replaceState(...),
+    // which won't cause the browser to attempt to load the new url.
+    // When the single page app is loaded further down in this file,
+    // the correct url will be waiting in the browser's history for
+    // the single page app to route accordingly.
+    (function (l) {
+      if (l.search[1] === "/") {
+        var decoded = l.search
+          .slice(1)
+          .split("&")
+          .map(function (s) {
+            return s.replace(/~and~/g, "&");
+          })
+          .join("?");
+        var basePath = l.pathname;
+        if (basePath.slice(-1) === "/") {
+          basePath = basePath.slice(0, -1);
         }
-      })(window.location);
-    </script>
+        window.history.replaceState(
+          null,
+          null,
+          basePath + decoded + l.hash,
+        );
+      }
+    })(window.location);
+  </script>
 
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
 </html>
