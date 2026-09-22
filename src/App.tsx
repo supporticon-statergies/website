@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 
 class ErrorBoundary extends Component<{ children: ReactNode }, { error: Error | null }> {
@@ -43,6 +43,9 @@ const Index = lazy(() => import("./pages/Index"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const About = lazy(() => import("./pages/About"));
 const Product = lazy(() => import("./pages/Product"));
+const ProductFreshdesk = lazy(() => import("./pages/ProductFreshdesk"));
+const ProductStandalone = lazy(() => import("./pages/ProductStandalone"));
+const ProductManufacturing = lazy(() => import("./pages/ProductManufacturing"));
 const Features = lazy(() => import("./pages/Features"));
 const Resources = lazy(() => import("./pages/Resources"));
 const Events = lazy(() => import("./pages/Events"));
@@ -50,11 +53,12 @@ const EBooks = lazy(() => import("./pages/EBooks"));
 const Privacy = lazy(() => import("./pages/Privacy"));
 const ResourceDetail = lazy(() => import("./pages/ResourceDetail"));
 const CaseStudyDetail = lazy(() => import("./pages/CaseStudyDetail"));
-const Pricing = lazy(() => import("./pages/Pricing"));
+const FAQ = lazy(() => import("./pages/FAQ"));
 const Terms = lazy(() => import("./pages/Terms"));
 const Legal = lazy(() => import("./pages/Legal"));
 import SiteHeader from "./components/layout/SiteHeader";
 const SiteFooter = lazy(() => import("./components/layout/SiteFooter"));
+
 const FinalCTASection = lazy(() => import("./components/FinalCTASection").then(m => ({ default: m.FinalCTASection })));
 import ScrollToTop from "./components/ScrollToTop";
 const WaveBackground = lazy(() => import("./components/WaveBackground").then(m => ({ default: m.WaveBackground })));
@@ -143,6 +147,9 @@ const Preloader = ({
   );
 };
 
+import { AuthProvider } from "@/context/AuthContext";
+import { AuthModal } from "@/components/AuthModal";
+
 function App() {
   const isMobile = useIsMobile();
   const [isLoading, setIsLoading] = useState(true);
@@ -151,9 +158,11 @@ function App() {
     <ErrorBoundary>
     <QueryClientProvider client={queryClient}>
       <HelmetProvider>
+        <AuthProvider>
         <TooltipProvider>
           <Toaster />
           <Sonner />
+          <AuthModal />
 
           <AnimatePresence>
             {isLoading && (
@@ -165,6 +174,7 @@ function App() {
             basename={import.meta.env.BASE_URL.replace(/\/$/, "") || undefined}
           >
             <ScrollToTop />
+
             <div
               className={`relative min-h-screen overflow-x-hidden ${isLoading ? "h-screen overflow-hidden" : ""}`}
             >
@@ -183,7 +193,13 @@ function App() {
                   <Route path="/about" element={<About />} />
                   <Route path="/features" element={<Features />} />
                   <Route path="/product" element={<Product />} />
-                  <Route path="/pricing" element={<Pricing />} />
+                  <Route path="/product/freshdesk" element={<ProductFreshdesk />} />
+                  <Route path="/product/freshdesk/pricing" element={<ProductFreshdesk initialTab="pricing" />} />
+                  <Route path="/product/standalone" element={<ProductStandalone />} />
+                  <Route path="/product/standalone/pricing" element={<ProductStandalone initialTab="pricing" />} />
+                  <Route path="/product/manufacturing" element={<ProductManufacturing />} />
+                  <Route path="/product/manufacturing/pricing" element={<ProductManufacturing initialTab="pricing" />} />
+                  <Route path="/faq" element={<FAQ />} />
                   <Route path="/resources" element={<Resources />} />
                   <Route path="/events" element={<Events />} />
                   <Route path="/sources" element={<EBooks />} />
@@ -206,6 +222,7 @@ function App() {
             </div>
           </BrowserRouter>
         </TooltipProvider>
+        </AuthProvider>
       </HelmetProvider>
     </QueryClientProvider>
     </ErrorBoundary>

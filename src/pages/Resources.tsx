@@ -382,14 +382,16 @@ const Resources = () => {
             <div className="bg-white/70 backdrop-blur-md rounded-3xl border border-green-100 shadow-xl overflow-hidden">
               <div className="relative aspect-video bg-gradient-to-br from-slate-900 to-slate-800">
                 <video
-                  className="w-full h-full object-contain bg-white"
+                  className="w-full h-full object-contain bg-slate-950"
                   controls
                   playsInline
-                  poster={videoThumbnail}
+                  autoPlay
+                  loop
+                  muted
                   controlsList="nodownload"
                 >
                   <source
-                    src={productDemoVideo}
+                    src="/User%20Interface.mp4"
                     type="video/mp4"
                   />
                   Your browser does not support the video tag.

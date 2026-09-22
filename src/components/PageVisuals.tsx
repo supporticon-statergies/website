@@ -20,6 +20,7 @@ import {
   BookOpen,
   GraduationCap,
   Video,
+  Headphones,
 } from "lucide-react";
 import supporticonLogo from "@/assets/supporticon_logo.png";
 
@@ -105,9 +106,10 @@ export function FeatureAIVisual() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   const layers = [
-    { Icon: Sparkles,  label: "Auto Pilot",  color: "from-emerald-500 to-teal-600",  tint: "emerald" as const },
-    { Icon: Brain,     label: "Co Pilot",    color: "from-primary to-primary",   tint: "blue"    as const },
-    { Icon: Workflow,  label: "SME Console", color: "from-violet-500 to-purple-600", tint: "white"   as const },
+    { Icon: Sparkles,   label: "Auto Pilot",  color: "from-emerald-500 to-teal-600",  tint: "emerald" as const },
+    { Icon: Headphones, label: "Live Agent",  color: "from-emerald-400 to-green-600", tint: "emerald" as const },
+    { Icon: Brain,      label: "Co Pilot",    color: "from-primary to-primary",      tint: "blue"    as const },
+    { Icon: Workflow,   label: "SME Console", color: "from-violet-500 to-purple-600", tint: "white"   as const },
   ];
 
   return (
@@ -128,7 +130,7 @@ export function FeatureAIVisual() {
         }}
       />
 
-      <DarkEnvironment minHeight={460}>
+      <DarkEnvironment minHeight={480}>
         {/* Central AI core */}
         <div
           className="absolute"
@@ -164,9 +166,10 @@ export function FeatureAIVisual() {
           {layers.map((L, i) => {
             const Icon = L.Icon;
             const positions = [
-              { top: "10%",  left: "8%"   },
-              { top: "44%",  right: "8%"  },
-              { bottom: "10%", left: "12%" },
+              { top: "8%",    left: "6%"   },
+              { top: "10%",   right: "6%"  },
+              { top: "44%",   right: "6%"  },
+              { bottom: "8%", left: "6%"   },
             ][i];
             return (
               <motion.div
@@ -181,7 +184,7 @@ export function FeatureAIVisual() {
                   animate={{ y: [0, -10, 0] }}
                   transition={{ duration: 5 + i * 0.8, repeat: Infinity, ease: "easeInOut", delay: i * 0.5 }}
                 >
-                  <GlassPanel tint={L.tint} className="w-[170px]">
+                  <GlassPanel tint={L.tint} className="w-[165px]">
                     <div className="p-3.5">
                       <div className="flex items-center gap-2.5 mb-2.5">
                         <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${L.color} flex items-center justify-center shadow-lg`}>
@@ -213,8 +216,8 @@ export function FeatureAIVisual() {
 
         {/* Floating micro chips */}
         {[
-          { text: "30s answer time",  top: "22%", right: "12%", tint: "amber"   as const, Icon: Zap         },
-          { text: "Grounded in KB",   top: "62%", left:  "10%", tint: "emerald" as const, Icon: CheckCircle },
+          { text: "30s answer time",  top: "76%", right: "10%", tint: "amber"   as const, Icon: Zap         },
+          { text: "Grounded in KB",   top: "48%", left:  "6%",  tint: "emerald" as const, Icon: CheckCircle },
         ].map((c, i) => (
           <motion.div
             key={c.text}

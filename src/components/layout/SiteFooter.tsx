@@ -2,28 +2,77 @@ import { Link } from "react-router-dom";
 import { supporticonUploads } from "@/assets/supporticon-uploads";
 import { Mail, MapPin, Phone, Linkedin, Instagram, ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
+
+declare global {
+  interface Window {
+    VANTA: any;
+  }
+}
 
 const quickLinks = [
   { name: "Home", path: "/" },
   { name: "Features", path: "/features" },
   { name: "Product", path: "/product" },
   { name: "Resources", path: "/resources" },
-  { name: "Pricing", path: "/pricing" },
+  { name: "FAQ's", path: "/faq" },
   { name: "About", path: "/about" },
 ];
 
 export const SiteFooter = () => {
+  const vantaRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    let vantaEffect: any = null;
+    
+    const initVanta = () => {
+      if (window.VANTA && window.VANTA.DOTS && vantaRef.current && !vantaEffect) {
+        vantaEffect = window.VANTA.DOTS({
+          el: vantaRef.current,
+          mouseControls: true,
+          touchControls: true,
+          gyroControls: false,
+          minHeight: 200.00,
+          minWidth: 200.00,
+          scale: 1.00,
+          scaleMobile: 1.00,
+          // White background with pistachio/emerald green dots
+          backgroundColor: 0x060905,
+          color: 0x6ee7b7,      // emerald-300 (light pistachio)
+          color2: 0xa7f3d0,     // emerald-200 (even lighter pistachio)
+          size: 3.00,
+          spacing: 35.00,
+        });
+      }
+    };
+
+    // Try immediately
+    initVanta();
+
+    // Also retry after a short delay in case scripts are still loading
+    const timeout = setTimeout(initVanta, 500);
+
+    return () => {
+      clearTimeout(timeout);
+      if (vantaEffect && vantaEffect.destroy) {
+        vantaEffect.destroy();
+      }
+    };
+  }, []);
+
   return (
-    <footer className="relative pt-20 pb-8 overflow-hidden bg-[#052e16]">
-      {/* Ambient glows */}
-      <div className="absolute top-0 right-[10%] w-[500px] h-[300px] bg-emerald-600/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 left-[5%] w-[400px] h-[280px] bg-green-500/8 rounded-full blur-[100px] pointer-events-none" />
+    <footer className="relative pt-20 pb-8 overflow-hidden text-white bg-[#060905]">
       {/* Top gradient fade */}
-      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-emerald-500/20 to-transparent" />
+      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-emerald-300/40 to-transparent z-10" />
+
+      {/* Vanta Background Container - full width */}
+      <div className="absolute inset-y-0 right-0 w-full pointer-events-none z-0">
+        <div ref={vantaRef as React.RefObject<HTMLDivElement>} className="w-full h-[120%] -mt-[5%]" />
+      </div>
 
       <div className="container mx-auto px-4 md:px-8 relative z-10">
 
-        {/* Main grid */}
+        {/* Main grid: Brand | Quick Links | Head Office */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-14">
 
           {/* Brand column */}
@@ -68,9 +117,9 @@ export const SiteFooter = () => {
             </div>
           </div>
 
-          {/* Quick links */}
-          <div className="flex flex-col gap-5 md:pl-8">
-            <h3 className="text-sm font-bold text-white uppercase tracking-widest">
+          {/* Quick Links */}
+          <div className="flex flex-col gap-5 -ml-8">
+            <h3 className="text-sm font-bold text-emerald-600 uppercase tracking-widest">
               Quick Links
             </h3>
             <ul className="flex flex-col gap-2.5">
@@ -78,7 +127,7 @@ export const SiteFooter = () => {
                 <li key={link.name}>
                   <Link
                     to={link.path}
-                    className="group flex items-center gap-1 text-sm text-white/75 hover:text-white transition-colors duration-200"
+                    className="group flex items-center gap-1 text-sm text-white hover:text-emerald-300 transition-colors duration-200"
                   >
                     {link.name}
                     <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-0.5 translate-x-0.5 group-hover:opacity-100 transition-all duration-200" />
@@ -88,15 +137,16 @@ export const SiteFooter = () => {
             </ul>
           </div>
 
-          {/* Contact */}
+
+          {/* Head Office */}
           <div className="flex flex-col gap-5">
-            <h3 className="text-sm font-bold text-white uppercase tracking-widest">
+            <h3 className="text-sm font-bold text-emerald-600 uppercase tracking-widest">
               Head Office
             </h3>
             <ul className="flex flex-col gap-5">
               <li className="flex gap-3 items-start">
                 <MapPin className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                <span className="text-sm text-white/75 leading-relaxed">
+                <span className="text-sm text-white leading-relaxed">
                   7-14/4, Madam Sandhu,
                   <br />
                   Tharamangalam, Salem,
@@ -108,14 +158,14 @@ export const SiteFooter = () => {
                 <Mail className="w-4 h-4 text-emerald-400 shrink-0" />
                 <a
                   href="mailto:founder@supporticon.com"
-                  className="text-sm text-white/75 hover:text-white transition-colors duration-200"
+                  className="text-sm text-white hover:text-emerald-300 transition-colors duration-200"
                 >
                   founder@supporticon.com
                 </a>
               </li>
               <li className="flex gap-3 items-center">
                 <Phone className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span className="text-sm text-white/75">+91 866 734 7679</span>
+                <span className="text-sm text-white">+91 866 734 7679</span>
               </li>
             </ul>
           </div>
@@ -132,13 +182,13 @@ export const SiteFooter = () => {
           <div className="flex items-center gap-5">
             <Link
               to="/legal"
-              className="text-xs text-white/80 hover:text-white transition-colors duration-200"
+              className="text-xs text-white/80 hover:text-emerald-300 transition-colors duration-200"
             >
               Privacy Policy
             </Link>
             <Link
               to="/legal"
-              className="text-xs text-white/80 hover:text-white transition-colors duration-200"
+              className="text-xs text-white/80 hover:text-emerald-300 transition-colors duration-200"
             >
               Terms of Service
             </Link>

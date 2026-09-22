@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
+import fs from "node:fs";
 import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
 import viteCompression from "vite-plugin-compression";
 import { componentTagger } from "lovable-tagger";
@@ -15,7 +16,11 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
+    // Serve static .html files from /public without the SPA history fallback
+    // so that iframe srcs like /HelpDude_Data_Flow.html work in dev mode.
+    fs: { strict: false },
   },
+
   build: {
     outDir: 'dist',
     sourcemap: false,
@@ -34,6 +39,25 @@ export default defineConfig(({ mode }) => ({
     }
   },
   plugins: [
+    // Serve public/*.html files directly in dev so iframes work (Vite's SPA
+    // historyApiFallback would otherwise return index.html for every .html URL).
+    {
+      name: "serve-public-html",
+      configureServer(server) {
+        server.middlewares.use((req, res, next) => {
+          const url = req.url?.split("?")[0] ?? "";
+          if (url.endsWith(".html") && url !== "/index.html") {
+            const filePath = path.resolve(__dirname, "public", url.replace(/^\//, ""));
+            if (fs.existsSync(filePath)) {
+              res.setHeader("Content-Type", "text/html; charset=utf-8");
+              fs.createReadStream(filePath).pipe(res);
+              return;
+            }
+          }
+          next();
+        });
+      },
+    },
     react(),
     ViteImageOptimizer({
       png: { quality: 80 },

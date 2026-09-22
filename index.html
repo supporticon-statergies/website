@@ -14,19 +14,22 @@
     gtag('config', 'G-VXH752WZ65');
   </script>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.dots.min.js"></script>
+
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preload" as="style"
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" />
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
     rel="stylesheet" media="print" onload="this.media='all'" />
   <noscript>
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet" />
   </noscript>
   <title>SupportIcon, AI for Support Engineers</title>
@@ -97,19 +100,7 @@
     })();
   </script>
 
-  <!-- HelpDude Voice Live Agent -->
-  <!-- HelpDude Voice Live Agent -->
-  <script>
-    window.HelpDudeVoiceConfig = {
-      widgetId: "supporticon",
-      apiBase: "https://api-helpdude.supporticon.com",
-      primaryColor: "#22c55e",
-      position: "right",
-      bottomSpacing: 24,
-      roundedCorners: true
-    };
-  </script>
-  <script src="https://api-helpdude.supporticon.com/widget/helpdude-voice.js" async></script>
+
 
   <script type="text/javascript">
     // Single Page Apps for GitHub Pages
@@ -143,6 +134,25 @@
       }
     })(window.location);
   </script>
+
+  <!-- HelpDude Chat Widget -->
+  <script>
+    window.HelpDudeConfig = {
+      widgetId: "supporticon",
+      apiBase: "https://api-helpdude.supporticon.com",
+      primaryColor: "#22c55e",
+      position: "right",
+      fontFamily: "Outfit",
+      welcomeTitle: "HelpDude Support",
+      welcomeText: "Hi there! Welcome to support. How can we help you today?",
+      launcherIcon: "chat",
+      bottomSpacing: 20,
+      roundedCorners: true,
+      suggestedQuestions: ["How can we help?", "Track my order", "Talk to support", "Pricing details"]
+    };
+  </script>
+  <script src="https://api-helpdude.supporticon.com/widget/helpdude-bot.js" async></script>
+
 
 </head>
 

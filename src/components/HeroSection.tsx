@@ -8,9 +8,11 @@ import {
   Clock,
   Plug,
   Shield,
+  Sparkles,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { CXLeadersForm } from "@/components/CXLeadersForm";
+import { useAuth } from "@/context/AuthContext";
 
 /* ─── Background particles ─── */
 const PARTICLES = [
@@ -26,6 +28,7 @@ const PARTICLES = [
 
 export const HeroSection = () => {
   const navigate = useNavigate();
+  const { openAuthModal } = useAuth();
   const [showCXForm, setShowCXForm] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const isMobile = useIsMobile();
@@ -101,23 +104,22 @@ export const HeroSection = () => {
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
 
 
-
           {/* Headline */}
           <div>
             <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.06] text-slate-900 mb-6">
               <span className="bg-gradient-to-r from-green-500 via-emerald-500 to-teal-600 bg-clip-text text-transparent">
-                Who supports
+                Your Customers Aren't Complaining
               </span>
-              <span className="block">the support team?</span>
+              <span className="block">They're Leaving</span>
             </h1>
           </div>
 
           {/* Subtitle */}
           <div>
             <p className="text-lg md:text-xl text-slate-600 leading-relaxed max-w-2xl mb-10">
-              Supporticon gives your support engineers unified knowledge search,
-              one-click AI email drafting, and intelligent escalation routing,
-              so every ticket is resolved faster and every customer stays longer.
+             94% of unhappy customers never file a ticket — they just don't renew.
+             HelpDude gives customers effortless help from AI or a human in their
+             own language, and gives your support team the speed to catch churn before it happens.
             </p>
           </div>
 
@@ -132,16 +134,10 @@ export const HeroSection = () => {
                 <Button
                   size="lg"
                   variant="hero"
-                  className="rounded-full px-9 py-6 text-base font-bold shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 w-full sm:w-auto"
-                  onClick={() =>
-                    window.open(
-                      "https://zbooking.in/PoPU8",
-                      "_blank",
-                      "noopener,noreferrer",
-                    )
-                  }
+                  className="rounded-full px-9 py-6 text-base font-bold btn-glow w-full sm:w-auto"
+                  onClick={() => window.open('https://helpdude-ai.supporticon.com/', '_blank')}
                 >
-                  Get Started
+                  Get Started 
                   <ArrowRight className="w-4 h-4 ml-1" />
                 </Button>
               </motion.div>
@@ -156,8 +152,7 @@ export const HeroSection = () => {
                   variant="outline"
                   className="rounded-full px-9 py-6 text-base font-semibold border-slate-200 bg-white/80 hover:bg-white text-slate-800 w-full sm:w-auto"
                   onClick={() => navigate("/product")}
-                >
-                  Watch How It Works
+                >See How It Works 
                 </Button>
               </motion.div>
             </div>
@@ -193,15 +188,19 @@ export const HeroSection = () => {
               <div className="w-full h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent my-5" />
 
               {/* Row 2 — proof metrics */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 w-full">
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-3 w-full">
                 {[
                   {
+                    stat: "30%",
+                    desc: "Silent churn reduced in the first month",
+                  },
+                  {
                     stat: "<30s",
-                    desc: "AI knowledge search & email draft generation",
+                    desc: "Average resolution time on Autopilot",
                   },
                   {
                     stat: "15 min",
-                    desc: "From sign-up to your first customer insight",
+                    desc: "From signup to your first automated resolution",
                   },
                   {
                     stat: "Day 1",
@@ -209,7 +208,7 @@ export const HeroSection = () => {
                   },
                   {
                     stat: "Zero",
-                    desc: "Third-party data sharing.",
+                    desc: "Third-party data sharing, every language, every channel.",
                   },
                 ].map((item) => (
                   <div

@@ -20,10 +20,15 @@ import {
   Info,
   ChevronDown,
   Search,
+  Wrench,
+  LogIn,
+  LogOut,
+  User as UserIcon,
 } from "lucide-react";
 import { supporticonUploads } from "@/assets/supporticon-uploads";
 import supporticonLogoIcon from "@/assets/supporticon_logo.png";
 import { motion, AnimatePresence } from "framer-motion";
+import { useAuth } from "@/context/AuthContext";
 
 const nav = [
   { to: "/", label: "Home", icon: Home },
@@ -34,10 +39,22 @@ const nav = [
     icon: Package,
     subItems: [
       {
-        to: "/product",
-        label: "HelpDude",
-        desc: "AI powered helpdesk platform",
+        to: "/product?tab=standalone",
+        label: "HelpDude Platform",
+        desc: "Standalone AI ticketing platform",
         icon: Package,
+      },
+      {
+        to: "/product?tab=freshdesk",
+        label: "HelpDude for Freshdesk",
+        desc: "Marketplace plugin for Freshdesk",
+        icon: Zap,
+      },
+      {
+        to: "/product?tab=manufacturing",
+        label: "Manufacturing & Hardware",
+        desc: "Voice AI & technical schematics search",
+        icon: Wrench,
       },
     ],
   },
@@ -78,11 +95,12 @@ const nav = [
       },
     ],
   },
-  { to: "/pricing", label: "Pricing", icon: CreditCard },
+  { to: "/faq", label: "FAQ", icon: CreditCard },
   { to: "/about", label: "About", icon: Info },
 ];
 
 export const SiteHeader = () => {
+  const { user, isLoggedIn, openAuthModal, logout } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [demoDialogOpen, setDemoDialogOpen] = useState(false);
   const [hoveredPath, setHoveredPath] = useState<string | null>(null);
@@ -183,60 +201,75 @@ export const SiteHeader = () => {
 
   const renderProductMegaMenu = () => {
     return (
-      <div className="grid grid-cols-12 gap-8 p-8 text-left">
-        {/* Left Side: Showcase card for HelpDude */}
-        <div className="col-span-8 flex flex-col justify-center">
+      <div className="p-8 text-left">
+        <p className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-slate-600 mb-6">
+          Three Deployment Options
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           <Link
-            to="/product?tab=standalone"
+            to="/product/standalone"
             onClick={() => setActiveMenu(null)}
-            className="group flex items-start gap-5 p-6 rounded-2xl transition-all duration-200 hover:bg-slate-50 hover:scale-[1.01]"
-          >
-            <div className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0 bg-emerald-50 text-emerald-500 transition-transform duration-300 group-hover:scale-110">
-              <Package className="w-6 h-6" />
-            </div>
-            <div>
-              <p className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-slate-600">
-                HelpDude Platform
-              </p>
-              <h3 className="text-lg font-bold text-slate-900 mt-1 mb-2 group-hover:text-primary transition-colors">
-                HelpDude
-              </h3>
-              <p className="text-[13px] text-slate-600 leading-relaxed mb-4 max-w-lg">
-                Our flagship AI powered customer support platform, purpose-built for modern SaaS teams. It integrates unified knowledge search, AI-generated email responses, and automatic escalation routing.
-              </p>
-              <span className="inline-flex items-center gap-1.5 text-xs font-bold text-primary hover:underline">
-                Explore HelpDude Platform
-                <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
-              </span>
-            </div>
-          </Link>
-        </div>
-
-        {/* Right Side: Featured content */}
-        <div className="col-span-4 border-l border-slate-100/80 pl-8">
-          <Link
-            to="/product?tab=freshdesk"
-            onClick={() => setActiveMenu(null)}
-            className="group flex flex-col justify-between h-full p-6 rounded-2xl transition-all duration-200 hover:bg-slate-50 hover:scale-[1.01]"
+            className="group flex flex-col justify-between p-6 rounded-2xl border border-slate-100 bg-slate-50/50 hover:bg-slate-50 hover:border-slate-200 transition-all duration-200"
           >
             <div>
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-emerald-500/20 bg-emerald-500/5 text-emerald-600 text-[10px] font-bold tracking-wider uppercase mb-4">
-                <Sparkles className="w-3 h-3 animate-pulse" />
-                Now Live
+              <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110">
+                <Package className="w-5 h-5" />
               </div>
               <h4 className="text-base font-bold text-slate-900 mb-2 leading-snug group-hover:text-primary transition-colors">
+                HelpDude Platform
+              </h4>
+              <p className="text-[12px] text-slate-600 leading-relaxed mb-4">
+                Standalone AI powered support ticketing platform for modern teams.
+              </p>
+            </div>
+            <span className="inline-flex items-center gap-1.5 text-xs font-bold text-primary group-hover:underline">
+              Explore Platform
+              <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
+            </span>
+          </Link>
+
+          <Link
+            to="/product/freshdesk"
+            onClick={() => setActiveMenu(null)}
+            className="group flex flex-col justify-between p-6 rounded-2xl border border-emerald-500/10 bg-emerald-500/5 hover:bg-emerald-500/10 hover:border-emerald-500/20 transition-all duration-200"
+          >
+            <div>
+              <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110">
+                <Zap className="w-5 h-5" />
+              </div>
+              <h4 className="text-base font-bold text-slate-900 mb-2 leading-snug group-hover:text-emerald-700 transition-colors">
                 HelpDude for Freshdesk
               </h4>
               <p className="text-[12px] text-slate-600 leading-relaxed mb-4">
-                Our flagship plugin is now available in the Freshworks Marketplace. Start your 14-day free trial.
+                Native Freshworks Marketplace plugin for instant helpdesk integration.
               </p>
             </div>
-            <div className="p-4 bg-emerald-500/5 rounded-2xl border border-emerald-500/10 transition-colors duration-200 group-hover:bg-emerald-500/10 w-full">
-              <div className="flex items-center justify-between text-xs font-bold text-emerald-700 group-hover:underline">
-                <span>Explore to Freshdesk</span>
-                <Zap className="w-3.5 h-3.5 text-emerald-600 transition-transform duration-200 group-hover:scale-110" />
+            <span className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-700 group-hover:underline">
+              Explore Integration
+              <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
+            </span>
+          </Link>
+
+          <Link
+            to="/product/manufacturing"
+            onClick={() => setActiveMenu(null)}
+            className="group flex flex-col justify-between p-6 rounded-2xl border border-purple-500/10 bg-purple-500/5 hover:bg-purple-500/10 hover:border-purple-500/20 transition-all duration-200"
+          >
+            <div>
+              <div className="w-10 h-10 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110">
+                <Wrench className="w-5 h-5" />
               </div>
+              <h4 className="text-base font-bold text-slate-900 mb-2 leading-snug group-hover:text-purple-700 transition-colors">
+                Manufacturing & Hardware
+              </h4>
+              <p className="text-[12px] text-slate-600 leading-relaxed mb-4">
+                Tailored AI for physical products, technical schematics, and field engineers.
+              </p>
             </div>
+            <span className="inline-flex items-center gap-1.5 text-xs font-bold text-purple-700 group-hover:underline">
+              Explore Hardware AI
+              <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
+            </span>
           </Link>
         </div>
       </div>
@@ -516,25 +549,37 @@ export const SiteHeader = () => {
               </AnimatePresence>
             </Button>
 
-            <Button
-              variant="hero"
-              size="sm"
-              aria-label="Book a demo"
-              onMouseEnter={() => {
-                setActiveMenu(null);
-                activeMenuRef.current = null;
-              }}
-              className="hidden sm:inline-flex rounded-full px-5 font-bold shadow-md shadow-primary/30 hover:shadow-primary/40 hover:scale-[1.03] transition-all duration-300"
-              onClick={() =>
-                window.open(
-                  "https://zbooking.in/PoPU8",
-                  "_blank",
-                  "noopener,noreferrer",
-                )
-              }
-            >
-              Book Demo
-            </Button>
+            {isLoggedIn ? (
+              <div className="hidden sm:flex items-center gap-2 pl-2">
+                <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-800">
+                  <div className="w-6 h-6 rounded-full bg-primary text-white flex items-center justify-center text-[10px] font-bold">
+                    {user?.name ? user.name.charAt(0).toUpperCase() : "U"}
+                  </div>
+                  <span className="max-w-[110px] truncate">{user?.name}</span>
+                </div>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={logout}
+                  className="rounded-full px-3 py-1.5 text-xs text-slate-600 hover:text-red-600 hover:bg-red-50 border-slate-200"
+                >
+                  <LogOut className="w-3.5 h-3.5 mr-1" />
+                  Log Out
+                </Button>
+              </div>
+            ) : (
+              <div className="hidden sm:flex items-center gap-2">
+                <Button
+                  variant="hero"
+                  size="sm"
+                  aria-label="Start Free Trial"
+                  className="rounded-full px-5 font-bold btn-glow hover:scale-[1.03] transition-all duration-300 text-xs"
+                  onClick={() => window.open("https://helpdude-ai.supporticon.com/", "_blank")}
+                >
+                  Start Free Trial
+                </Button>
+              </div>
+            )}
           </div>{/* end right-actions */}
         </div>{/* end flex row */}
 
@@ -631,18 +676,40 @@ export const SiteHeader = () => {
                     )}
                   </div>
                 ))}
-                <div className="pt-3 pb-1">
-                  <Button
-                    variant="hero"
-                    size="sm"
-                    className="w-full rounded-full font-bold"
-                    onClick={() => {
-                      setMobileMenuOpen(false);
-                      window.open("https://zbooking.in/PoPU8", "_blank", "noopener,noreferrer");
-                    }}
-                  >
-                    Book Demo
-                  </Button>
+                <div className="pt-3 pb-1 border-t border-slate-100 flex flex-col gap-2">
+                  {isLoggedIn ? (
+                    <div className="flex flex-col gap-2">
+                      <div className="px-3 py-2 rounded-xl bg-slate-100 flex items-center justify-between text-xs font-semibold">
+                        <span className="truncate">{user?.name} ({user?.email})</span>
+                      </div>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="w-full rounded-full font-bold text-red-600 border-red-200 hover:bg-red-50"
+                        onClick={() => {
+                          setMobileMenuOpen(false);
+                          logout();
+                        }}
+                      >
+                        <LogOut className="w-4 h-4 mr-2" />
+                        Log Out
+                      </Button>
+                    </div>
+                  ) : (
+                    <div className="flex flex-col gap-2">
+                      <Button
+                        variant="hero"
+                        size="sm"
+                        className="w-full rounded-full font-bold btn-glow"
+                        onClick={() => {
+                          setMobileMenuOpen(false);
+                          window.open("https://helpdude-ai.supporticon.com/", "_blank");
+                        }}
+                      >
+                        Start Free Trial
+                      </Button>
+                    </div>
+                  )}
                 </div>
               </nav>
             </motion.div>

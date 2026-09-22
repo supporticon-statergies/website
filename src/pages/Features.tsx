@@ -2,30 +2,31 @@ import { SEO } from "@/components/SEO";
 import { CheckCircle, XCircle } from "lucide-react";
 import { useScrollToTop } from "@/hooks/use-scroll-to-top";
 import { useReveal } from "@/hooks/use-reveal";
-import { FeatureAIVisual, AmbientAccent } from "@/components/PageVisuals";
+import { AmbientAccent } from "@/components/PageVisuals";
 import { FadeUp, FadeIn } from "@/components/ui/motion-utils";
 import { motion } from "framer-motion";
 
+
 const comparison = [
   {
-    without: "Agents tab-switch across 5+ tools just to find the right answer",
-    with: "Unified AI search across knowledge base in < 30 seconds",
+    without: "Customers wait on hold or dig through FAQs",
+    with: "Live Agent and Inbound Voice resolve by conversation, instantly",
   },
   {
-    without: "Email responses written from scratch, slow, inconsistent, off brand",
-    with: "One click AI email drafts from ticket context in your brand tone",
+    without: "Every channel is a separate inbox and a separate wait time",
+    with: "Omnichannel Autopilot/Copilot unifies WhatsApp, Instagram, Facebook, and email",
   },
   {
-    without: "Escalations stall while teams search Slack for the right POC",
-    with: "Intelligent POC routing, right person engaged instantly",
+    without: "Non-English customers get a slower, translated experience",
+    with: "Every feature works natively in every language",
   },
   {
-    without: "Senior engineers become human search engines and bottlenecks",
-    with: "Expert knowledge distributed instantly across your entire team",
+    without: "Hardware issues are tracked across scattered spreadsheets and calls",
+    with: "Automated Tracking follows every repair from report to resolution",
   },
   {
-    without: "New hires take weeks to ramp, customers feel every gap",
-    with: "New hires resolve tickets with confidence from Week One",
+    without: "Agents tab-switch across 5+ tools for one answer",
+    with: "Unified AI search across your KB in under 30 seconds",
   },
   {
     without: "Support's impact on revenue stays invisible to leadership",
@@ -52,22 +53,32 @@ const Features = () => {
       <div className="container mx-auto px-4 py-16 md:py-24 relative">
         <div
           ref={reveal.ref}
-          className={`grid md:grid-cols-2 gap-12 items-center ${reveal.revealClasses}`}
+          className={`grid md:grid-cols-2 gap-12 items-start ${reveal.revealClasses}`}
         >
-          <div className="max-w-2xl">
-            <h1 className="font-display text-4xl font-extrabold leading-tight md:text-5xl lg:text-6xl text-slate-900 tracking-normal">
+          <div className="max-w-2xl self-start pt-8 md:pt-16">
+            <h1 className="font-display text-5xl font-extrabold leading-tight md:text-6xl lg:text-7xl text-slate-900 tracking-normal">
               <span className="bg-gradient-to-r from-green-500 via-emerald-500 to-teal-600 bg-clip-text text-transparent pr-2 box-decoration-clone">
-                Everything Your Team Needs.
+                Six ways HelpDude turns customer friction into effortless resolution
               </span>
-              <span className="block mt-2 pr-2">Nothing Your Customers Should Ever Notice.</span>
+              <span className="block mt-2 pr-2">before trust is broken</span>
             </h1>
-            <p className="mt-6 text-xl text-muted-foreground leading-relaxed">
-              HelpDude works silently behind every ticket so agents look brilliant
-              and customers feel understood.
+            <p className="mt-6 text-xl md:text-2xl text-muted-foreground leading-relaxed">
+            From first voice interaction to final update,
+            HelpDude handles the routine—so customers and engineers focus on what matters.
             </p>
           </div>
-          <div className="relative">
-            <FeatureAIVisual />
+          <div className="relative w-full flex items-center justify-center">
+            <div
+              className="rounded-3xl overflow-hidden bg-transparent"
+              style={{ width: "100%", maxWidth: "680px", aspectRatio: "1 / 1" }}
+            >
+              <iframe
+                src="/HelpDude_Rotating_Wheel.html"
+                className="w-full h-full border-0 block pointer-events-none"
+                title="HelpDude Rotating Wheel"
+                scrolling="no"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -78,87 +89,144 @@ const Features = () => {
           <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight mb-16 text-slate-900 text-center leading-tight">
             Core Features of HelpDude, and the Customer Outcomes They Create
           </h2>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+            variants={{
+              hidden: {},
+              visible: {
+                transition: {
+                  staggerChildren: 0.12,
+                },
+              },
+            }}
+          >
             {/* Feature 1 */}
-            <div className="flex flex-col h-full bg-green-50/60 backdrop-blur-md p-6 md:p-8 rounded-2xl border border-green-100 shadow-xl hover:shadow-[0_8px_30px_rgba(26,127,181,0.15)] transition-shadow duration-300">
+            <motion.div 
+              variants={{
+                hidden: { opacity: 0, y: 40, scale: 0.95 },
+                visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: "easeOut" } },
+              }}
+              whileHover={{ y: -8, transition: { duration: 0.2 } }}
+              className="flex flex-col h-full bg-green-50/60 backdrop-blur-md p-6 md:p-8 rounded-2xl border border-green-100 shadow-xl hover:shadow-[0_12px_35px_rgba(26,127,181,0.18)] transition-all duration-300"
+            >
               <h3 className="text-xl font-bold text-slate-900 mb-2">
-                Unified Knowledge Search
+                Live Agent Support
               </h3>
               <div className="text-primary font-medium text-sm md:text-base mb-4 leading-snug">
-                → Right answer, every time, in &lt;30 sec
+                → One Click. A Full Conversation. In customer's preferred language
               </div>
               <p className="text-sm md:text-base text-slate-600 leading-relaxed">
-                Searches across KB articles, internal docs, knowledge transfer content, and past resolved tickets in a single AI powered query with citation.
-              </p>
-            </div>
+                The moment a customer clicks your HelpDude's AI agent logo from the same product screen that takes the full conversation by voice — no forms, no typing, no waiting. Every question is answered end-to-end, professionally and warmly in your customers' preferred language.
+                </p>
+            </motion.div>
 
             {/* Feature 2 */}
-            <div className="flex flex-col h-full bg-green-50/60 backdrop-blur-md p-6 md:p-8 rounded-2xl border border-green-100 shadow-xl hover:shadow-[0_8px_30px_rgba(26,127,181,0.15)] transition-shadow duration-300">
+            <motion.div 
+              variants={{
+                hidden: { opacity: 0, y: 40, scale: 0.95 },
+                visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: "easeOut" } },
+              }}
+              whileHover={{ y: -8, transition: { duration: 0.2 } }}
+              className="flex flex-col h-full bg-green-50/60 backdrop-blur-md p-6 md:p-8 rounded-2xl border border-green-100 shadow-xl hover:shadow-[0_12px_35px_rgba(26,127,181,0.18)] transition-all duration-300"
+            >
               <h3 className="text-xl font-bold text-slate-900 mb-2">
-                One-Click AI Email Drafting
+               Inbound Voice Calls
               </h3>
               <div className="text-primary font-medium text-sm md:text-base mb-4 leading-snug">
-                → Professional responses at CX speed
+               → Your Support Line, Answered Like a Human
               </div>
               <p className="text-sm md:text-base text-slate-600 leading-relaxed">
-                Reads ticket context, finds the most relevant knowledge, and drafts a complete, brand-toned response in one click under 30 seconds.
+              Every call to your support number is picked up instantly. HelpDude resolves it directly from your Knowledge Base. Exceptions get forwarded to a support engineer with the full context of conversations already captured — zero repetition of the issue explanation for the customer.
               </p>
-            </div>
+            </motion.div>
 
             {/* Feature 3 */}
-            <div className="flex flex-col h-full bg-green-50/60 backdrop-blur-md p-6 md:p-8 rounded-2xl border border-green-100 shadow-xl hover:shadow-[0_8px_30px_rgba(26,127,181,0.15)] transition-shadow duration-300">
+            <motion.div 
+              variants={{
+                hidden: { opacity: 0, y: 40, scale: 0.95 },
+                visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: "easeOut" } },
+              }}
+              whileHover={{ y: -8, transition: { duration: 0.2 } }}
+              className="flex flex-col h-full bg-green-50/60 backdrop-blur-md p-6 md:p-8 rounded-2xl border border-green-100 shadow-xl hover:shadow-[0_12px_35px_rgba(26,127,181,0.18)] transition-all duration-300"
+            >
               <h3 className="text-xl font-bold text-slate-900 mb-2">
-                Intelligent POC Escalation
+                Email Ticketing — Autopilot & Copilot
               </h3>
               <div className="text-primary font-medium text-sm md:text-base mb-4 leading-snug">
-                → High-value issues, zero friction
+                → Two Modes. One Seamless Resolution.
               </div>
               <p className="text-sm md:text-base text-slate-600 leading-relaxed">
-                Analyses ticket content and automatically identifies the correct Dev or QA POC for every escalation, no Slack-searching required.
+                Every emailed ticket context is analysed with your Knowledge Base & trusted documents. If HelpDude AI finds a confident answer,
+                Autopilot resolves and replies instantly. If HelpDude AI doubts, Copilot provides a drafted reply for your engineers to validate and send
+                combining the AI Auto-pilot and co-pilot capability with full automation.
               </p>
-            </div>
+            </motion.div>
 
             {/* Feature 4 */}
-            <div className="flex flex-col h-full bg-green-50/60 backdrop-blur-md p-6 md:p-8 rounded-2xl border border-green-100 shadow-xl hover:shadow-[0_8px_30px_rgba(26,127,181,0.15)] transition-shadow duration-300">
+            <motion.div 
+              variants={{
+                hidden: { opacity: 0, y: 40, scale: 0.95 },
+                visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: "easeOut" } },
+              }}
+              whileHover={{ y: -8, transition: { duration: 0.2 } }}
+              className="flex flex-col h-full bg-green-50/60 backdrop-blur-md p-6 md:p-8 rounded-2xl border border-green-100 shadow-xl hover:shadow-[0_12px_35px_rgba(26,127,181,0.18)] transition-all duration-300"
+            >
               <h3 className="text-xl font-bold text-slate-900 mb-2">
-                Enterprise-Grade Security
+                Omnichannel Messaging
               </h3>
               <div className="text-primary font-medium text-sm md:text-base mb-4 leading-snug">
-                → Customer trust, protected end to end
+               → The Same Intelligence, Everywhere.
               </div>
               <p className="text-sm md:text-base text-slate-600 leading-relaxed">
-                All data stored exclusively on AWS and MongoDB Atlas. Zero third-party sharing. Role-based access keeps the right people in the right seats.
+              WhatsApp, Instagram, Facebook, and every channel your customers already message you run on the same Autopilot and Copilot logic as email, in one unified inbox instead of scattered  inboxes.
               </p>
-            </div>
+            </motion.div>
 
             {/* Feature 5 */}
-            <div className="flex flex-col h-full bg-green-50/60 backdrop-blur-md p-6 md:p-8 rounded-2xl border border-green-100 shadow-xl hover:shadow-[0_8px_30px_rgba(26,127,181,0.15)] transition-shadow duration-300">
+            <motion.div 
+              variants={{
+                hidden: { opacity: 0, y: 40, scale: 0.95 },
+                visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: "easeOut" } },
+              }}
+              whileHover={{ y: -8, transition: { duration: 0.2 } }}
+              className="flex flex-col h-full bg-green-50/60 backdrop-blur-md p-6 md:p-8 rounded-2xl border border-green-100 shadow-xl hover:shadow-[0_12px_35px_rgba(26,127,181,0.18)] transition-all duration-300"
+            >
               <h3 className="text-xl font-bold text-slate-900 mb-2">
-                SME Admin Console
+               Multi-language Support
               </h3>
               <div className="text-primary font-medium text-sm md:text-base mb-4 leading-snug">
-                → CX consistency managed at scale
+               → Every Feature. Every Language.
               </div>
               <p className="text-sm md:text-base text-slate-600 leading-relaxed">
-                Configure knowledge sources, define escalation ownership, and manage role based permissions from a single control centre. No code required.
-              </p>
-            </div>
+              Live Agent, voice calls, email, and omnichannel messaging all work in the language your customer speaks — no separate setup and no translation workaround.</p>
+            </motion.div>
 
             {/* Feature 6 */}
-            <div className="flex flex-col h-full bg-green-50/60 backdrop-blur-md p-6 md:p-8 rounded-2xl border border-green-100 shadow-xl hover:shadow-[0_8px_30px_rgba(26,127,181,0.15)] transition-shadow duration-300">
+            <motion.div 
+              variants={{
+                hidden: { opacity: 0, y: 40, scale: 0.95 },
+                visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: "easeOut" } },
+              }}
+              whileHover={{ y: -8, transition: { duration: 0.2 } }}
+              className="flex flex-col h-full bg-green-50/60 backdrop-blur-md p-6 md:p-8 rounded-2xl border border-green-100 shadow-xl hover:shadow-[0_12px_35px_rgba(26,127,181,0.18)] transition-all duration-300"
+            >
               <h3 className="text-xl font-bold text-slate-900 mb-2">
-                ROI & Pattern Intelligence
+                Automated Tracking (Manufacturing & Hardware)
               </h3>
               <div className="text-primary font-medium text-sm md:text-base mb-4 leading-snug">
-                → Support becomes a growth engine
+                → From Reported to Resolved — Automatically Tracked.
               </div>
               <p className="text-sm md:text-base text-slate-600 leading-relaxed">
-                Recurring ticket patterns surface automatically. Support impact on retention becomes measurable, giving your team a seat at the leadership table.
+              Purpose-built for physical products: every hardware issue ticket is tracked through diagnosis, repair, spare-part shipment, and field visit in a single timeline, with recurring failure patterns surfaced automatically. Exclusive to manufacturing and hardware businesses.
               </p>
-            </div>
-          </div>
-        </div>
+            </motion.div>
+          </motion.div>
+  
       </section>
 
       {/* The Problem We Solve */}
@@ -168,14 +236,36 @@ const Features = () => {
           <FadeUp>
             <div className="text-center mb-16">
               <div className="section-label mb-4 mx-auto w-fit">The Problem We Solve</div>
-              <h2 className="font-display text-4xl md:text-5xl font-bold text-slate-900 mb-5">
-                Your SAAS company Is Losing Customers, Silently.
+              <h2 className="font-display text-4xl md:text-5xl font-bold text-slate-900 mb-12">
+                Your SaaS company may be losing customers and you may not know why.
               </h2>
-              <p className="text-xl text-slate-500 max-w-3xl mx-auto">
-                Slow replies. Inconsistent answers. Missed escalations. These aren't
-                operational problems, they're revenue leaks that compound quietly
-                every single day.
-              </p>
+              
+              <div className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto space-y-6 mb-12">
+                <p>
+                  Silent churn starts when customers face friction but don't report it. Reporting an issue takes effort. Getting it resolved takes time. So instead of asking for help, customers simply disengage and leave.
+                </p>
+                <p>
+                  Meanwhile, support teams are overwhelmed with repetitive issues, leaving less time for the complex problems where human expertise can truly make a difference.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center text-left">
+                {/* Left Side: Wording in a box */}
+                <div className="bg-slate-50/80 p-8 md:p-12 rounded-3xl border border-slate-200/80 shadow-lg flex items-center h-full">
+                  <p className="font-bold text-slate-800 text-xl md:text-3xl leading-snug">
+                    HelpDude makes getting help effortless for customers and reduces the support burden with an AI Support Intelligence layer—so your teams can focus on the issues that matter most and retain more customers.
+                  </p>
+                </div>
+
+                {/* Right Side: Image */}
+                <div className="relative w-full h-full flex items-center justify-center">
+                  <img 
+                    src="/feature_page.png" 
+                    alt="HelpDude support intelligence" 
+                    className="w-full h-full object-contain rounded-3xl shadow-lg border border-slate-200/50 hover:scale-105 transition-transform duration-500" 
+                  />
+                </div>
+              </div>
             </div>
           </FadeUp>
 
@@ -222,6 +312,8 @@ const Features = () => {
           </FadeIn>
         </div>
       </section>
+
+
 
     </main>
   );

@@ -37,8 +37,8 @@ const devTeam: TeamMember[] = [
     linkedin: "shanmuga-sudhan-k",
   },
   {
-    name: "JaiManisha",
-    role: "Sales Development Representative",
+    name: "JaiManisa",
+    role: "Sales & Marketing Executive",
     linkedin: "https://www.linkedin.com/in/jaimanisa-kirubakaran-76b733346?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
   },
   {
@@ -141,8 +141,8 @@ const TeamCard = ({ dev }: { dev: TeamMember }) => {
             transition: isHovered
               ? "transform 0.1s ease-out, box-shadow 0.3s ease"
               : "transform 0.3s ease-out, box-shadow 0.3s ease",
-            ["--mouse-x" as any]: `${mousePos.x}px`,
-            ["--mouse-y" as any]: `${mousePos.y}px`,
+            ["--mouse-x" as const]: `${mousePos.x}px`,
+            ["--mouse-y" as const]: `${mousePos.y}px`,
           }}
         >
           {/* Border: default subtle border */}
@@ -287,9 +287,9 @@ const About = () => {
                 About Supporticon
               </h1>
               <p className="text-xl text-slate-600 mb-6 leading-relaxed">
-                Supporticon Strategies Private Limited builds AI powered IT
-                helpdesk software for SaaS support teams across India and
-                beyond.
+               Supporticon Strategies Private Limited builds HelpDude, the AI support platform that resolves customer
+               conversations by voice, phone, email, and chat for SaaS teams across India and beyond,
+               and for manufacturing and hardware businesses that need every repair tracked from report to resolution.
               </p>
               <p className="text-lg text-slate-500 mb-8 leading-relaxed">
                 We exist because we believe the quality of your customer support

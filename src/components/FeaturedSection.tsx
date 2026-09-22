@@ -19,6 +19,7 @@ export const FeaturedSection = () => {
           <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium max-w-3xl mx-auto">
             Answer 20 quick questions about your SaaS support operations.<br />
             Get your overall readiness score and actionable insights instantly.
+            Assess Support Readiness.
           </p>
           <div className="pt-6">
             <Button

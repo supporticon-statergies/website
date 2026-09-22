@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { FadeUp } from "@/components/ui/motion-utils";
 import { CheckCircle, ChevronRight, Zap, ArrowRight } from "lucide-react";
+import { useAuth } from "@/context/AuthContext";
 import {
   Dialog,
   DialogContent,
@@ -13,6 +14,7 @@ import {
 
 export function FinalCTASection() {
   const navigate = useNavigate();
+  const { openAuthModal } = useAuth();
   const [showOptionDialog, setShowOptionDialog] = useState(false);
   return (
     <section className="pt-12 pb-24 md:pt-16 md:pb-32 relative overflow-hidden">
@@ -24,7 +26,7 @@ export function FinalCTASection() {
           <div className="section-label mx-auto mb-8 w-fit">Get Started Today</div>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">
             Setup in 15 Minutes.{" "}
-            <span className="gradient-text">Customer Outcomes from Day One.</span>
+            <span className="gradient-text">Customer Outcomes from Day One</span>
           </h2>
           <p className="text-xl text-slate-500 mb-10 max-w-3xl mx-auto leading-relaxed">
             Sign up and see your first customer intelligence insight in under 15
@@ -35,8 +37,8 @@ export function FinalCTASection() {
             <Button
               size="lg"
               variant="hero"
-              className="rounded-full px-10 py-6 text-base font-bold shadow-xl shadow-primary/30 hover:shadow-primary/40 hover:scale-[1.03] transition-all duration-300"
-              onClick={() => setShowOptionDialog(true)}
+              className="rounded-full px-10 py-6 text-base font-bold btn-glow hover:scale-[1.03]"
+              onClick={() => window.open('https://helpdude-ai.supporticon.com/', '_blank')}
             >
               Start Your Exclusive Trial
               <ChevronRight className="w-4 h-4 ml-1" />

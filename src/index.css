@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Neon glow pulse animation */
+@keyframes neon-pulse {
+  0%, 100% {
+    box-shadow:
+      0 0 4px rgba(52, 211, 153, 0.4),
+      0 0 12px rgba(16, 185, 129, 0.3),
+      0 0 24px rgba(5, 150, 105, 0.2);
+  }
+  50% {
+    box-shadow:
+      0 0 8px rgba(52, 211, 153, 0.6),
+      0 0 20px rgba(16, 185, 129, 0.45),
+      0 0 40px rgba(5, 150, 105, 0.3);
+  }
+}
+
 /* Mobile menu animations */
 @keyframes slideDown {
   from {
@@ -36,7 +52,7 @@ All colors MUST be HSL.
     /* Brand palette derived from the logo (HSL) */
     --brand-red: 0 85% 55%;
     --brand-yellow: 48 95% 55%;
-    --brand-green: 100 60% 45%;
+    --brand-green: 100 60% 58%;
     --brand-blue: 201 70% 40%; /* #1A7FB5 - darker */
 
     /* Core surfaces */
@@ -433,6 +449,18 @@ All colors MUST be HSL.
   }
   .animate-css-fade-up-5 {
     animation: css-fade-up 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards;
+  }
+  /* ── Neon glow button ── */
+  .btn-glow {
+    position: relative;
+    animation: neon-pulse 2.8s ease-in-out infinite;
+    transition: transform 0.15s ease-out, box-shadow 0.2s ease-out;
+  }
+  .btn-glow:hover {
+    transform: translateY(-1px) scale(1.02);
+  }
+  .btn-glow:active {
+    transform: scale(0.98);
   }
 }
 

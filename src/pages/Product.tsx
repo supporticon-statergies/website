@@ -1,84 +1,45 @@
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Zap,
-  FileText,
-  Sparkles,
-  Sliders,
-  Route,
-  Lock,
-  ChevronDown,
-  Search,
-  Mail,
-  BookOpen,
-  BarChart,
-  Users,
-  CheckCircle2,
+  Wrench,
   ArrowRight,
+  Sparkles,
+  Cpu,
+  X,
 } from "lucide-react";
-import { useState, useEffect, lazy, Suspense } from "react";
-import { useSearchParams, useLocation } from "react-router-dom";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-} from "@/components/ui/dialog";
-import ImageWithLoader from "@/components/ImageWithLoader";
+import { useState, lazy, Suspense, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useScrollToTop } from "@/hooks/use-scroll-to-top";
+import { AmbientAccent } from "@/components/PageVisuals";
+import { motion, AnimatePresence } from "framer-motion";
+import Marquee from "@/components/Marquee";
+import productDemoVideo from "@/assets/product_demo.mp4";
+import heroImage from "@/assets/home-imge.png";
+
+import { useAuth } from "@/context/AuthContext";
 
 const RequestDemoDialog = lazy(() => import("@/components/RequestDemoDialog"));
-import productDemoVideo from "@/assets/product_demo.mp4";
-import { useScrollToTop } from "@/hooks/use-scroll-to-top";
-import postImage from "@/assets/post_image.png";
-import heroImage from "@/assets/home-imge.png";
-import videoThumbnail from "@/assets/thmb.png";
-import { supporticonUploads } from "@/assets/supporticon-uploads";
-import ImageZoom from "@/components/ui/image-zoom";
-import Marquee from "@/components/Marquee";
-import { ProductEcosystemVisual, AmbientAccent } from "@/components/PageVisuals";
-import { motion } from "framer-motion";
 
 const Product = () => {
-  const [searchParams] = useSearchParams();
+  const { openAuthModal } = useAuth();
+  const [open, setOpen] = useState(false);
+  const [showHelpdudeSubs, setShowHelpdudeSubs] = useState(false);
+  const navigate = useNavigate();
   const location = useLocation();
   useScrollToTop();
 
-  const [open, setOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-  const [activeTab, setActiveTab] = useState<"freshdesk" | "standalone">(
-    "freshdesk",
-  );
-  const [showOptionDialog, setShowOptionDialog] = useState(false);
-
-  // Check if device is mobile
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
-  // Handle URL tab parameter and scroll to section
-  useEffect(() => {
-    const tabParam = searchParams.get("tab");
-    if (tabParam === "freshdesk" || tabParam === "standalone") {
-      setActiveTab(tabParam);
-      
-      const element = document.getElementById("deployment-options");
-      if (element) {
-        const scrollTimeout = setTimeout(() => {
-          element.scrollIntoView({ behavior: "smooth", block: "start" });
-        }, 150);
-        return () => clearTimeout(scrollTimeout);
-      }
+    if (location.hash === "#deployment-options" || location.state?.scrollToGrid) {
+      const timer = setTimeout(() => {
+        const el = document.getElementById("deployment-options");
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+      return () => clearTimeout(timer);
     }
-  }, [searchParams, location.key]);
+  }, [location.hash, location.state]);
 
   return (
     <main className="overflow-x-hidden pb-12 bg-transparent relative">
@@ -87,7 +48,6 @@ const Product = () => {
         description="Explore HelpDude's Intelligent Email Drafting and SME Admin Console features."
         canonicalPath="/product"
       />
-
 
       <AmbientAccent position="right" color="emerald" />
       <AmbientAccent position="left" color="blue" />
@@ -98,7 +58,7 @@ const Product = () => {
         </Suspense>
       )}
 
-      {/* Technology Partner Banner — Product page only */}
+      {/* Technology Partner Banner */}
       <Marquee />
 
       {/* Hero / Video Demo Section */}
@@ -110,25 +70,19 @@ const Product = () => {
                 HelpDude
               </h1>
               <p className="text-lg text-slate-500 mb-8 leading-relaxed">
-                HelpDude is Supporticon's flagship customer support software,
-                purpose-built for SaaS support teams. It gives your engineers
-                unified knowledge search, AI generated email responses, and
-                automatic escalation routing, so every customer interaction is
-                handled with the speed, accuracy, and care that drives retention
-                and renewal.
+                HelpDude is Supporticon's AI support platform built for SaaS teams scaling
+                past their first 100 customers, and for manufacturing & hardware businesses
+                that support physical products. It resolves conversations by voice, phone,
+                email, WhatsApp, Instagram, and Facebook, automatically where it can and
+                with a drafted assist for your engineer where it can't, in every language
+                your customers speak.
               </p>
               <div className="flex flex-wrap sm:flex-nowrap gap-2 md:gap-3 mb-8">
                 <Button
                   size="lg"
                   variant="hero"
                   className="font-semibold px-3 py-2.5 md:px-4 md:py-3 text-xs md:text-sm rounded-xl transition-all duration-300 transform hover:scale-105 whitespace-nowrap"
-                  onClick={() =>
-                    window.open(
-                      "https://www.freshworks.com/apps/helpdude_1/",
-                      "_blank",
-                      "noopener,noreferrer",
-                    )
-                  }
+                  onClick={() => window.open('https://helpdude-ai.supporticon.com/', '_blank')}
                 >
                   Start free trial
                 </Button>
@@ -148,7 +102,7 @@ const Product = () => {
                     window.open(
                       "https://www.freshworks.com/apps/helpdude_1/",
                       "_blank",
-                      "noopener,noreferrer",
+                      "noopener,noreferrer"
                     )
                   }
                 >
@@ -173,7 +127,88 @@ const Product = () => {
             </div>
           </div>
 
-          {/* New One line sentence spanning the entire width */}
+          {/* The Problem HelpDude is solving */}
+          <div className="mt-20 w-full animate-in fade-in slide-in-from-bottom-4 duration-700 delay-400">
+            <div className="flex justify-center mb-8">
+              <span className="text-sm font-bold tracking-widest text-emerald-600 uppercase bg-emerald-50 px-4 py-2 rounded-full border border-emerald-200 shadow-sm">
+                The problem
+              </span>
+            </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch text-left">
+              {/* Left Side: Text Box */}
+              <div className="bg-slate-50/80 p-8 md:p-12 rounded-3xl border border-slate-200/80 shadow-lg flex flex-col justify-center h-full">
+                <h3 className="font-display text-2xl md:text-3xl font-bold text-slate-900 mb-6">
+                  The Problem HelpDude is solving:
+                </h3>
+                <div className="space-y-4 text-slate-600 md:text-lg leading-relaxed">
+                  <p>
+                    Every SaaS company loses customers quietly — not through complaints, but through silence. This "Silent Churn" is a holistic, unsolved issue in every SaaS company, irrespective of size.
+                  </p>
+                  <p>
+                    Data shows this happens because of two reasons: it takes a lot of effort to report an issue, and a lot of time to get it resolved. So, out of 26 dissatisfied customers, only 1 complains — the rest walk out silently and never come back.
+                  </p>
+                  <p>
+                    The customer support function, meant to be the backbone of customer experience, is broken by design. Support teams are buried under repetitive, low-value tickets, leaving no room for the real expertise that could actually retain customers.
+                  </p>
+                </div>
+              </div>
+
+              {/* Right Side: Image */}
+              <div className="relative w-full h-full flex items-center justify-center rounded-3xl shadow-lg border border-slate-200/50 p-6 md:p-8 overflow-hidden bg-gradient-to-br from-slate-50 via-slate-100 to-slate-200">
+                {/* Decorative canvas pattern */}
+                <div className="absolute inset-0 opacity-40 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+                <div className="relative w-full h-full flex items-center justify-center">
+                  <img 
+                    src="/product_page_image1.png" 
+                    alt="Silent Churn problem" 
+                    className="w-full h-full object-contain hover:scale-105 transition-transform duration-500 shadow-md rounded-2xl bg-white" 
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Separator Label */}
+          <div className="flex justify-center mt-12 mb-8 animate-in fade-in duration-700 delay-500">
+            <span className="text-sm font-bold tracking-widest text-emerald-600 uppercase bg-emerald-50 px-4 py-2 rounded-full border border-emerald-200 shadow-sm">
+              that helpdude solves
+            </span>
+          </div>
+
+          {/* How HelpDude is solving them */}
+          <div className="w-full animate-in fade-in slide-in-from-bottom-4 duration-700 delay-500">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch text-left">
+              {/* Left Side: Image */}
+              <div className="relative w-full h-full flex items-center justify-center rounded-3xl shadow-lg border border-slate-200/50 p-6 md:p-8 overflow-hidden bg-gradient-to-br from-slate-50 via-slate-100 to-slate-200">
+                {/* Decorative canvas pattern */}
+                <div className="absolute inset-0 opacity-40 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+                <div className="relative w-full h-full flex items-center justify-center">
+                  <img 
+                    src="/product_page_image2.png" 
+                    alt="How HelpDude solves the problem" 
+                    className="w-full h-full object-contain hover:scale-105 transition-transform duration-500 shadow-md rounded-2xl bg-white" 
+                  />
+                </div>
+              </div>
+
+              {/* Right Side: Text Box */}
+              <div className="bg-slate-50/80 p-8 md:p-12 rounded-3xl border border-slate-200/80 shadow-lg flex flex-col justify-center h-full">
+                <h3 className="font-display text-2xl md:text-3xl font-bold text-slate-900 mb-6">
+                  How HelpDude is solving them:
+                </h3>
+                <div className="space-y-4 text-slate-600 md:text-lg leading-relaxed">
+                  <p>
+                    HelpDude is an AI-powered platform built by Supporticon to provide an effortless way to get help whenever needed, from AI or a human. We free up support teams from operational drag and redirect their time and skill toward what genuinely moves the needle — proactive, high-value customer engagement.
+                  </p>
+                  <p>
+                    The result: fewer silent exits, stronger retention, and a support function that finally earns its place as a growth driver, not a cost center.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Banner */}
           <div className="mt-12 w-full bg-white border-2 border-white p-6 rounded-2xl shadow-lg text-center animate-in fade-in slide-in-from-bottom-4 duration-700 delay-500">
             <p className="text-lg md:text-xl text-slate-800 font-semibold md:whitespace-nowrap">
               Reduce your search time. Faster Resolution. Improve customer Retention.
@@ -182,303 +217,190 @@ const Product = () => {
         </div>
       </section>
 
-      {/* Deployment Options Section */}
+      {/* Product Selection Grid */}
       <section id="deployment-options" className="container mx-auto px-4 py-16 animate-in fade-in duration-700 delay-500 fill-mode-both">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           {/* Header */}
           <div className="text-center mb-12">
             <span className="text-sm font-bold tracking-widest text-primary uppercase">
-              Two Deployment Options
+              Choose Your Product
             </span>
             <h2 className="font-display text-4xl font-bold text-slate-900 mt-2">
-              Choose how HelpDude fits your stack
+              How would you like to use HelpDude?
             </h2>
+            <p className="text-slate-500 mt-3 text-sm md:text-base max-w-xl mx-auto font-medium">
+              💡 Click a product below to explore its features and pricing
+            </p>
           </div>
 
-          {/* Tabs Navigation */}
-          <div className="flex justify-center mb-12">
-            <div className="inline-flex p-1.5 bg-slate-100/80 backdrop-blur-md rounded-2xl border border-slate-200/50 relative w-full max-w-xl shadow-inner">
-              <button
-                onClick={() => setActiveTab("freshdesk")}
-                className={`flex-1 py-3 px-4 md:px-6 text-sm md:text-base font-semibold rounded-xl transition-all duration-300 relative z-10 ${
-                  activeTab === "freshdesk"
-                    ? "text-white font-bold scale-102"
-                    : "text-slate-600 hover:text-slate-900"
-                }`}
-              >
-                HelpDude for Freshdesk
-                {activeTab === "freshdesk" && (
-                  <motion.div
-                    layoutId="activeTabBackground"
-                    className="absolute inset-0 bg-primary rounded-xl -z-10 shadow-md"
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                  />
-                )}
-              </button>
-              <button
-                onClick={() => setActiveTab("standalone")}
-                className={`flex-1 py-3 px-4 md:px-6 text-sm md:text-base font-semibold rounded-xl transition-all duration-300 relative z-10 ${
-                  activeTab === "standalone"
-                    ? "text-white font-bold scale-102"
-                    : "text-slate-600 hover:text-slate-900"
-                }`}
-              >
-                HelpDude Platform
-                {activeTab === "standalone" && (
-                  <motion.div
-                    layoutId="activeTabBackground"
-                    className="absolute inset-0 bg-primary rounded-xl -z-10 shadow-md"
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                  />
-                )}
-              </button>
-            </div>
-          </div>
+          {/* Top-level 2 grids */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-stretch">
 
-          <div className="mt-8">
-            <motion.div
-              key={activeTab}
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35, ease: "easeOut" }}
+            {/* Grid 1: HelpDude for Freshdesk */}
+            <motion.button
+              whileHover={{ scale: 1.02, y: -4 }}
+              whileTap={{ scale: 0.99 }}
+              onClick={() => navigate("/product/freshdesk")}
+              className="group relative flex flex-col text-left p-8 md:p-10 rounded-3xl border border-emerald-200/60 bg-gradient-to-br from-emerald-50 to-teal-50 hover:from-emerald-100 hover:to-teal-100 shadow-xl hover:shadow-2xl hover:shadow-emerald-100/50 transition-all duration-300 cursor-pointer overflow-hidden h-full"
             >
-              {activeTab === "freshdesk" ? (
-              <div className="bg-white p-8 md:p-12 rounded-[2.5rem] border border-slate-100 shadow-xl animate-in fade-in duration-300">
-                {/* Paragraph */}
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12 border-b border-slate-100 pb-8">
-                  <p className="text-lg text-slate-700 font-medium max-w-3xl leading-relaxed">
-                    A Marketplace plugin that embeds directly into every Freshdesk
-                    ticket view. Zero workflow disruption. Install in 15 minutes,
-                    no IT involvment needed.
-                  </p>
-                  <Button
-                    size="lg"
-                    className="font-semibold px-6 py-5 rounded-xl transition-all duration-300 transform hover:scale-105 bg-emerald-600 hover:bg-emerald-700 text-white shrink-0 shadow-md"
-                    onClick={() =>
-                      window.open(
-                        "https://www.freshworks.com/apps/helpdude_1/",
-                        "_blank",
-                        "noopener,noreferrer",
-                      )
-                    }
-                  >
-                    Install on Freshdesk
-                  </Button>
-                </div>
+              <div className="absolute top-0 right-0 w-40 h-40 bg-emerald-200/20 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl pointer-events-none" />
 
-                {/* Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                  {[
-                    {
-                      icon: Search,
-                      title: "Unified knowledge search",
-                      desc: "AI searches KB articles, internal docs, and past resolutions simultaneously across all sources in under 30 seconds.",
-                    },
-                    {
-                      icon: Sparkles,
-                      title: "One click AI drafting",
-                      desc: "Three complete, context-grounded email replies generated per ticket. Agent selects, optionally refines, then sends.",
-                    },
-                    {
-                      icon: Sliders,
-                      title: "Response customisation",
-                      desc: "Adjust tone, language, length, and regional context in one click. LLM regenerates the reply in real time.",
-                    },
-                    {
-                      icon: Route,
-                      title: "Intelligent POC routing",
-                      desc: "AI identifies the correct Dev or QA escalation contact automatically from ticket context, with no manual org-chart lookup.",
-                    },
-                    {
-                      icon: Lock,
-                      title: "SME admin console",
-                      desc: "Central control for knowledge sources, escalation ownership, and role based permissions across all agents.",
-                    },
-                    {
-                      icon: FileText,
-                      title: "Analytics dashboard",
-                      desc: "Resolution rates, Autopilot accuracy, knowledge gap reports, and agent performance, all in one view.",
-                    },
-                  ].map((item, idx) => (
-                    <div
-                      key={idx}
-                      className="flex flex-col bg-green-50/60 backdrop-blur-md p-6 md:p-8 rounded-2xl border border-green-100 shadow-xl hover:shadow-[0_8px_30px_rgba(26,127,181,0.15)] transition-all duration-300"
-                    >
-                      <div className="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center mb-5 text-emerald-600 shrink-0">
-                        <item.icon className="h-5 w-5" />
+              <div className="relative z-10 flex flex-col h-full w-full">
+                <div className="w-14 h-14 rounded-2xl bg-emerald-600 flex items-center justify-center mb-6 shadow-lg shadow-emerald-200 transition-transform duration-300 group-hover:scale-110">
+                  <Zap className="w-7 h-7 text-white" />
+                </div>
+                <div className="mb-3">
+                  <span className="text-xs font-bold tracking-widest text-emerald-600 uppercase">
+                    Freshdesk Plugin
+                  </span>
+                </div>
+                <h3 className="text-2xl md:text-3xl font-black text-slate-900 mb-3 leading-tight group-hover:text-emerald-800 transition-colors">
+                  HelpDude for Freshdesk
+                </h3>
+                <p className="text-slate-600 text-sm md:text-base leading-relaxed mb-8">
+                  A Marketplace plugin that embeds directly into every Freshdesk ticket view.
+                  Zero workflow disruption. Install in 15 minutes, no IT involvement needed.
+                </p>
+                <div className="flex items-center gap-2 text-emerald-700 font-bold text-sm group-hover:gap-3 transition-all duration-200 mt-auto">
+                  Explore features & pricing
+                  <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
+                </div>
+              </div>
+            </motion.button>
+
+            {/* Grid 2: HelpDude — expands sub-grids INSIDE the card */}
+            <motion.div
+              layout
+              className={`relative flex flex-col text-left rounded-3xl border shadow-xl transition-colors duration-300 overflow-hidden h-full ${
+                showHelpdudeSubs
+                  ? "border-primary/30 bg-gradient-to-br from-primary/5 to-indigo-50"
+                  : "border-blue-200/60 bg-gradient-to-br from-blue-50 to-indigo-50"
+              }`}
+            >
+              <div className="absolute top-0 right-0 w-40 h-40 bg-blue-200/20 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl pointer-events-none" />
+
+              <AnimatePresence mode="wait">
+                {!showHelpdudeSubs ? (
+                  /* Default card view */
+                  <motion.button
+                    key="helpdude-default"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    onClick={() => setShowHelpdudeSubs(true)}
+                    className="group relative flex flex-col text-left p-8 md:p-10 w-full h-full cursor-pointer"
+                  >
+                    <div className="relative z-10 flex flex-col h-full w-full">
+                      <div className="w-14 h-14 rounded-2xl bg-primary flex items-center justify-center mb-6 shadow-lg shadow-primary/20 transition-transform duration-300 group-hover:scale-110">
+                        <Sparkles className="w-7 h-7 text-white" />
                       </div>
-                      <h4 className="text-lg font-bold text-slate-900 mb-3 leading-snug">
-                        {item.title}
-                      </h4>
-                      <p className="text-sm md:text-base text-slate-600 leading-relaxed">
-                        {item.desc}
+                      <div className="mb-3">
+                        <span className="text-xs font-bold tracking-widest text-primary uppercase">
+                          Standalone Platform
+                        </span>
+                      </div>
+                      <h3 className="text-2xl md:text-3xl font-black text-slate-900 mb-3 leading-tight group-hover:text-primary transition-colors">
+                        HelpDude
+                      </h3>
+                      <p className="text-slate-600 text-sm md:text-base leading-relaxed mb-8">
+                        The full HelpDude platform for SaaS teams for
+                        manufacturing & hardware businesses.
                       </p>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Freshdesk CTA Button at the bottom */}
-                <div className="mt-12 text-center border-t border-slate-100 pt-8 flex flex-col items-center">
-                  <p className="text-slate-600 mb-4 font-medium">
-                    Ready to embed HelpDude's intelligence directly into your Freshdesk ticket views?
-                  </p>
-                  <Button
-                    size="lg"
-                    className="font-semibold px-8 py-6 rounded-xl transition-all duration-300 transform hover:scale-105 bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg"
-                    onClick={() =>
-                      window.open(
-                        "https://www.freshworks.com/apps/helpdude_1/",
-                        "_blank",
-                        "noopener,noreferrer",
-                      )
-                    }
-                  >
-                    Install HelpDude on Freshdesk
-                  </Button>
-                </div>
-              </div>
-            ) : (
-              <div className="bg-white p-8 md:p-12 rounded-[2.5rem] border border-slate-100 shadow-xl animate-in fade-in duration-300">
-                {/* Paragraph */}
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12 border-b border-slate-100 pb-8">
-                  <p className="text-lg text-slate-700 font-medium max-w-3xl leading-relaxed">
-                    A complete, standalone email ticketing platform. No Freshdesk
-                    needed. Support Tickets become tickets. Autopilot resolves what
-                    it can. Co Pilot handles everything else.
-                  </p>
-                  <Button
-                    size="lg"
-                    className="font-semibold px-6 py-5 rounded-xl transition-all duration-300 transform hover:scale-105 bg-emerald-600 hover:bg-emerald-700 text-white shrink-0 shadow-md"
-                    onClick={() =>
-                      window.open(
-                        "https://helpdude-ai.supporticon.com/",
-                        "_blank",
-                        "noopener,noreferrer",
-                      )
-                    }
-                  >
-                    Go to HelpDude
-                  </Button>
-                </div>
-
-                {/* 2 Column Autopilot / Co Pilot Section */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-                  {/* Left Column: Autopilot */}
-                  <div className="flex flex-col bg-white p-6 md:p-8 rounded-2xl border border-slate-100 shadow-xl transition-all duration-300">
-                    <div className="bg-primary/10/50 p-4 rounded-2xl flex items-center gap-4 mb-6 border border-primary/20">
-                      <div className="w-12 h-12 rounded-xl bg-primary/15 flex items-center justify-center text-primary shrink-0">
-                        <Zap className="h-5 w-5" />
+                      <div className="flex items-center gap-2 text-primary font-bold text-sm group-hover:gap-3 transition-all duration-200 mt-auto">
+                        Choose your version
+                        <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
                       </div>
+                    </div>
+                  </motion.button>
+                ) : (
+                  /* Expanded sub-grids view — inside the same card */
+                  <motion.div
+                    key="helpdude-expanded"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.25 }}
+                    className="relative z-10 p-6 md:p-8 flex flex-col gap-4"
+                  >
+                    {/* Header row */}
+                    <div className="flex items-center justify-between mb-2">
                       <div>
-                        <h4 className="text-lg font-bold text-slate-900 leading-tight">
-                          Autopilot Mode
+                        <span className="text-xs font-bold tracking-widest text-primary uppercase">
+                          HelpDude
+                        </span>
+                        <h3 className="text-xl font-black text-slate-900 leading-tight">
+                          Choose your version
+                        </h3>
+                      </div>
+                      <button
+                        onClick={() => setShowHelpdudeSubs(false)}
+                        className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-700 transition-all duration-200 shrink-0"
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
+                    </div>
+
+                    {/* Sub-grid 1: Standalone */}
+                    <motion.button
+                      initial={{ opacity: 0, y: 12 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.25, delay: 0.05 }}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={() => navigate("/product/standalone")}
+                      className="group flex items-center gap-4 text-left p-5 rounded-2xl border border-blue-200/60 bg-white hover:bg-blue-50 shadow-md hover:shadow-lg hover:shadow-blue-100/40 transition-all duration-200 cursor-pointer w-full"
+                    >
+                      <div className="w-11 h-11 rounded-xl bg-blue-600 flex items-center justify-center shadow-md shadow-blue-200 transition-transform duration-200 group-hover:scale-110 shrink-0">
+                        <Sparkles className="w-5 h-5 text-white" />
+                      </div>
+                      <div className="flex-1 min-w-0 text-left">
+                        <span className="text-xs font-bold tracking-widest text-blue-600 uppercase block">
+                        
+                        </span>
+                        <h4 className="text-base font-black text-slate-900 group-hover:text-blue-700 transition-colors leading-snug">
+                          HelpDude Standalone
                         </h4>
-                        <p className="text-sm text-primary font-semibold uppercase tracking-wider mt-0.5">
-                          AI handles customer tickets automatically
+                        <p className="text-slate-500 text-xs leading-relaxed mt-0.5 line-clamp-2">
+                          AI ticketing platform. Autopilot resolves, Co-Pilot assists.
                         </p>
                       </div>
-                    </div>
+                      <ArrowRight className="w-4 h-4 text-blue-500 shrink-0 transition-transform duration-200 group-hover:translate-x-1" />
+                    </motion.button>
 
-                    <p className="text-slate-600 mb-8 leading-relaxed">
-                      When a customer creates a ticket, HelpDude reads the question, finds the best answer from your company's information, and replies automatically if it's confident about the answer. Your team doesn't have to do anything.
-                    </p>
+                    {/* Sub-grid 2: Manufacturing */}
+                    <motion.button
+                      initial={{ opacity: 0, y: 12 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.25, delay: 0.1 }}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={() => navigate("/product/manufacturing")}
+                     className="group flex items-center gap-4 text-left p-5 rounded-2xl border border-red-500/30 bg-white hover:bg-red-500/5 shadow-md hover:shadow-lg hover:shadow-red-500/10 transition-all duration-200 cursor-pointer w-full"
+>
+  <div className="w-11 h-11 rounded-xl bg-red-500 flex items-center justify-center shadow-md shadow-red-500/20 transition-transform duration-200 group-hover:scale-110 shrink-0">
+    <Cpu className="w-5 h-5 text-white" />
+  </div>
 
-                    <ol className="space-y-4">
-                      {[
-                        "Customer creates a support ticket.",
-                        "HelpDude looks through your company's guides, FAQs, and documents.",
-                        "If it finds the correct answer with high confidence.",
-                        "It creates a professional reply and sends it to the customer automatically.",
-                        "The entire ticket and response are saved for future reference.",
-                      ].map((step, idx) => (
-                        <li key={idx} className="flex items-start gap-4">
-                          <div className="w-6 h-6 rounded bg-primary/15 text-primary font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">
-                            {String.fromCharCode(65 + idx)}
-                          </div>
-                          <p className="text-slate-700 font-medium">{step}</p>
-                        </li>
-                      ))}
-                    </ol>
-                  </div>
+  <div className="flex-1 min-w-0 text-left">
+    <span className="text-xs font-bold tracking-widest text-red-500 uppercase block">
+    
+    </span>
 
-                  {/* Right Column: Co Pilot */}
-                  <div className="flex flex-col bg-white p-6 md:p-8 rounded-2xl border border-slate-100 shadow-xl transition-all duration-300">
-                    <div className="bg-emerald-50/50 p-4 rounded-2xl flex items-center gap-4 mb-6 border border-emerald-100/50">
-                      <div className="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-600 shrink-0">
-                        <Users className="h-5 w-5" />
-                      </div>
-                      <div>
-                        <h4 className="text-lg font-bold text-slate-900 leading-tight">
-                          Co-Pilot Mode
-                        </h4>
-                        <p className="text-sm text-emerald-600 font-semibold uppercase tracking-wider mt-0.5">
-                          AI helps your support team resolve tickets faster
-                        </p>
-                      </div>
-                    </div>
+    <h4 className="text-base font-black text-slate-900 group-hover:text-red-500 transition-colors leading-snug">
+      Helpdude for Manufacturing & Hardware
+    </h4>
 
-                    <p className="text-slate-600 mb-8 leading-relaxed">
-                      When a customer's ticket needs a human, HelpDude prepares the reply for your support team. The agent only needs to review it, make small changes if needed, and send it.
-                    </p>
+    <p className="text-slate-500 text-xs leading-relaxed mt-0.5 line-clamp-2">
+      Voice, calls, email, WhatsApp & auto order tracking.
+    </p>
+  </div>
 
-                    <ul className="space-y-4">
-                      {[
-                        {
-                          letter: "A",
-                          text: "A support team member opens the customer's ticket.",
-                        },
-                        {
-                          letter: "B",
-                          text: "HelpDude suggests the three best reply options.",
-                        },
-                        {
-                          letter: "C",
-                          text: "The agent chooses one and edits it if needed.",
-                        },
-                        {
-                          letter: "D",
-                          text: "Or the agent types a simple answer, and HelpDude turns it into a clear, professional response.",
-                        },
-                        {
-                          letter: "E",
-                          text: "If the issue needs another team (like Developers or QA), HelpDude sends it to the right person automatically.",
-                        },
-                      ].map((step, idx) => (
-                        <li key={idx} className="flex items-start gap-4">
-                          <div className="w-6 h-6 rounded bg-emerald-100 text-emerald-700 font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">
-                            {step.letter}
-                          </div>
-                          <p className="text-slate-700 font-medium">
-                            {step.text}
-                          </p>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-
-
-                {/* Standalone CTA Button at the bottom */}
-                <div className="mt-12 text-center border-t border-slate-100 pt-8 flex flex-col items-center">
-                  <p className="text-slate-600 mb-4 font-medium">
-                    Ready to streamline your support with our standalone ticketing platform?
-                  </p>
-                  <Button
-                    size="lg"
-                    className="font-semibold px-8 py-6 rounded-xl transition-all duration-300 transform hover:scale-105 bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg"
-                    onClick={() =>
-                      window.open(
-                        "https://helpdude-ai.supporticon.com/",
-                        "_blank",
-                        "noopener,noreferrer",
-                      )
-                    }
-                  >
-                    Get Started with HelpDude
-                  </Button>
-                </div>
-              </div>
-            )}
+  <ArrowRight className="w-4 h-4 text-red-500 shrink-0 transition-transform duration-200 group-hover:translate-x-1" />
+</motion.button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.div>
           </div>
         </div>
@@ -486,121 +408,43 @@ const Product = () => {
 
       {/* Marketplace Section */}
       <section className="container mx-auto px-4 py-16 animate-in fade-in duration-700 delay-500 fill-mode-both">
-        <div className="bg-white p-8 md:p-16 rounded-[2.5rem] border border-slate-100 shadow-xl relative overflow-hidden">
-          {/* Subtle glow background */}
-          <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[300px] h-[300px] bg-primary/5 rounded-full blur-[80px] pointer-events-none"></div>
-          <div className="absolute bottom-0 right-1/4 w-[200px] h-[200px] bg-emerald-500/5 rounded-full blur-[60px] pointer-events-none"></div>
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-10 items-stretch max-w-6xl mx-auto">
+          {/* Text inside the styled box */}
+          <div className="lg:col-span-3 bg-white p-6 md:p-8 lg:p-10 rounded-[2.5rem] border border-slate-100 shadow-xl relative overflow-hidden flex flex-col justify-center">
+            <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[300px] h-[300px] bg-primary/5 rounded-full blur-[80px] pointer-events-none" />
+            <div className="absolute bottom-0 right-1/4 w-[200px] h-[200px] bg-emerald-500/5 rounded-full blur-[60px] pointer-events-none" />
 
-          <div className="relative z-10">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/20 bg-primary/10 text-primary text-xs font-semibold tracking-wider uppercase">
-              <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse shrink-0"></span>
-              Now live on Freshdesk Marketplace
+            <div className="relative z-10">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/20 bg-primary/10 text-primary text-xs font-semibold tracking-wider uppercase mb-4">
+                <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse shrink-0" />
+                Now live on Freshdesk Marketplace
+              </div>
+
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold tracking-tight text-slate-900 leading-tight max-w-2xl">
+                Intelligent AI that resolves support tickets{" "}
+                <span className="bg-gradient-to-r from-primary to-primary bg-clip-text text-transparent block md:inline">
+                  before your team opens them
+                </span>
+              </h2>
+
+              <p className="mt-4 text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl font-normal">
+                HelpDude's AI engine automatically handles common tickets on Autopilot and empowers
+                agents with AI-drafted replies on Co Pilot, as a native Freshdesk plugin or a fully
+                standalone platform.
+              </p>
             </div>
+          </div>
 
-            {/* Heading */}
-            <h2 className="text-3xl md:text-5xl font-display font-bold tracking-tight text-slate-900 leading-tight mt-6 max-w-4xl">
-              Intelligent AI that resolves support tickets{" "}
-              <span className="bg-gradient-to-r from-primary to-primary bg-clip-text text-transparent block md:inline">
-                before your team opens them
-              </span>
-            </h2>
-
-            {/* Description */}
-            <p className="mt-6 text-lg md:text-xl text-slate-600 leading-relaxed max-w-4xl font-normal">
-              HelpDude's AI engine automatically handles common tickets on
-              Autopilot and empowers agents with AI-drafted replies on Co Pilot,
-              as a native Freshdesk plugin or a fully standalone platform.
-            </p>
-
-            {/* Buttons */}
-            <div className="mt-10 flex flex-wrap gap-4 items-center">
-              <Button
-                size="lg"
-                variant="hero"
-                className="font-semibold px-8 py-6 rounded-xl transition-all duration-300 transform hover:scale-105"
-                onClick={() => setShowOptionDialog(true)}
-              >
-                Install HelpDude
-              </Button>
-            </div>
+          {/* Image outside the box but matching exact height */}
+          <div className="lg:col-span-2 relative rounded-[2.5rem] shadow-xl border border-slate-200/60 overflow-hidden">
+            <img 
+              src="/productpage_image.png" 
+              alt="Product Dashboard" 
+              className="w-full h-full object-cover object-center"
+            />
           </div>
         </div>
       </section>
-
-      {/* Video Modal Removed */}
-      <Dialog open={showOptionDialog} onOpenChange={setShowOptionDialog}>
-        <DialogContent className="sm:max-w-xl p-8 rounded-3xl border border-slate-100/50 bg-white/95 backdrop-blur-xl shadow-2xl animate-in fade-in zoom-in-95 duration-200 text-left">
-          <DialogHeader className="text-center sm:text-center pb-4 border-b border-slate-100">
-            <DialogTitle className="text-2xl font-black text-slate-900 tracking-tight">
-              Get Started with HelpDude
-            </DialogTitle>
-            <DialogDescription className="text-sm text-slate-500 mt-2">
-              Choose the deployment model that best fits your support team's workflow.
-            </DialogDescription>
-          </DialogHeader>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6">
-            {/* Option 1: HelpDude for Freshdesk */}
-            <button
-              onClick={() => {
-                setShowOptionDialog(false);
-                window.open(
-                  "https://www.freshworks.com/apps/helpdude_1/",
-                  "_blank",
-                  "noopener,noreferrer"
-                );
-              }}
-              className="group flex flex-col justify-between p-6 rounded-2xl border border-emerald-500/10 bg-emerald-500/5 hover:bg-emerald-500/10 hover:border-emerald-500/30 transition-all duration-300 text-left hover:scale-[1.02] shadow-sm hover:shadow-md"
-            >
-              <div>
-                <div className="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-600 mb-4 transition-transform duration-300 group-hover:scale-110">
-                  <Zap className="w-5 h-5" />
-                </div>
-                <h4 className="text-base font-bold text-slate-900 group-hover:text-emerald-700 transition-colors">
-                  HelpDude for Freshdesk
-                </h4>
-                <p className="text-xs text-slate-500 leading-relaxed mt-2">
-                  Marketplace plugin that embeds directly in Freshdesk ticket views. Zero workflow disruption.
-                </p>
-              </div>
-              <div className="mt-6 flex items-center gap-1.5 text-xs font-bold text-emerald-700 group-hover:underline">
-                Explore Freshdesk Integration
-                <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" />
-              </div>
-            </button>
-
-            {/* Option 2: HelpDude Standalone */}
-            <button
-              onClick={() => {
-                setShowOptionDialog(false);
-                window.open(
-                  "https://helpdude-ai.supporticon.com/",
-                  "_blank",
-                  "noopener,noreferrer"
-                );
-              }}
-              className="group flex flex-col justify-between p-6 rounded-2xl border border-slate-200/60 bg-slate-50/50 hover:bg-slate-50 hover:border-slate-300 transition-all duration-300 text-left hover:scale-[1.02] shadow-sm hover:shadow-md"
-            >
-              <div>
-                <div className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600 mb-4 transition-transform duration-300 group-hover:scale-110">
-                  <CheckCircle2 className="w-5 h-5" />
-                </div>
-                <h4 className="text-base font-bold text-slate-900 group-hover:text-primary transition-colors">
-                  HelpDude Standalone
-                </h4>
-                <p className="text-xs text-slate-500 leading-relaxed mt-2">
-                  A standalone AI ticketing platform. Inbound emails automatically converted, logged, and resolved.
-                </p>
-              </div>
-              <div className="mt-6 flex items-center gap-1.5 text-xs font-bold text-primary group-hover:underline">
-                Explore Standalone Platform
-                <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" />
-              </div>
-            </button>
-          </div>
-        </DialogContent>
-      </Dialog>
     </main>
   );
 };
