@@ -18,7 +18,7 @@
   <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.dots.min.js"></script>
 
   <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -104,32 +104,26 @@
 
   <script type="text/javascript">
     // Single Page Apps for GitHub Pages
-    // MIT License
-    // https://github.com/rafgraph/spa-github-pages
-    // This script checks to see if a redirect is present at the query string,
-    // converts it back into the correct url and adds it to the
-    // browser's history using window.history.replaceState(...),
-    // which won't cause the browser to attempt to load the new url.
-    // When the single page app is loaded further down in this file,
-    // the correct url will be waiting in the browser's history for
-    // the single page app to route accordingly.
+    // MIT License – https://github.com/rafgraph/spa-github-pages
+    //
+    // Decodes the path that was encoded by 404.html as a query string,
+    // restores it to the browser history, and lets React Router take over.
     (function (l) {
-      if (l.search[1] === "/") {
+      // The redirect sets search to "/?/real/path", so search[1] === '/'
+      if (l.search && l.search[1] === '/') {
         var decoded = l.search
-          .slice(1)
-          .split("&")
-          .map(function (s) {
-            return s.replace(/~and~/g, "&");
-          })
-          .join("?");
-        var basePath = l.pathname;
-        if (basePath.slice(-1) === "/") {
-          basePath = basePath.slice(0, -1);
-        }
+          .slice(1)           // remove leading '?'
+          .split('&')         // split off any extra query params
+          .map(function (s) { return s.replace(/~and~/g, '&'); })
+          .join('?');         // first segment becomes the path, rest become query
+
+        // Normalise the base (strip trailing slash if present)
+        var base = l.pathname.replace(/\/$/, '');
+
         window.history.replaceState(
           null,
           null,
-          basePath + decoded + l.hash,
+          base + decoded + l.hash
         );
       }
     })(window.location);

@@ -1,38 +1,42 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Page Not Found</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting… | SupportIcon</title>
+    <!-- Prevent search engines from indexing this redirect page -->
+    <meta name="robots" content="noindex">
     <script>
       // Single Page Apps for GitHub Pages
-      // MIT License
-      // https://github.com/rafgraph/spa-github-pages
-      // This script takes the current url and converts the path and query
-      // string into just a query string, and then redirects the browser
-      // to the new url with only a query string and hash fragment.
-      // 0 = custom domain or user site at domain root (supporticon.com)
-      // 1 = project site at https://user.github.io/repo-name/
-      // Dynamic calculation of path segments to keep for GitHub Pages subfolder vs custom domain
+      // MIT License – https://github.com/rafgraph/spa-github-pages
+      //
+      // When GitHub Pages serves a 404, this script encodes the real path
+      // into a query string and redirects to index.html, which decodes it
+      // and replaces browser history so React Router sees the right URL.
+      //
+      // pathSegmentsToKeep:
+      //   0  → custom domain (supporticon.com) – served from root
+      //   1  → github.io project site (user.github.io/repo-name/)
       var pathSegmentsToKeep = 0;
       if (window.location.hostname.indexOf('github.io') !== -1) {
+        // repo name is the first path segment after the leading slash
         var pathParts = window.location.pathname.split('/');
-        if (pathParts[1] && pathParts[1] !== 'index.html') {
+        if (pathParts.length > 1 && pathParts[1] !== '') {
           pathSegmentsToKeep = 1;
         }
       }
 
       var l = window.location;
-      l.replace(
-        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
-        l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
-        l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
-        (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
-        l.hash
-      );
+      var origin = l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '');
+      var base   = l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/');
+      var route  = l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~');
+      var query  = l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '';
+
+      l.replace(origin + base + '/?/' + route + query + l.hash);
     </script>
   </head>
   <body>
-    <p>Redirecting to main page...</p>
+    <p>Redirecting…</p>
     <p>If you are not redirected automatically, <a href="/">click here</a>.</p>
   </body>
 </html>
