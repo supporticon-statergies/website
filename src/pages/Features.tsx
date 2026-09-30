@@ -67,15 +67,19 @@ const Features = () => {
             HelpDude handles the routine—so customers and engineers focus on what matters.
             </p>
           </div>
-          <div className="relative w-full flex items-center justify-center">
-            <div
-              className="rounded-3xl overflow-hidden bg-transparent"
-              style={{ width: "100%", maxWidth: "680px", aspectRatio: "1 / 1" }}
-            >
+          <div className="relative w-full flex items-center justify-center overflow-hidden">
+            <div style={{ width: "100%", maxWidth: "620px" }}>
               <iframe
-                src="/HelpDude_Rotating_Wheel.html"
-                className="w-full h-full border-0 block pointer-events-none"
+                src="/HelpDude_Rotating_Wheel (2).html"
                 title="HelpDude Rotating Wheel"
+                style={{
+                  width: "100%",
+                  height: "620px",
+                  border: "none",
+                  background: "transparent",
+                  display: "block",
+                  overflow: "hidden",
+                }}
                 scrolling="no"
               />
             </div>
@@ -260,7 +264,7 @@ const Features = () => {
                 {/* Right Side: Image */}
                 <div className="relative w-full h-full flex items-center justify-center">
                   <img 
-                    src="/feature_page.png" 
+                    src="/feature_page.jpeg" 
                     alt="HelpDude support intelligence" 
                     className="w-full h-full object-contain rounded-3xl shadow-lg border border-slate-200/50 hover:scale-105 transition-transform duration-500" 
                   />

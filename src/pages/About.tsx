@@ -1,6 +1,6 @@
-import { useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { SEO } from "@/components/SEO";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import ImageWithLoader from "../components/ImageWithLoader";
 import {
   Mail,
@@ -141,9 +141,9 @@ const TeamCard = ({ dev }: { dev: TeamMember }) => {
             transition: isHovered
               ? "transform 0.1s ease-out, box-shadow 0.3s ease"
               : "transform 0.3s ease-out, box-shadow 0.3s ease",
-            ["--mouse-x" as const]: `${mousePos.x}px`,
-            ["--mouse-y" as const]: `${mousePos.y}px`,
-          }}
+            "--mouse-x": `${mousePos.x}px`,
+            "--mouse-y": `${mousePos.y}px`,
+          } as React.CSSProperties}
         >
           {/* Border: default subtle border */}
           <div
@@ -190,7 +190,7 @@ const TeamCard = ({ dev }: { dev: TeamMember }) => {
 
           {/* Left Column: Avatar */}
           <div className="flex-shrink-0 relative">
-            <div className="relative w-24 h-24 sm:w-26 sm:h-26 rounded-full p-0.5 bg-gradient-to-tr from-emerald-100 to-blue-100 shadow-inner transition-colors duration-500">
+            <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full p-0.5 bg-gradient-to-tr from-emerald-100 to-blue-100 shadow-inner transition-colors duration-500">
               <div className="w-full h-full rounded-full overflow-hidden flex items-center justify-center bg-slate-50 relative">
                 <div
                   className={`absolute inset-0 bg-gradient-to-br ${avatarBgGradient} flex items-center justify-center font-display font-black text-3xl sm:text-4xl tracking-wider transition-transform duration-300 ${isHovered ? "scale-110" : "scale-100"
@@ -453,7 +453,7 @@ const About = () => {
                   embedded in every product decision Supporticon makes.
                 </p>
                 <a
-                  href="https://www.linkedin.com/in/supporticon-gowthami"
+                  href="https://www.linkedin.com/in/supporticon-gowthami/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-3 bg-slate-50 text-slate-700 px-6 py-3 rounded-full font-bold hover:bg-indigo-50 hover:text-indigo-600 transition-all shadow-sm"

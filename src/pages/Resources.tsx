@@ -391,7 +391,7 @@ const Resources = () => {
                   controlsList="nodownload"
                 >
                   <source
-                    src="/User%20Interface.mp4"
+                    src={productDemoVideo}
                     type="video/mp4"
                   />
                   Your browser does not support the video tag.

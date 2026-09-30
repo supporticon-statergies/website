@@ -159,7 +159,7 @@ const Product = () => {
                 <div className="absolute inset-0 opacity-40 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
                 <div className="relative w-full h-full flex items-center justify-center">
                   <img 
-                    src="/product_page_image1.png" 
+                    src="/product_page_image1.jpeg" 
                     alt="Silent Churn problem" 
                     className="w-full h-full object-contain hover:scale-105 transition-transform duration-500 shadow-md rounded-2xl bg-white" 
                   />
@@ -184,7 +184,7 @@ const Product = () => {
                 <div className="absolute inset-0 opacity-40 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
                 <div className="relative w-full h-full flex items-center justify-center">
                   <img 
-                    src="/product_page_image2.png" 
+                    src="/product_page_image2.jpeg" 
                     alt="How HelpDude solves the problem" 
                     className="w-full h-full object-contain hover:scale-105 transition-transform duration-500 shadow-md rounded-2xl bg-white" 
                   />
@@ -438,9 +438,9 @@ const Product = () => {
           {/* Image outside the box but matching exact height */}
           <div className="lg:col-span-2 relative rounded-[2.5rem] shadow-xl border border-slate-200/60 overflow-hidden">
             <img 
-              src="/productpage_image.png" 
+              src="/productpage_image.jpeg" 
               alt="Product Dashboard" 
-              className="w-full h-full object-cover object-center"
+              className="w-full h-full object-contain object-center bg-slate-50"
             />
           </div>
         </div>

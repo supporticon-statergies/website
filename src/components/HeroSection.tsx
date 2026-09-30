@@ -1,7 +1,9 @@
-import { useRef, useState } from "react";
+import { useRef, useState, lazy, Suspense } from "react";
 import { motion, useTransform, useScroll } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
+
+const RequestDemoDialog = lazy(() => import("@/components/RequestDemoDialog"));
 import {
   ArrowRight,
   CheckCircle,
@@ -30,6 +32,7 @@ export const HeroSection = () => {
   const navigate = useNavigate();
   const { openAuthModal } = useAuth();
   const [showCXForm, setShowCXForm] = useState(false);
+  const [showDemoDialog, setShowDemoDialog] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const isMobile = useIsMobile();
 
@@ -150,9 +153,9 @@ export const HeroSection = () => {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="rounded-full px-9 py-6 text-base font-semibold border-slate-200 bg-white/80 hover:bg-white text-slate-800 w-full sm:w-auto"
-                  onClick={() => navigate("/product")}
-                >See How It Works 
+                  className="rounded-full px-9 py-6 text-base font-semibold border-slate-200 bg-white/80 hover:bg-white hover:border-primary hover:text-primary text-slate-800 w-full sm:w-auto transition-all duration-200"
+                  onClick={() => setShowDemoDialog(true)}
+                >Request a Demo
                 </Button>
               </motion.div>
             </div>
@@ -231,6 +234,12 @@ export const HeroSection = () => {
       </div>
 
       <CXLeadersForm open={showCXForm} onOpenChange={setShowCXForm} />
+
+      {showDemoDialog && (
+        <Suspense fallback={null}>
+          <RequestDemoDialog open={showDemoDialog} onOpenChange={setShowDemoDialog} />
+        </Suspense>
+      )}
     </section>
   );
 };

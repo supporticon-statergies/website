@@ -13,6 +13,7 @@ import {
   Check,
   Mail,
   ChevronDown,
+  AlertCircle,
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -84,41 +85,49 @@ const ProductManufacturing = ({ initialTab }: ProductPageProps) => {
   const navigate = useNavigate();
   useScrollToTop();
 
-  // Pricing gate form
-  const [pricingUnlocked, setPricingUnlocked] = useState(false);
+  // Pricing gate form — pricing is always blurred; form just captures the lead
   const [pricingForm, setPricingForm] = useState({ name: "", email: "", phone: "", company: "" });
   const [pricingSubmitting, setPricingSubmitting] = useState(false);
   const [pricingSubmitted, setPricingSubmitted] = useState(false);
+  const [pricingError, setPricingError] = useState("");
 
   const handlePricingFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setPricingSubmitting(true);
+    setPricingError("");
+
+    const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:3001";
+
     try {
-      const apiKey = import.meta.env.VITE_WEB3FORMS_KEY || "";
-      if (apiKey) {
-        await fetch("https://api.web3forms.com/submit", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            access_key: apiKey,
-            subject: "Pricing Inquiry - Hardware & Manufacturing",
-            to: "jaimanisa@supporticon.com",
-            name: pricingForm.name,
-            email: pricingForm.email,
-            phone: pricingForm.phone,
-            company: pricingForm.company,
-            message: `${pricingForm.name} from ${pricingForm.company} is requesting to view Hardware & Manufacturing pricing.\nPhone: ${pricingForm.phone}\nEmail: ${pricingForm.email}`,
-          }),
-        });
+      const response = await fetch(`${apiUrl}/api/pricing-inquiry`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name: pricingForm.name.trim(),
+          email: pricingForm.email.trim().toLowerCase(),
+          company: pricingForm.company.trim(),
+          phone: pricingForm.phone.trim(),
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setPricingSubmitted(true);
+      } else if (response.status === 429) {
+        setPricingError("Too many requests. Please wait 15 minutes before trying again.");
       } else {
-        // Fallback mailto
-        const body = encodeURIComponent(`Name: ${pricingForm.name}\nEmail: ${pricingForm.email}\nPhone: ${pricingForm.phone}\nCompany: ${pricingForm.company}\n\nRequesting Hardware & Manufacturing pricing.`);
-        window.open(`mailto:jaimanisa@supporticon.com?subject=Pricing Inquiry - Hardware %26 Manufacturing&body=${body}`);
+        const details: string[] = data.details || [];
+        setPricingError(
+          details.length > 0
+            ? details.join(" ")
+            : data.error || "Something went wrong. Please try again or email us at jaimanisa@supporticon.com"
+        );
       }
-      setPricingSubmitted(true);
-      setTimeout(() => setPricingUnlocked(true), 1200);
     } catch {
-      setPricingUnlocked(true);
+      setPricingError(
+        "Unable to reach our server. Please check your connection and try again, or email us at jaimanisa@supporticon.com"
+      );
     } finally {
       setPricingSubmitting(false);
     }
@@ -396,13 +405,12 @@ const ProductManufacturing = ({ initialTab }: ProductPageProps) => {
                 </div>
               </div>
 
-              {/* Pricing Cards — blurred until contact form is submitted */}
+              {/* Pricing Cards — fully visible */}
               <div className="relative">
 
-                {/* Blurred pricing cards */}
+                {/* Unblurred pricing cards */}
                 <div
                   className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch max-w-7xl mx-auto text-left"
-                  style={!pricingUnlocked ? { filter: "blur(6px)", pointerEvents: "none", userSelect: "none" } : {}}
                 >
                 {/* Starter Tier */}
                 <motion.div 
@@ -590,111 +598,6 @@ const ProductManufacturing = ({ initialTab }: ProductPageProps) => {
                   </motion.div>
                 </motion.div>
                 </div>
-
-                {/* Contact form overlay - shown when pricing is locked */}
-                {!pricingUnlocked && (
-                  <div className="absolute inset-0 flex flex-col items-center justify-center z-10 px-4">
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                      animate={{ opacity: 1, scale: 1, y: 0 }}
-                      transition={{ duration: 0.5, ease: "easeOut" }}
-                      className="bg-white/95 backdrop-blur-xl rounded-3xl border border-slate-200 shadow-2xl p-8 w-full max-w-md"
-                    >
-                      {pricingSubmitted ? (
-                        <div className="text-center py-4">
-                          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <Check className="w-8 h-8 text-green-600" />
-                          </div>
-                          <h3 className="text-xl font-bold text-slate-900 mb-2">Thank you!</h3>
-                          <p className="text-slate-500 text-sm">Our sales team will reach out shortly. Unlocking pricing now...</p>
-                        </div>
-                      ) : (
-                        <>
-                          <div className="text-center mb-6">
-                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 border border-red-200 text-red-600 text-xs font-bold uppercase tracking-wider mb-3">
-                              <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
-                              Pricing Available on Request
-                            </div>
-                            <h3 className="text-xl font-bold text-slate-900 mb-1">Want to see our pricing?</h3>
-                            <p className="text-slate-500 text-sm">Share your details and our sales team will personalise the best plan for you.</p>
-                          </div>
-
-                          <form onSubmit={handlePricingFormSubmit} className="space-y-3">
-                            <div className="grid grid-cols-2 gap-3">
-                              <div>
-                                <label className="block text-xs font-semibold text-slate-600 mb-1">Full Name *</label>
-                                <input
-                                  type="text"
-                                  required
-                                  placeholder="Jane Doe"
-                                  value={pricingForm.name}
-                                  onChange={(e) => setPricingForm(f => ({ ...f, name: e.target.value }))}
-                                  className="w-full px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 text-sm focus:outline-none focus:ring-2 focus:ring-red-400 focus:border-transparent transition"
-                                />
-                              </div>
-                              <div>
-                                <label className="block text-xs font-semibold text-slate-600 mb-1">Company *</label>
-                                <input
-                                  type="text"
-                                  required
-                                  placeholder="Acme Corp"
-                                  value={pricingForm.company}
-                                  onChange={(e) => setPricingForm(f => ({ ...f, company: e.target.value }))}
-                                  className="w-full px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 text-sm focus:outline-none focus:ring-2 focus:ring-red-400 focus:border-transparent transition"
-                                />
-                              </div>
-                            </div>
-                            <div>
-                              <label className="block text-xs font-semibold text-slate-600 mb-1">Work Email *</label>
-                              <input
-                                type="email"
-                                required
-                                placeholder="jane@company.com"
-                                value={pricingForm.email}
-                                onChange={(e) => setPricingForm(f => ({ ...f, email: e.target.value }))}
-                                className="w-full px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 text-sm focus:outline-none focus:ring-2 focus:ring-red-400 focus:border-transparent transition"
-                              />
-                            </div>
-                            <div>
-                              <label className="block text-xs font-semibold text-slate-600 mb-1">Phone Number *</label>
-                              <input
-                                type="tel"
-                                required
-                                placeholder="+91 98765 43210"
-                                value={pricingForm.phone}
-                                onChange={(e) => setPricingForm(f => ({ ...f, phone: e.target.value }))}
-                                className="w-full px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 text-sm focus:outline-none focus:ring-2 focus:ring-red-400 focus:border-transparent transition"
-                              />
-                            </div>
-                            <motion.button
-                              type="submit"
-                              disabled={pricingSubmitting}
-                              whileHover={{ scale: 1.02 }}
-                              whileTap={{ scale: 0.97 }}
-                              className="w-full mt-2 py-3 rounded-xl bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-bold text-sm tracking-wide shadow-lg shadow-red-500/30 transition-all duration-200 disabled:opacity-60 flex items-center justify-center gap-2"
-                            >
-                              {pricingSubmitting ? (
-                                <>
-                                  <motion.span
-                                    animate={{ rotate: 360 }}
-                                    transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
-                                    className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full block"
-                                  />
-                                  Sending...
-                                </>
-                              ) : (
-                                <span>Contact Sales &amp; View Pricing</span>
-                              )}
-                            </motion.button>
-                            <p className="text-center text-[10px] text-slate-400 mt-1">
-                              We will get back to you within 24 hours. No spam, ever.
-                            </p>
-                          </form>
-                        </>
-                      )}
-                    </motion.div>
-                  </div>
-                )}
               </div>
 
 

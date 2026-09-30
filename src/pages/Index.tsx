@@ -304,7 +304,7 @@ const Home = () => {
             {/* Options Cards added above the sentence */}
             <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
               {optionCards.map((opt) => (
-                <StaggerItem key={opt.number} className={`relative w-full rounded-2xl overflow-hidden bg-gradient-to-b ${opt.gradient} text-white shadow-xl hover:-translate-y-1 transition-transform duration-300`}>
+                <StaggerItem key={opt.number} className={`relative w-full h-full flex flex-col rounded-2xl overflow-hidden bg-gradient-to-b ${opt.gradient} text-white shadow-xl hover:-translate-y-1 transition-transform duration-300`}>
                   <div className="filter drop-shadow-[0_4px_4px_rgba(0,0,0,0.1)] relative z-10">
                     <div 
                       className="bg-white/95 backdrop-blur-sm w-full h-[140px] relative"
@@ -316,12 +316,14 @@ const Home = () => {
                     </div>
                   </div>
 
-                  <div className="absolute top-[10px] left-1/2 -translate-x-1/2 w-[120px] h-[120px] rounded-full bg-white shadow-lg flex items-center justify-center z-20 overflow-hidden">
-                    <img src={opt.image} alt={opt.title} className="w-[110px] h-[110px] object-contain scale-110" />
+                  <div className="absolute top-[10px] left-1/2 -translate-x-1/2 w-[120px] h-[120px] rounded-full bg-white shadow-lg flex items-center justify-center z-20">
+                    <img src={opt.image} alt={opt.title} className="w-[100px] h-[100px] object-contain" />
                   </div>
 
-                  <div className="px-6 pt-2 pb-10 text-center relative z-0">
-                    <h3 className="font-bold text-lg mb-3 tracking-wide text-black drop-shadow-sm">{opt.title}</h3>
+                  <div className="px-6 pt-2 pb-10 text-center relative z-0 flex-1 flex flex-col">
+                    <div className="min-h-[3.5rem] flex items-center justify-center mb-3">
+                      <h3 className="font-bold text-lg tracking-wide text-black drop-shadow-sm leading-tight">{opt.title}</h3>
+                    </div>
                     <p className="text-[13px] text-white/95 leading-relaxed font-medium">
                       {opt.desc}
                     </p>
@@ -364,10 +366,12 @@ const Home = () => {
                       />
                     </div>
                     
-                    <div className="text-center mt-auto relative z-20">
-                      <h3 className={`font-bold text-[15px] mb-3 tracking-wider uppercase ${opt.color}`}>
-                        {opt.title}
-                      </h3>
+                    <div className="text-center mt-auto relative z-20 flex-1 flex flex-col">
+                      <div className="min-h-[3.5rem] flex items-center justify-center mb-3">
+                        <h3 className={`font-bold text-[15px] tracking-wider uppercase leading-tight ${opt.color}`}>
+                          {opt.title}
+                        </h3>
+                      </div>
                       <p className="text-[12px] text-slate-500 leading-relaxed font-medium">
                         {opt.desc}
                       </p>

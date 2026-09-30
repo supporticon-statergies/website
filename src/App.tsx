@@ -149,6 +149,7 @@ const Preloader = ({
 
 import { AuthProvider } from "@/context/AuthContext";
 import { AuthModal } from "@/components/AuthModal";
+import { PromoModal } from "@/components/PromoModal";
 
 function App() {
   const isMobile = useIsMobile();
@@ -178,6 +179,7 @@ function App() {
             <div
               className={`relative min-h-screen overflow-x-hidden ${isLoading ? "h-screen overflow-hidden" : ""}`}
             >
+              <PromoModal />
               {!isMobile && (
                 <Suspense fallback={null}>
                   <WaveBackground />

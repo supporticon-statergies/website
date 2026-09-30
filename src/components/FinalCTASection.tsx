@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { FadeUp } from "@/components/ui/motion-utils";
@@ -12,10 +12,13 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 
+const RequestDemoDialog = lazy(() => import("@/components/RequestDemoDialog"));
+
 export function FinalCTASection() {
   const navigate = useNavigate();
   const { openAuthModal } = useAuth();
   const [showOptionDialog, setShowOptionDialog] = useState(false);
+  const [showDemoDialog, setShowDemoDialog] = useState(false);
   return (
     <section className="pt-12 pb-24 md:pt-16 md:pb-32 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-emerald-50 via-white to-teal-50 -z-10" />
@@ -42,6 +45,14 @@ export function FinalCTASection() {
             >
               Start Your Exclusive Trial
               <ChevronRight className="w-4 h-4 ml-1" />
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="rounded-full px-10 py-6 text-base font-semibold border-slate-200 bg-white/80 hover:bg-white hover:border-primary hover:text-primary text-slate-800 transition-all duration-200"
+              onClick={() => setShowDemoDialog(true)}
+            >
+              Request a Demo
             </Button>
           </div>
 
@@ -138,6 +149,11 @@ export function FinalCTASection() {
           </div>
         </DialogContent>
       </Dialog>
+      {showDemoDialog && (
+        <Suspense fallback={null}>
+          <RequestDemoDialog open={showDemoDialog} onOpenChange={setShowDemoDialog} />
+        </Suspense>
+      )}
     </section>
   );
 }

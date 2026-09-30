@@ -570,6 +570,15 @@ export const SiteHeader = () => {
             ) : (
               <div className="hidden sm:flex items-center gap-2">
                 <Button
+                  variant="outline"
+                  size="sm"
+                  aria-label="Request a Demo"
+                  className="rounded-full px-4 font-semibold border-slate-200 hover:border-primary hover:text-primary hover:bg-primary/5 text-slate-700 text-xs transition-all duration-200"
+                  onClick={() => setDemoDialogOpen(true)}
+                >
+                  Request a Demo
+                </Button>
+                <Button
                   variant="hero"
                   size="sm"
                   aria-label="Start Free Trial"
@@ -697,6 +706,17 @@ export const SiteHeader = () => {
                     </div>
                   ) : (
                     <div className="flex flex-col gap-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="w-full rounded-full font-semibold border-slate-200 hover:border-primary hover:text-primary hover:bg-primary/5 text-slate-700"
+                        onClick={() => {
+                          setMobileMenuOpen(false);
+                          setDemoDialogOpen(true);
+                        }}
+                      >
+                        Request a Demo
+                      </Button>
                       <Button
                         variant="hero"
                         size="sm"
