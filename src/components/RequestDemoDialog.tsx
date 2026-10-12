@@ -213,7 +213,7 @@ const RequestDemoDialog: React.FC<RequestDemoDialogProps> = ({
       } else {
         setServerError(
           data.error ||
-            "Something went wrong. Please try again or email us directly at jaimanisa@supporticon.com"
+            "Something went wrong. Please check your details and try again."
         );
         setSubmitState("error");
       }
@@ -221,7 +221,7 @@ const RequestDemoDialog: React.FC<RequestDemoDialogProps> = ({
       // Network error (server down, no internet, etc.)
       console.error("[RequestDemo] Network error:", err);
       setServerError(
-        "Unable to reach our server. Please check your connection and try again, or email us at jaimanisa@supporticon.com"
+        "Unable to reach our server. Please check your connection and try again."
       );
       setSubmitState("error");
     } finally {

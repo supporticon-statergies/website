@@ -121,12 +121,12 @@ const ProductManufacturing = ({ initialTab }: ProductPageProps) => {
         setPricingError(
           details.length > 0
             ? details.join(" ")
-            : data.error || "Something went wrong. Please try again or email us at jaimanisa@supporticon.com"
+            : data.error || "Something went wrong. Please check your details and try again."
         );
       }
     } catch {
       setPricingError(
-        "Unable to reach our server. Please check your connection and try again, or email us at jaimanisa@supporticon.com"
+        "Unable to reach our server. Please check your connection and try again."
       );
     } finally {
       setPricingSubmitting(false);

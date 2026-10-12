@@ -70,7 +70,7 @@ const Features = () => {
           <div className="relative w-full flex items-center justify-center overflow-hidden">
             <div style={{ width: "100%", maxWidth: "620px" }}>
               <iframe
-                src="/HelpDude_Rotating_Wheel (2).html"
+                src={`/HelpDude_Rotating_Wheel (2).html?v=${Date.now()}`}
                 title="HelpDude Rotating Wheel"
                 style={{
                   width: "100%",

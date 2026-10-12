@@ -24,7 +24,13 @@ import {
   Share2,
   Mail,
   Monitor,
+  ZoomIn,
 } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { useNavigate } from "react-router-dom";
 import { useScrollToTop } from "@/hooks/use-scroll-to-top";
 import { useState, useEffect } from "react";
@@ -100,35 +106,35 @@ const features = [
 const optionCards = [
   {
     number: "01",
-    title: "Get Answers, Not \"We'll Get Back to You\"",
-    desc: "No one wants to wait a day for a reply to a two-line question. With HelpDude, your customers can talk to the AI in real time, with live screen sharing, in their own language — getting accurate answers immediately, so their problem feels solved, not filed away.",
+    title: "Resolve Issues in Seconds, Not Days",
+    desc: "AI that understands context across your knowledge base, CRM, and help docs 30-second average resolution for automated tickets.",
     gradient: "from-primary to-primary/80",
     iconColor: "text-primary",
-    image: "/card 1.png",
+    image: "/image1.png",
   },
   {
     number: "02",
-    title: "Never Repeat Yourself Again",
-    desc: "Nothing frustrates a customer more than explaining their issue twice. If it needs human support, HelpDude passes on full context instantly, so every response feels like it's coming from someone who already knows their story.",
+    title: "Support Customers in Any Language—Natively",
+    desc: "40+ languages, cultural nuance included. Not just translation. Real support 65% higher repurchase rates when customers get support in their language.",
     gradient: "from-primary to-primary/80",
     iconColor: "text-primary",
-    image: "/card 2.png",
+    image: "/image2.png",
   },
   {
     number: "03",
-    title: "Help That Feels Human, Even When It's AI",
-    desc: "Customers don't want a bot. They want to feel heard. HelpDude blends AI speed with human empathy, so every interaction feels personal — not automated.",
+    title: "Humans Handle What Matters. AI Handles the Rest.",
+    desc: "   AI escalates to humans with full context—no repeated explanations Your team focuses on complex issues, not routine tickets",
     gradient: "from-primary to-primary/80",
     iconColor: "text-primary",
-    image: "/card 3.png",
+    image: "/image3.png",
   },
   {
     number: "04",
-    title: "One Conversation, Wherever They Reach You",
-    desc: "Email, chat, WhatsApp — customers don't think in \"channels,\" they just want to be understood. HelpDude keeps context seamless across every touchpoint, so the conversation never restarts.",
+    title: "One Conversation Across Every Channel",
+    desc: "Email, chat, WhatsApp, phone—context flows seamlessly Customers don't repeat themselves. Your team doesn't search five tools",
     gradient: "from-primary to-primary/80",
     iconColor: "text-primary",
-    image: "/card 4.png",
+    image: "/image4.png",
   },
 ];
 
@@ -213,6 +219,7 @@ const Home = () => {
   useScrollToTop();
   const navigate = useNavigate();
   const [showCXForm, setShowCXForm] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<{ src: string; title: string; desc: string } | null>(null);
 
   return (
     <>
@@ -243,11 +250,13 @@ const Home = () => {
               <FadeUp>
                 <div className="section-label mb-6">Platform</div>
                 <h2 className="font-display text-4xl md:text-5xl font-bold text-slate-900 mb-5 leading-tight">
-                  One Platform Every Way Your Customers Reach You
+               One Platform. Every Channel. Support That Understands
+
                 </h2>
                 <p className="text-lg text-slate-500 leading-relaxed mb-8">
-                 Whether it's email, chat, or WhatsApp — HelpDude meets your
-                 customers on their terms, in their language, with one consistent AI-powered experience.
+                 HelpDude brings together email, chat, WhatsApp, voice, and social into one 
+                 intelligent platform. Every conversation has full context. Every response feels 
+                 personal. Every hand-off to a human comes with the complete story.
                 </p>
                 <div className="flex flex-wrap gap-3">
                   {["Jira", "Confluence", "Freshdesk", "Slack", "Notion"].map((tool) => (
@@ -292,7 +301,7 @@ const Home = () => {
 
         {/* ── HOW IT WORKS ─────────────────────────────────────────────── */}
         <section className="pt-12 pb-12 md:pt-16 md:pb-16">
-          <div className="container mx-auto px-4 md:px-8 max-w-7xl xl:max-w-[1400px]">
+          <div className="container mx-auto px-4 md:px-6 max-w-7xl xl:max-w-[1520px]">
             <FadeUp>
               <div className="text-center mb-12">
                 <div className="section-label mb-4 text-emerald-600 bg-emerald-50 border-emerald-200">
@@ -302,29 +311,42 @@ const Home = () => {
             </FadeUp>
 
             {/* Options Cards added above the sentence */}
-            <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+            <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 xl:gap-7 mb-16">
               {optionCards.map((opt) => (
-                <StaggerItem key={opt.number} className={`relative w-full h-full flex flex-col rounded-2xl overflow-hidden bg-gradient-to-b ${opt.gradient} text-white shadow-xl hover:-translate-y-1 transition-transform duration-300`}>
-                  <div className="filter drop-shadow-[0_4px_4px_rgba(0,0,0,0.1)] relative z-10">
-                    <div 
-                      className="bg-white/95 backdrop-blur-sm w-full h-[140px] relative"
-                      style={{ clipPath: 'polygon(0 0, 100% 0, 100% 75%, 50% 100%, 0 75%)' }}
-                    >
-                      <div className={`absolute top-4 right-4 ${opt.iconColor}`}>
-                        <ChevronsRight className="w-5 h-5" />
-                      </div>
+                <StaggerItem key={opt.number} className="relative w-full h-full flex flex-col rounded-2xl overflow-hidden bg-white border border-slate-200/80 shadow-[0_10px_30px_rgba(0,0,0,0.06)] hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 group">
+                  {/* Clickable Image showcase container for maximum clarity */}
+                  <div 
+                    onClick={() => setSelectedImage({ src: opt.image, title: opt.title, desc: opt.desc })}
+                    className="relative w-full aspect-[16/11] bg-slate-900 overflow-hidden border-b border-slate-100/90 cursor-zoom-in"
+                    title="Click to view full image in high resolution"
+                  >
+                    <img 
+                      src={opt.image} 
+                      alt={opt.title} 
+                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500" 
+                    />
+                    
+                    {/* Badge number */}
+                    <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-md px-2.5 py-1 rounded-full text-[11px] font-bold text-slate-700 shadow-sm border border-white/60 z-10">
+                      {opt.number}
                     </div>
+
+                    {/* Quick zoom preview button */}
+                    <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-md px-2.5 py-1 rounded-full text-[11px] font-semibold text-slate-700 shadow-sm border border-white/60 flex items-center gap-1.5 group-hover:bg-primary group-hover:text-white transition-colors duration-200 z-10">
+                      <ZoomIn className="w-3.5 h-3.5" />
+                      <span>Enlarge</span>
+                    </div>
+
+                    {/* Hover overlay hint */}
+                    <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                   </div>
 
-                  <div className="absolute top-[10px] left-1/2 -translate-x-1/2 w-[120px] h-[120px] rounded-full bg-white shadow-lg flex items-center justify-center z-20">
-                    <img src={opt.image} alt={opt.title} className="w-[100px] h-[100px] object-contain" />
-                  </div>
-
-                  <div className="px-6 pt-2 pb-10 text-center relative z-0 flex-1 flex flex-col">
-                    <div className="min-h-[3.5rem] flex items-center justify-center mb-3">
-                      <h3 className="font-bold text-lg tracking-wide text-black drop-shadow-sm leading-tight">{opt.title}</h3>
-                    </div>
-                    <p className="text-[13px] text-white/95 leading-relaxed font-medium">
+                  {/* Content area */}
+                  <div className="p-6 text-left flex-1 flex flex-col bg-white">
+                    <h3 className="font-bold text-[17px] text-slate-900 leading-snug mb-3 group-hover:text-primary transition-colors duration-200">
+                      {opt.title}
+                    </h3>
+                    <p className="text-[13px] text-slate-600 leading-relaxed font-normal">
                       {opt.desc}
                     </p>
                   </div>
@@ -591,6 +613,33 @@ const Home = () => {
         </section>
 
         <CXLeadersForm open={showCXForm} onOpenChange={setShowCXForm} />
+
+        {/* High-Resolution Image Lightbox Modal */}
+        <Dialog open={!!selectedImage} onOpenChange={(open) => !open && setSelectedImage(null)}>
+          <DialogContent className="max-w-5xl w-[94vw] p-2 sm:p-4 bg-slate-950/95 border-slate-800 text-white rounded-2xl overflow-hidden backdrop-blur-xl">
+            {selectedImage && (
+              <div className="flex flex-col gap-3">
+                <div className="flex items-center justify-between px-2 pt-1 pb-1">
+                  <DialogTitle className="text-base sm:text-lg font-bold text-white tracking-wide">
+                    {selectedImage.title}
+                  </DialogTitle>
+                </div>
+                
+                <div className="relative rounded-xl overflow-hidden bg-slate-900 border border-slate-800/80 max-h-[75vh] flex items-center justify-center">
+                  <img
+                    src={selectedImage.src}
+                    alt={selectedImage.title}
+                    className="w-full h-auto max-h-[75vh] object-contain select-none"
+                  />
+                </div>
+
+                <p className="text-xs sm:text-sm text-slate-300 px-2 pb-1 font-medium leading-relaxed">
+                  {selectedImage.desc}
+                </p>
+              </div>
+            )}
+          </DialogContent>
+        </Dialog>
       </main>
     </>
   );
