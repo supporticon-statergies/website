@@ -96,41 +96,86 @@ const ProductManufacturing = ({ initialTab }: ProductPageProps) => {
     setPricingSubmitting(true);
     setPricingError("");
 
-    const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:3001";
+    const salesEmail = "mehashree@supporticon.com";
 
+    const isLocalhost =
+      typeof window !== "undefined" &&
+      (window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1");
+
+    const configuredApiUrl = import.meta.env.VITE_API_URL;
+    const shouldAttemptBackend =
+      isLocalhost ||
+      (Boolean(configuredApiUrl) && !configuredApiUrl.includes("localhost"));
+
+    let sentSuccessfully = false;
+
+    // 1. Try dedicated backend if reachable and appropriate
+    if (shouldAttemptBackend) {
+      try {
+        const apiUrl = configuredApiUrl || "http://localhost:3001";
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 4000);
+
+        const response = await fetch(`${apiUrl}/api/pricing-inquiry`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          signal: controller.signal,
+          body: JSON.stringify({
+            name: pricingForm.name.trim(),
+            email: pricingForm.email.trim().toLowerCase(),
+            company: pricingForm.company.trim(),
+            phone: pricingForm.phone.trim(),
+          }),
+        });
+        clearTimeout(timeoutId);
+
+        if (response.ok) {
+          const data = await response.json();
+          if (data.success) {
+            sentSuccessfully = true;
+            setPricingSubmitted(true);
+            return;
+          }
+        }
+      } catch {
+        console.log("[PricingForm] Backend server unreachable, using serverless fallback...");
+      }
+    }
+
+    // 2. Production Static Host Fallback: FormSubmit API directly to sales email
     try {
-      const response = await fetch(`${apiUrl}/api/pricing-inquiry`, {
+      const formSubmitUrl = `https://formsubmit.co/ajax/${encodeURIComponent(salesEmail)}`;
+      const fallbackResponse = await fetch(formSubmitUrl, {
         method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
         body: JSON.stringify({
           name: pricingForm.name.trim(),
           email: pricingForm.email.trim().toLowerCase(),
-          company: pricingForm.company.trim(),
-          phone: pricingForm.phone.trim(),
+          phone: pricingForm.phone.trim() || "Not provided",
+          company: pricingForm.company.trim() || "Not provided",
+          _subject: `New Pricing Inquiry: ${pricingForm.name.trim()} (${pricingForm.company.trim()})`,
+          _template: "table",
+          _captcha: "false",
         }),
       });
 
-      const data = await response.json();
-
-      if (response.ok && data.success) {
+      if (fallbackResponse.ok) {
+        sentSuccessfully = true;
         setPricingSubmitted(true);
-      } else if (response.status === 429) {
-        setPricingError("Too many requests. Please wait 15 minutes before trying again.");
-      } else {
-        const details: string[] = data.details || [];
-        setPricingError(
-          details.length > 0
-            ? details.join(" ")
-            : data.error || "Something went wrong. Please check your details and try again."
-        );
+        return;
       }
-    } catch {
-      setPricingError(
-        "Unable to reach our server. Please check your connection and try again."
-      );
-    } finally {
-      setPricingSubmitting(false);
+    } catch (fallbackErr) {
+      console.error("[PricingForm] Fallback error:", fallbackErr);
     }
+
+    if (!sentSuccessfully) {
+      setPricingError("Unable to send inquiry right now. Please check your connection and try again.");
+    }
+    setPricingSubmitting(false);
   };
 
   useEffect(() => {

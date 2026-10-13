@@ -170,10 +170,78 @@ const RequestDemoDialog: React.FC<RequestDemoDialogProps> = ({
     setIsSubmitting(true);
     setServerError("");
 
-    const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:3001";
+    // Target sales email
+    const salesEmail = "mehashree@supporticon.com";
 
+    const isLocalhost =
+      typeof window !== "undefined" &&
+      (window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1");
+
+    const configuredApiUrl = import.meta.env.VITE_API_URL;
+    // Only attempt the Node backend if on localhost OR if a dedicated HTTPS backend URL is configured
+    const shouldAttemptBackend =
+      isLocalhost ||
+      (Boolean(configuredApiUrl) && !configuredApiUrl.includes("localhost"));
+
+    let sentSuccessfully = false;
+
+    // 1. First attempt: Dedicated Backend Server API if reachable/configured
+    if (shouldAttemptBackend) {
+      try {
+        const apiUrl = configuredApiUrl || "http://localhost:3001";
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 4000); // 4 second timeout
+
+        const response = await fetch(`${apiUrl}/api/request-demo`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          signal: controller.signal,
+          body: JSON.stringify({
+            name: values.name.trim(),
+            email: values.email.trim().toLowerCase(),
+            company: values.company.trim(),
+            phone: values.phone?.trim() || "",
+            jobTitle: values.jobTitle?.trim() || "",
+            companySize: values.companySize || "",
+            interest: values.interest || "",
+            message: values.message?.trim() || "",
+          }),
+        });
+        clearTimeout(timeoutId);
+
+        if (response.ok) {
+          const data = await response.json();
+          if (data.success) {
+            sentSuccessfully = true;
+            setSubmitState("success");
+            reset();
+            return;
+          }
+        } else if (response.status === 422) {
+          const data = await response.json();
+          const details: string[] = data.details || [];
+          setServerError(
+            details.length > 0
+              ? details.join(" ")
+              : data.error || "Please check your inputs and try again."
+          );
+          setSubmitState("error");
+          return;
+        }
+      } catch {
+        // Backend not running / deployed without Node server (e.g. GitHub Pages)
+        console.log("[RequestDemo] Backend server unavailable, falling back to serverless dispatch...");
+      }
+    }
+
+    // 2. Production Static Host Fallback: FormSubmit API directly to sales email
     try {
-      const response = await fetch(`${apiUrl}/api/request-demo`, {
+      const formSubmitUrl = `https://formsubmit.co/ajax/${encodeURIComponent(salesEmail)}`;
+      const fallbackResponse = await fetch(formSubmitUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -182,51 +250,33 @@ const RequestDemoDialog: React.FC<RequestDemoDialogProps> = ({
         body: JSON.stringify({
           name: values.name.trim(),
           email: values.email.trim().toLowerCase(),
+          phone: values.phone?.trim() || "Not provided",
           company: values.company.trim(),
-          phone: values.phone?.trim() || "",
-          jobTitle: values.jobTitle?.trim() || "",
-          companySize: values.companySize || "",
-          interest: values.interest || "",
-          message: values.message?.trim() || "",
+          jobTitle: values.jobTitle?.trim() || "Not provided",
+          companySize: values.companySize || "Not provided",
+          interest: values.interest || "General",
+          message: values.message?.trim() || "No message provided",
+          _subject: `New Demo Request: ${values.name.trim()} (${values.company.trim()})`,
+          _template: "table",
+          _captcha: "false",
         }),
       });
 
-      const data = await response.json();
-
-      if (response.ok && data.success) {
+      if (fallbackResponse.ok) {
+        sentSuccessfully = true;
         setSubmitState("success");
         reset();
-      } else if (response.status === 422) {
-        // Validation errors from server
-        const details: string[] = data.details || [];
-        setServerError(
-          details.length > 0
-            ? details.join(" ")
-            : data.error || "Please check your inputs and try again."
-        );
-        setSubmitState("error");
-      } else if (response.status === 429) {
-        setServerError(
-          "Too many requests. Please wait 15 minutes before trying again."
-        );
-        setSubmitState("error");
-      } else {
-        setServerError(
-          data.error ||
-            "Something went wrong. Please check your details and try again."
-        );
-        setSubmitState("error");
+        return;
       }
-    } catch (err) {
-      // Network error (server down, no internet, etc.)
-      console.error("[RequestDemo] Network error:", err);
-      setServerError(
-        "Unable to reach our server. Please check your connection and try again."
-      );
-      setSubmitState("error");
-    } finally {
-      setIsSubmitting(false);
+    } catch (fallbackErr) {
+      console.error("[RequestDemo] Serverless fallback error:", fallbackErr);
     }
+
+    if (!sentSuccessfully) {
+      setServerError("Unable to send request right now. Please check your connection and try again.");
+      setSubmitState("error");
+    }
+    setIsSubmitting(false);
   };
 
   // ── Success state ─────────────────────────────────────────────────────────
