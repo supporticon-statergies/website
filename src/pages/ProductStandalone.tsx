@@ -452,10 +452,10 @@ const ProductStandalone = ({ initialTab }: ProductPageProps) => {
                 <motion.div
                   initial={{ opacity: 0, y: 60 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
                 >
-                  <div className={`h-full flex flex-col bg-white rounded-2xl border-2 border-[#619c3b] overflow-hidden transition-all duration-300 ${activeChannel === 'mail-web' ? 'shadow-2xl scale-105 -translate-y-4 relative z-10' : 'shadow-sm hover:shadow-md opacity-70 hover:opacity-100'}`}>
+                  <div className={`h-full flex flex-col bg-white rounded-2xl border-2 border-[#93D152] overflow-hidden transition-all duration-300 ${activeChannel === 'mail-web' ? 'shadow-2xl scale-105 -translate-y-4 relative z-10' : 'shadow-sm hover:shadow-md opacity-70 hover:opacity-100'}`}>
                     <div className="bg-transparent text-slate-900 p-6 min-h-[140px]">
-                      <div className="w-8 h-8 flex items-center justify-center rounded bg-[#619c3b]/10 mb-3">
-                        <MessageSquare className="w-4 h-4 text-[#619c3b]" />
+                      <div className="w-8 h-8 flex items-center justify-center rounded bg-[#93D152]/10 mb-3">
+                        <MessageSquare className="w-4 h-4 text-[#93D152]" />
                       </div>
                       <h3 className="text-xl font-bold mb-1">Basic</h3>
                       <p className="text-slate-700 text-xs">For growing teams running email and live chat together.</p>
@@ -485,10 +485,10 @@ const ProductStandalone = ({ initialTab }: ProductPageProps) => {
                       </div>
 
                       <ul className="space-y-3 flex-1 text-sm text-slate-800 mb-6">
-                        <li className="flex gap-2 items-start"><Check className="w-4 h-4 text-[#619c3b] mt-0.5 shrink-0" /> Everything in Starter, plus:</li>
-                        <li className="flex gap-2 items-start"><Check className="w-4 h-4 text-[#619c3b] mt-0.5 shrink-0" /> 5 agent seats, 2,000 tickets/mo</li>
-                        <li className="flex gap-2 items-start"><Check className="w-4 h-4 text-[#619c3b] mt-0.5 shrink-0" /> OCR on emailed attachments (Textract)</li>
-                        <li className="flex gap-2 items-start"><Check className="w-4 h-4 text-[#619c3b] mt-0.5 shrink-0" /> Priority email support</li>
+                        <li className="flex gap-2 items-start"><Check className="w-4 h-4 text-[#93D152] mt-0.5 shrink-0" /> Everything in Starter, plus:</li>
+                        <li className="flex gap-2 items-start"><Check className="w-4 h-4 text-[#93D152] mt-0.5 shrink-0" /> 5 agent seats, 2,000 tickets/mo</li>
+                        <li className="flex gap-2 items-start"><Check className="w-4 h-4 text-[#93D152] mt-0.5 shrink-0" /> OCR on emailed attachments (Textract)</li>
+                        <li className="flex gap-2 items-start"><Check className="w-4 h-4 text-[#93D152] mt-0.5 shrink-0" /> Priority email support</li>
                       </ul>
                     </div>
                   </div>

@@ -3,13 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <title>HelpDude — AI Support Ops</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#0a0e14;
     --card-bg:#11151d;
     --card-border:#242a35;
-    --green:#8DC63F;
-    --green-glow: rgba(141,198,63,0.55);
+    --green:#93D152;
+    --green-glow: rgba(147,209,82,0.55);
     --text-dim:#8b93a3;
     --text:#f2f4f7;
   }
@@ -17,7 +20,7 @@
   html,body{
     margin:0;padding:0;
     background:var(--bg);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    font-family: 'Inter', sans-serif;
     overflow:hidden;
     height:100%;
   }
@@ -36,7 +39,7 @@
     margin:0;
     transform-origin:top left;
     background:
-      radial-gradient(600px 340px at 50% 48%, rgba(141,198,63,0.06), transparent 70%),
+      radial-gradient(600px 340px at 50% 48%, rgba(147,209,82,0.06), transparent 70%),
       var(--bg);
   }
 
@@ -70,8 +73,8 @@
   }
   .card .icon{
     width:40px;height:40px;border-radius:50%;
-    background:rgba(141,198,63,0.12);
-    border:1px solid rgba(141,198,63,0.4);
+    background:rgba(147,209,82,0.12);
+    border:1px solid rgba(147,209,82,0.4);
     display:flex;align-items:center;justify-content:center;
     font-size:19px;
     flex-shrink:0;
@@ -95,12 +98,12 @@
     left:420px; top:130px;
     width:300px; height:300px;
     background:linear-gradient(180deg,#141a12,#0f130d);
-    border:1px solid rgba(141,198,63,0.55);
+    border:1px solid rgba(147,209,82,0.55);
     border-radius:18px;
     display:flex;flex-direction:column;align-items:center;justify-content:center;
     text-align:center;
     gap:10px;
-    box-shadow:0 0 70px 6px var(--green-glow), inset 0 0 40px rgba(141,198,63,0.05);
+    box-shadow:0 0 70px 6px var(--green-glow), inset 0 0 40px rgba(147,209,82,0.05);
   }
   .center-card .tagline{
     color:var(--text);
@@ -112,7 +115,7 @@
   .center-card .divider{
     width:60px;
     height:1px;
-    background:rgba(141,198,63,0.4);
+    background:rgba(147,209,82,0.4);
     margin:16px 0;
   }
   .center-card .brand{
@@ -153,11 +156,11 @@
 
   <svg class="lines" viewBox="0 0 1140 560" preserveAspectRatio="none">
     <!-- left -> center (5 sources) -->
-    <path class="flow-line" style="stroke:#8DC63F" d="M320,64  C 360,64  395,240 420,240" />
-    <path class="flow-line" style="stroke:#8DC63F" d="M320,172 C 360,172 400,260 420,260" />
-    <path class="flow-line" style="stroke:#8DC63F" d="M320,280 C 370,280 400,280 420,280" />
-    <path class="flow-line" style="stroke:#8DC63F" d="M320,388 C 360,388 400,300 420,300" />
-    <path class="flow-line" style="stroke:#8DC63F" d="M320,496 C 360,496 395,320 420,320" />
+    <path class="flow-line" style="stroke:#93D152" d="M320,64  C 360,64  395,240 420,240" />
+    <path class="flow-line" style="stroke:#93D152" d="M320,172 C 360,172 400,260 420,260" />
+    <path class="flow-line" style="stroke:#93D152" d="M320,280 C 370,280 400,280 420,280" />
+    <path class="flow-line" style="stroke:#93D152" d="M320,388 C 360,388 400,300 420,300" />
+    <path class="flow-line" style="stroke:#93D152" d="M320,496 C 360,496 395,320 420,320" />
 
     <!-- center -> right (Knowledge Base) -->
     <path class="flow-line" style="stroke:#5b8ee0" d="M720,280 C 755,280 775,280 820,280" />

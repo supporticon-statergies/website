@@ -22,8 +22,9 @@ export const VantaSection = () => {
           minHeight: 200.00,
           minWidth: 200.00,
           scale: 1.00,
-          scaleMobile: 1.00,
-          backgroundColor: 0x60905
+          backgroundColor: 0x060905,
+          color: 0x93D152,
+          color2: 0x93D152
         });
       }
     };

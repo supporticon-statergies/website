@@ -93,7 +93,7 @@ const TeamCard = ({ dev }: { dev: TeamMember }) => {
     .slice(0, 2)
     .toUpperCase();
 
-  const avatarBgGradient = "from-emerald-500 to-teal-600 text-emerald-50";
+  const avatarBgGradient = "text-white";
 
   const getLinkedinUrl = (handle: string) => {
     if (!handle) return "";
@@ -154,7 +154,7 @@ const TeamCard = ({ dev }: { dev: TeamMember }) => {
           <div
             className="absolute inset-0 rounded-[24px] transition-opacity duration-300 pointer-events-none"
             style={{
-              background: "linear-gradient(135deg, #10b981, #2dd4bf, #3b82f6)",
+              background: "linear-gradient(135deg, #93D152, #2dd4bf, #3b82f6)",
               padding: "1.5px",
               WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
               WebkitMaskComposite: "xor",
@@ -166,7 +166,7 @@ const TeamCard = ({ dev }: { dev: TeamMember }) => {
           <div
             className="absolute inset-0 rounded-[24px] transition-opacity duration-300 pointer-events-none"
             style={{
-              background: `radial-gradient(150px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(16, 185, 129, 0.7), rgba(59, 130, 246, 0.5) 50%, transparent 100%)`,
+              background: `radial-gradient(150px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(147,209,82,0.7), rgba(59, 130, 246, 0.5) 50%, transparent 100%)`,
               padding: "1.5px",
               WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
               WebkitMaskComposite: "xor",
@@ -181,7 +181,7 @@ const TeamCard = ({ dev }: { dev: TeamMember }) => {
             <div
               className="absolute inset-0 pointer-events-none transition-opacity duration-300"
               style={{
-                background: `radial-gradient(350px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(16, 185, 129, 0.12), rgba(59, 130, 246, 0.08) 40%, transparent 80%)`,
+                background: `radial-gradient(350px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(147,209,82,0.12), rgba(59, 130, 246, 0.08) 40%, transparent 80%)`,
                 opacity: isHovered ? 1 : 0,
               }}
             />
@@ -190,11 +190,12 @@ const TeamCard = ({ dev }: { dev: TeamMember }) => {
 
           {/* Left Column: Avatar */}
           <div className="flex-shrink-0 relative">
-            <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full p-0.5 bg-gradient-to-tr from-emerald-100 to-blue-100 shadow-inner transition-colors duration-500">
+            <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full p-0.5 shadow-inner transition-colors duration-500" style={{ background: 'linear-gradient(to top right, rgba(147,209,82,0.3), #bfdbfe)' }}>
               <div className="w-full h-full rounded-full overflow-hidden flex items-center justify-center bg-slate-50 relative">
                 <div
-                  className={`absolute inset-0 bg-gradient-to-br ${avatarBgGradient} flex items-center justify-center font-display font-black text-3xl sm:text-4xl tracking-wider transition-transform duration-300 ${isHovered ? "scale-110" : "scale-100"
+                  className={`absolute inset-0 flex items-center justify-center font-display font-black text-3xl sm:text-4xl tracking-wider transition-transform duration-300 ${isHovered ? "scale-110" : "scale-100"
                     }`}
+                  style={{ background: 'linear-gradient(135deg, #93D152, #5ab330)', color: 'white' }}
                 >
                   {initials}
                 </div>
@@ -212,12 +213,12 @@ const TeamCard = ({ dev }: { dev: TeamMember }) => {
                     {dev.name}
                   </h3>
                   {dev.badge && (
-                    <span className="text-[8px] font-extrabold tracking-wider uppercase px-2 py-0.5 rounded-full bg-emerald-500 text-white shadow-sm shadow-emerald-500/30 whitespace-nowrap">
+                    <span className="text-[8px] font-extrabold tracking-wider uppercase px-2 py-0.5 rounded-full text-white shadow-sm whitespace-nowrap" style={{ background: '#93D152', boxShadow: '0 1px 6px rgba(147,209,82,0.30)' }}>
                       {dev.badge}
                     </span>
                   )}
                 </div>
-                <p className="text-emerald-600 font-bold text-xs tracking-wider uppercase mt-1">
+                <p className="font-bold text-xs tracking-wider uppercase mt-1" style={{ color: '#93D152' }}>
                   {dev.role}
                 </p>
               </div>
@@ -357,8 +358,8 @@ const About = () => {
 
         {/* Central Quote */}
         <div className="mt-12 max-w-5xl mx-auto px-4">
-          <div className="rounded-3xl bg-emerald-50/50 border border-emerald-100 shadow-lg p-8 md:p-10 text-center relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 to-teal-500"></div>
+          <div className="rounded-3xl bg-[#93D152]/5 border border-[#93D152]/20 shadow-lg p-8 md:p-10 text-center relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-1 rounded-t-3xl" style={{ background: 'linear-gradient(to right, #93D152, #93D152cc)' }}></div>
             <p className="text-xl md:text-2xl font-display font-medium text-slate-800 leading-relaxed italic relative z-10">
               "We envision a world where every helpdesk system interaction builds customer trust, deepens product understanding,<br className="hidden md:block" /> and strengthens the long term relationship between a business and the people it serves."
             </p>
@@ -483,7 +484,7 @@ const About = () => {
             </p>
 
             {/* Decorative gradient line */}
-            <div className="w-24 h-1.5 bg-gradient-to-r from-emerald-500 via-teal-500 to-blue-500 mx-auto mt-6 rounded-full shadow-sm" />
+            <div className="w-24 h-1.5 mx-auto mt-6 rounded-full shadow-sm" style={{ background: 'linear-gradient(to right, #93D152, #93D152aa, #3b82f6)' }} />
           </div>
 
           <StaggerContainer className="flex flex-wrap gap-8 max-w-6xl mx-auto justify-center relative z-10">

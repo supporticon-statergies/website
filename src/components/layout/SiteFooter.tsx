@@ -38,8 +38,8 @@ export const SiteFooter = () => {
           scaleMobile: 1.00,
           // White background with pistachio/emerald green dots
           backgroundColor: 0x060905,
-          color: 0x6ee7b7,      // emerald-300 (light pistachio)
-          color2: 0xa7f3d0,     // emerald-200 (even lighter pistachio)
+          color: 0x93D152,      // brand green #93D152
+          color2: 0x93D152,     // brand green #93D152
           size: 3.00,
           spacing: 35.00,
         });
@@ -82,6 +82,7 @@ export const SiteFooter = () => {
                 src={supporticonUploads.logo}
                 alt="Supporticon logo"
                 className="h-10 w-auto opacity-90 group-hover:opacity-100 transition-opacity"
+                style={{ filter: 'brightness(1.2) saturate(1.3)' }}
               />
             </Link>
             <p className="text-sm text-white/80 leading-relaxed max-w-[220px]">

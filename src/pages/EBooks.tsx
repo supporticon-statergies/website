@@ -74,9 +74,9 @@ const EBookCover = () => (
       maxWidth: 300,
       aspectRatio: "3/4",
       background:
-        "linear-gradient(160deg, #0f172a 0%, #1e293b 60%, #134e2a 100%)",
+        "linear-gradient(160deg, #0f172a 0%, #1e293b 60%, #243910 100%)",
       borderRadius: "0.75rem 1.5rem 1.5rem 0.75rem",
-      boxShadow: "6px 6px 0px #a8d97f, 0 20px 60px rgba(0,0,0,0.4)",
+      boxShadow: "6px 6px 0px #93D152, 0 20px 60px rgba(0,0,0,0.4)",
       padding: "2rem 1.75rem",
       display: "flex",
       flexDirection: "column" as const,
@@ -133,15 +133,15 @@ const EBookCover = () => (
           height="26"
           viewBox="0 0 24 24"
           fill="none"
-          stroke="#a8d97f"
+          stroke="#93D152"
           strokeWidth="1.8"
           strokeLinecap="round"
           strokeLinejoin="round"
         >
           <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-          <circle cx="9" cy="10" r="1" fill="#a8d97f" />
-          <circle cx="12" cy="10" r="1" fill="#a8d97f" />
-          <circle cx="15" cy="10" r="1" fill="#a8d97f" />
+          <circle cx="9" cy="10" r="1" fill="#93D152" />
+          <circle cx="12" cy="10" r="1" fill="#93D152" />
+          <circle cx="15" cy="10" r="1" fill="#93D152" />
         </svg>
       </div>
 
@@ -151,7 +151,7 @@ const EBookCover = () => (
           fontSize: 9,
           fontWeight: 700,
           letterSpacing: "0.15em",
-          color: "#a8d97f",
+          color: "#93D152",
           textTransform: "uppercase",
           marginBottom: "1rem",
         }}
@@ -204,7 +204,7 @@ const EBookCover = () => (
         </span>
         <div
           style={{
-            background: "#a8d97f",
+            background: "#93D152",
             color: "#0f172a",
             borderRadius: 6,
             padding: "4px 10px",
@@ -269,7 +269,7 @@ export default function EBooks() {
     width: "100%",
     padding: "0.7rem 1rem",
     borderRadius: "0.6rem",
-    border: `1.5px solid ${errors[field] ? "#f87171" : "#d1fae5"}`,
+    border: `1.5px solid ${errors[field] ? "#f87171" : "#e6f5d5"}`,
     fontSize: "0.92rem",
     fontFamily: "inherit",
     outline: "none",
@@ -307,13 +307,13 @@ export default function EBooks() {
         >
           <div
             style={{
-              background: "linear-gradient(160deg, #ffffff 0%, #f0fdf4 100%)",
+              background: "linear-gradient(160deg, #ffffff 0%, #f5faee 100%)",
               borderRadius: "1.5rem",
               padding: "2.5rem 2rem",
               maxWidth: 460,
               width: "100%",
               boxShadow: "0 32px 80px rgba(0,0,0,0.18)",
-              border: "1px solid rgba(200,230,160,0.5)",
+              border: "1px solid rgba(147,209,82,0.5)",
               position: "relative",
               animation: "modalIn 0.3s cubic-bezier(0.34,1.56,0.64,1)",
             }}
@@ -351,15 +351,15 @@ export default function EBooks() {
                   width: 52,
                   height: 52,
                   borderRadius: "1rem",
-                  background: "#dcfce7",
-                  border: "1px solid #bbf7d0",
+                  background: "#e6f5d5",
+                  border: "1px solid #ceeca8",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   margin: "0 auto 1rem",
                 }}
               >
-                <Download style={{ width: 22, height: 22, color: "#16a34a" }} />
+                <Download style={{ width: 22, height: 22, color: "#93D152" }} />
               </div>
               <h2
                 style={{
@@ -384,7 +384,7 @@ export default function EBooks() {
                 <p
                   style={{
                     fontWeight: 700,
-                    color: "#16a34a",
+                    color: "#93D152",
                     fontSize: "1.1rem",
                     margin: 0,
                   }}
@@ -548,7 +548,7 @@ export default function EBooks() {
                   style={{
                     marginTop: "0.5rem",
                     padding: "0.85rem 1rem",
-                    background: "linear-gradient(135deg, #4ade80, #16a34a)",
+                    background: "linear-gradient(135deg, #a4dc60, #93D152)",
                     color: "#fff",
                     border: "none",
                     borderRadius: "0.625rem",
@@ -620,9 +620,9 @@ export default function EBooks() {
                   display: "inline-flex",
                   alignItems: "center",
                   gap: 6,
-                  background: "#E8F5D8",
-                  color: "#166534",
-                  border: "1px solid #C8E6A0",
+                  background: "#f5faee",
+                  color: "#497022",
+                  border: "1px solid #ceeca8",
                   borderRadius: 999,
                   padding: "4px 14px",
                   fontSize: 12,
@@ -688,7 +688,7 @@ export default function EBooks() {
                 models to get there.{" "}
                 <Link
                   to="/resources"
-                  style={{ color: "#16a34a", textDecoration: "underline" }}
+                  style={{ color: "#93D152", textDecoration: "underline" }}
                 >
                   Explore all our resources here.
                 </Link>
@@ -752,7 +752,7 @@ export default function EBooks() {
                   style={{
                     width: "100%",
                     padding: "0.85rem 1rem",
-                    background: "linear-gradient(135deg, #4ade80, #16a34a)",
+                    background: "linear-gradient(135deg, #a4dc60, #93D152)",
                     color: "#fff",
                     border: "none",
                     borderRadius: "0.625rem",
@@ -856,13 +856,13 @@ export default function EBooks() {
                       width: 48,
                       height: 48,
                       borderRadius: "0.75rem",
-                      background: "#E8F5D8",
-                      border: "1px solid #C8E6A0",
+                      background: "#f5faee",
+                      border: "1px solid #ceeca8",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       marginBottom: "1.25rem",
-                      color: "#16a34a",
+                      color: "#93D152",
                     }}
                   >
                     <section.icon style={{ width: 22, height: 22 }} />
@@ -871,7 +871,7 @@ export default function EBooks() {
                     style={{
                       fontSize: 11,
                       fontWeight: 700,
-                      color: "#a8d97f",
+                      color: "#93D152",
                       textTransform: "uppercase",
                       letterSpacing: "0.08em",
                       marginBottom: "0.5rem",
@@ -963,7 +963,7 @@ export default function EBooks() {
                       style={{
                         width: 18,
                         height: 18,
-                        color: "#16a34a",
+                        color: "#93D152",
                         flexShrink: 0,
                       }}
                     />
@@ -1039,7 +1039,7 @@ export default function EBooks() {
                 display: "inline-flex",
                 alignItems: "center",
                 gap: 8,
-                background: "#a8d97f",
+                background: "#93D152",
                 color: "#0f172a",
                 border: "none",
                 borderRadius: "0.75rem",

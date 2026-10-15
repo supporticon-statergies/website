@@ -346,7 +346,7 @@ export function LiveChatAgent({
               <div className="flex flex-col items-center text-center mb-6">
                 <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-emerald-100 shadow-lg mb-4 relative">
                   <ChromaKeyVideo src="/avatar video.webm" fallbackSrc="/avatar.jpg" className="w-full h-full" chromaKey={false} />
-                  <div className="absolute bottom-1 right-1 w-4 h-4 bg-emerald-500 border-2 border-white rounded-full animate-pulse" />
+                  <div className="absolute bottom-1 right-1 w-4 h-4 border-2 border-white rounded-full animate-pulse" style={{ background: '#93D152' }} />
                 </div>
                 <h2 className="text-xl font-bold text-slate-800">Talk to Sarah</h2>
                 <p className="text-sm text-slate-500 mt-1">Enter your details to start a live voice or chat session.</p>
@@ -374,14 +374,15 @@ export function LiveChatAgent({
                   <div className="grid grid-cols-3 gap-2">
                     {LANGUAGES.map((l) => (
                       <button type="button" key={l.code} onClick={() => setSelectedLang(l.code)}
-                        className={`text-xs py-1.5 px-2 rounded-lg border transition-all font-medium ${selectedLang === l.code ? "bg-emerald-600 text-white border-emerald-600 shadow" : "bg-white text-slate-600 border-slate-200 hover:border-emerald-400"}`}>
+                        className={`text-xs py-1.5 px-2 rounded-lg border transition-all font-medium ${selectedLang === l.code ? "text-white border-transparent shadow" : "bg-white text-slate-600 border-slate-200 hover:border-[#93D152]"}`}
+                        style={selectedLang === l.code ? { background: '#93D152', borderColor: '#93D152' } : {}}>
                         {l.label}
                       </button>
                     ))}
                   </div>
                 </div>
 
-                <Button type="submit" className="w-full bg-emerald-600 hover:bg-emerald-700 text-white">
+                <Button type="submit" className="w-full text-white" style={{ background: '#93D152' }} onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = '#7db83a'} onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = '#93D152'}>
                   Start Chat →
                 </Button>
               </form>
@@ -399,13 +400,13 @@ export function LiveChatAgent({
               className="flex flex-col h-[640px] max-h-[90vh]"
             >
               {/* Header */}
-              <div className="bg-gradient-to-r from-emerald-600 to-teal-600 px-4 py-3 flex items-center gap-3 shadow relative">
+              <div className="px-4 py-3 flex items-center gap-3 shadow relative" style={{ background: 'linear-gradient(to right, #93D152, #7db83a)' }}>
                 <button onClick={() => onOpenChange(false)} className="absolute right-3 top-1/2 -translate-y-1/2 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 p-1.5 rounded-full transition-colors">
                   <X className="w-3.5 h-3.5" />
                 </button>
 
                 <div className="relative shrink-0">
-                  <div className={`w-10 h-10 rounded-full overflow-hidden border-2 ${isSpeaking ? "border-amber-300" : "border-emerald-300"} transition-colors`}>
+                  <div className={`w-10 h-10 rounded-full overflow-hidden border-2 ${isSpeaking ? "border-amber-300" : ""} transition-colors`} style={!isSpeaking ? { borderColor: 'rgba(147,209,82,0.6)' } : {}}>
                     <ChromaKeyVideo src="/avatar video.webm" fallbackSrc="/avatar.jpg" className="w-full h-full" chromaKey={false} />
                   </div>
                   <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-400 border-2 border-emerald-600 rounded-full" />

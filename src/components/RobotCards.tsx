@@ -1,4 +1,4 @@
-import { StaggerContainer, StaggerItem, HoverCard } from "@/components/ui/motion-utils";
+﻿import { StaggerContainer, StaggerItem, HoverCard } from "@/components/ui/motion-utils";
 
 export const RobotCards = () => {
   return (
@@ -18,17 +18,17 @@ export const RobotCards = () => {
           fontSize: "13px",
           letterSpacing: "0.3px",
           marginBottom: "28px",
-          fontFamily: "'Poppins', 'Segoe UI', Arial, sans-serif",
+          fontFamily: "'Inter', sans-serif",
         }}
       >
-        Swipe wisely, spend smart — see what Aspire can do for you
+        Swipe wisely, spend smart â€” see what Aspire can do for you
       </div>
 
       <StaggerContainer
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7"
         style={{ maxWidth: "1200px", margin: "0 auto" }}
       >
-        {/* CARD 1 — Personality / character */}
+        {/* CARD 1 â€” Personality / character */}
         <StaggerItem>
           <HoverCard>
             <div
@@ -43,7 +43,7 @@ export const RobotCards = () => {
                 alignItems: "center",
                 textAlign: "center",
                 minHeight: "420px",
-                fontFamily: "'Poppins', 'Segoe UI', Arial, sans-serif",
+                fontFamily: "'Inter', sans-serif",
               }}
             >
               <div style={{ width: "100%", height: "165px", position: "relative", display: "flex", alignItems: "flex-end", justifyContent: "center", marginBottom: "6px", overflow: "visible" }}>
@@ -105,7 +105,7 @@ export const RobotCards = () => {
           </HoverCard>
         </StaggerItem>
 
-        {/* CARD 2 — Special promo / gift */}
+        {/* CARD 2 â€” Special promo / gift */}
         <StaggerItem>
           <HoverCard>
             <div
@@ -120,7 +120,7 @@ export const RobotCards = () => {
                 alignItems: "center",
                 textAlign: "center",
                 minHeight: "420px",
-                fontFamily: "'Poppins', 'Segoe UI', Arial, sans-serif",
+                fontFamily: "'Inter', sans-serif",
               }}
             >
               <div style={{ width: "100%", height: "165px", position: "relative", display: "flex", alignItems: "flex-end", justifyContent: "center", marginBottom: "6px", overflow: "visible" }}>
@@ -179,7 +179,7 @@ export const RobotCards = () => {
           </HoverCard>
         </StaggerItem>
 
-        {/* CARD 3 — Better cashflow */}
+        {/* CARD 3 â€” Better cashflow */}
         <StaggerItem>
           <HoverCard>
             <div
@@ -194,7 +194,7 @@ export const RobotCards = () => {
                 alignItems: "center",
                 textAlign: "center",
                 minHeight: "420px",
-                fontFamily: "'Poppins', 'Segoe UI', Arial, sans-serif",
+                fontFamily: "'Inter', sans-serif",
               }}
             >
               <div style={{ width: "100%", height: "165px", position: "relative", display: "flex", alignItems: "flex-end", justifyContent: "center", marginBottom: "6px", overflow: "visible" }}>
@@ -254,7 +254,7 @@ export const RobotCards = () => {
           </HoverCard>
         </StaggerItem>
 
-        {/* CARD 4 — Security / fraud protection */}
+        {/* CARD 4 â€” Security / fraud protection */}
         <StaggerItem>
           <HoverCard>
             <div
@@ -269,7 +269,7 @@ export const RobotCards = () => {
                 alignItems: "center",
                 textAlign: "center",
                 minHeight: "420px",
-                fontFamily: "'Poppins', 'Segoe UI', Arial, sans-serif",
+                fontFamily: "'Inter', sans-serif",
               }}
             >
               <div style={{ width: "100%", height: "165px", position: "relative", display: "flex", alignItems: "flex-end", justifyContent: "center", marginBottom: "6px", overflow: "visible" }}>
@@ -338,7 +338,7 @@ export const RobotCards = () => {
         className="grid grid-cols-1 md:grid-cols-3 gap-7 mt-12"
         style={{ maxWidth: "1100px", margin: "48px auto 0" }}
       >
-        {/* CARD 1 — Personality / character */}
+        {/* CARD 1 â€” Personality / character */}
         <StaggerItem>
           <HoverCard>
             <div
@@ -353,7 +353,7 @@ export const RobotCards = () => {
                 alignItems: "center",
                 textAlign: "center",
                 minHeight: "420px",
-                fontFamily: "'Poppins', 'Segoe UI', Arial, sans-serif",
+                fontFamily: "'Inter', sans-serif",
               }}
             >
               <div style={{ width: "100%", height: "165px", position: "relative", display: "flex", alignItems: "flex-end", justifyContent: "center", marginBottom: "6px", overflow: "visible" }}>
@@ -415,7 +415,7 @@ export const RobotCards = () => {
           </HoverCard>
         </StaggerItem>
 
-        {/* CARD 2 — Special promo / gift */}
+        {/* CARD 2 â€” Special promo / gift */}
         <StaggerItem>
           <HoverCard>
             <div
@@ -430,7 +430,7 @@ export const RobotCards = () => {
                 alignItems: "center",
                 textAlign: "center",
                 minHeight: "420px",
-                fontFamily: "'Poppins', 'Segoe UI', Arial, sans-serif",
+                fontFamily: "'Inter', sans-serif",
               }}
             >
               <div style={{ width: "100%", height: "165px", position: "relative", display: "flex", alignItems: "flex-end", justifyContent: "center", marginBottom: "6px", overflow: "visible" }}>
@@ -489,7 +489,7 @@ export const RobotCards = () => {
           </HoverCard>
         </StaggerItem>
 
-        {/* CARD 3 — Better cashflow */}
+        {/* CARD 3 â€” Better cashflow */}
         <StaggerItem>
           <HoverCard>
             <div
@@ -504,7 +504,7 @@ export const RobotCards = () => {
                 alignItems: "center",
                 textAlign: "center",
                 minHeight: "420px",
-                fontFamily: "'Poppins', 'Segoe UI', Arial, sans-serif",
+                fontFamily: "'Inter', sans-serif",
               }}
             >
               <div style={{ width: "100%", height: "165px", position: "relative", display: "flex", alignItems: "flex-end", justifyContent: "center", marginBottom: "6px", overflow: "visible" }}>
@@ -567,3 +567,5 @@ export const RobotCards = () => {
     </section>
   );
 };
+
+

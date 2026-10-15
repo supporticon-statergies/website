@@ -285,7 +285,12 @@ const RequestDemoDialog: React.FC<RequestDemoDialogProps> = ({
       <Dialog open={open} onOpenChange={handleOpenChange}>
         <DialogContent className="sm:max-w-md p-0 overflow-hidden rounded-2xl border-0 shadow-2xl">
           {/* Header */}
-          <div className="bg-gradient-to-br from-primary via-primary/90 to-emerald-500 px-6 pt-6 pb-5 text-white">
+          <div
+            className="px-6 pt-6 pb-5 text-white relative overflow-hidden"
+            style={{
+              background: "linear-gradient(135deg, #1A7FB5 0%, #157ea8 45%, #93D152 100%)",
+            }}
+          >
             <DialogHeader>
               <DialogTitle className="sr-only">Demo Request Sent</DialogTitle>
               <DialogDescription className="sr-only">
@@ -296,8 +301,8 @@ const RequestDemoDialog: React.FC<RequestDemoDialogProps> = ({
 
           {/* Success body */}
           <div className="px-8 py-10 bg-white flex flex-col items-center text-center">
-            <div className="w-16 h-16 rounded-full bg-emerald-50 border-2 border-emerald-200 flex items-center justify-center mb-5">
-              <CheckCircle2 className="w-9 h-9 text-emerald-500" />
+            <div className="w-16 h-16 rounded-full border-2 flex items-center justify-center mb-5" style={{ background: 'rgba(147,209,82,0.08)', borderColor: 'rgba(147,209,82,0.3)' }}>
+              <CheckCircle2 className="w-9 h-9" style={{ color: '#93D152' }} />
             </div>
             <h2 className="text-xl font-bold text-slate-900 mb-3">
               Request Received!
@@ -327,23 +332,34 @@ const RequestDemoDialog: React.FC<RequestDemoDialogProps> = ({
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent className="sm:max-w-2xl p-0 overflow-hidden rounded-2xl border-0 shadow-2xl max-h-[95vh] overflow-y-auto">
         {/* Header gradient banner */}
-        <div className="bg-gradient-to-br from-primary via-primary/90 to-emerald-500 px-6 pt-6 pb-5 text-white sticky top-0 z-10">
-          <div className="flex items-start justify-between">
+        <div
+          className="px-6 pt-6 pb-5 text-white sticky top-0 z-10 relative overflow-hidden"
+          style={{
+            background: "linear-gradient(135deg, #1A7FB5 0%, #157ea8 45%, #93D152 100%)",
+          }}
+        >
+          {/* Subtle ambient lighting orb */}
+          <div className="absolute -top-10 -right-10 w-32 h-32 rounded-full bg-white/10 blur-xl pointer-events-none" />
+
+          <div className="flex items-start justify-between relative z-10">
             <DialogHeader>
               <div className="flex items-center gap-2 mb-1">
-                <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
+                <div className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center shadow-sm">
                   <Sparkles className="w-4 h-4 text-white" />
                 </div>
-                <DialogTitle className="text-white text-xl font-bold">
+                <DialogTitle className="text-white text-xl font-bold tracking-tight">
                   Request a Demo
                 </DialogTitle>
               </div>
-              <DialogDescription className="text-white/80 text-sm">
+              <DialogDescription className="text-white/90 text-sm">
                 Fill in your details and our sales team will reach out within 24
                 hours.
               </DialogDescription>
             </DialogHeader>
-            <DialogClose className="mt-1 rounded-full w-7 h-7 flex items-center justify-center bg-white/20 hover:bg-white/30 transition-colors text-white shrink-0" aria-label="Close">
+            <DialogClose
+              className="mt-1 rounded-full w-8 h-8 flex items-center justify-center bg-white/20 hover:bg-white/30 backdrop-blur-sm transition-colors text-white shrink-0 shadow-sm"
+              aria-label="Close"
+            >
               <X className="w-4 h-4" />
             </DialogClose>
           </div>

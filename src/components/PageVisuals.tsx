@@ -645,7 +645,7 @@ export function AmbientAccent({
   color?: "emerald" | "blue" | "amber";
 }) {
   const colorMap = {
-    emerald: "rgba(16,185,129,0.10)",
+    emerald: "rgba(147,209,82,0.15)",
     blue:    "rgba(59,130,246,0.10)",
     amber:   "rgba(245,158,11,0.10)",
   };

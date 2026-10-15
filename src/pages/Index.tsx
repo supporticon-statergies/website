@@ -107,7 +107,7 @@ const optionCards = [
   {
     number: "01",
     title: "Resolve Issues in Seconds, Not Days",
-    desc: "AI that understands context across your knowledge base, CRM, and help docs 30-second average resolution for automated tickets.",
+    desc: "AI that understands context across your knowledge base, CRM, and help docs. 30-second average resolution for automated tickets.",
     gradient: "from-primary to-primary/80",
     iconColor: "text-primary",
     image: "/image1.png",
@@ -115,7 +115,7 @@ const optionCards = [
   {
     number: "02",
     title: "Support Customers in Any Language—Natively",
-    desc: "40+ languages, cultural nuance included. Not just translation. Real support 65% higher repurchase rates when customers get support in their language.",
+    desc: "40+ languages, cultural nuance included. Not just translation — real support. 65% higher repurchase rates when customers get support in their language.",
     gradient: "from-primary to-primary/80",
     iconColor: "text-primary",
     image: "/image2.png",
@@ -123,7 +123,7 @@ const optionCards = [
   {
     number: "03",
     title: "Humans Handle What Matters. AI Handles the Rest.",
-    desc: "   AI escalates to humans with full context—no repeated explanations Your team focuses on complex issues, not routine tickets",
+    desc: "AI escalates to humans with full context — no repeated explanations. Your team focuses on complex issues, not routine tickets.",
     gradient: "from-primary to-primary/80",
     iconColor: "text-primary",
     image: "/image3.png",
@@ -131,7 +131,7 @@ const optionCards = [
   {
     number: "04",
     title: "One Conversation Across Every Channel",
-    desc: "Email, chat, WhatsApp, phone—context flows seamlessly Customers don't repeat themselves. Your team doesn't search five tools",
+    desc: "Email, chat, WhatsApp, phone — context flows seamlessly. Customers don't repeat themselves. Your team doesn't search five tools.",
     gradient: "from-primary to-primary/80",
     iconColor: "text-primary",
     image: "/image4.png",
@@ -303,52 +303,58 @@ const Home = () => {
         <section className="pt-12 pb-12 md:pt-16 md:pb-16">
           <div className="container mx-auto px-4 md:px-6 max-w-7xl xl:max-w-[1520px]">
             <FadeUp>
-              <div className="text-center mb-12">
-                <div className="section-label mb-4 text-emerald-600 bg-emerald-50 border-emerald-200">
+              <div className="text-center mb-10">
+                <div className="section-label mb-4">
                   Powering Better Customer Support
                 </div>
               </div>
             </FadeUp>
 
-            {/* Options Cards added above the sentence */}
-            <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 xl:gap-7 mb-16">
+            {/* Options Cards arranged 2 by 2 */}
+            <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 max-w-5xl mx-auto mb-20">
               {optionCards.map((opt) => (
-                <StaggerItem key={opt.number} className="relative w-full h-full flex flex-col rounded-2xl overflow-hidden bg-white border border-slate-200/80 shadow-[0_10px_30px_rgba(0,0,0,0.06)] hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 group">
-                  {/* Clickable Image showcase container for maximum clarity */}
+                <StaggerItem
+                  key={opt.number}
+                  className="relative w-full h-full flex flex-col rounded-2xl overflow-hidden bg-white border border-slate-200/90 shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 group"
+                >
+                  {/* Clickable Image showcase container for maximum clarity (16:9 native aspect ratio) */}
                   <div 
                     onClick={() => setSelectedImage({ src: opt.image, title: opt.title, desc: opt.desc })}
-                    className="relative w-full aspect-[16/11] bg-slate-900 overflow-hidden border-b border-slate-100/90 cursor-zoom-in"
+                    className="relative w-full aspect-[16/9] bg-slate-950 overflow-hidden border-b border-slate-100 cursor-zoom-in"
                     title="Click to view full image in high resolution"
                   >
                     <img 
                       src={opt.image} 
                       alt={opt.title} 
-                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500" 
+                      className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" 
                     />
                     
                     {/* Badge number */}
-                    <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-md px-2.5 py-1 rounded-full text-[11px] font-bold text-slate-700 shadow-sm border border-white/60 z-10">
+                    <div className="absolute top-3.5 left-3.5 bg-white/95 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-slate-800 shadow-sm border border-white/80 z-10 flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full inline-block" style={{ backgroundColor: "#93D152" }} />
                       {opt.number}
                     </div>
 
                     {/* Quick zoom preview button */}
-                    <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-md px-2.5 py-1 rounded-full text-[11px] font-semibold text-slate-700 shadow-sm border border-white/60 flex items-center gap-1.5 group-hover:bg-primary group-hover:text-white transition-colors duration-200 z-10">
+                    <div className="absolute top-3.5 right-3.5 bg-white/95 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold text-slate-700 shadow-sm border border-white/80 flex items-center gap-1.5 group-hover:bg-[#93D152] group-hover:text-white transition-colors duration-200 z-10">
                       <ZoomIn className="w-3.5 h-3.5" />
                       <span>Enlarge</span>
                     </div>
 
                     {/* Hover overlay hint */}
-                    <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                    <div className="absolute inset-0 bg-[#93D152]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                   </div>
 
                   {/* Content area */}
-                  <div className="p-6 text-left flex-1 flex flex-col bg-white">
-                    <h3 className="font-bold text-[17px] text-slate-900 leading-snug mb-3 group-hover:text-primary transition-colors duration-200">
-                      {opt.title}
-                    </h3>
-                    <p className="text-[13px] text-slate-600 leading-relaxed font-normal">
-                      {opt.desc}
-                    </p>
+                  <div className="p-6 sm:p-7 text-left flex-1 flex flex-col justify-between bg-white">
+                    <div>
+                      <h3 className="font-bold text-lg sm:text-xl text-slate-900 leading-snug mb-3 group-hover:text-[#93D152] transition-colors duration-200">
+                        {opt.title}
+                      </h3>
+                      <p className="text-sm text-slate-600 leading-relaxed font-normal">
+                        {opt.desc}
+                      </p>
+                    </div>
                   </div>
                 </StaggerItem>
               ))}
@@ -356,7 +362,7 @@ const Home = () => {
 
             <FadeUp>
               <div className="text-center mt-12 mb-12">
-                <div className="section-label mb-4 text-emerald-600 bg-emerald-50 border-emerald-200">
+                <div className="section-label mb-4">
                   Power Up Your Support Team
                 </div>
               </div>

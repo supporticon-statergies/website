@@ -46,7 +46,7 @@ export const HeroSection = () => {
     >
       {/* ── Ambient background ───────────────────────────────────── */}
       <motion.div style={{ y: bgY }} className="absolute inset-0 -z-10 pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-to-br from-white via-slate-50/90 to-emerald-50/70" />
+        <div className="absolute inset-0 bg-gradient-to-br from-white via-slate-50/90 to-green-50/70" />
 
         {!isMobile && (
           <>
@@ -57,7 +57,7 @@ export const HeroSection = () => {
           className="absolute -top-20 -right-20 w-[600px] h-[600px] rounded-full"
           style={{
             background:
-              "radial-gradient(circle, rgba(209,250,229,0.65) 0%, rgba(167,243,208,0.28) 45%, transparent 70%)",
+              "radial-gradient(circle, rgba(147,209,82,0.25) 0%, rgba(147,209,82,0.10) 45%, transparent 70%)",
           }}
         />
 
@@ -79,7 +79,7 @@ export const HeroSection = () => {
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] rounded-full"
           style={{
             background:
-              "radial-gradient(ellipse, rgba(209,250,229,0.5) 0%, transparent 65%)",
+              "radial-gradient(ellipse, rgba(147,209,82,0.18) 0%, transparent 65%)",
           }}
         />
 
@@ -87,8 +87,8 @@ export const HeroSection = () => {
         {PARTICLES.map((p) => (
           <motion.div
             key={p.id}
-            className="absolute rounded-full bg-emerald-400/20"
-            style={{ left: p.x, top: p.y, width: p.size, height: p.size }}
+            className="absolute rounded-full"
+            style={{ left: p.x, top: p.y, width: p.size, height: p.size, background: 'rgba(147,209,82,0.25)' }}
             animate={{ y: [-14, 14, -14], opacity: [0.1, 0.5, 0.1] }}
             transition={{
               duration: p.dur,
@@ -110,7 +110,7 @@ export const HeroSection = () => {
           {/* Headline */}
           <div>
             <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.06] text-slate-900 mb-6">
-              <span className="bg-gradient-to-r from-green-500 via-emerald-500 to-teal-600 bg-clip-text text-transparent">
+              <span style={{ color: '#93D152' }}>
                 Your Customers Aren't Complaining
               </span>
               <span className="block">They're Leaving</span>
@@ -177,8 +177,8 @@ export const HeroSection = () => {
                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
                     className="flex items-center gap-3 px-5 py-4 rounded-2xl bg-white/85 border border-slate-100/80 shadow-sm backdrop-blur-sm"
                   >
-                    <div className="w-9 h-9 rounded-xl bg-emerald-50 flex items-center justify-center shrink-0">
-                      <b.icon className="w-5 h-5 text-emerald-500" />
+                    <div className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0" style={{ background: 'rgba(147,209,82,0.15)' }}>
+                      <b.icon className="w-5 h-5" style={{ color: '#93D152' }} />
                     </div>
                     <span className="text-slate-700 text-sm font-semibold leading-snug text-left">
                       {b.text}
@@ -211,15 +211,16 @@ export const HeroSection = () => {
                   },
                   {
                     stat: "Zero",
-                    desc: "Third-party data sharing, every language, every channel.",
+                    desc: "Third-party data sharing — every language, every channel.",
                   },
                 ].map((item) => (
                   <div
                     key={item.stat}
-                    className="flex flex-col items-center justify-center gap-2 px-5 py-4 rounded-2xl bg-emerald-50/60 border border-emerald-100/70 text-center"
+                    className="flex flex-col items-center justify-center gap-2 px-5 py-4 rounded-2xl border text-center"
+                    style={{ background: 'rgba(147,209,82,0.08)', borderColor: 'rgba(147,209,82,0.25)' }}
                   >
-                    <CheckCircle className="w-5 h-5 text-emerald-500 shrink-0" />
-                    <span className="text-lg font-black text-emerald-600 leading-none">
+                    <CheckCircle className="w-5 h-5 shrink-0" style={{ color: '#93D152' }} />
+                    <span className="text-lg font-black leading-none" style={{ color: '#93D152' }}>
                       {item.stat}
                     </span>
                     <span className="text-slate-700 text-xs font-semibold leading-snug">

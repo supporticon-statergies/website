@@ -273,7 +273,7 @@ const BotAvatar = ({ pulse = false }: { pulse?: boolean }) => (
   <div className="relative shrink-0">
     <div
       className="w-8 h-8 rounded-full flex items-center justify-center shadow-lg"
-      style={{ background: "linear-gradient(135deg, #10b981 0%, #0d9488 100%)" }}
+      style={{ background: "linear-gradient(135deg, #93D152 0%, #0d9488 100%)" }}
     >
       <Bot className="w-4 h-4 text-white" />
     </div>
@@ -422,8 +422,8 @@ export function FeaturesChatbot() {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.92 }}
           onClick={() => setOpen((v) => !v)}
-          className="relative w-14 h-14 rounded-full flex items-center justify-center text-white shadow-[0_8px_32px_rgba(16,185,129,0.5)]"
-          style={{ background: "linear-gradient(135deg, #10b981 0%, #0d9488 60%, #0891b2 100%)" }}
+          className="relative w-14 h-14 rounded-full flex items-center justify-center text-white shadow-[0_8px_32px_rgba(147,209,82,0.5)]"
+          style={{ background: "linear-gradient(135deg, #93D152 0%, #0d9488 60%, #0891b2 100%)" }}
         >
           <AnimatePresence mode="wait">
             {open ? (
@@ -486,7 +486,7 @@ export function FeaturesChatbot() {
             >
               {/* Background orbs */}
               <div className="absolute -top-6 -right-6 w-28 h-28 rounded-full opacity-20"
-                style={{ background: "radial-gradient(circle, #34d399, transparent)" }} />
+                style={{ background: "radial-gradient(circle, #93D152, transparent)" }} />
               <div className="absolute -bottom-4 -left-4 w-20 h-20 rounded-full opacity-15"
                 style={{ background: "radial-gradient(circle, #22d3ee, transparent)" }} />
 
@@ -566,7 +566,7 @@ export function FeaturesChatbot() {
             <div
               className="flex-1 overflow-y-auto px-4 py-4 space-y-5"
               style={{
-                background: "linear-gradient(180deg, #f0fdf4 0%, #ecfdf5 40%, #f0fdfa 100%)",
+                background: "linear-gradient(180deg, #f5faee 0%, #ecfdf5 40%, #f0fdfa 100%)",
                 scrollbarWidth: "none",
               }}
             >

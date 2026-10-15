@@ -392,7 +392,7 @@ export const CaseStudiesList = () => {
               className="group relative overflow-hidden border-white/60 bg-white/70 backdrop-blur-md rounded-3xl p-7 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"
             >
               {/* Decorative softly glowing blurred circle behind content */}
-              <div className="absolute -top-10 -right-10 w-40 h-40 bg-[#C8E6A0]/40 rounded-full blur-3xl group-hover:bg-[#a8d97f]/50 transition-colors pointer-events-none" />
+              <div className="absolute -top-10 -right-10 w-40 h-40 bg-[#93D152]/30 rounded-full blur-3xl group-hover:bg-[#93D152]/50 transition-colors pointer-events-none" />
 
               <div className="relative z-10 flex flex-col h-full">
                 <div className="flex items-center justify-between mb-5">
@@ -421,7 +421,7 @@ export const CaseStudiesList = () => {
                 </div>
 
                 <div className="mt-auto pt-4 flex flex-col gap-4 border-t border-slate-100">
-                  <div className="inline-flex items-center gap-2 bg-[#E8F5D8]/80 px-3 py-1.5 rounded-lg border border-[#C8E6A0]/50 self-start">
+                  <div className="inline-flex items-center gap-2 bg-[#f5faee]/90 px-3 py-1.5 rounded-lg border border-[#93D152]/40 self-start">
                     <span className="text-[10px] font-bold text-green-800 uppercase tracking-widest">
                       Built With:
                     </span>

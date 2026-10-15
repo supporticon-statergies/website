@@ -66,7 +66,34 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				/* ── Override Tailwind emerald & green to use brand green #93D152 ── */
+				emerald: {
+					50:  '#f5faee',
+					100: '#e6f5d5',
+					200: '#ceeca8',
+					300: '#b5e378',
+					400: '#a4dc60',
+					500: '#93D152',  /* brand green */
+					600: '#7bb83c',
+					700: '#62962e',
+					800: '#497022',
+					900: '#314c17',
+					950: '#19270a',
+				},
+				green: {
+					50:  '#f5faee',
+					100: '#e6f5d5',
+					200: '#ceeca8',
+					300: '#b5e378',
+					400: '#a4dc60',
+					500: '#93D152',  /* brand green */
+					600: '#7bb83c',
+					700: '#62962e',
+					800: '#497022',
+					900: '#314c17',
+					950: '#19270a',
+				},
 			},
 			fontFamily: {
 				display: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],

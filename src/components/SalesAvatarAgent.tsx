@@ -64,13 +64,14 @@ export const SalesAvatarAgent = () => {
           whileTap={{ scale: 0.94 }}
           onClick={openHelpDudeLiveAgent}
           aria-label="Open Voice Agent"
-          className="fixed bottom-5 right-4 z-[9999] w-[60px] h-[60px] rounded-full bg-emerald-500 hover:bg-emerald-600 text-white flex items-center justify-center shadow-[0_8px_32px_rgba(16,185,129,0.45)] border-2 border-emerald-300 select-none"
-          style={{ bottom: "20px" }}
+          className="fixed bottom-5 right-4 z-[9999] w-[60px] h-[60px] rounded-full text-white flex items-center justify-center border-2 select-none"
+          style={{ bottom: "20px", background: '#93D152', boxShadow: '0 8px 32px rgba(147,209,82,0.45)', borderColor: 'rgba(147,209,82,0.6)' }}
         >
           <Mic className="w-7 h-7" />
           {/* Pulse ring */}
           <motion.span
-            className="absolute inset-0 rounded-full border-4 border-emerald-400/50"
+            className="absolute inset-0 rounded-full border-4"
+            style={{ borderColor: 'rgba(147,209,82,0.5)' }}
             animate={{ scale: [1, 1.35, 1], opacity: [0.7, 0, 0.7] }}
             transition={{ duration: 2.2, repeat: Infinity, ease: "easeOut" }}
           />

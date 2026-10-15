@@ -50,14 +50,14 @@ const Features = () => {
       <AmbientAccent position="right" color="emerald" />
       <AmbientAccent position="left"  color="blue"    />
 
-      <div className="container mx-auto px-4 py-16 md:py-24 relative">
+      <div className="container mx-auto px-4 pt-2 md:pt-4 pb-12 md:pb-16 relative">
         <div
           ref={reveal.ref}
-          className={`grid md:grid-cols-2 gap-12 items-start ${reveal.revealClasses}`}
+          className={`grid md:grid-cols-2 gap-8 lg:gap-12 items-center ${reveal.revealClasses}`}
         >
-          <div className="max-w-2xl self-start pt-8 md:pt-16">
+          <div className="max-w-2xl self-center pt-0">
             <h1 className="font-display text-5xl font-extrabold leading-tight md:text-6xl lg:text-7xl text-slate-900 tracking-normal">
-              <span className="bg-gradient-to-r from-green-500 via-emerald-500 to-teal-600 bg-clip-text text-transparent pr-2 box-decoration-clone">
+              <span style={{ color: '#93D152' }} className="pr-2 box-decoration-clone">
                 Six ways HelpDude turns customer friction into effortless resolution
               </span>
               <span className="block mt-2 pr-2">before trust is broken</span>
@@ -70,7 +70,7 @@ const Features = () => {
           <div className="relative w-full flex items-center justify-center overflow-hidden">
             <div style={{ width: "100%", maxWidth: "620px" }}>
               <iframe
-                src={`/HelpDude_Rotating_Wheel (2).html?v=${Date.now()}`}
+                src={`/HelpDude_Rotating_Wheel.html?v=${Date.now()}`}
                 title="HelpDude Rotating Wheel"
                 style={{
                   width: "100%",
@@ -233,6 +233,56 @@ const Features = () => {
   
       </section>
 
+      {/* Email Ticketing Demo */}
+      <section className="container mx-auto px-4 py-12 animate-in fade-in duration-700 delay-1000 fill-mode-both">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight mb-4 text-slate-900 text-center leading-tight">
+            See Email Ticketing in Action
+          </h2>
+          <p className="text-center text-lg text-slate-500 mb-10 max-w-2xl mx-auto">
+            Watch how HelpDude's Autopilot &amp; Copilot handle real email tickets — resolving instantly or drafting replies for your team.
+          </p>
+          <div className="w-full rounded-2xl overflow-hidden shadow-2xl border border-green-100">
+            <iframe
+              src="/email_ticketing.html.html"
+              title="Email Ticketing Demo"
+              style={{
+                width: "100%",
+                height: "620px",
+                border: "none",
+                display: "block",
+              }}
+              scrolling="no"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Voice Agent Demo */}
+      <section className="container mx-auto px-4 py-12 animate-in fade-in duration-700 delay-1000 fill-mode-both">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight mb-4 text-slate-900 text-center leading-tight">
+            Voice Agent — Live Language Switch
+          </h2>
+          <p className="text-center text-lg text-slate-500 mb-10 max-w-2xl mx-auto">
+            See HelpDude's voice agent handle inbound calls in any language — switching seamlessly and resolving without making the customer repeat themselves.
+          </p>
+          <div className="w-full rounded-2xl overflow-hidden shadow-2xl border border-green-100">
+            <iframe
+              src={`/Voice_agent.html?v=${Date.now()}`}
+              title="Voice Agent Demo"
+              style={{
+                width: "100%",
+                height: "660px",
+                border: "none",
+                display: "block",
+              }}
+              scrolling="no"
+            />
+          </div>
+        </div>
+      </section>
+
       {/* The Problem We Solve */}
       <section className="py-24 md:py-32 relative">
         <div className="absolute inset-0 bg-gradient-to-b from-slate-50/70 to-white pointer-events-none" />
@@ -304,8 +354,8 @@ const Features = () => {
                       {row.without}
                     </span>
                   </div>
-                  <div className="p-5 md:p-7 flex gap-3 items-start bg-emerald-50/20 group-hover:bg-emerald-50/40 transition-colors">
-                    <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0 mt-1" />
+                  <div className="p-5 md:p-7 flex gap-3 items-start transition-colors" style={{ background: 'rgba(147,209,82,0.05)' }}>
+                    <CheckCircle className="w-4 h-4 shrink-0 mt-1" style={{ color: '#93D152' }} />
                     <span className="text-sm md:text-base text-slate-800 font-medium leading-relaxed">
                       {row.with}
                     </span>

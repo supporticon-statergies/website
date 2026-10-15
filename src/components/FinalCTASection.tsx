@@ -58,15 +58,15 @@ export function FinalCTASection() {
 
           <div className="mt-12 flex flex-wrap items-center justify-center gap-6 text-sm text-slate-400 font-medium">
             <span className="flex items-center gap-1.5">
-              <CheckCircle className="w-4 h-4 text-emerald-500" />
+              <CheckCircle className="w-4 h-4" style={{ color: '#93D152' }} />
               Free to start
             </span>
             <span className="flex items-center gap-1.5">
-              <CheckCircle className="w-4 h-4 text-emerald-500" />
+              <CheckCircle className="w-4 h-4" style={{ color: '#93D152' }} />
               No credit card required
             </span>
             <span className="flex items-center gap-1.5">
-              <CheckCircle className="w-4 h-4 text-emerald-500" />
+              <CheckCircle className="w-4 h-4" style={{ color: '#93D152' }} />
               Live in minutes
             </span>
           </div>
@@ -126,20 +126,25 @@ export function FinalCTASection() {
                   "noopener,noreferrer"
                 );
               }}
-              className="group flex flex-col justify-between p-6 rounded-2xl border border-emerald-500/10 bg-emerald-500/5 hover:bg-emerald-500/10 hover:border-emerald-500/30 transition-all duration-300 text-left hover:scale-[1.02] shadow-sm hover:shadow-md"
+              className="group flex flex-col justify-between p-6 rounded-2xl border transition-all duration-300 text-left hover:scale-[1.02] shadow-sm hover:shadow-md"
+              style={{ borderColor: 'rgba(147,209,82,0.15)', background: 'rgba(147,209,82,0.04)' }}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(147,209,82,0.08)'; (e.currentTarget as HTMLElement).style.borderColor = 'rgba(147,209,82,0.3)'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(147,209,82,0.04)'; (e.currentTarget as HTMLElement).style.borderColor = 'rgba(147,209,82,0.15)'; }}
             >
               <div>
-                <div className="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-600 mb-4 transition-transform duration-300 group-hover:scale-110">
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110" style={{ background: 'rgba(147,209,82,0.12)', color: '#6aab2d' }}>
                   <Zap className="w-5 h-5" />
                 </div>
-                <h4 className="text-base font-bold text-slate-900 group-hover:text-emerald-700 transition-colors">
+                <h4 className="text-base font-bold text-slate-900 transition-colors" style={{}}
+                  onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#6aab2d'}
+                  onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = ''}>
                   HelpDude for Freshdesk
                 </h4>
                 <p className="text-xs text-slate-500 leading-relaxed mt-2">
                   Marketplace plugin that embeds directly in Freshdesk ticket views. Zero workflow disruption.
                 </p>
               </div>
-              <div className="mt-6 flex items-center gap-1.5 text-xs font-bold text-emerald-700 group-hover:underline">
+              <div className="mt-6 flex items-center gap-1.5 text-xs font-bold group-hover:underline" style={{ color: '#6aab2d' }}>
                 Explore Freshdesk Integration
                 <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" />
               </div>

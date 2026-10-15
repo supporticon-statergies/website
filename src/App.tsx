@@ -29,7 +29,7 @@ class ErrorBoundary extends Component<{ children: ReactNode }, { error: Error | 
           <pre style={{ whiteSpace: "pre-wrap", fontSize: "0.8rem", color: "#374151" }}>{err.message}{"\n\n"}{err.stack}</pre>
           <button 
             onClick={() => { sessionStorage.removeItem("chunk_reloaded"); window.location.reload(); }}
-            style={{ marginTop: "1rem", padding: "0.5rem 1rem", background: "#059669", color: "#fff", border: "none", borderRadius: "0.25rem", cursor: "pointer" }}
+            style={{ marginTop: "1rem", padding: "0.5rem 1rem", background: "#93D152", color: "#fff", border: "none", borderRadius: "0.25rem", cursor: "pointer" }}
           >
             Force Reload
           </button>
@@ -114,7 +114,7 @@ const Preloader = ({
           className="relative w-16 h-16 flex items-center justify-center"
         >
           {/* Subtle surrounding glow ring */}
-          <div className="absolute inset-0 rounded-full bg-emerald-500/5 blur-xl animate-pulse" />
+          <div className="absolute inset-0 rounded-full blur-xl animate-pulse" style={{ background: 'rgba(147,209,82,0.07)' }} />
           <img
             src={supporticonLogoIcon}
             alt="Supporticon"
@@ -139,7 +139,8 @@ const Preloader = ({
             initial={{ width: "0%" }}
             animate={{ width: "100%" }}
             transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
-            className="h-full bg-gradient-to-r from-emerald-500 via-teal-400 to-blue-500 rounded-full"
+            className="h-full rounded-full"
+            style={{ background: 'linear-gradient(to right, #93D152, #93D152bb, #3b82f6)' }}
           />
         </div>
       </div>

@@ -4,23 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>HelpDude Features — Rotating Wheel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   html,body{
     margin:0;padding:0;
-    background:
-      radial-gradient(1200px 800px at 50% 45%, #FBF8F1 0%, #F3EFE5 45%, #E7E1D2 100%);
+    background:transparent;
     display:flex;align-items:center;justify-content:center;
     min-height:100vh;
+    font-family: 'Inter', sans-serif;
   }
   .stage{ width:min(900px, 96vw); }
-  svg{ display:block; width:100%; height:auto; overflow:visible; }
+  svg{ display:block; width:100%; height:auto; overflow:visible; font-family: 'Inter', sans-serif; }
 
   /* main ring: same motion as the original */
-  #ringGroup{
-    transform-box: view-box;
-    transform-origin: 500px 530px;
-    animation: spinRing 22s linear infinite;
-  }
+  #ringGroup{ will-change: transform; } /* rotation driven by script below */
   /* decorative outer scale turns slowly the other way */
   #scaleGroup{
     transform-box: view-box;
@@ -34,7 +33,7 @@
 
   .seg{ transition: filter .25s ease; cursor: pointer; }
   .seg:hover{ filter: brightness(1.12) saturate(1.1); }
-  .lbl{ pointer-events:none; letter-spacing:.2px; }
+  .lbl{ pointer-events:none; letter-spacing:.2px; font-family: 'Inter', sans-serif !important; }
 
   @media (prefers-reduced-motion: reduce){
     #ringGroup, #scaleGroup{ animation:none; }
@@ -83,20 +82,18 @@
   <defs>
     <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#ED1C24"/>
-      <stop offset="45%" stop-color="#8DC63F"/>
+      <stop offset="45%" stop-color="#93D152"/>
       <stop offset="100%" stop-color="#0072BC"/>
     </linearGradient>
 
     <!-- segment fills: light at the hub, deeper toward the rim (rotation-proof) -->
     <radialGradient id="segA" gradientUnits="userSpaceOnUse" cx="500" cy="530" r="430">
-      <stop offset="0.72" stop-color="#9AD455"/>
-      <stop offset="0.88" stop-color="#7DBF38"/>
-      <stop offset="1"    stop-color="#5F9F25"/>
+      <stop offset="0" stop-color="#93D152"/>
+      <stop offset="1" stop-color="#93D152"/>
     </radialGradient>
     <radialGradient id="segB" gradientUnits="userSpaceOnUse" cx="500" cy="530" r="430">
-      <stop offset="0.72" stop-color="#84C43F"/>
-      <stop offset="0.88" stop-color="#68AB2C"/>
-      <stop offset="1"    stop-color="#4A8A1B"/>
+      <stop offset="0" stop-color="#93D152"/>
+      <stop offset="1" stop-color="#93D152"/>
     </radialGradient>
 
     <radialGradient id="hubGrad" gradientUnits="userSpaceOnUse" cx="500" cy="490" r="330">
@@ -106,8 +103,8 @@
     </radialGradient>
 
     <linearGradient id="wordGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#8DC63F"/>
-      <stop offset="1" stop-color="#5E9F25"/>
+      <stop offset="0" stop-color="#93D152"/>
+      <stop offset="1" stop-color="#93D152"/>
     </linearGradient>
 
     <filter id="blurBig" x="-30%" y="-30%" width="160%" height="160%">
@@ -127,7 +124,7 @@
   <!-- outer decorative scale -->
   <g id="scaleGroup">
     <circle cx="500" cy="530" r="452" fill="none" stroke="#D9D3C1" stroke-width="1.5"/>
-    <line x1="500.00" y1="68.00" x2="500.00" y2="52.00" stroke="#76B83C" stroke-width="3" stroke-linecap="round"/>
+    <line x1="500.00" y1="68.00" x2="500.00" y2="52.00" stroke="#93D152" stroke-width="3" stroke-linecap="round"/>
 <line x1="524.39" y1="64.64" x2="524.81" y2="56.65" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="548.71" y1="66.55" x2="549.55" y2="58.60" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="572.90" y1="69.74" x2="574.15" y2="61.84" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
@@ -137,7 +134,7 @@
 <line x1="667.00" y1="94.95" x2="669.87" y2="87.48" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="689.54" y1="104.29" x2="692.79" y2="96.98" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="711.56" y1="114.79" x2="715.19" y2="107.66" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
-<line x1="731.00" y1="129.90" x2="739.00" y2="116.04" stroke="#76B83C" stroke-width="3" stroke-linecap="round"/>
+<line x1="731.00" y1="129.90" x2="739.00" y2="116.04" stroke="#93D152" stroke-width="3" stroke-linecap="round"/>
 <line x1="753.80" y1="139.18" x2="758.16" y2="132.47" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="773.91" y1="153.00" x2="778.61" y2="146.53" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="793.26" y1="167.85" x2="798.30" y2="161.63" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
@@ -147,7 +144,7 @@
 <line x1="862.15" y1="236.74" x2="868.37" y2="231.70" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="877.00" y1="256.09" x2="883.47" y2="251.39" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="890.82" y1="276.20" x2="897.53" y2="271.84" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
-<line x1="900.10" y1="299.00" x2="913.96" y2="291.00" stroke="#76B83C" stroke-width="3" stroke-linecap="round"/>
+<line x1="900.10" y1="299.00" x2="913.96" y2="291.00" stroke="#93D152" stroke-width="3" stroke-linecap="round"/>
 <line x1="915.21" y1="318.44" x2="922.34" y2="314.81" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="925.71" y1="340.46" x2="933.02" y2="337.21" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="935.05" y1="363.00" x2="942.52" y2="360.13" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
@@ -157,7 +154,7 @@
 <line x1="960.26" y1="457.10" x2="968.16" y2="455.85" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="963.45" y1="481.29" x2="971.40" y2="480.45" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="965.36" y1="505.61" x2="973.35" y2="505.19" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
-<line x1="962.00" y1="530.00" x2="978.00" y2="530.00" stroke="#76B83C" stroke-width="3" stroke-linecap="round"/>
+<line x1="962.00" y1="530.00" x2="978.00" y2="530.00" stroke="#93D152" stroke-width="3" stroke-linecap="round"/>
 <line x1="965.36" y1="554.39" x2="973.35" y2="554.81" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="963.45" y1="578.71" x2="971.40" y2="579.55" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="960.26" y1="602.90" x2="968.16" y2="604.15" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
@@ -167,7 +164,7 @@
 <line x1="935.05" y1="697.00" x2="942.52" y2="699.87" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="925.71" y1="719.54" x2="933.02" y2="722.79" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="915.21" y1="741.56" x2="922.34" y2="745.19" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
-<line x1="900.10" y1="761.00" x2="913.96" y2="769.00" stroke="#76B83C" stroke-width="3" stroke-linecap="round"/>
+<line x1="900.10" y1="761.00" x2="913.96" y2="769.00" stroke="#93D152" stroke-width="3" stroke-linecap="round"/>
 <line x1="890.82" y1="783.80" x2="897.53" y2="788.16" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="877.00" y1="803.91" x2="883.47" y2="808.61" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="862.15" y1="823.26" x2="868.37" y2="828.30" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
@@ -177,7 +174,7 @@
 <line x1="793.26" y1="892.15" x2="798.30" y2="898.37" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="773.91" y1="907.00" x2="778.61" y2="913.47" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="753.80" y1="920.82" x2="758.16" y2="927.53" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
-<line x1="731.00" y1="930.10" x2="739.00" y2="943.96" stroke="#76B83C" stroke-width="3" stroke-linecap="round"/>
+<line x1="731.00" y1="930.10" x2="739.00" y2="943.96" stroke="#93D152" stroke-width="3" stroke-linecap="round"/>
 <line x1="711.56" y1="945.21" x2="715.19" y2="952.34" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="689.54" y1="955.71" x2="692.79" y2="963.02" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="667.00" y1="965.05" x2="669.87" y2="972.52" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
@@ -187,7 +184,7 @@
 <line x1="572.90" y1="990.26" x2="574.15" y2="998.16" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="548.71" y1="993.45" x2="549.55" y2="1001.40" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="524.39" y1="995.36" x2="524.81" y2="1003.35" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
-<line x1="500.00" y1="992.00" x2="500.00" y2="1008.00" stroke="#76B83C" stroke-width="3" stroke-linecap="round"/>
+<line x1="500.00" y1="992.00" x2="500.00" y2="1008.00" stroke="#93D152" stroke-width="3" stroke-linecap="round"/>
 <line x1="475.61" y1="995.36" x2="475.19" y2="1003.35" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="451.29" y1="993.45" x2="450.45" y2="1001.40" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="427.10" y1="990.26" x2="425.85" y2="998.16" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
@@ -197,7 +194,7 @@
 <line x1="333.00" y1="965.05" x2="330.13" y2="972.52" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="310.46" y1="955.71" x2="307.21" y2="963.02" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="288.44" y1="945.21" x2="284.81" y2="952.34" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
-<line x1="269.00" y1="930.10" x2="261.00" y2="943.96" stroke="#76B83C" stroke-width="3" stroke-linecap="round"/>
+<line x1="269.00" y1="930.10" x2="261.00" y2="943.96" stroke="#93D152" stroke-width="3" stroke-linecap="round"/>
 <line x1="246.20" y1="920.82" x2="241.84" y2="927.53" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="226.09" y1="907.00" x2="221.39" y2="913.47" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="206.74" y1="892.15" x2="201.70" y2="898.37" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
@@ -207,7 +204,7 @@
 <line x1="137.85" y1="823.26" x2="131.63" y2="828.30" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="123.00" y1="803.91" x2="116.53" y2="808.61" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="109.18" y1="783.80" x2="102.47" y2="788.16" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
-<line x1="99.90" y1="761.00" x2="86.04" y2="769.00" stroke="#76B83C" stroke-width="3" stroke-linecap="round"/>
+<line x1="99.90" y1="761.00" x2="86.04" y2="769.00" stroke="#93D152" stroke-width="3" stroke-linecap="round"/>
 <line x1="84.79" y1="741.56" x2="77.66" y2="745.19" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="74.29" y1="719.54" x2="66.98" y2="722.79" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="64.95" y1="697.00" x2="57.48" y2="699.87" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
@@ -217,7 +214,7 @@
 <line x1="39.74" y1="602.90" x2="31.84" y2="604.15" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="36.55" y1="578.71" x2="28.60" y2="579.55" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="34.64" y1="554.39" x2="26.65" y2="554.81" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
-<line x1="38.00" y1="530.00" x2="22.00" y2="530.00" stroke="#76B83C" stroke-width="3" stroke-linecap="round"/>
+<line x1="38.00" y1="530.00" x2="22.00" y2="530.00" stroke="#93D152" stroke-width="3" stroke-linecap="round"/>
 <line x1="34.64" y1="505.61" x2="26.65" y2="505.19" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="36.55" y1="481.29" x2="28.60" y2="480.45" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="39.74" y1="457.10" x2="31.84" y2="455.85" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
@@ -227,7 +224,7 @@
 <line x1="64.95" y1="363.00" x2="57.48" y2="360.13" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="74.29" y1="340.46" x2="66.98" y2="337.21" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="84.79" y1="318.44" x2="77.66" y2="314.81" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
-<line x1="99.90" y1="299.00" x2="86.04" y2="291.00" stroke="#76B83C" stroke-width="3" stroke-linecap="round"/>
+<line x1="99.90" y1="299.00" x2="86.04" y2="291.00" stroke="#93D152" stroke-width="3" stroke-linecap="round"/>
 <line x1="109.18" y1="276.20" x2="102.47" y2="271.84" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="123.00" y1="256.09" x2="116.53" y2="251.39" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="137.85" y1="236.74" x2="131.63" y2="231.70" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
@@ -237,7 +234,7 @@
 <line x1="206.74" y1="167.85" x2="201.70" y2="161.63" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="226.09" y1="153.00" x2="221.39" y2="146.53" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="246.20" y1="139.18" x2="241.84" y2="132.47" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
-<line x1="269.00" y1="129.90" x2="261.00" y2="116.04" stroke="#76B83C" stroke-width="3" stroke-linecap="round"/>
+<line x1="269.00" y1="129.90" x2="261.00" y2="116.04" stroke="#93D152" stroke-width="3" stroke-linecap="round"/>
 <line x1="288.44" y1="114.79" x2="284.81" y2="107.66" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="310.46" y1="104.29" x2="307.21" y2="96.98" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
 <line x1="333.00" y1="94.95" x2="330.13" y2="87.48" stroke="#C9C2AE" stroke-width="1.6" stroke-linecap="round"/>
@@ -271,18 +268,18 @@
 
     <circle cx="500" cy="530" r="432" fill="none" stroke="#3E7A16" stroke-opacity=".35" stroke-width="2"/>
     <circle cx="500" cy="530" r="318" fill="none" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="2"/>
-    <g transform="translate(500.00,155.00) rotate(0.00)"><text text-anchor="middle" class="lbl" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-weight="700" font-size="22" fill="#FFFFFF" filter="url(#txtShadow)" dy="-0.575em"><tspan x="0" dy="0">AI Ticket</tspan><tspan x="0" dy="1.15em">Resolution</tspan></text></g>
-<g transform="translate(687.50,205.24) rotate(30.00)"><text text-anchor="middle" class="lbl" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-weight="700" font-size="22" fill="#FFFFFF" filter="url(#txtShadow)" dy="-0.575em"><tspan x="0" dy="0">AI</tspan><tspan x="0" dy="1.15em">Copilot</tspan></text></g>
-<g transform="translate(824.76,342.50) rotate(60.00)"><text text-anchor="middle" class="lbl" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-weight="700" font-size="22" fill="#FFFFFF" filter="url(#txtShadow)" dy="-0.575em"><tspan x="0" dy="0">Smart</tspan><tspan x="0" dy="1.15em">Knowledge Base</tspan></text></g>
-<g transform="translate(875.00,530.00) rotate(90.00)"><text text-anchor="middle" class="lbl" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-weight="700" font-size="22" fill="#FFFFFF" filter="url(#txtShadow)" dy="-0.575em"><tspan x="0" dy="0">Intelligent</tspan><tspan x="0" dy="1.15em">Matching</tspan></text></g>
-<g transform="translate(824.76,717.50) rotate(300.00)"><text text-anchor="middle" class="lbl" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-weight="700" font-size="22" fill="#FFFFFF" filter="url(#txtShadow)" dy="-0.575em"><tspan x="0" dy="0">Multi-</tspan><tspan x="0" dy="1.15em">Language</tspan></text></g>
-<g transform="translate(687.50,854.76) rotate(330.00)"><text text-anchor="middle" class="lbl" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-weight="700" font-size="22" fill="#FFFFFF" filter="url(#txtShadow)" dy="-0.575em"><tspan x="0" dy="0">Tool</tspan><tspan x="0" dy="1.15em">Integrations</tspan></text></g>
-<g transform="translate(500.00,905.00) rotate(360.00)"><text text-anchor="middle" class="lbl" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-weight="700" font-size="22" fill="#FFFFFF" filter="url(#txtShadow)" dy="-0.575em"><tspan x="0" dy="0">Support</tspan><tspan x="0" dy="1.15em">Analytics</tspan></text></g>
-<g transform="translate(312.50,854.76) rotate(390.00)"><text text-anchor="middle" class="lbl" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-weight="700" font-size="22" fill="#FFFFFF" filter="url(#txtShadow)" dy="-0.575em"><tspan x="0" dy="0">Channel</tspan><tspan x="0" dy="1.15em">Analytics</tspan></text></g>
-<g transform="translate(175.24,717.50) rotate(420.00)"><text text-anchor="middle" class="lbl" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-weight="700" font-size="22" fill="#FFFFFF" filter="url(#txtShadow)" dy="-0.575em"><tspan x="0" dy="0">Keyword</tspan><tspan x="0" dy="1.15em">Analysis</tspan></text></g>
-<g transform="translate(125.00,530.00) rotate(270.00)"><text text-anchor="middle" class="lbl" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-weight="700" font-size="22" fill="#FFFFFF" filter="url(#txtShadow)" dy="-0.575em"><tspan x="0" dy="0">Custom</tspan><tspan x="0" dy="1.15em">Widgets</tspan></text></g>
-<g transform="translate(175.24,342.50) rotate(300.00)"><text text-anchor="middle" class="lbl" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-weight="700" font-size="22" fill="#FFFFFF" filter="url(#txtShadow)" dy="-0.575em"><tspan x="0" dy="0">SME</tspan><tspan x="0" dy="1.15em">Assistance</tspan></text></g>
-<g transform="translate(312.50,205.24) rotate(330.00)"><text text-anchor="middle" class="lbl" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-weight="700" font-size="22" fill="#FFFFFF" filter="url(#txtShadow)" dy="-0.575em"><tspan x="0" dy="0">Faster</tspan><tspan x="0" dy="1.15em">Resolution</tspan></text></g>
+    <g transform="translate(500.00,155.00) rotate(0)"><g class="flip"><text text-anchor="middle" class="lbl" font-family="'Inter', sans-serif" font-weight="700" font-size="22" fill="#FFFFFF" filter="url(#txtShadow)" dy="-0.575em"><tspan x="0" dy="0">AI Ticket</tspan><tspan x="0" dy="1.15em">Resolution</tspan></text></g></g>
+<g transform="translate(687.50,205.24) rotate(30)"><g class="flip"><text text-anchor="middle" class="lbl" font-family="'Inter', sans-serif" font-weight="700" font-size="22" fill="#FFFFFF" filter="url(#txtShadow)" dy="-0.575em"><tspan x="0" dy="0">AI</tspan><tspan x="0" dy="1.15em">Copilot</tspan></text></g></g>
+<g transform="translate(824.76,342.50) rotate(60)"><g class="flip"><text text-anchor="middle" class="lbl" font-family="'Inter', sans-serif" font-weight="700" font-size="22" fill="#FFFFFF" filter="url(#txtShadow)" dy="-0.575em"><tspan x="0" dy="0">Smart</tspan><tspan x="0" dy="1.15em">Knowledge Base</tspan></text></g></g>
+<g transform="translate(875.00,530.00) rotate(90)"><g class="flip"><text text-anchor="middle" class="lbl" font-family="'Inter', sans-serif" font-weight="700" font-size="22" fill="#FFFFFF" filter="url(#txtShadow)" dy="-0.575em"><tspan x="0" dy="0">Intelligent</tspan><tspan x="0" dy="1.15em">Matching</tspan></text></g></g>
+<g transform="translate(824.76,717.50) rotate(120)"><g class="flip"><text text-anchor="middle" class="lbl" font-family="'Inter', sans-serif" font-weight="700" font-size="22" fill="#FFFFFF" filter="url(#txtShadow)" dy="-0.575em"><tspan x="0" dy="0">Multi-</tspan><tspan x="0" dy="1.15em">Language</tspan></text></g></g>
+<g transform="translate(687.50,854.76) rotate(150)"><g class="flip"><text text-anchor="middle" class="lbl" font-family="'Inter', sans-serif" font-weight="700" font-size="22" fill="#FFFFFF" filter="url(#txtShadow)" dy="-0.575em"><tspan x="0" dy="0">Tool</tspan><tspan x="0" dy="1.15em">Integrations</tspan></text></g></g>
+<g transform="translate(500.00,905.00) rotate(180)"><g class="flip"><text text-anchor="middle" class="lbl" font-family="'Inter', sans-serif" font-weight="700" font-size="22" fill="#FFFFFF" filter="url(#txtShadow)" dy="-0.575em"><tspan x="0" dy="0">Support</tspan><tspan x="0" dy="1.15em">Analytics</tspan></text></g></g>
+<g transform="translate(312.50,854.76) rotate(210)"><g class="flip"><text text-anchor="middle" class="lbl" font-family="'Inter', sans-serif" font-weight="700" font-size="22" fill="#FFFFFF" filter="url(#txtShadow)" dy="-0.575em"><tspan x="0" dy="0">Channel</tspan><tspan x="0" dy="1.15em">Analytics</tspan></text></g></g>
+<g transform="translate(175.24,717.50) rotate(240)"><g class="flip"><text text-anchor="middle" class="lbl" font-family="'Inter', sans-serif" font-weight="700" font-size="22" fill="#FFFFFF" filter="url(#txtShadow)" dy="-0.575em"><tspan x="0" dy="0">Keyword</tspan><tspan x="0" dy="1.15em">Analysis</tspan></text></g></g>
+<g transform="translate(125.00,530.00) rotate(270)"><g class="flip"><text text-anchor="middle" class="lbl" font-family="'Inter', sans-serif" font-weight="700" font-size="22" fill="#FFFFFF" filter="url(#txtShadow)" dy="-0.575em"><tspan x="0" dy="0">Custom</tspan><tspan x="0" dy="1.15em">Widgets</tspan></text></g></g>
+<g transform="translate(175.24,342.50) rotate(300)"><g class="flip"><text text-anchor="middle" class="lbl" font-family="'Inter', sans-serif" font-weight="700" font-size="22" fill="#FFFFFF" filter="url(#txtShadow)" dy="-0.575em"><tspan x="0" dy="0">SME</tspan><tspan x="0" dy="1.15em">Assistance</tspan></text></g></g>
+<g transform="translate(312.50,205.24) rotate(330)"><g class="flip"><text text-anchor="middle" class="lbl" font-family="'Inter', sans-serif" font-weight="700" font-size="22" fill="#FFFFFF" filter="url(#txtShadow)" dy="-0.575em"><tspan x="0" dy="0">Faster</tspan><tspan x="0" dy="1.15em">Resolution</tspan></text></g></g>
 
     <circle cx="582.82" cy="220.90" r="3.5" fill="#FFFFFF" opacity=".9"/>
 <circle cx="726.27" cy="303.73" r="3.5" fill="#FFFFFF" opacity=".9"/>
@@ -297,18 +294,18 @@
 <circle cx="273.73" cy="303.73" r="3.5" fill="#FFFFFF" opacity=".9"/>
 <circle cx="417.18" cy="220.90" r="3.5" fill="#FFFFFF" opacity=".9"/>
 
-    <circle cx="611.29" cy="114.65" r="7" fill="#FFFFFF" stroke="#5E9F25" stroke-width="3.5"/>
-<circle cx="804.06" cy="225.94" r="7" fill="#FFFFFF" stroke="#5E9F25" stroke-width="3.5"/>
-<circle cx="915.35" cy="418.71" r="7" fill="#FFFFFF" stroke="#5E9F25" stroke-width="3.5"/>
-<circle cx="915.35" cy="641.29" r="7" fill="#FFFFFF" stroke="#5E9F25" stroke-width="3.5"/>
-<circle cx="804.06" cy="834.06" r="7" fill="#FFFFFF" stroke="#5E9F25" stroke-width="3.5"/>
-<circle cx="611.29" cy="945.35" r="7" fill="#FFFFFF" stroke="#5E9F25" stroke-width="3.5"/>
-<circle cx="388.71" cy="945.35" r="7" fill="#FFFFFF" stroke="#5E9F25" stroke-width="3.5"/>
-<circle cx="195.94" cy="834.06" r="7" fill="#FFFFFF" stroke="#5E9F25" stroke-width="3.5"/>
-<circle cx="84.65" cy="641.29" r="7" fill="#FFFFFF" stroke="#5E9F25" stroke-width="3.5"/>
-<circle cx="84.65" cy="418.71" r="7" fill="#FFFFFF" stroke="#5E9F25" stroke-width="3.5"/>
-<circle cx="195.94" cy="225.94" r="7" fill="#FFFFFF" stroke="#5E9F25" stroke-width="3.5"/>
-<circle cx="388.71" cy="114.65" r="7" fill="#FFFFFF" stroke="#5E9F25" stroke-width="3.5"/>
+    <circle cx="611.29" cy="114.65" r="7" fill="#FFFFFF" stroke="#93D152" stroke-width="3.5"/>
+<circle cx="804.06" cy="225.94" r="7" fill="#FFFFFF" stroke="#93D152" stroke-width="3.5"/>
+<circle cx="915.35" cy="418.71" r="7" fill="#FFFFFF" stroke="#93D152" stroke-width="3.5"/>
+<circle cx="915.35" cy="641.29" r="7" fill="#FFFFFF" stroke="#93D152" stroke-width="3.5"/>
+<circle cx="804.06" cy="834.06" r="7" fill="#FFFFFF" stroke="#93D152" stroke-width="3.5"/>
+<circle cx="611.29" cy="945.35" r="7" fill="#FFFFFF" stroke="#93D152" stroke-width="3.5"/>
+<circle cx="388.71" cy="945.35" r="7" fill="#FFFFFF" stroke="#93D152" stroke-width="3.5"/>
+<circle cx="195.94" cy="834.06" r="7" fill="#FFFFFF" stroke="#93D152" stroke-width="3.5"/>
+<circle cx="84.65" cy="641.29" r="7" fill="#FFFFFF" stroke="#93D152" stroke-width="3.5"/>
+<circle cx="84.65" cy="418.71" r="7" fill="#FFFFFF" stroke="#93D152" stroke-width="3.5"/>
+<circle cx="195.94" cy="225.94" r="7" fill="#FFFFFF" stroke="#93D152" stroke-width="3.5"/>
+<circle cx="388.71" cy="114.65" r="7" fill="#FFFFFF" stroke="#93D152" stroke-width="3.5"/>
 
   </g>
 
@@ -329,19 +326,38 @@
   <g id="tagline">
     <line x1="400" y1="766" x2="448" y2="766" stroke="#C9C2AE" stroke-width="1.5" stroke-linecap="round"/>
     <line x1="552" y1="766" x2="600" y2="766" stroke="#C9C2AE" stroke-width="1.5" stroke-linecap="round"/>
-    <circle cx="500" cy="766" r="3.5" fill="#8DC63F"/>
-    <text x="500" y="797" font-family="'Segoe UI', Arial, sans-serif" font-weight="600" font-size="16"
+    <circle cx="500" cy="766" r="3.5" fill="#93D152"/>
+    <text x="500" y="797" font-family="'Inter', sans-serif" font-weight="600" font-size="16"
       letter-spacing="4" text-anchor="middle" fill="#7A8068">EXPLORE OUR FEATURES</text>
   </g>
 
   <!-- fixed pointer marker at 12 o'clock -->
   <g id="pointer" filter="url(#softShadow)">
-    <circle id="pointerGlow" cx="500" cy="30" r="20" fill="#8DC63F"/>
+    <circle id="pointerGlow" cx="500" cy="30" r="20" fill="#93D152"/>
     <path d="M 484 12 L 516 12 Q 518 12 517 14 L 503 44 Q 500 49 497 44 L 483 14 Q 482 12 484 12 Z"
       fill="url(#logoGrad)" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round"/>
     <circle cx="500" cy="22" r="4" fill="#FFFFFF"/>
   </g>
 </svg>
 </div>
+<script>
+(function(){
+  var ring=document.getElementById('ringGroup');
+  var flips=[].slice.call(document.querySelectorAll('.flip'));
+  var PERIOD=22000;
+  function draw(a){
+    ring.setAttribute('transform','rotate('+a.toFixed(3)+' 500 530)');
+    for(var i=0;i<flips.length;i++){
+      var screen=(i*30+a)%360;                       // where this label is on screen (0 = top)
+      flips[i].setAttribute('transform', (screen>90 && screen<270) ? 'rotate(180)' : 'rotate(0)');
+    }
+  }
+  draw(0);
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var t0=performance.now();
+  (function tick(t){ draw(((t-t0)%PERIOD)/PERIOD*360); requestAnimationFrame(tick); })(t0);
+})();
+</script>
 </body>
 </html>
+

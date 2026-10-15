@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Live translation chat demo</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#edfbf2;--glow1:rgba(237,251,242,0);--glow2:rgba(237,251,242,0);--dot:rgba(20,90,50,.06);--shadow:0 20px 50px -20px rgba(30,41,90,.35);--panel:#fff;--ink:#14232b;--mute:#62747d;--line:#d5dee2;--teal:#93D152;--in:#e8eef0;--amber:#c9770f;--amberbg:#fdf0dc}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1220;--glow1:rgba(99,102,241,.25);--glow2:rgba(43,179,177,.18);--dot:rgba(255,255,255,.07);--shadow:0 20px 50px -20px #000;--panel:#17262d;--ink:#e8f0f2;--mute:#8da2ab;--line:#2a3d46;--teal:#93D152;--in:#22343c;--amber:#f2a33a;--amberbg:#3a2c14}}
+:root[data-theme="dark"]{--bg:#0b1220;--glow1:rgba(99,102,241,.25);--glow2:rgba(43,179,177,.18);--dot:rgba(255,255,255,.07);--shadow:0 20px 50px -20px #000;--panel:#17262d;--ink:#e8f0f2;--mute:#8da2ab;--line:#2a3d46;--teal:#93D152;--in:#22343c;--amber:#f2a33a;--amberbg:#3a2c14}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(900px 480px at 15% -5%,var(--glow1),transparent 60%),radial-gradient(800px 480px at 90% 105%,var(--glow2),transparent 60%),radial-gradient(var(--dot) 1px,transparent 1px) 0 0/22px 22px,var(--bg);color:var(--ink);font:15px/1.5 "Inter",system-ui,sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px 16px}
+h1{font-size:30px;line-height:1.2;font-weight:600;letter-spacing:-.02em;margin:0 0 8px;text-align:center;max-width:22ch}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:5px 14px;margin-bottom:14px;border:1px solid var(--line);border-radius:99px;background:var(--panel);font-size:13px;font-weight:500;color:var(--mute)}
+.badge i{width:8px;height:8px;border-radius:50%;background:#93D152;box-shadow:0 0 0 4px rgba(147,209,82,.2)}
+.feat{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:22px}
+.feat span{padding:6px 14px;border:1px solid var(--line);border-radius:8px;background:var(--panel);font-size:13px;color:var(--mute)}
+p.sub{margin:0 0 22px;color:var(--mute);text-align:center;max-width:52ch}
+.stage{display:flex;align-items:center;gap:14px;width:100%;max-width:1280px}
+.win{flex:1;background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);height:480px;display:flex;flex-direction:column;overflow:hidden;min-width:0}
+.head{padding:12px 16px;border-bottom:1px solid var(--line);background:linear-gradient(var(--in),transparent);display:flex;justify-content:space-between;align-items:center;font-weight:600}
+.dots{display:flex;gap:6px;margin-inline-end:12px}.dots i{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.head small{font-weight:400;color:var(--mute)}
+.msgs{flex:1;padding:12px;display:flex;flex-direction:column;gap:10px;overflow-y:auto;background:var(--bg)}
+.subj{padding:10px 16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:10px;font-weight:600;font-size:14px}
+.subj.ar{direction:rtl}
+.pill{padding:2px 10px;border-radius:99px;background:var(--in);font-size:12px;font-weight:500;white-space:nowrap}
+.pill.urgent{background:var(--amberbg);color:var(--amber);font-weight:600}
+.mail{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;animation:pop .25s ease-out}
+.mail.ar{direction:rtl;text-align:right;font-family:"IBM Plex Sans Arabic",system-ui,sans-serif}
+.mh{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.av{width:34px;height:34px;border-radius:50%;background:var(--teal);color:#fff;display:grid;place-items:center;font-weight:600;font-size:13px;flex:none}
+.who{flex:1;min-width:0;line-height:1.3}.who b{display:block;font-size:14px}.who small{color:var(--mute);font-size:12px}
+.time{font-size:12px;color:var(--mute)}
+.body{font-size:14px;white-space:pre-line}
+.tag{display:inline-block;margin-top:10px;font-size:11px;color:var(--teal);font-weight:500}
+.att{display:inline-block;margin-top:8px;margin-inline-end:8px;padding:3px 10px;border:1px solid var(--line);border-radius:6px;font-size:12px;color:var(--mute)}
+.typing{align-self:flex-start;color:var(--mute);font-size:13px;padding:8px 4px}
+.typing.ar{align-self:flex-end;direction:rtl}
+.bridge{display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--mute);font-size:12px;width:64px;text-align:center}
+.bridge i{width:12px;height:12px;border-radius:50%;background:var(--line);transition:background .2s}
+.bridge.on i{background:var(--teal);animation:pulse .7s infinite alternate}
+.ctl{margin-top:20px}
+button{font:inherit;background:var(--teal);color:#fff;border:0;border-radius:8px;padding:8px 18px;cursor:pointer}
+button:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.nc{position:relative;width:190px;height:480px;flex:none}
+.note{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);display:flex;align-items:center;opacity:0;transition:opacity .35s,top .35s}
+.note.show{opacity:1}
+.note .tx{flex:1;padding:8px 12px;border:1px solid var(--teal);border-radius:10px;background:var(--panel);font-size:13px;font-weight:500;line-height:1.35}
+.nl .tx{text-align:right}
+.arw{height:2px;width:48px;background:var(--teal);position:relative;flex:none}
+.arw::after{content:"";position:absolute;top:-4px;border-style:solid;border-color:transparent}
+.nl .arw{margin-right:-14px}
+.nl .arw::after{right:-1px;border-width:5px 0 5px 9px;border-left-color:var(--teal)}
+.nr .arw{margin-left:-14px}
+.nr .arw::after{left:-1px;border-width:5px 9px 5px 0;border-right-color:var(--teal)}
+@keyframes pop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes pulse{to{transform:scale(1.5)}}
+@media (prefers-reduced-motion:reduce){.m,.ticket,.bridge.on i{animation:none}}
+@media (max-width:700px){.stage{flex-direction:column}.nc{width:100%;height:auto}.note{position:static;transform:none;display:none;flex-direction:column}.note.show{display:flex}.nl .tx,.nr .tx{text-align:center;width:100%;flex:none}.arw{width:2px;height:26px;margin:0!important}.nl .arw::after{right:auto;left:-4px;top:auto;bottom:-1px;border-width:9px 5px 0 5px;border-color:var(--teal) transparent transparent transparent}.nr .arw::after{left:-4px;top:-1px;border-width:0 5px 9px 5px;border-color:transparent transparent var(--teal) transparent}.bridge{flex-direction:row;width:auto}.win{height:340px;width:100%}}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="nc nl"><div class="note" id="nL"><div class="tx"></div><span class="arw"></span></div></div>
+  <section class="win" aria-label="Customer inbox in Arabic">
+    <div class="head"><span class="dots"><i></i><i></i><i></i></span><span class="ar" style="flex:1">صندوق العميل</span><small>Customer · Arabic</small></div>
+    <div class="subj ar"><span id="sa">البريد الوارد</span><span id="pa"></span></div>
+    <div class="msgs" id="a"></div>
+  </section>
+  <div class="bridge" id="br"><i></i><span>Live translation</span></div>
+  <section class="win" aria-label="Agent inbox in English">
+    <div class="head"><span class="dots"><i></i><i></i><i></i></span><span style="flex:1">Support inbox</span><small>English</small></div>
+    <div class="subj"><span id="se">Inbox</span><span id="pe"></span></div>
+    <div class="msgs" id="e"></div>
+  </section>
+  <div class="nc nr"><div class="note" id="nR"><span class="arw"></span><div class="tx"></div></div></div>
+</div>
+<script>
+var SUB={ar:'تعذر تسجيل الدخول إلى لوحة التحكم',en:'Unable to log in to the dashboard'};
+var S=[
+{tm:0,f:'c',ar:'مرحباً فريق الدعم،\nلا أستطيع تسجيل الدخول إلى لوحة التحكم منذ هذا الصباح. أرجو فتح تذكرة دعم.\nشكراً،\nسارة',en:"Hello Support team,\nI haven't been able to log in to the dashboard since this morning. Please open a support ticket.\nThanks,\nSara"},
+{tm:4,f:'a',ar:'مرحباً سارة،\nنعتذر عن ذلك. لقد أنشأت التذكرة رقم 4821. هل يمكنك الرد بلقطة شاشة للخطأ؟\nمع التحية،\nدانيال',en:"Hi Sara,\nSorry about that. I've created ticket #4821. Could you reply with a screenshot of the error?\nBest,\nDaniel",st:'open'},
+{tm:9,f:'c',ar:'مرحباً دانيال،\nمرفق لقطة الشاشة. الأولوية عاجلة من فضلك.\nشكراً،\nسارة',en:'Hi Daniel,\nThe screenshot is attached. Please mark this as urgent.\nThanks,\nSara',att:true},
+{tm:11,f:'a',ar:'مرحباً سارة،\nتم. أصبحت التذكرة رقم 4821 عاجلة. سيرد عليك المهندس خلال 30 دقيقة.\nمع التحية،\nدانيال',en:'Hi Sara,\nDone. Ticket #4821 is now urgent. Our engineer will reply within 30 minutes.\nBest,\nDaniel',st:'urgent'}];
+var P={c:{ar:'سارة الحربي',en:'Sara Al-Harbi',i:'S',m:'sara@client.com'},a:{ar:'دانيال من الدعم',en:'Daniel, Support',i:'D',m:'support@helpdesk.com'}};
+var A=document.getElementById('a'),E=document.getElementById('e'),B=document.getElementById('br'),run=0;
+var NT=[
+['Customer\u2019s query message, written in Arabic','Support engineer receives it instantly in English'],
+['Support engineer replies in English','Customer receives the reply in Arabic'],
+['Customer follows up in Arabic with a screenshot','Engineer reads it in English, attachment included'],
+['Engineer marks the ticket urgent and replies in English','Customer sees the urgent update in Arabic']];
+function note(side,txt,box){var n=document.getElementById(side==='l'?'nL':'nR'),cr=n.parentNode.getBoundingClientRect(),mr=box.lastElementChild.getBoundingClientRect();
+ n.querySelector('.tx').textContent=txt;n.style.top=Math.max(34,Math.min(cr.height-34,mr.top-cr.top+mr.height/2))+'px';n.classList.add('show')}
+var rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function w(ms){return new Promise(function(r){setTimeout(r,rm?ms/4:ms)})}
+function el(t,c,x){var d=document.createElement(t);if(c)d.className=c;if(x)d.textContent=x;return d}
+function fmt(mn,ar){var t=10*60+42+mn,h=Math.floor(t/60),x=t%60;return h+':'+(x<10?'0':'')+x+(ar?' ص':' AM')}
+function mail(box,m,ar,fromKey,inbound,n){var p=P[fromKey],d=el('div','mail'+(ar?' ar':'')),h=el('div','mh'),av=el('span','av',p.i),who=el('div','who'),t=el('span','time',inbound?(ar?'استُلم ':'Received ')+fmt(m.tm+1,ar):(ar?'أُرسل ':'Sent ')+fmt(m.tm,ar));
+ who.appendChild(el('b','',ar?p.ar:p.en));who.appendChild(el('small','',ar?'إلى: '+P[fromKey==='c'?'a':'c'].m:'To: '+P[fromKey==='c'?'a':'c'].m));
+ h.appendChild(av);h.appendChild(who);h.appendChild(t);d.appendChild(h);d.appendChild(el('div','body',ar?m.ar:m.en));
+ if(m.att){d.appendChild(el('span','att',ar?'📎 لقطة_شاشة.png':'📎 screenshot.png'))}
+ if(inbound){d.appendChild(el('div','tag',ar?'مترجم من الإنجليزية':'Translated from Arabic'))}
+ box.appendChild(d);box.scrollTop=box.scrollHeight}
+function typing(box,ar,txt){var d=el('div','typing'+(ar?' ar':''),txt);box.appendChild(d);box.scrollTop=box.scrollHeight;return d}
+function status(st){[['pa',1],['pe',0]].forEach(function(x){var e=document.getElementById(x[0]);e.className='pill'+(st==='urgent'?' urgent':'');e.textContent=x[1]?(st==='urgent'?'تذكرة #4821 · عاجلة':'تذكرة #4821 · مفتوحة'):(st==='urgent'?'Ticket #4821 · Urgent':'Ticket #4821 · Open')})}
+async function play(){var id=++run;A.innerHTML='';E.innerHTML='';document.getElementById('nL').classList.remove('show');document.getElementById('nR').classList.remove('show');
+ document.getElementById('sa').textContent=SUB.ar;document.getElementById('se').textContent=SUB.en;
+ document.getElementById('pa').textContent='';document.getElementById('pe').textContent='';document.getElementById('pa').className=document.getElementById('pe').className='';
+ for(var i=0;i<S.length;i++){var m=S[i];if(id!==run)return;await w(3500);
+  if(m.f==='c'){mail(A,m,true,'c',false);note('l',NT[i][0],A);B.classList.add('on');var t=typing(E,false,'Translating email…');await w(3500);t.remove();B.classList.remove('on');mail(E,m,false,'c',true);note('r',NT[i][1],E)}
+  else{mail(E,m,false,'a',false);note('r',NT[i][0],E);B.classList.add('on');var t2=typing(A,true,'…جارٍ ترجمة البريد');await w(3500);t2.remove();B.classList.remove('on');mail(A,m,true,'a',true);note('l',NT[i][1],A);if(m.st){await w(1200);status(m.st)}}
+ }
+ await w(7000);if(id===run)play()}
+play();
+</script>
+</body>
+</html>

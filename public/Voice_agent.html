@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Voice agent language switch demo</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f1f7ea;--glow1:rgba(147,209,82,.2);--glow2:rgba(99,102,241,.12);--dot:rgba(15,61,46,.05);--panel:#fff;--ink:#0f1f1a;--mute:#5c6f68;--line:#dbe5e0;--teal:#93D152;--teal2:#7bbd3a;--tealink:#4d8a1a;--in:#f4f8ef;--amber:#b86a0a;--amberbg:#fdf0dc;--outink:#10250a;--hd1:#93D152;--hd2:#7bbd3a;--shadow:0 1px 2px rgba(15,31,26,.06),0 28px 50px -26px rgba(15,61,46,.4)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#09111a;--glow1:rgba(147,209,82,.14);--glow2:rgba(99,102,241,.2);--dot:rgba(255,255,255,.05);--panel:#111c26;--ink:#e8f1f5;--mute:#8da3ad;--line:#22333f;--teal:#93D152;--teal2:#7bbd3a;--tealink:#93D152;--in:#16232e;--amber:#f2a33a;--amberbg:#3a2c14;--outink:#10250a;--hd1:#93D152;--hd2:#7bbd3a;--shadow:0 28px 50px -26px #000}}
+:root[data-theme="dark"]{--bg:#09111a;--glow1:rgba(147,209,82,.14);--glow2:rgba(99,102,241,.2);--dot:rgba(255,255,255,.05);--panel:#111c26;--ink:#e8f1f5;--mute:#8da3ad;--line:#22333f;--teal:#93D152;--teal2:#7bbd3a;--tealink:#93D152;--in:#16232e;--amber:#f2a33a;--amberbg:#3a2c14;--outink:#10250a;--hd1:#93D152;--hd2:#7bbd3a;--shadow:0 28px 50px -26px #000}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(900px 520px at 12% -8%,var(--glow1),transparent 60%),radial-gradient(800px 520px at 92% 108%,var(--glow2),transparent 60%),radial-gradient(var(--dot) 1px,transparent 1px) 0 0/22px 22px,var(--bg);color:var(--ink);font:15px/1.5 "IBM Plex Sans",system-ui,sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px 16px}
+.stage{display:flex;align-items:center;gap:14px;width:100%;max-width:1300px}
+.win{flex:1;background:var(--panel);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);height:560px;display:flex;flex-direction:column;overflow:hidden;min-width:0}
+.head{padding:14px 18px;background:linear-gradient(135deg,var(--hd1),var(--hd2));color:var(--outink);display:flex;justify-content:space-between;align-items:center;font-weight:600;letter-spacing:.01em}
+.dots{display:flex;gap:6px;margin-inline-end:12px}.dots i{width:10px;height:10px;border-radius:50%;background:rgba(16,37,10,.3)}
+.head small{font-weight:500;font-size:12px;padding:2px 10px;border-radius:99px;background:rgba(16,37,10,.14);color:var(--outink)}
+.subj{padding:8px 16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:8px;font-weight:600;font-size:14px;min-height:44px}
+.grp{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.live{display:inline-flex;align-items:center;gap:8px;font-variant-numeric:tabular-nums;color:var(--ink)}
+.live i{width:8px;height:8px;border-radius:50%;background:#e11d48;box-shadow:0 0 0 4px rgba(225,29,72,.18);animation:blink 1.2s infinite}
+.pill{padding:3px 11px;border-radius:99px;background:var(--in);font-size:12px;font-weight:500;white-space:nowrap}
+.pill.lang{background:var(--amberbg);color:var(--amber);font-weight:600}
+.pill.ok{background:rgba(147,209,82,.25);color:var(--tealink);font-weight:600}
+.langs{padding:9px 14px;border-bottom:1px solid var(--line);display:flex;gap:6px;flex-wrap:wrap;align-items:center;font-size:12px;color:var(--mute);min-height:44px}
+.chip{padding:3px 11px;border:1px solid var(--line);border-radius:99px;font-size:12px;color:var(--mute);background:var(--panel);transition:all .35s}
+.chip.on{background:linear-gradient(135deg,var(--teal),var(--teal2));border-color:transparent;color:var(--outink);font-weight:600;box-shadow:0 4px 10px -4px var(--teal)}
+.call{padding:14px 12px 6px;display:flex;flex-direction:column;align-items:center;gap:3px;border-bottom:1px solid var(--line);background:linear-gradient(var(--in),var(--panel))}
+.av2{width:66px;height:66px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--teal2));color:var(--outink);display:grid;place-items:center;font-size:24px;font-weight:600;position:relative;box-shadow:0 8px 18px -8px var(--teal),0 0 0 4px var(--panel)}
+.av2.ai{background:linear-gradient(135deg,#6366f1,#2bb3b1);color:#fff}
+.av2.on::after{content:"";position:absolute;inset:-8px;border-radius:50%;border:2px solid var(--teal);animation:ring 1.1s infinite}
+.nm{font-weight:600;font-size:15px;margin-top:4px}
+.st{font-size:12px;color:var(--mute);min-height:18px}
+.wave{display:flex;align-items:center;justify-content:center;gap:3px;height:40px}
+.wave i{width:3px;height:4px;border-radius:2px;background:var(--line);transition:background .2s}
+.wave.on i{background:linear-gradient(var(--teal),var(--teal2));animation:wv .7s ease-in-out infinite alternate;animation-delay:var(--d)}
+.msgs{flex:1;padding:14px;display:flex;flex-direction:column;gap:10px;overflow-y:auto;background:var(--in)}
+.cap{max-width:88%;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:10px 14px;font-size:14px;box-shadow:0 1px 2px rgba(15,31,26,.05);animation:pop .25s ease-out}
+.cap.out{align-self:flex-end;background:linear-gradient(135deg,#0070c0,#005a9c);border-color:transparent;color:#fff;border-bottom-right-radius:4px}
+.cap.in{align-self:flex-start;border-bottom-left-radius:4px}
+.dir{display:block;margin-bottom:4px;font-size:10.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+.gloss{display:block;margin-top:4px;font-size:12px;color:var(--mute);font-style:italic}
+.tag{display:block;margin-top:6px;font-size:11px;color:var(--tealink);font-weight:500}
+.cap.out .dir,.cap.out .tag,.cap.out .gloss{color:#fff;opacity:.85}
+.sys{align-self:center;font-size:12px;font-weight:600;color:var(--amber);background:var(--amberbg);padding:4px 14px;border-radius:99px;animation:pop .25s ease-out}
+.bridge{display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--mute);font-size:11px;font-weight:500;width:72px;text-align:center;padding:12px 6px;border:1px solid var(--line);border-radius:14px;background:var(--panel);box-shadow:var(--shadow)}
+.bridge i{width:12px;height:12px;border-radius:50%;background:var(--line);transition:background .2s}
+.bridge.on i{background:var(--teal);animation:pulse .7s infinite alternate}
+.nc{position:relative;width:200px;height:560px;flex:none}
+.note{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);display:flex;align-items:center;opacity:0;transition:opacity .35s,top .35s}
+.note.show{opacity:1}
+.note .tx{flex:1;padding:10px 13px;border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:12px;background:var(--panel);box-shadow:var(--shadow);font-size:13px;font-weight:500;line-height:1.4}
+.note .tx::before{content:"Step " attr(data-s);display:block;margin-bottom:2px;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--tealink)}
+.nl .tx{text-align:right;border-left-color:var(--line);border-right:3px solid var(--teal)}
+.arw{height:2px;width:48px;background:var(--teal);position:relative;flex:none}
+.arw::after{content:"";position:absolute;top:-4px;border-style:solid;border-color:transparent}
+.nl .arw{margin-right:-14px}
+.nl .arw::after{right:-1px;border-width:5px 0 5px 9px;border-left-color:var(--teal)}
+.nr .arw{margin-left:-14px}
+.nr .arw::after{left:-1px;border-width:5px 9px 5px 0;border-right-color:var(--teal)}
+@keyframes pop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes pulse{to{transform:scale(1.5)}}
+@keyframes ring{from{opacity:.9;transform:scale(.9)}to{opacity:0;transform:scale(1.25)}}
+@keyframes wv{from{height:4px}to{height:var(--h)}}
+@keyframes blink{50%{opacity:.35}}
+@media (prefers-reduced-motion:reduce){.cap,.sys,.bridge.on i,.wave.on i,.av2.on::after,.live i{animation:none}.wave.on i{height:var(--h)}}
+@media (max-width:700px){.stage{flex-direction:column}.bridge{flex-direction:row;width:auto;padding:8px 14px}.win{height:520px;width:100%}.nc{width:100%;height:auto}.note{position:static;transform:none;display:none;flex-direction:column}.note.show{display:flex}.nl .tx,.nr .tx{text-align:center;width:100%;flex:none;border:1px solid var(--line);border-top:3px solid var(--teal)}.arw{width:2px;height:26px;margin:0!important}.nl .arw::after{right:auto;left:-4px;top:auto;bottom:-1px;border-width:9px 5px 0 5px;border-color:var(--teal) transparent transparent transparent}.nr .arw::after{left:-4px;top:-1px;border-width:0 5px 9px 5px;border-color:transparent transparent var(--teal) transparent}}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="nc nl"><div class="note" id="nL"><div class="tx"></div><span class="arw"></span></div></div>
+  <section class="win" aria-label="Customer phone call">
+    <div class="head"><span class="dots"><i></i><i></i><i></i></span><span style="flex:1">Customer call</span><small>Any language</small></div>
+    <div class="subj"><span class="live"><i></i><span id="ta">00:00</span></span><span class="grp" id="pa"></span></div>
+    <div class="langs" id="lg"><span>🌐 Call language</span></div>
+    <div class="call"><div class="av2" id="ava">S</div><div class="nm">Sara, Customer</div><div class="st" id="sta"></div><div class="wave" id="wa"></div></div>
+    <div class="msgs" id="a"></div>
+  </section>
+  <div class="bridge" id="br"><i></i><span>Live voice call</span></div>
+  <section class="win" aria-label="AI voice agent">
+    <div class="head"><span class="dots"><i></i><i></i><i></i></span><span style="flex:1">AI voice agent</span><small>English by default</small></div>
+    <div class="subj"><span class="live"><i></i><span id="te">00:00</span></span><span class="grp" id="pe"></span></div>
+    <div class="langs"><span>🌐 Auto language detection · switches on request</span></div>
+    <div class="call"><div class="av2 ai" id="ave">AI</div><div class="nm">HelpDude AI agent</div><div class="st" id="ste"></div><div class="wave" id="we"></div></div>
+    <div class="msgs" id="e"></div>
+  </section>
+  <div class="nc nr"><div class="note" id="nR"><span class="arw"></span><div class="tx"></div></div></div>
+</div>
+<script>
+var S=[
+{f:'a',lang:'English',txt:"Hello, welcome to HelpDude support. How can I help you today?"},
+{f:'c',lang:'English',txt:"Hi, can you please speak German?"},
+{f:'a',lang:'Deutsch',txt:"Natürlich! Ab jetzt spreche ich Deutsch. Wie kann ich Ihnen helfen?",en:"Of course! From now on I'll speak German. How can I help you?",sw:'Deutsch'},
+{f:'c',lang:'Deutsch',txt:"Ich kann mich seit heute Morgen nicht im Dashboard anmelden. Bitte erstellen Sie ein Ticket.",en:"I haven't been able to log in to the dashboard since this morning. Please create a ticket."},
+{f:'a',lang:'Deutsch',txt:"Das tut mir leid. Ich habe Ticket 4821 erstellt. Ein Ingenieur meldet sich innerhalb von 30 Minuten bei Ihnen.",en:"I'm sorry about that. I've created ticket 4821. An engineer will contact you within 30 minutes.",st:1}];
+var NT=[
+['AI voice agent greets in English by default','Customer hears the greeting'],
+['Customer asks the AI to speak German','AI understands the request and prepares to switch'],
+['AI now speaks German','Customer hears the AI in German'],
+['Customer explains the issue in German','AI understands German and creates the ticket'],
+['AI confirms the ticket in German','Customer gets the answer in their own language']];
+var LANGS=['English','Deutsch','Español','Français','العربية'];
+var ST={a:{idle:'Connected',spk:'🎙 Speaking…',hear:'🔊 Hearing the AI agent…'},e:{idle:'Ready',spk:'🎙 AI speaking…',det:'🌐 Detecting language…'}};
+var A=document.getElementById('a'),E=document.getElementById('e'),B=document.getElementById('br'),run=0,cur=1,tick=null,BOX={a:A,e:E};
+function w(ms){return new Promise(function(r){setTimeout(r,ms)})}
+function el(t,c,x){var d=document.createElement(t);if(c)d.className=c;if(x)d.textContent=x;return d}
+function wave(id){var d=document.getElementById(id);d.innerHTML='';for(var i=0;i<30;i++){var b=document.createElement('i'),env=Math.sin(Math.PI*(i+1)/31);b.style.setProperty('--h',(8+env*28*(0.5+Math.random()*0.5)).toFixed(0)+'px');b.style.setProperty('--d','-'+(Math.random()*0.7).toFixed(2)+'s');d.appendChild(b)}}
+wave('wa');wave('we');
+(function(){var g=document.getElementById('lg');LANGS.forEach(function(l){var c=el('span','chip',l);c.dataset.l=l;g.appendChild(c)})})();
+function setst(k,key,av,wv){document.getElementById('st'+k).textContent=ST[k][key];document.getElementById('av'+k).classList.toggle('on',!!av);document.getElementById('w'+k).classList.toggle('on',!!wv)}
+function setLang(l){[].forEach.call(document.querySelectorAll('.chip'),function(c){c.classList.toggle('on',c.dataset.l===l)});
+ var p=document.getElementById('pe'),old=p.querySelector('.lang');if(!old){old=el('span','pill lang');p.insertBefore(old,p.firstChild)}old.textContent='Speaking: '+l}
+function cap(k,m,tag,out){var d=el('div','cap '+(out?'out':'in'));d.appendChild(el('span','dir',out?'↗ Sent':'↙ Received'));var b=el('div','',m.txt);d.appendChild(b);if(m.en&&m.lang!=='English'){d.appendChild(el('span','gloss','EN: '+m.en))}d.appendChild(el('span','tag',tag));BOX[k].appendChild(d);BOX[k].scrollTop=BOX[k].scrollHeight}
+function sys(txt){['a','e'].forEach(function(k){BOX[k].appendChild(el('div','sys',txt));BOX[k].scrollTop=BOX[k].scrollHeight})}
+function note(side,txt,box){var n=document.getElementById(side==='l'?'nL':'nR'),cr=n.parentNode.getBoundingClientRect(),mr=box.lastElementChild.getBoundingClientRect();
+ n.querySelector('.tx').textContent=txt;n.querySelector('.tx').dataset.s=cur;n.style.top=Math.max(34,Math.min(cr.height-34,mr.top-cr.top+mr.height/2))+'px';n.classList.add('show')}
+function ticket(){['pa','pe'].forEach(function(i,x){var p=el('span','pill ok',x?'Ticket #4821 · Created':'Ticket #4821 · Erstellt');document.getElementById(i).appendChild(p)})}
+function clock(){var s=0;clearInterval(tick);['ta','te'].forEach(function(i){document.getElementById(i).textContent='00:00'});
+ tick=setInterval(function(){s++;var m=Math.floor(s/60),t=(m<10?'0':'')+m+':'+(s%60<10?'0':'')+s%60;document.getElementById('ta').textContent=t;document.getElementById('te').textContent=t},1000)}
+async function play(){var id=++run;A.innerHTML='';E.innerHTML='';B.classList.remove('on');
+ document.getElementById('nL').classList.remove('show');document.getElementById('nR').classList.remove('show');
+ document.getElementById('pa').innerHTML='';document.getElementById('pe').innerHTML='';
+ setst('a','idle');setst('e','idle');setLang('English');clock();
+ for(var i=0;i<S.length;i++){var m=S[i];cur=i+1;if(id!==run)return;await w(1800);if(id!==run)return;
+  if(m.f==='a'){
+   if(m.sw){setLang(m.sw);sys('🌐 Language switched to '+m.sw);await w(1500);if(id!==run)return}
+   setst('e','spk',true,true);setst('a','hear',false,true);
+   cap('e',m,'🎙 AI voice · '+m.lang,true);cap('a',m,'🔊 AI voice · '+m.lang,false);
+   note('r',NT[i][0],E);note('l',NT[i][1],A);
+   await w(4500);if(id!==run)return;setst('e','idle');setst('a','idle');
+   if(m.st){ticket();await w(800)}
+  }else{
+   setst('a','spk',true,true);cap('a',m,'🎙 Customer · '+m.lang,true);note('l',NT[i][0],A);
+   await w(3800);if(id!==run)return;setst('a','idle');
+   B.classList.add('on');setst('e','det');await w(2200);if(id!==run)return;B.classList.remove('on');
+   setst('e','idle');cap('e',m,'🎧 Heard · '+m.lang,false);note('r',NT[i][1],E);
+   await w(2000);if(id!==run)return;
+  }
+ }
+ await w(6000);if(id===run)play()}
+play();
+</script>
+</body>
+</html>

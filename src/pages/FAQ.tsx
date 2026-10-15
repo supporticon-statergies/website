@@ -209,8 +209,8 @@ const FAQ = () => {
                     }}
                     className={`w-full text-left px-5 py-4 text-sm font-bold uppercase tracking-wider transition-colors duration-150 ${
                       isActive
-                        ? "text-emerald-600"
-                        : "text-slate-700 hover:text-emerald-500"
+                        ? "text-[#93D152]"
+                        : "text-slate-700 hover:text-[#93D152]"
                     }`}
                     style={{ letterSpacing: "0.08em" }}
                   >
@@ -257,7 +257,7 @@ const FAQ = () => {
                         key={i}
                         className={`rounded-xl border transition-all duration-200 ${
                           isOpen
-                            ? "border-emerald-300 shadow-sm bg-white"
+                            ? "border-[#93D152]/40 shadow-sm bg-white"
                             : "border-slate-200 bg-white/70 hover:border-slate-300 hover:bg-white"
                         }`}
                       >
@@ -277,7 +277,7 @@ const FAQ = () => {
                             animate={{ rotate: isOpen ? 180 : 0 }}
                             transition={{ duration: 0.22, ease: "easeInOut" }}
                             className={`flex-shrink-0 transition-colors duration-200 ${
-                              isOpen ? "text-emerald-500" : "text-slate-400"
+                              isOpen ? "text-[#93D152]" : "text-slate-400"
                             }`}
                           >
                             <ChevronDown className="w-5 h-5" />
@@ -311,9 +311,9 @@ const FAQ = () => {
                                     }
                                     className={`p-1.5 rounded-md transition-colors ${
                                       helpful[key] === true
-                                        ? "text-emerald-500 bg-emerald-50"
-                                        : "text-slate-300 hover:text-slate-500 hover:bg-slate-50"
+                                        ? "bg-[#93D152]/10" : "text-slate-300 hover:text-slate-500 hover:bg-slate-50"
                                     }`}
+                                    style={helpful[key] === true ? { color: '#93D152' } : {}}
                                   >
                                     <ThumbsUp className="w-4 h-4" />
                                   </button>
