@@ -1,5 +1,6 @@
 import { useState, useEffect, lazy, Suspense, useCallback } from "react";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { useNavigate } from "react-router-dom";
 import { X } from "lucide-react";
 
 const RequestDemoDialog = lazy(() => import("@/components/RequestDemoDialog"));
@@ -7,21 +8,39 @@ const RequestDemoDialog = lazy(() => import("@/components/RequestDemoDialog"));
 const TEMPLATES = [
   {
     id: 1,
-    file: "Template_1.png",
-    title: "How Many Tickets Could AI Resolve for You?",
-    alt: "How Many Tickets Could AI Resolve for You? - HelpDude Autopilot",
+    file: "Template-1.png",
+    title: "Discover what HelpDude can do for your team",
+    alt: "Discover what HelpDude can do for your team - HelpDude AI Features",
+    primaryLabel: "Book a Demo",
+    secondaryLabel: "Explore Features",
+    secondaryAction: "features",
   },
   {
     id: 2,
-    file: "Template_2.png",
-    title: "Ready to Spend Less Time on Manual Tickets?",
-    alt: "Ready to Spend Less Time on Manual Tickets? - HelpDude Autopilot and Copilot",
+    file: "Template-2.png",
+    title: "Still handling tickets manually?",
+    alt: "Still handling tickets manually? - HelpDude Autopilot and Copilot",
+    primaryLabel: "See It in Action",
+    secondaryLabel: "Maybe Later",
+    secondaryAction: "close",
   },
   {
     id: 3,
-    file: "Template_3.png",
-    title: "How Much of Your Support Could You Automate?",
-    alt: "How Much of Your Support Could You Automate? - HelpDude AI",
+    file: "Template-3.png",
+    title: "Too many channels, one support team?",
+    alt: "Too many channels, one support team? - HelpDude Omnichannel Support",
+    primaryLabel: "Book a Demo",
+    secondaryLabel: "Maybe Later",
+    secondaryAction: "close",
+  },
+  {
+    id: 4,
+    file: "Template-4.png",
+    title: "Could HelpDude be the right fit for your company?",
+    alt: "Could HelpDude be the right fit for your company? - HelpDude AI Support",
+    primaryLabel: "Schedule a Demo",
+    secondaryLabel: "Keep Exploring",
+    secondaryAction: "close",
   },
 ];
 
@@ -29,12 +48,29 @@ const TEMPLATES = [
 const PROMO_INTERVAL_MS = 3 * 60 * 1000;
 
 const getAssetUrl = (fileName: string) => {
+  const clean = fileName.replace(/^\//, "");
+
+  if (typeof window !== "undefined") {
+    // Detect GitHub Pages repo subpath (e.g. /website/)
+    const pathSegments = window.location.pathname.split("/").filter(Boolean);
+    const isGithubIo = window.location.hostname.includes("github.io");
+
+    if (isGithubIo && pathSegments.length > 0) {
+      return `/${pathSegments[0]}/${clean}`;
+    }
+
+    if (pathSegments.length > 0 && pathSegments[0] === "website") {
+      return `/website/${clean}`;
+    }
+  }
+
   const base = import.meta.env.BASE_URL || "/";
   const cleanBase = base.endsWith("/") ? base : `${base}/`;
-  return `${cleanBase}${fileName.replace(/^\//, "")}`;
+  return `${cleanBase}${clean}`;
 };
 
 export function PromoModal() {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [isDemoOpen, setIsDemoOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -51,14 +87,14 @@ export function PromoModal() {
     let intervalMs = PROMO_INTERVAL_MS;
 
     // Quick test options via URL:
-    // e.g. ?promo=1 | 2 | 3 (shows immediately)
+    // e.g. ?promo=1 | 2 | 3 | 4 (shows immediately)
     // or ?promo_sec=10 (test with a 10s timer instead of waiting 3 minutes)
     if (typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search);
       const promoParam = params.get("promo");
       if (promoParam) {
         const pNum = parseInt(promoParam, 10);
-        if (pNum >= 1 && pNum <= 3) {
+        if (pNum >= 1 && pNum <= TEMPLATES.length) {
           setCurrentIndex(pNum - 1);
         }
         setIsOpen(true);
@@ -75,7 +111,7 @@ export function PromoModal() {
     }
 
     console.log(
-      `[PromoModal] Active: next template will appear unexpectedly in ${intervalMs / 1000}s (3 mins)`
+      `[PromoModal] Active: next template will appear in ${intervalMs / 1000}s (3 mins)`
     );
 
     let templateIndex = 0;
@@ -89,7 +125,7 @@ export function PromoModal() {
       templateIndex = (templateIndex + 1) % TEMPLATES.length;
     }, intervalMs);
 
-    // Testing helper in browser console: window.__triggerPromoModal(1 | 2 | 3)
+    // Testing helper in browser console: window.__triggerPromoModal(1 | 2 | 3 | 4)
     (window as any).__triggerPromoModal = (num = 1) => {
       const idx = Math.max(0, Math.min(TEMPLATES.length - 1, num - 1));
       setCurrentIndex(idx);
@@ -112,6 +148,39 @@ export function PromoModal() {
 
   const currentTemplate = TEMPLATES[currentIndex];
 
+  const handleSecondaryClick = useCallback((e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsOpen(false);
+    if (currentTemplate.secondaryAction === "features") {
+      navigate("/features");
+    }
+  }, [currentTemplate, navigate]);
+
+  const [imageSrc, setImageSrc] = useState<string>(() => getAssetUrl(currentTemplate.file));
+  const [fallbackAttempt, setFallbackAttempt] = useState(0);
+
+  useEffect(() => {
+    setImageSrc(getAssetUrl(currentTemplate.file));
+    setFallbackAttempt(0);
+  }, [currentIndex]);
+
+  const handleImageError = () => {
+    const clean = currentTemplate.file.replace(/^\//, "");
+    const fallbacks = [
+      `/${clean}`,
+      `/website/${clean}`,
+      `./${clean}`,
+      `${import.meta.env.BASE_URL || "/"}${clean}`,
+    ];
+
+    if (fallbackAttempt < fallbacks.length) {
+      const nextUrl = fallbacks[fallbackAttempt];
+      console.warn(`[PromoModal] Image failed to load, attempting fallback ${fallbackAttempt + 1}: ${nextUrl}`);
+      setFallbackAttempt((prev) => prev + 1);
+      setImageSrc(nextUrl);
+    }
+  };
+
   return (
     <>
       <Dialog
@@ -127,7 +196,7 @@ export function PromoModal() {
 
           <div className="relative flex flex-col items-center">
             {/* Template Card Showcase */}
-            <div className="relative w-full rounded-2xl overflow-hidden shadow-2xl group select-none">
+            <div className="relative w-full rounded-2xl overflow-hidden shadow-2xl group select-none bg-white min-h-[300px] flex items-center justify-center">
               {/* Close (X) button on top right of the card */}
               <button
                 onClick={handleClose}
@@ -139,11 +208,37 @@ export function PromoModal() {
 
               {/* Clickable Template Image */}
               <img
-                src={getAssetUrl(currentTemplate.file)}
+                src={imageSrc}
                 alt={currentTemplate.alt}
                 onClick={handleBookDemo}
-                className="w-full h-auto max-h-[75vh] object-contain rounded-2xl cursor-pointer transition-transform duration-300 hover:scale-[1.01]"
+                onError={handleImageError}
+                className="w-full h-auto max-h-[75vh] object-contain rounded-2xl cursor-pointer transition-transform duration-300 hover:scale-[1.01] block"
+                loading="eager"
               />
+
+              {/* Clickable Action Hotspots over the buttons in the graphic */}
+              <div
+                className="absolute bottom-[6%] left-[5%] right-[5%] h-[16%] flex gap-4 pointer-events-auto z-20"
+                style={{ maxWidth: "600px" }}
+              >
+                {/* Primary CTA (Book a Demo / See It in Action / Schedule a Demo) */}
+                <button
+                  type="button"
+                  onClick={handleBookDemo}
+                  className="w-[45%] h-full rounded-xl cursor-pointer bg-transparent hover:bg-white/10 active:scale-95 transition-all focus:outline-none"
+                  aria-label={currentTemplate.primaryLabel}
+                  title={currentTemplate.primaryLabel}
+                />
+
+                {/* Secondary CTA (Explore Features / Maybe Later / Keep Exploring) */}
+                <button
+                  type="button"
+                  onClick={handleSecondaryClick}
+                  className="w-[45%] h-full rounded-xl cursor-pointer bg-transparent hover:bg-slate-900/5 active:scale-95 transition-all focus:outline-none"
+                  aria-label={currentTemplate.secondaryLabel}
+                  title={currentTemplate.secondaryLabel}
+                />
+              </div>
             </div>
           </div>
         </DialogContent>

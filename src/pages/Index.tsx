@@ -1,4 +1,5 @@
 import { SEO } from "@/components/SEO";
+import { assetUrl } from "@/lib/baseUrl";
 import heroImage from "@/assets/home-imge.png";
 import { supporticonUploads } from "@/assets/supporticon-uploads";
 import {
@@ -547,10 +548,10 @@ const Home = () => {
             <FadeIn delay={0.1}>
               <div
                 className="w-full max-w-5xl mx-auto rounded-2xl overflow-hidden shadow-xl border border-slate-200"
-                style={{ aspectRatio: "1140 / 560" }}
+                style={{ aspectRatio: "1140 / 504" }}
               >
                 <iframe
-                  src="/HelpDude_Data_Flow.html"
+                  src={assetUrl("HelpDude_Data_Flow.html")}
                   className="w-full h-full border-0 block"
                   title="HelpDude Data Flow"
                 />
