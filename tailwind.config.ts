@@ -96,8 +96,9 @@ export default {
 				},
 			},
 			fontFamily: {
-				display: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-				sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif']
+				display: ['"Inter Tight"', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+				sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+				tight: ['"Inter Tight"', 'Inter', 'sans-serif'],
 			},
 			backgroundImage: {
 				'gradient-brand': 'var(--gradient-brand)',

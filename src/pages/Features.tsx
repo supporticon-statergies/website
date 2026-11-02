@@ -56,7 +56,7 @@ const Features = () => {
           className={`grid md:grid-cols-2 gap-8 lg:gap-12 items-center ${reveal.revealClasses}`}
         >
           <div className="max-w-2xl self-center pt-0">
-            <h1 className="font-display text-5xl font-extrabold leading-tight md:text-6xl lg:text-7xl text-slate-900 tracking-normal">
+            <h1 className="text-5xl font-bold leading-tight md:text-6xl lg:text-7xl text-slate-900 tracking-normal" style={{ fontWeight: 600, fontFamily: "'Inter', sans-serif", letterSpacing: '-0.76px' }}>
               <span style={{ color: '#93D152' }} className="pr-2 box-decoration-clone">
                 Six ways HelpDude turns customer friction into effortless resolution
               </span>
@@ -231,56 +231,6 @@ const Features = () => {
             </motion.div>
           </motion.div>
   
-      </section>
-
-      {/* Email Ticketing Demo */}
-      <section className="container mx-auto px-4 py-12 animate-in fade-in duration-700 delay-1000 fill-mode-both">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight mb-4 text-slate-900 text-center leading-tight">
-            See Email Ticketing in Action
-          </h2>
-          <p className="text-center text-lg text-slate-500 mb-10 max-w-2xl mx-auto">
-            Watch how HelpDude's Autopilot &amp; Copilot handle real email tickets — resolving instantly or drafting replies for your team.
-          </p>
-          <div className="w-full rounded-2xl overflow-hidden shadow-2xl border border-green-100">
-            <iframe
-              src="/email_ticketing.html.html"
-              title="Email Ticketing Demo"
-              style={{
-                width: "100%",
-                height: "620px",
-                border: "none",
-                display: "block",
-              }}
-              scrolling="no"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Voice Agent Demo */}
-      <section className="container mx-auto px-4 py-12 animate-in fade-in duration-700 delay-1000 fill-mode-both">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight mb-4 text-slate-900 text-center leading-tight">
-            Voice Agent — Live Language Switch
-          </h2>
-          <p className="text-center text-lg text-slate-500 mb-10 max-w-2xl mx-auto">
-            See HelpDude's voice agent handle inbound calls in any language — switching seamlessly and resolving without making the customer repeat themselves.
-          </p>
-          <div className="w-full rounded-2xl overflow-hidden shadow-2xl border border-green-100">
-            <iframe
-              src={`/Voice_agent.html?v=${Date.now()}`}
-              title="Voice Agent Demo"
-              style={{
-                width: "100%",
-                height: "660px",
-                border: "none",
-                display: "block",
-              }}
-              scrolling="no"
-            />
-          </div>
-        </div>
       </section>
 
       {/* The Problem We Solve */}

@@ -1,240 +1,157 @@
-import { useRef, useState, lazy, Suspense } from "react";
-import { motion, useTransform, useScroll } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { useIsMobile } from "@/hooks/use-mobile";
+import { useState, useRef, lazy, Suspense } from "react";
+import { toast } from "sonner";
 
 const RequestDemoDialog = lazy(() => import("@/components/RequestDemoDialog"));
-import {
-  ArrowRight,
-  CheckCircle,
-  Clock,
-  Plug,
-  Shield,
-  Sparkles,
-} from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import { CXLeadersForm } from "@/components/CXLeadersForm";
-import { useAuth } from "@/context/AuthContext";
-
-/* ─── Background particles ─── */
-const PARTICLES = [
-  { id: 0,  x: "6%",  y: "18%", size: 3, dur: 5.2, delay: 0   },
-  { id: 1,  x: "92%", y: "22%", size: 2, dur: 6.8, delay: 1.1 },
-  { id: 2,  x: "14%", y: "72%", size: 2, dur: 4.5, delay: 0.7 },
-  { id: 3,  x: "88%", y: "68%", size: 3, dur: 7.0, delay: 2.3 },
-  { id: 4,  x: "50%", y: "8%",  size: 2, dur: 5.6, delay: 1.8 },
-  { id: 5,  x: "50%", y: "90%", size: 2, dur: 6.2, delay: 0.4 },
-  { id: 6,  x: "25%", y: "42%", size: 2, dur: 4.9, delay: 3.0 },
-  { id: 7,  x: "75%", y: "48%", size: 2, dur: 7.5, delay: 1.5 },
-];
 
 export const HeroSection = () => {
-  const navigate = useNavigate();
-  const { openAuthModal } = useAuth();
-  const [showCXForm, setShowCXForm] = useState(false);
   const [showDemoDialog, setShowDemoDialog] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
-  const isMobile = useIsMobile();
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  const { scrollY } = useScroll();
-  const bgY = useTransform(scrollY, [0, 600], [0, -22]);
+  const validateEmail = (val: string): boolean => {
+    const trimmed = val.trim();
+    if (!trimmed) {
+      setEmailError("Please enter your work email");
+      return false;
+    }
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(trimmed)) {
+      setEmailError("Please enter a valid work email address");
+      return false;
+    }
+    setEmailError("");
+    return true;
+  };
+
+  const handleTryForFree = (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    const isValid = validateEmail(email);
+    if (!isValid) {
+      const err = !email.trim()
+        ? "Please enter your work email address"
+        : "Please enter a valid work email address (e.g. you@company.com)";
+      setEmailError(err);
+      toast.error(err);
+      inputRef.current?.focus();
+      return;
+    }
+    toast.success("Redirecting to HelpDude trial signup...");
+    window.open(
+      `https://helpdude-ai.supporticon.com/?email=${encodeURIComponent(email.trim())}`,
+      "_blank"
+    );
+  };
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative min-h-[92vh] flex items-center overflow-hidden pt-4 pb-20"
-    >
-      {/* ── Ambient background ───────────────────────────────────── */}
-      <motion.div style={{ y: bgY }} className="absolute inset-0 -z-10 pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-to-br from-white via-slate-50/90 to-green-50/70" />
-
-        {!isMobile && (
-          <>
-            {/* Top-right glow */}
-            <motion.div
-          animate={{ scale: [1, 1.12, 1], opacity: [0.45, 0.72, 0.45] }}
-          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -top-20 -right-20 w-[600px] h-[600px] rounded-full"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(147,209,82,0.25) 0%, rgba(147,209,82,0.10) 45%, transparent 70%)",
-          }}
-        />
-
-        {/* Bottom-left glow */}
-        <motion.div
-          animate={{ scale: [1, 1.18, 1], opacity: [0.18, 0.4, 0.18] }}
-          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 2.5 }}
-          className="absolute -bottom-24 -left-20 w-[520px] h-[420px] rounded-full"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(186,230,255,0.38) 0%, rgba(147,197,253,0.14) 50%, transparent 70%)",
-          }}
-        />
-
-        {/* Center subtle glow */}
-        <motion.div
-          animate={{ scale: [1, 1.08, 1], opacity: [0.12, 0.28, 0.12] }}
-          transition={{ duration: 11, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] rounded-full"
-          style={{
-            background:
-              "radial-gradient(ellipse, rgba(147,209,82,0.18) 0%, transparent 65%)",
-          }}
-        />
-
-        {/* Floating particles */}
-        {PARTICLES.map((p) => (
-          <motion.div
-            key={p.id}
-            className="absolute rounded-full"
-            style={{ left: p.x, top: p.y, width: p.size, height: p.size, background: 'rgba(147,209,82,0.25)' }}
-            animate={{ y: [-14, 14, -14], opacity: [0.1, 0.5, 0.1] }}
-            transition={{
-              duration: p.dur,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: p.delay,
-            }}
-            />
-          ))}
-          </>
-        )}
-      </motion.div>
-
-      {/* ── Centered content ─────────────────────────────────────── */}
-      <div className="container mx-auto px-4 md:px-8 lg:px-12">
-        <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
-
-
-          {/* Headline */}
-          <div>
-            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.06] text-slate-900 mb-6">
-              <span style={{ color: '#93D152' }}>
-                Your Customers Aren't Complaining
+    <section className="relative w-full bg-[#eaedf2] overflow-hidden">
+      <div className="relative flex flex-col items-center text-center py-12 md:py-16 lg:py-20 px-6 sm:px-10 md:px-16 lg:px-20">
+        
+        {/* Centered content */}
+        <div className="w-full max-w-[1400px] z-10 flex flex-col items-center text-center">
+          {/* Attractive badge — centered above heading */}
+          <div className="relative inline-flex items-center mb-6 group">
+            {/* Glowing border ring */}
+            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#3fae2a] via-[#00c6a7] to-[#3fae2a] opacity-70 blur-[6px] group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="relative inline-flex items-center gap-3 bg-white border border-[#c8edc2] px-6 py-3 rounded-full shadow-md">
+              {/* Pulsing green dot */}
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#3fae2a] opacity-75" />
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#3fae2a]" />
               </span>
-              <span className="block">They're Leaving</span>
-            </h1>
-          </div>
-
-          {/* Subtitle */}
-          <div>
-            <p className="text-lg md:text-xl text-slate-600 leading-relaxed max-w-2xl mb-10">
-             94% of unhappy customers never file a ticket — they just don't renew.
-             HelpDude gives customers effortless help from AI or a human in their
-             own language, and gives your support team the speed to catch churn before it happens.
-            </p>
-          </div>
-
-          {/* CTA Buttons */}
-          <div>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center mb-10">
-              <motion.div
-                whileHover={{ scale: 1.04, y: -2 }}
-                whileTap={{ scale: 0.97 }}
-                transition={{ type: "spring", stiffness: 300, damping: 18 }}
+              <span
+                className="font-bold text-[15px] md:text-[16px] tracking-wide"
+                style={{ background: "linear-gradient(90deg, #0f4a2c 0%, #3fae2a 50%, #00c6a7 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}
               >
-                <Button
-                  size="lg"
-                  variant="hero"
-                  className="rounded-full px-9 py-6 text-base font-bold btn-glow w-full sm:w-auto"
-                  onClick={() => window.open('https://helpdude-ai.supporticon.com/', '_blank')}
-                >
-                  Get Started 
-                  <ArrowRight className="w-4 h-4 ml-1" />
-                </Button>
-              </motion.div>
-
-              <motion.div
-                whileHover={{ scale: 1.03, y: -1 }}
-                whileTap={{ scale: 0.97 }}
-                transition={{ type: "spring", stiffness: 300, damping: 18 }}
-              >
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="rounded-full px-9 py-6 text-base font-semibold border-slate-200 bg-white/80 hover:bg-white hover:border-primary hover:text-primary text-slate-800 w-full sm:w-auto transition-all duration-200"
-                  onClick={() => setShowDemoDialog(true)}
-                >Request a Demo
-                </Button>
-              </motion.div>
+                ✦ An AI-powered Customer Support platform
+              </span>
             </div>
           </div>
 
-          {/* Full-width trust + proof strip */}
-          <div className="w-full">
-            <div className="w-full mt-2">
-              {/* Row 1 — feature badges */}
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-3 w-full">
-                {[
-                  { icon: Clock,  text: "Setup in under 15 minutes" },
-                  { icon: Plug,   text: "No IT dependency"          },
-                  { icon: Shield, text: "Enterprise-grade security" },
-                ].map((b) => (
-                  <motion.div
-                    key={b.text}
-                    whileHover={{ y: -3, scale: 1.02 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                    className="flex items-center gap-3 px-5 py-4 rounded-2xl bg-white/85 border border-slate-100/80 shadow-sm backdrop-blur-sm"
-                  >
-                    <div className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0" style={{ background: 'rgba(147,209,82,0.15)' }}>
-                      <b.icon className="w-5 h-5" style={{ color: '#93D152' }} />
-                    </div>
-                    <span className="text-slate-700 text-sm font-semibold leading-snug text-left">
-                      {b.text}
-                    </span>
-                  </motion.div>
-                ))}
+          <h1 
+            className="text-[32px] sm:text-[42px] md:text-[48px] lg:text-[54px] leading-[1.15] mb-5 font-sans tracking-[-0.5px] text-[#10284a] max-w-[1250px] mx-auto"
+            style={{ fontWeight: 600, fontFamily: "'Inter', sans-serif", letterSpacing: '-0.76px' }}
+          >
+            Making the customer <em className="not-italic text-[#3fae2a]" style={{ fontWeight: 600 }}>support effortless</em><br className="hidden md:block" /> for the customers and support teams.
+          </h1>
+
+          <p className="text-[#6b7a90] text-[17px] sm:text-[18px] md:text-[20px] leading-[1.6] mb-3 max-w-[1100px] mx-auto md:whitespace-nowrap">
+            HelpDude help you deliver a consistent customer experiences across channels & languages.
+          </p>
+
+          <p className="text-[#334155] text-[16px] md:text-[18px] mb-8 max-w-[750px] mx-auto font-normal">
+            An AI that knows when to{" "}
+            <span className="relative inline-block font-semibold text-[#1e8e3e] px-1">
+              <span className="absolute inset-0 bg-emerald-400/25 blur-md rounded-full -z-10 scale-125 pointer-events-none"></span>
+              automate
+            </span>{" "}
+            and when to bring in a{" "}
+            <span className="relative inline-block font-semibold text-[#0077ff] px-1">
+              <span className="absolute inset-0 bg-sky-400/30 blur-md rounded-full -z-10 scale-125 pointer-events-none"></span>
+              human.
+            </span>
+          </p>
+
+          {/* Form container */}
+          <div className="bg-[#e6f4e4] rounded-[18px] p-5 sm:p-[24px_30px] w-full max-w-[850px] shadow-sm mx-auto">
+            <label htmlFor="hero-work-email" className="flex items-center justify-start gap-2.5 text-[15px] font-medium text-[#10284a] mb-2.5">
+              <span>✉</span> Work email address
+            </label>
+
+            <form onSubmit={handleTryForFree} className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+              <div className="relative flex-1">
+                <input
+                  id="hero-work-email"
+                  ref={inputRef}
+                  type="email"
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    if (emailError) validateEmail(e.target.value);
+                  }}
+                  placeholder="you@company.com"
+                  className={`w-full p-4 rounded-xl text-[16px] bg-white text-[#10284a] border outline-none transition-all ${
+                    emailError
+                      ? "border-red-400 focus:ring-2 focus:ring-red-300/40"
+                      : "border-[#e3e9ee] focus:border-[#3fae2a] focus:ring-2 focus:ring-[#3fae2a]/20"
+                  }`}
+                />
+                {emailError && (
+                  <span className="absolute -bottom-5 left-1 text-[11px] font-semibold text-red-600 bg-white/95 px-1.5 py-0.5 rounded shadow-sm border border-red-200">
+                    {emailError}
+                  </span>
+                )}
               </div>
 
-              {/* Divider */}
-              <div className="w-full h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent my-5" />
+              <button
+                type="submit"
+                className="bg-[#0f4a2c] hover:bg-[#155e39] text-white font-semibold text-[17px] px-8 py-4 sm:py-0 rounded-xl transition-all duration-200 cursor-pointer shadow-sm hover:brightness-110 active:scale-[0.98] whitespace-nowrap"
+              >
+                Try for free →
+              </button>
+            </form>
 
-              {/* Row 2 — proof metrics */}
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-3 w-full">
-                {[
-                  {
-                    stat: "30%",
-                    desc: "Silent churn reduced in the first month",
-                  },
-                  {
-                    stat: "<30s",
-                    desc: "Average resolution time on Autopilot",
-                  },
-                  {
-                    stat: "15 min",
-                    desc: "From signup to your first automated resolution",
-                  },
-                  {
-                    stat: "Day 1",
-                    desc: "New hire productivity with AI",
-                  },
-                  {
-                    stat: "Zero",
-                    desc: "Third-party data sharing — every language, every channel.",
-                  },
-                ].map((item) => (
-                  <div
-                    key={item.stat}
-                    className="flex flex-col items-center justify-center gap-2 px-5 py-4 rounded-2xl border text-center"
-                    style={{ background: 'rgba(147,209,82,0.08)', borderColor: 'rgba(147,209,82,0.25)' }}
-                  >
-                    <CheckCircle className="w-5 h-5 shrink-0" style={{ color: '#93D152' }} />
-                    <span className="text-lg font-black leading-none" style={{ color: '#93D152' }}>
-                      {item.stat}
-                    </span>
-                    <span className="text-slate-700 text-xs font-semibold leading-snug">
-                      {item.desc}
-                    </span>
-                  </div>
-                ))}
-              </div>
+            <div className="flex items-center justify-center gap-2.5 my-4 text-[14px] md:text-[15px] text-[#10284a] font-normal">
+              <span>🛡</span> 14-day free trial. No credit card required.
+            </div>
+
+            <div className="flex justify-center">
+              <button
+                type="button"
+                onClick={() => setShowDemoDialog(true)}
+                className="text-[#0f4a2c] font-semibold underline text-[15px] hover:text-[#3fae2a] transition-colors cursor-pointer bg-transparent border-0 p-0"
+              >
+                Book a Demo →
+              </button>
             </div>
           </div>
+
+          <p className="text-[#6b7a90] text-[15px] mt-5 text-center mx-auto">
+            Explore a smarter way to support your customers.
+          </p>
         </div>
-      </div>
 
-      <CXLeadersForm open={showCXForm} onOpenChange={setShowCXForm} />
+      </div>
 
       {showDemoDialog && (
         <Suspense fallback={null}>

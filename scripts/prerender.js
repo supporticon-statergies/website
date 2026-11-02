@@ -11,6 +11,7 @@ const DIST_DIR = path.resolve(__dirname, '../dist');
 // Define the static routes to pre-render
 const routesToPrerender = [
   '/',
+  '/saas',
   '/about',
   '/features',
   '/product',

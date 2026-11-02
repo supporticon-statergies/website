@@ -85,6 +85,31 @@ export function StaggerItem({
   );
 }
 
+/** Pop up and float in on scroll - spring physics */
+export function FloatIn({
+  children,
+  delay = 0,
+  className = "",
+}: AnimProps) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 65, scale: 0.95 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: false, amount: 0.12 }}
+      transition={{
+        type: "spring",
+        stiffness: 95,
+        damping: 13,
+        mass: 0.75,
+        delay,
+      }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
 /** Hover-lift card wrapper */
 export function HoverCard({
   children,

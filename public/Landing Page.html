@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Supporticon – AI Customer Support Landing Page</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #10284a;
+  --muted: #6b7a90;
+  --green: #3fae2a;
+  --dark: #0f4a2c;
+  --mint: #e6f4e4;
+  --bg: #eaedf2;
+  --line: #e3e9ee;
+  --card: #fff;
+  --soft: #e9f6e6;
+  --trial-green: #7cc339;
+}
+* { box-sizing: border-box; }
+html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Navigation matching uploaded image ── */
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 44px;
+  background: var(--card);
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+.logo img {
+  height: 48px;
+  width: auto;
+  display: block;
+  filter: brightness(1.15) contrast(1.08);
+  transition: transform 0.2s ease;
+}
+.logo img:hover {
+  transform: scale(1.02);
+}
+.links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  font-weight: 500;
+  font-size: 15px;
+}
+.links a {
+  color: var(--ink);
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 9999px;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.links a:hover {
+  color: var(--green);
+  background: rgba(147, 209, 82, 0.08);
+}
+.links a.active-pill {
+  background: #eaf7d6;
+  color: #439219;
+  font-weight: 600;
+  padding: 8px 18px;
+}
+.chevron {
+  font-size: 12px;
+  line-height: 1;
+  opacity: 0.7;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.btn-demo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #dbe4ec;
+  color: var(--ink);
+  background: #fff;
+  padding: 9px 22px;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+.btn-demo:hover {
+  border-color: var(--green);
+  color: var(--green);
+  background: rgba(147, 209, 82, 0.04);
+}
+.btn-trial {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--trial-green);
+  color: #fff;
+  padding: 9px 24px;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  border: none;
+  box-shadow: 0 2px 10px rgba(124, 195, 57, 0.3);
+  transition: all 0.2s ease;
+}
+.btn-trial:hover {
+  background: #72b533;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(124, 195, 57, 0.4);
+}
+
+/* ── Hero Section ── */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: 40px;
+  padding: 48px 0 48px max(44px, calc((100vw - 1400px) / 2));
+  align-items: center;
+  overflow: hidden;
+}
+.pill {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  background: var(--soft);
+  color: var(--dark);
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 15px;
+}
+h1 {
+  font-size: clamp(34px, 4.4vw, 58px);
+  line-height: 1.12;
+  margin: 28px 0 20px;
+  font-weight: 600;
+  letter-spacing: -0.76px;
+  color: var(--ink);
+}
+h1 em {
+  font-style: normal;
+  color: var(--green);
+  font-weight: 600;
+}
+.sub {
+  color: var(--muted);
+  font-size: 19px;
+  line-height: 1.55;
+  margin: 0 0 12px;
+  max-width: 560px;
+}
+.sub2 {
+  color: var(--muted);
+  font-size: 17px;
+  margin: 0 0 28px;
+}
+.form {
+  background: var(--mint);
+  border-radius: 18px;
+  padding: 22px 26px;
+  max-width: 620px;
+}
+.form label {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 15px;
+  margin-bottom: 10px;
+  color: var(--ink);
+  font-weight: 500;
+}
+.row {
+  display: flex;
+  gap: 22px;
+}
+.row input {
+  flex: 1;
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  font: inherit;
+  background: var(--card);
+  color: var(--ink);
+}
+.row input:focus-visible {
+  outline: 3px solid #3fae2a;
+  outline-offset: 2px;
+}
+.btn {
+  background: var(--dark);
+  color: #fff;
+  border: 0;
+  border-radius: 12px;
+  padding: 0 34px;
+  font: 600 17px inherit;
+  font-family: inherit;
+  cursor: pointer;
+  transition: filter 0.2s ease, transform 0.1s ease;
+  white-space: nowrap;
+}
+.btn:hover {
+  filter: brightness(1.15);
+}
+.btn:active {
+  transform: scale(0.98);
+}
+.note {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin: 16px 0;
+  font-size: 15px;
+  color: var(--ink);
+}
+.demo {
+  color: var(--dark);
+  font-weight: 600;
+  text-decoration: underline;
+}
+.demo:hover {
+  color: var(--green);
+}
+.explore {
+  color: var(--muted);
+  font-size: 15px;
+  margin: 14px 0 0 22px;
+}
+
+/* ── Visual Section ── */
+.visual {
+  position: relative;
+}
+.visual:before {
+  content: "";
+  position: absolute;
+  inset: -20px 0 -20px -20px;
+  border-radius: 52px 0 0 52px;
+  background: var(--soft);
+  z-index: 0;
+}
+.frame {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  border-radius: 36px 0 0 36px;
+  box-shadow: 0 18px 40px rgba(16, 40, 74, 0.15);
+  background: #fff;
+}
+.photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 640px;
+  object-fit: cover;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  nav {
+    padding: 14px 20px;
+    gap: 16px;
+  }
+  .links {
+    display: none;
+  }
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 28px 20px 32px;
+  }
+  .visual {
+    margin: 0;
+  }
+  .visual:before {
+    display: none;
+  }
+  .row {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .btn {
+    padding: 16px;
+  }
+  .frame {
+    border-radius: 24px;
+  }
+  .logo img {
+    height: 40px;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation with features from uploaded image -->
+<nav>
+  <a class="logo" href="/" aria-label="Supporticon Home">
+    <img src="supporticon-nav-logo.png" alt="Supporticon – Catalyst for Excellence" onerror="this.src='/favicon.ico'">
+  </a>
+  
+  <div class="links">
+    <a href="/" class="active-pill">Home</a>
+    <a href="/features">Features</a>
+    <a href="/product">Product <span class="chevron">⌵</span></a>
+    <a href="/resources">Resources <span class="chevron">⌵</span></a>
+    <a href="/faq">FAQ</a>
+    <a href="/about">About</a>
+  </div>
+
+  <div class="nav-actions">
+    <a class="btn-demo" href="/product?demo=true">Request a Demo</a>
+    <a class="btn-trial" href="https://helpdude-ai.supporticon.com/" target="_blank" rel="noopener noreferrer">Start Free Trial</a>
+  </div>
+</nav>
+
+<!-- Hero Main Section -->
+<main class="hero">
+  <section>
+    <span class="pill">✦ An AI-powered Customer Support platform</span>
+    <h1>Making the customer <em>support effortless</em><br> for the customers and support teams</h1>
+    <p class="sub" style="max-width: 100%; white-space: nowrap;">HelpDude help you deliver a consistent customer experiences across channels & languages.</p>
+    <p class="sub2">An AI that knows when to <span style="position:relative;display:inline-block;color:#1e8e3e;font-weight:600;padding:0 4px;"><span style="position:absolute;inset:0;background:rgba(52,211,153,0.28);filter:blur(8px);border-radius:9999px;transform:scale(1.25);z-index:-1;pointer-events:none;"></span>automate</span> and when to bring in a <span style="position:relative;display:inline-block;color:#0077ff;font-weight:600;padding:0 4px;"><span style="position:absolute;inset:0;background:rgba(56,189,248,0.32);filter:blur(8px);border-radius:9999px;transform:scale(1.25);z-index:-1;pointer-events:none;"></span>human.</span></p>
+    
+    <div class="form">
+      <label for="em">✉ Work email address</label>
+      <div class="row">
+        <input id="em" type="email" placeholder="you@company.com" required>
+        <button class="btn" type="button" onclick="handleTrial()">Try for free →</button>
+      </div>
+      <div class="note">🛡 14-day free trial. No credit card required.</div>
+      <a class="demo" href="/product?demo=true">Book a Demo →</a>
+    </div>
+
+    <p class="explore">Explore a smarter way to support your customers.</p>
+  </section>
+
+  <section class="visual">
+    <div class="frame">
+      <img class="photo" src="hero-agent-dashboard.jpg" alt="Support agent using the HelpDude ticketing dashboard">
+    </div>
+  </section>
+</main>
+
+<script>
+function handleTrial() {
+  const emailInput = document.getElementById('em');
+  const email = emailInput ? emailInput.value.trim() : '';
+  if (!email || !email.includes('@')) {
+    alert('Please enter a valid work email address');
+    if (emailInput) emailInput.focus();
+    return;
+  }
+  window.open('https://helpdude-ai.supporticon.com/?email=' + encodeURIComponent(email), '_blank');
+}
+</script>
+
+</body>
+</html>

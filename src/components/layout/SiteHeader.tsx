@@ -26,7 +26,7 @@ import {
   User as UserIcon,
 } from "lucide-react";
 import { supporticonUploads } from "@/assets/supporticon-uploads";
-import supporticonLogoIcon from "@/assets/supporticon_logo.png";
+
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@/context/AuthContext";
 
@@ -396,7 +396,7 @@ export const SiteHeader = () => {
                   transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
                 >
                   <img
-                    src={supporticonLogoIcon}
+                    src={supporticonUploads.logo}
                     alt="Loading"
                     className="w-full h-full object-contain drop-shadow-md"
                   />
@@ -430,16 +430,16 @@ export const SiteHeader = () => {
 
       {/* ── Header ────────────────────────────────────────────────────── */}
       <header 
-        className="fixed top-0 inset-x-0 z-50"
+        className="fixed top-0 inset-x-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-[0_1px_4px_rgba(0,0,0,0.02)] transition-colors duration-300"
         onMouseEnter={cancelCloseTimeout}
         onMouseLeave={startCloseTimeout}
       >
-        {/* Inner pill — starts invisible, gains glass on scroll */}
+        {/* Inner nav container */}
         <div
           className={`mx-auto transition-all duration-500 ease-out relative ${
             scrolled
-              ? "max-w-[calc(100%-1rem)] lg:max-w-5xl mt-3 rounded-2xl bg-white/80 backdrop-blur-2xl shadow-[0_4px_32px_rgba(0,0,0,0.08)] border border-white/60"
-              : "max-w-7xl mt-0 rounded-none bg-transparent backdrop-blur-none shadow-none border-transparent"
+              ? "max-w-[calc(100%-1rem)] lg:max-w-5xl my-1 rounded-2xl bg-white shadow-[0_4px_24px_rgba(0,0,0,0.06)] border border-slate-100"
+              : "max-w-7xl my-0 rounded-none bg-transparent shadow-none border-transparent"
           }`}
         >
         <div className="flex h-[64px] items-center justify-between px-5 md:px-8">
@@ -453,15 +453,14 @@ export const SiteHeader = () => {
               setActiveMenu(null);
               activeMenuRef.current = null;
             }}
-            className="flex items-center gap-2 mr-0 md:mr-8 transition-opacity duration-200 hover:opacity-80"
+            className="flex items-center gap-2 mr-0 md:mr-8 transition-transform duration-200 hover:scale-[1.02]"
           >
             <img
               src={supporticonUploads.logo}
               alt="Supporticon logo"
-              className="h-10 w-auto"
+              className="h-14 w-auto max-w-[180px] object-contain brightness-110 contrast-105"
               loading="eager"
               fetchPriority="high"
-              style={{ filter: 'brightness(1.2) saturate(1.3)' }}
             />
           </Link>
 
@@ -497,27 +496,27 @@ export const SiteHeader = () => {
                       activeMenuRef.current = null;
                     }}
                     className={({ isActive }) =>
-                      `relative z-10 flex items-center gap-1 px-4 py-2 text-[13px] font-semibold tracking-tight rounded-full transition-all duration-200 ${
+                      `relative z-10 flex items-center gap-1.5 px-4 py-1.5 text-[14px] tracking-tight rounded-full transition-all duration-200 ${
                         isActive || active
-                          ? "text-[#93D152] bg-[#93D152]/15 font-bold"
-                          : "text-slate-700 hover:text-[#93D152] hover:bg-[#93D152]/10 active:text-[#93D152] active:bg-[#93D152]/20"
+                          ? "text-[#439219] bg-[#eaf7d6] font-semibold"
+                          : "text-[#10284a] font-medium hover:text-[#439219] hover:bg-[#eaf7d6]/40 active:text-[#439219]"
                       }`
                     }
                   >
                     <span>{n.label}</span>
                     {n.subItems && (
-                      <ChevronDown className={`w-3 h-3 opacity-60 transition-transform duration-200 ${
-                        active || activeMenu === n.label.toLowerCase() ? "rotate-180 text-[#93D152] opacity-100" : "group-hover:text-[#93D152] group-hover:opacity-100"
+                      <ChevronDown className={`w-3 h-3 opacity-70 transition-transform duration-200 ${
+                        active || activeMenu === n.label.toLowerCase() ? "rotate-180 text-[#439219] opacity-100" : "group-hover:text-[#439219] group-hover:opacity-100"
                       }`} />
                     )}
                   </NavLink>
 
                   {/* Animated hover bg pill */}
                   <AnimatePresence>
-                    {hoveredPath === n.to && (
+                    {hoveredPath === n.to && !active && (
                       <motion.div
                         layoutId="nav-pill"
-                        className="absolute inset-0 bg-[#93D152]/10 rounded-full -z-[1]"
+                        className="absolute inset-0 bg-[#eaf7d6]/50 rounded-full -z-[1]"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
@@ -585,12 +584,12 @@ export const SiteHeader = () => {
                 </Button>
               </div>
             ) : (
-              <div className="hidden sm:flex items-center gap-2">
+              <div className="hidden sm:flex items-center gap-3">
                 <Button
                   variant="outline"
                   size="sm"
                   aria-label="Request a Demo"
-                  className="rounded-full px-4 font-semibold border-slate-200 hover:border-primary hover:text-primary hover:bg-primary/5 text-slate-700 text-xs transition-all duration-200"
+                  className="rounded-full px-5 py-2 font-semibold border-[#dbe4ec] hover:border-[#3fae2a] hover:text-[#3fae2a] text-[#10284a] text-xs transition-all duration-200 bg-white shadow-none"
                   onClick={() => setDemoDialogOpen(true)}
                 >
                   Request a Demo
@@ -599,7 +598,7 @@ export const SiteHeader = () => {
                   variant="hero"
                   size="sm"
                   aria-label="Start Free Trial"
-                  className="rounded-full px-5 font-bold btn-glow hover:scale-[1.03] transition-all duration-300 text-xs"
+                  className="rounded-full px-6 py-2 font-bold bg-[#7cc339] hover:bg-[#72b533] text-white text-xs shadow-[0_2px_10px_rgba(124,195,57,0.3)] hover:scale-[1.03] transition-all duration-300"
                   onClick={() => window.open("https://helpdude-ai.supporticon.com/", "_blank")}
                 >
                   Start Free Trial

@@ -47,6 +47,7 @@ const ProductFreshdesk = lazy(() => import("./pages/ProductFreshdesk"));
 const ProductStandalone = lazy(() => import("./pages/ProductStandalone"));
 const ProductManufacturing = lazy(() => import("./pages/ProductManufacturing"));
 const Features = lazy(() => import("./pages/Features"));
+const Saas = lazy(() => import("./pages/Saas"));
 const Resources = lazy(() => import("./pages/Resources"));
 const Events = lazy(() => import("./pages/Events"));
 const EBooks = lazy(() => import("./pages/EBooks"));
@@ -193,6 +194,7 @@ function App() {
               <Suspense fallback={<div className="h-screen bg-transparent" />}>
                 <Routes>
                   <Route path="/" element={<Index />} />
+                  <Route path="/saas" element={<Saas />} />
                   <Route path="/about" element={<About />} />
                   <Route path="/features" element={<Features />} />
                   <Route path="/product" element={<Product />} />

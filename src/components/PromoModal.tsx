@@ -5,7 +5,19 @@ import { X } from "lucide-react";
 
 const RequestDemoDialog = lazy(() => import("@/components/RequestDemoDialog"));
 
-const TEMPLATES = [
+interface PromoTemplate {
+  id: number;
+  file: string;
+  title: string;
+  alt: string;
+  primaryLabel: string;
+  secondaryLabel: string;
+  secondaryAction: "features" | "close";
+  primaryBounds: { left: string; top: string; width: string; height: string };
+  secondaryBounds: { left: string; top: string; width: string; height: string };
+}
+
+const TEMPLATES: PromoTemplate[] = [
   {
     id: 1,
     file: "Template-1.png",
@@ -14,6 +26,8 @@ const TEMPLATES = [
     primaryLabel: "Book a Demo",
     secondaryLabel: "Explore Features",
     secondaryAction: "features",
+    primaryBounds: { left: "5.5%", top: "79.8%", width: "25.5%", height: "11.8%" },
+    secondaryBounds: { left: "34.1%", top: "79.8%", width: "31.5%", height: "11.8%" },
   },
   {
     id: 2,
@@ -23,6 +37,8 @@ const TEMPLATES = [
     primaryLabel: "See It in Action",
     secondaryLabel: "Maybe Later",
     secondaryAction: "close",
+    primaryBounds: { left: "5.8%", top: "79.6%", width: "27.8%", height: "11.5%" },
+    secondaryBounds: { left: "36.6%", top: "79.6%", width: "25.0%", height: "11.5%" },
   },
   {
     id: 3,
@@ -32,6 +48,8 @@ const TEMPLATES = [
     primaryLabel: "Book a Demo",
     secondaryLabel: "Maybe Later",
     secondaryAction: "close",
+    primaryBounds: { left: "5.2%", top: "79.9%", width: "27.9%", height: "11.4%" },
+    secondaryBounds: { left: "36.2%", top: "79.9%", width: "25.1%", height: "11.4%" },
   },
   {
     id: 4,
@@ -41,6 +59,8 @@ const TEMPLATES = [
     primaryLabel: "Schedule a Demo",
     secondaryLabel: "Keep Exploring",
     secondaryAction: "close",
+    primaryBounds: { left: "5.0%", top: "79.7%", width: "31.3%", height: "11.4%" },
+    secondaryBounds: { left: "39.3%", top: "79.7%", width: "28.7%", height: "11.4%" },
   },
 ];
 
@@ -150,9 +170,14 @@ export function PromoModal() {
 
   const handleSecondaryClick = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
+    e.preventDefault();
     setIsOpen(false);
-    if (currentTemplate.secondaryAction === "features") {
+    if (
+      currentTemplate.secondaryAction === "features" ||
+      currentTemplate.secondaryLabel.toLowerCase().includes("feature")
+    ) {
       navigate("/features");
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   }, [currentTemplate, navigate]);
 
@@ -196,7 +221,7 @@ export function PromoModal() {
 
           <div className="relative flex flex-col items-center">
             {/* Template Card Showcase */}
-            <div className="relative w-full rounded-2xl overflow-hidden shadow-2xl group select-none bg-white min-h-[300px] flex items-center justify-center">
+            <div className="relative w-full rounded-2xl overflow-hidden shadow-2xl group select-none bg-white">
               {/* Close (X) button on top right of the card */}
               <button
                 onClick={handleClose}
@@ -206,26 +231,32 @@ export function PromoModal() {
                 <X className="w-4 h-4" />
               </button>
 
-              {/* Clickable Template Image */}
-              <img
-                src={imageSrc}
-                alt={currentTemplate.alt}
-                onClick={handleBookDemo}
-                onError={handleImageError}
-                className="w-full h-auto max-h-[75vh] object-contain rounded-2xl cursor-pointer transition-transform duration-300 hover:scale-[1.01] block"
-                loading="eager"
-              />
+              {/* Template Graphic & Hotspot Container */}
+              <div className="relative w-full">
+                <img
+                  src={imageSrc}
+                  alt={currentTemplate.alt}
+                  onError={handleImageError}
+                  className="w-full h-auto block rounded-2xl select-none"
+                  loading="eager"
+                  draggable={false}
+                />
 
-              {/* Clickable Action Hotspots over the buttons in the graphic */}
-              <div
-                className="absolute bottom-[6%] left-[5%] right-[5%] h-[16%] flex gap-4 pointer-events-auto z-20"
-                style={{ maxWidth: "600px" }}
-              >
                 {/* Primary CTA (Book a Demo / See It in Action / Schedule a Demo) */}
                 <button
                   type="button"
-                  onClick={handleBookDemo}
-                  className="w-[45%] h-full rounded-xl cursor-pointer bg-transparent hover:bg-white/10 active:scale-95 transition-all focus:outline-none"
+                  id="promo-primary-btn"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleBookDemo();
+                  }}
+                  style={{
+                    left: currentTemplate.primaryBounds.left,
+                    top: currentTemplate.primaryBounds.top,
+                    width: currentTemplate.primaryBounds.width,
+                    height: currentTemplate.primaryBounds.height,
+                  }}
+                  className="absolute rounded-xl cursor-pointer bg-transparent hover:bg-white/10 active:scale-[0.98] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 z-20"
                   aria-label={currentTemplate.primaryLabel}
                   title={currentTemplate.primaryLabel}
                 />
@@ -233,8 +264,15 @@ export function PromoModal() {
                 {/* Secondary CTA (Explore Features / Maybe Later / Keep Exploring) */}
                 <button
                   type="button"
+                  id="promo-secondary-btn"
                   onClick={handleSecondaryClick}
-                  className="w-[45%] h-full rounded-xl cursor-pointer bg-transparent hover:bg-slate-900/5 active:scale-95 transition-all focus:outline-none"
+                  style={{
+                    left: currentTemplate.secondaryBounds.left,
+                    top: currentTemplate.secondaryBounds.top,
+                    width: currentTemplate.secondaryBounds.width,
+                    height: currentTemplate.secondaryBounds.height,
+                  }}
+                  className="absolute rounded-xl cursor-pointer bg-transparent hover:bg-slate-900/5 active:scale-[0.98] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 z-20"
                   aria-label={currentTemplate.secondaryLabel}
                   title={currentTemplate.secondaryLabel}
                 />
