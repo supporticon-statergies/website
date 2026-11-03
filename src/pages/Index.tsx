@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/motion-utils";
 import { ZoomIn } from "lucide-react";
 import { useScrollToTop } from "@/hooks/use-scroll-to-top";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Dialog,
   DialogContent,
@@ -30,6 +30,17 @@ const Home = () => {
     title: string;
     desc: string;
   } | null>(null);
+  const [channelsHeight, setChannelsHeight] = useState<number | null>(690);
+
+  useEffect(() => {
+    const handleMessage = (e: MessageEvent) => {
+      if (e.data?.type === "RESIZE_CHANNELS_IFRAME" && typeof e.data.height === "number") {
+        setChannelsHeight(Math.max(680, e.data.height));
+      }
+    };
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
+  }, []);
 
   return (
     <>
@@ -67,12 +78,12 @@ const Home = () => {
                   in their language. Every conversation feels personal and has full context while hand-off to human expert.
                 </p>
                 <div className="flex flex-wrap gap-3">
-                  {["Jira", "Confluence", "Freshdesk", "Slack", "Notion"].map((tool) => (
+                  {["Email", "Live Chat", "WhatsApp", "Voice", "Instagram"].map((channel) => (
                     <span
-                      key={tool}
+                      key={channel}
                       className="px-3 py-1.5 rounded-full bg-slate-100 border border-slate-200/70 text-xs font-semibold text-slate-600"
                     >
-                      {tool}
+                      {channel}
                     </span>
                   ))}
                 </div>
@@ -346,26 +357,27 @@ const Home = () => {
               </FloatIn>
             </div>
 
-            {/* Integrations Section */}
+            {/* Customer Channels Section */}
             <div>
               <FloatIn>
                 <div className="mt-16 sm:mt-24 mb-8 sm:mb-10 text-center">
                   <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-[-0.03em] leading-tight mb-4">
-                    Works with Your Stack
+                    Connect Across Every Channel
                   </h2>
                   <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto">
-                    Connect your AI models and customer channels — all from one unified workspace.
+                    Meet your customers on Email, Voice, Web Chat, WhatsApp, and Instagram from one unified workspace.
                   </p>
                 </div>
               </FloatIn>
 
-              {/* Integrations Section Iframe */}
+              {/* Channels Section Iframe */}
               <FloatIn delay={0}>
                 <div className="w-full max-w-full rounded-2xl md:rounded-3xl overflow-hidden border border-slate-200/80 shadow-[0_10px_40px_rgba(0,0,0,0.04)] bg-white">
                   <iframe
-                    src={assetUrl("Integrations Section.html")}
-                    title="HelpDude Integrations"
-                    className="w-full h-[680px] border-none block"
+                    src={assetUrl("channels-section.html")}
+                    title="Customer Channels"
+                    style={{ height: channelsHeight ? `${channelsHeight}px` : undefined }}
+                    className="w-full h-[690px] min-h-[680px] border-none block transition-[height] duration-200"
                     scrolling="no"
                   />
                 </div>
