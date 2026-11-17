@@ -28,20 +28,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useScrollToTop } from "@/hooks/use-scroll-to-top";
 import { AmbientAccent } from "@/components/PageVisuals";
 import { motion, AnimatePresence } from "framer-motion";
-import walletAnimation from "@/assets/wallet-animation.lottie";
-import PricingGate from "@/components/PricingGate";
 
-const LazyDotLottiePlayer = lazy(() =>
-  import("@dotlottie/react-player").then((module) => ({
-    default: module.DotLottiePlayer,
-  }))
-);
 
-const RequestDemoDialog = lazy(() => import("@/components/RequestDemoDialog"));
-
-interface ProductPageProps {
-  initialTab?: "features" | "pricing";
-}
 
 const featuresList = [
   {
@@ -76,45 +64,18 @@ const featuresList = [
   },
 ];
 
-const pricingFeatures = [
-  "Autopilot + Co-Pilot modes",
-  "Freshdesk Marketplace plugin",
-  "Unified knowledge search",
-  "SME Admin console",
-];
 
-const ProductFreshdesk = ({ initialTab }: ProductPageProps) => {
-  const location = useLocation();
-  const isPricingPath = location.pathname.endsWith("/pricing") || initialTab === "pricing";
-  const [activeTab, setActiveTab] = useState<"features" | "pricing">(isPricingPath ? "pricing" : "features");
-  
+const ProductFreshdesk = () => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   useScrollToTop();
 
-  useEffect(() => {
-    if (location.pathname.endsWith("/pricing")) {
-      setActiveTab("pricing");
-    } else {
-      setActiveTab("features");
-    }
-  }, [location.pathname]);
-
-  const switchTab = (tab: "features" | "pricing") => {
-    setActiveTab(tab);
-    if (tab === "pricing") {
-      navigate("/product/freshdesk/pricing", { replace: true });
-    } else {
-      navigate("/product/freshdesk", { replace: true });
-    }
-  };
-
   return (
     <main className="overflow-x-hidden pb-16 bg-transparent min-h-screen relative">
       <SEO
-        title={activeTab === "pricing" ? "HelpDude for Freshdesk – Pricing" : "HelpDude for Freshdesk – Features"}
+        title="HelpDude for Freshdesk – Features"
         description="Embed HelpDude's AI directly into Freshdesk. Zero workflow disruption. Install in 15 minutes."
-        canonicalPath={activeTab === "pricing" ? "/product/freshdesk/pricing" : "/product/freshdesk"}
+        canonicalPath="/product/freshdesk"
       />
 
       <AmbientAccent position="right" color="emerald" />
@@ -150,44 +111,16 @@ const ProductFreshdesk = ({ initialTab }: ProductPageProps) => {
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-
-        {/* Features / Pricing pill buttons */}
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => switchTab("features")}
-            className={`px-5 py-2 rounded-full text-sm font-bold transition-all duration-200 ${
-              activeTab === "features"
-                ? "bg-primary text-white shadow-md shadow-primary/30"
-                : "bg-slate-100 text-slate-600 hover:bg-slate-200"
-            }`}
-          >
-            Features
-          </button>
-          <button
-            onClick={() => switchTab("pricing")}
-            className={`px-5 py-2 rounded-full text-sm font-bold transition-all duration-200 ${
-              activeTab === "pricing"
-                ? "bg-primary text-white shadow-md shadow-primary/30"
-                : "bg-slate-100 text-slate-600 hover:bg-slate-200"
-            }`}
-          >
-            Pricing
-          </button>
-        </div>
       </div>
 
-
-      {/* ── Page Content Switch ── */}
-      <AnimatePresence mode="wait">
-        {activeTab === "features" ? (
-          /* FEATURES PAGE */
-          <motion.div
-            key="features-page"
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.3 }}
-          >
+      {/* ── Features Page ── */}
+      <motion.div
+        key="features-page"
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -12 }}
+        transition={{ duration: 0.3 }}
+      >
             {/* Hero Section */}
             <section className="container mx-auto px-4 pt-6 md:pt-8 pb-12 md:pb-20">
               <motion.div 
@@ -293,115 +226,7 @@ const ProductFreshdesk = ({ initialTab }: ProductPageProps) => {
               </div>
             </section>
           </motion.div>
-        ) : (
-          /* DEDICATED PRICING PAGE */
-          <PricingGate>
-          <motion.div
-            key="pricing-page"
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.3 }}
-          >
-            <section className="container mx-auto px-4 pt-12 md:pt-16 pb-12 md:pb-16">
-              <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
-                <motion.div 
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, ease: "easeOut" }}
-                  className="text-center md:text-left"
-                >
-                  <div className="inline-flex items-center gap-2 bg-green-50 border border-green-200 text-green-700 text-xs font-bold px-4 py-1.5 rounded-full mb-6 shadow-sm">
-                    <Mail className="w-3.5 h-3.5" />
-                    Simple · Transparent · Flexible
-                  </div>
-                  <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 mb-5 leading-tight">
-                    One plan, everything&nbsp;
-                    <span className="bg-gradient-to-r from-primary to-green-600 bg-clip-text text-transparent">
-                      you need
-                    </span>
-                  </h1>
-                  <p className="text-base md:text-lg text-slate-500 max-w-xl mx-auto md:mx-0 leading-relaxed font-medium">
-                    No tiers. No surprises. One straightforward price
-                    gives your team the freedom to scale support without the
-                    billing headaches.
-                  </p>
-                </motion.div>
-                <motion.div 
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-                  className="flex justify-center md:justify-end"
-                >
-                  <div className="w-full max-w-[380px] aspect-square flex items-center justify-center">
-                    <Suspense fallback={<div className="w-full h-full bg-green-50/50 rounded-2xl animate-pulse" />}>
-                      <LazyDotLottiePlayer
-                        src={walletAnimation}
-                        autoplay
-                        loop
-                        className="w-full h-full"
-                      />
-                    </Suspense>
-                  </div>
-                </motion.div>
-              </div>
-
-              {/* Single Pricing Card */}
-              <motion.div 
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.6 }}
-                className="max-w-md mx-auto"
-              >
-                <div className="relative flex flex-col bg-green-50/30 p-8 md:p-10 rounded-3xl border-2 border-primary shadow-2xl hover:shadow-green-900/20 transition-shadow duration-500">
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-wider shadow-md">
-                    BASIC
-                  </div>
-
-                  <div className="mb-6 text-center">
-                    <div className="flex items-baseline justify-center gap-1 mt-4 mb-2">
-                      <span className="text-5xl font-black text-slate-900">$36</span>
-                      <span className="text-slate-500 font-medium text-sm">/ month</span>
-                    </div>
-                  </div>
-
-                  <ul className="space-y-3 mb-8 flex-1 text-sm text-slate-700 font-medium">
-                    {pricingFeatures.map((feature, idx) => (
-                      <motion.li key={idx} className="flex items-center gap-2"
-                        initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }} transition={{ delay: 0.1 + idx * 0.07 }}
-                      >
-                        <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
-                        <span>{feature}</span>
-                      </motion.li>
-                    ))}
-                  </ul>
-
-                  <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                    <Button
-                      size="lg"
-                      variant="hero"
-                      className="w-full font-bold rounded-xl py-6 tracking-wider uppercase shadow-lg shadow-primary/30 group"
-                      onClick={() =>
-                        window.open(
-                          "https://www.freshworks.com/apps/helpdude_1/",
-                          "_blank",
-                          "noopener,noreferrer"
-                        )
-                      }
-                    >
-                      INSTALL ON FRESHDESK
-                      <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-200 group-hover:translate-x-1" />
-                    </Button>
-                  </motion.div>
-                </div>
-              </motion.div>
-            </section>
-          </motion.div>
-          </PricingGate>
-        )}
-      </AnimatePresence>
+        
     </main>
   );
 };

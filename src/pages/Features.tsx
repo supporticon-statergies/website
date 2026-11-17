@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { SEO } from "@/components/SEO";
 import { CheckCircle, XCircle } from "lucide-react";
 import { useScrollToTop } from "@/hooks/use-scroll-to-top";
@@ -5,6 +6,7 @@ import { useReveal } from "@/hooks/use-reveal";
 import { AmbientAccent } from "@/components/PageVisuals";
 import { FadeUp, FadeIn } from "@/components/ui/motion-utils";
 import { motion } from "framer-motion";
+import { assetUrl } from "@/lib/baseUrl";
 
 
 const comparison = [
@@ -37,6 +39,17 @@ const comparison = [
 const Features = () => {
   useScrollToTop();
   const reveal = useReveal();
+  const [flowHeight, setFlowHeight] = useState<number | null>(null);
+
+  useEffect(() => {
+    const handleMessage = (e: MessageEvent) => {
+      if (e.data && e.data.type === "helpdude-features-resize" && typeof e.data.height === "number") {
+        setFlowHeight(e.data.height);
+      }
+    };
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
+  }, []);
 
   return (
     <main className="min-h-screen bg-transparent pb-24 relative">
@@ -86,6 +99,43 @@ const Features = () => {
           </div>
         </div>
       </div>
+
+      {/* HelpDude Features Interactive Flow */}
+      <section className="container mx-auto px-4 py-8 md:py-14 relative">
+        <div className="max-w-6xl mx-auto">
+          {/* Banner */}
+          <div className="mb-10 w-full bg-white border-2 border-white p-6 rounded-2xl shadow-lg text-center animate-in fade-in slide-in-from-bottom-4 duration-700">
+            <p className="text-lg md:text-xl text-slate-800 font-semibold md:whitespace-nowrap">
+              HelpDude handles the conversation. Your engineers handle the exceptions
+            </p>
+          </div>
+
+          <div className="text-center max-w-4xl mx-auto mb-8 md:mb-12">
+            <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight text-slate-900 leading-tight">
+              Smarter Support. Faster Solutions. Zero Complexity.
+            </h2>
+            <p className="mt-4 text-lg md:text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto">
+              Discover how HelpDude brings intelligence, speed, and simplicity to every customer interaction.
+            </p>
+          </div>
+
+          <div className="w-full rounded-2xl md:rounded-3xl overflow-hidden bg-white border border-slate-200/80 shadow-[0_12px_45px_rgba(15,23,42,0.06)]">
+            <iframe
+              src={assetUrl("helpdude-features.html")}
+              title="HelpDude Features Interactive Flow"
+              style={{
+                width: "100%",
+                height: flowHeight ? `${flowHeight}px` : undefined,
+                border: "none",
+                display: "block",
+                overflow: "hidden",
+              }}
+              className={`w-full ${flowHeight ? "" : "h-[980px] lg:h-[640px]"}`}
+              scrolling="no"
+            />
+          </div>
+        </div>
+      </section>
 
       {/* Section 4: Core Features */}
       <section className="container mx-auto px-4 py-20 animate-in fade-in duration-700 delay-1000 fill-mode-both">

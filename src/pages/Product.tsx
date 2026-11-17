@@ -229,7 +229,7 @@ const Product = () => {
               How would you like to use HelpDude?
             </h2>
             <p className="text-slate-500 mt-3 text-sm md:text-base max-w-xl mx-auto font-medium">
-              💡 Click a product below to explore its features and pricing
+              💡 Click a product below to explore its features
             </p>
           </div>
 
@@ -262,7 +262,7 @@ const Product = () => {
                   Zero workflow disruption. Install in 15 minutes, no IT involvement needed.
                 </p>
                 <div className="flex items-center gap-2 text-emerald-700 font-bold text-sm group-hover:gap-3 transition-all duration-200 mt-auto">
-                  Explore features & pricing
+                  Explore features
                   <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
                 </div>
               </div>

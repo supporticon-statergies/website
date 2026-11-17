@@ -95,7 +95,7 @@ const nav = [
       },
     ],
   },
-  { to: "/faq", label: "FAQ", icon: CreditCard },
+  { to: "/pricing", label: "Pricing", icon: CreditCard },
   { to: "/about", label: "About", icon: Info },
 ];
 

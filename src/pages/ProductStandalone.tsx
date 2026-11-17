@@ -25,26 +25,14 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useState, lazy, Suspense, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useState, lazy, Suspense } from "react";
+import { useNavigate } from "react-router-dom";
 import { useScrollToTop } from "@/hooks/use-scroll-to-top";
 import { AmbientAccent } from "@/components/PageVisuals";
-import { motion, AnimatePresence } from "framer-motion";
-import walletAnimation from "@/assets/wallet-animation.lottie";
-import PricingGate from "@/components/PricingGate";
+import { motion } from "framer-motion";
 import { useAuth } from "@/context/AuthContext";
 
-const LazyDotLottiePlayer = lazy(() =>
-  import("@dotlottie/react-player").then((module) => ({
-    default: module.DotLottiePlayer,
-  }))
-);
-
 const RequestDemoDialog = lazy(() => import("@/components/RequestDemoDialog"));
-
-interface ProductPageProps {
-  initialTab?: "features" | "pricing";
-}
 
 const featuresList = [
   {
@@ -93,41 +81,18 @@ const featuresList = [
     desc: "Centralized control over who can access what. Manage knowledge-source access, escalation paths, and agent permissions from one place — so sensitive data and critical workflows stay locked down as your team scales.",
   },
 ];
-const ProductStandalone = ({ initialTab }: ProductPageProps) => {
+const ProductStandalone = () => {
   const { openAuthModal } = useAuth();
-  const location = useLocation();
-  const isPricingPath = location.pathname.endsWith("/pricing") || initialTab === "pricing";
-  const [activeTab, setActiveTab] = useState<"features" | "pricing">(isPricingPath ? "pricing" : "features");
-
-  const [billingCycle, setBillingCycle] = useState<"monthly" | "yearly">("yearly");
-  const [activeChannel, setActiveChannel] = useState<"mail" | "mail-web" | "mail-web-voice">("mail");
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   useScrollToTop();
 
-  useEffect(() => {
-    if (location.pathname.endsWith("/pricing")) {
-      setActiveTab("pricing");
-    } else {
-      setActiveTab("features");
-    }
-  }, [location.pathname]);
-
-  const switchTab = (tab: "features" | "pricing") => {
-    setActiveTab(tab);
-    if (tab === "pricing") {
-      navigate("/product/standalone/pricing", { replace: true });
-    } else {
-      navigate("/product/standalone", { replace: true });
-    }
-  };
-
   return (
     <main className="overflow-x-hidden pb-16 bg-transparent min-h-screen relative">
       <SEO
-        title={activeTab === "pricing" ? "HelpDude Standalone – Pricing" : "HelpDude Standalone – Features"}
+        title="HelpDude Standalone – Features"
         description="A complete standalone AI ticketing platform. No Freshdesk needed. Autopilot resolves tickets automatically."
-        canonicalPath={activeTab === "pricing" ? "/product/standalone/pricing" : "/product/standalone"}
+        canonicalPath="/product/standalone"
       />
 
       <AmbientAccent position="right" color="blue" />
@@ -162,44 +127,15 @@ const ProductStandalone = ({ initialTab }: ProductPageProps) => {
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-
-        {/* Features / Pricing pill buttons */}
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => switchTab("features")}
-            className={`px-5 py-2 rounded-full text-sm font-bold transition-all duration-200 ${
-              activeTab === "features"
-                ? "bg-blue-600 text-white shadow-md shadow-blue-200"
-                : "bg-slate-100 text-slate-600 hover:bg-slate-200"
-            }`}
-          >
-            Features
-          </button>
-          <button
-            onClick={() => switchTab("pricing")}
-            className={`px-5 py-2 rounded-full text-sm font-bold transition-all duration-200 ${
-              activeTab === "pricing"
-                ? "bg-blue-600 text-white shadow-md shadow-blue-200"
-                : "bg-slate-100 text-slate-600 hover:bg-slate-200"
-            }`}
-          >
-            Pricing
-          </button>
-        </div>
       </div>
 
-      {/* ── Page Content Switch ── */}
-
-      <AnimatePresence mode="wait">
-        {activeTab === "features" ? (
-          /* FEATURES PAGE */
-          <motion.div
-            key="standalone-features-page"
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.3 }}
-          >
+      {/* ── Features Page ── */}
+      <motion.div
+        key="standalone-features-page"
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+      >
             <section className="container mx-auto px-4 pt-6 md:pt-8 pb-12 md:pb-20">
               <div className="max-w-5xl mx-auto text-center">
                 {/* Animated Pill Badge */}
@@ -308,395 +244,7 @@ const ProductStandalone = ({ initialTab }: ProductPageProps) => {
               </div>
             </section>
           </motion.div>
-        ) : (
-          /* DEDICATED PRICING PAGE */
-          <PricingGate>
-          <motion.div
-            key="standalone-pricing-page"
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.3 }}
-          >
-            <section className="container mx-auto px-4 pt-6 md:pt-8 pb-12 md:pb-16">
-              <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
-                <motion.div 
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, ease: "easeOut" }}
-                  className="text-center md:text-left"
-                >
-                  <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-200 text-blue-700 text-xs font-bold px-4 py-1.5 rounded-full mb-6 shadow-sm">
-                    <Mail className="w-3.5 h-3.5" />
-                    Simple · Transparent · Flexible
-                  </div>
-                  <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 mb-5 leading-tight">
-                    Pay only for what&nbsp;
-                    <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                      you use
-                    </span>
-                  </h1>
-                  <p className="text-base md:text-lg text-slate-500 max-w-xl mx-auto md:mx-0 leading-relaxed font-medium">
-                    No hidden fees. No complicated tiers. Every channel is priced transparently,
-                    giving your team the freedom to scale support without the billing headaches.
-                  </p>
-                </motion.div>
-                
-                <motion.div 
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-                  className="flex justify-center md:justify-end"
-                >
-                  <div className="w-full max-w-[400px] aspect-square flex items-center justify-center">
-                    <Suspense fallback={<div className="w-full h-full bg-blue-50/50 rounded-2xl animate-pulse" />}>
-                      <LazyDotLottiePlayer
-                        src={walletAnimation}
-                        autoplay
-                        loop
-                        className="w-full h-full"
-                      />
-                    </Suspense>
-                  </div>
-                </motion.div>
-              </div>
-
-              {/* Channel Tabs */}
-              <div className="flex items-center justify-center gap-2 mb-16">
-                <div className="inline-flex items-center p-1 rounded-lg bg-slate-100 border border-slate-200">
-                  <button
-                    onClick={() => setActiveChannel("mail")}
-                    className={`px-6 py-2 rounded-md text-sm font-bold transition-all duration-200 ${
-                      activeChannel === "mail"
-                        ? "bg-[#0b5cba] text-white shadow-sm"
-                        : "text-slate-600 hover:text-slate-900"
-                    }`}
-                  >
-                    Mail only
-                  </button>
-                  <button
-                    onClick={() => setActiveChannel("mail-web")}
-                    className={`px-6 py-2 rounded-md text-sm font-bold transition-all duration-200 ${
-                      activeChannel === "mail-web"
-                        ? "bg-[#0b5cba] text-white shadow-sm"
-                        : "text-slate-600 hover:text-slate-900"
-                    }`}
-                  >
-                    Mail + Web
-                  </button>
-                  <button
-                    onClick={() => setActiveChannel("mail-web-voice")}
-                    className={`px-6 py-2 rounded-md text-sm font-bold transition-all duration-200 ${
-                      activeChannel === "mail-web-voice"
-                        ? "bg-[#0b5cba] text-white shadow-sm"
-                        : "text-slate-600 hover:text-slate-900"
-                    }`}
-                  >
-                    Mail + Web + Voice
-                  </button>
-                </div>
-              </div>
-
-              {/* Pricing Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch max-w-[1400px] mx-auto text-left mb-16">
-                
-                {/* Starter */}
-                <motion.div
-                  initial={{ opacity: 0, y: 60 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.7, delay: 0, ease: "easeOut" }}
-                >
-                  <div className={`h-full flex flex-col bg-white rounded-2xl border-2 border-[#1265b7] overflow-hidden transition-all duration-300 ${activeChannel === 'mail' ? 'shadow-2xl scale-105 -translate-y-4 relative z-10' : 'shadow-sm hover:shadow-md opacity-70 hover:opacity-100'}`}>
-                    <div className="bg-transparent text-slate-900 p-6 min-h-[140px]">
-                      <div className="w-8 h-8 flex items-center justify-center rounded bg-[#1265b7]/10 mb-3">
-                        <Mail className="w-4 h-4 text-[#1265b7]" />
-                      </div>
-                      <h3 className="text-xl font-bold mb-1">Starter</h3>
-                      <p className="text-slate-700 text-xs">For small teams getting email support off the ground.</p>
-                    </div>
-                    <div className="p-6 flex flex-col flex-1">
-                      <div className="mb-6">
-                        <div className="flex items-end gap-1">
-                          <span className="text-4xl font-bold text-slate-900">$15</span>
-                          <span className="text-sm font-medium text-slate-700 mb-1">/agent/mo</span>
-                        </div>
-                        <div className="text-xs text-slate-600 mt-1">≈ ₹1425 /agent/mo</div>
-                      </div>
-
-                      <div className="grid grid-cols-3 gap-2 border border-slate-200 rounded-lg p-3 mb-6 bg-slate-50">
-                        <div>
-                          <div className="text-sm font-bold text-slate-900">2</div>
-                          <div className="text-[10px] text-slate-700 uppercase">Agents</div>
-                        </div>
-                        <div className="border-l border-slate-200 pl-2">
-                          <div className="text-sm font-bold text-slate-900">500</div>
-                          <div className="text-[10px] text-slate-700 uppercase">Tickets/mo</div>
-                        </div>
-                        <div className="border-l border-slate-200 pl-2">
-                          <div className="text-sm font-bold text-slate-900">—</div>
-                          <div className="text-[10px] text-slate-700 uppercase">Voice</div>
-                        </div>
-                      </div>
-
-                      <ul className="space-y-3 flex-1 text-sm text-slate-800 mb-6">
-                        <li className="flex gap-2 items-start"><Check className="w-4 h-4 text-[#1265b7] mt-0.5 shrink-0" /> Email ticketing — inbound & outbound (SES)</li>
-                        <li className="flex gap-2 items-start"><Check className="w-4 h-4 text-[#1265b7] mt-0.5 shrink-0" /> Up to 2 agent seats</li>
-                        <li className="flex gap-2 items-start"><Check className="w-4 h-4 text-[#1265b7] mt-0.5 shrink-0" /> 500 tickets/mo included</li>
-                        <li className="flex gap-2 items-start"><Check className="w-4 h-4 text-[#1265b7] mt-0.5 shrink-0" /> AI replies grounded in your knowledge base</li>
-                        <li className="flex gap-2 items-start"><Check className="w-4 h-4 text-[#1265b7] mt-0.5 shrink-0" /> Article-based KB, unlimited articles</li>
-                        <li className="flex gap-2 items-start"><Check className="w-4 h-4 text-[#1265b7] mt-0.5 shrink-0" /> Email support</li>
-                      </ul>
-                    </div>
-                  </div>
-                </motion.div>
-
-                {/* Basic */}
-                <motion.div
-                  initial={{ opacity: 0, y: 60 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
-                >
-                  <div className={`h-full flex flex-col bg-white rounded-2xl border-2 border-[#93D152] overflow-hidden transition-all duration-300 ${activeChannel === 'mail-web' ? 'shadow-2xl scale-105 -translate-y-4 relative z-10' : 'shadow-sm hover:shadow-md opacity-70 hover:opacity-100'}`}>
-                    <div className="bg-transparent text-slate-900 p-6 min-h-[140px]">
-                      <div className="w-8 h-8 flex items-center justify-center rounded bg-[#93D152]/10 mb-3">
-                        <MessageSquare className="w-4 h-4 text-[#93D152]" />
-                      </div>
-                      <h3 className="text-xl font-bold mb-1">Basic</h3>
-                      <p className="text-slate-700 text-xs">For growing teams running email and live chat together.</p>
-                    </div>
-                    <div className="p-6 flex flex-col flex-1">
-                      <div className="mb-6">
-                        <div className="flex items-end gap-1">
-                          <span className="text-4xl font-bold text-slate-900">$29</span>
-                          <span className="text-sm font-medium text-slate-700 mb-1">/agent/mo</span>
-                        </div>
-                        <div className="text-xs text-slate-600 mt-1">≈ ₹2755 /agent/mo</div>
-                      </div>
-
-                      <div className="grid grid-cols-3 gap-2 border border-slate-200 rounded-lg p-3 mb-6 bg-slate-50">
-                        <div>
-                          <div className="text-sm font-bold text-slate-900">5</div>
-                          <div className="text-[10px] text-slate-700 uppercase">Agents</div>
-                        </div>
-                        <div className="border-l border-slate-200 pl-2">
-                          <div className="text-sm font-bold text-slate-900">2,000</div>
-                          <div className="text-[10px] text-slate-700 uppercase">Tickets/mo</div>
-                        </div>
-                        <div className="border-l border-slate-200 pl-2">
-                          <div className="text-sm font-bold text-slate-900">200 min</div>
-                          <div className="text-[10px] text-slate-700 uppercase">Voice</div>
-                        </div>
-                      </div>
-
-                      <ul className="space-y-3 flex-1 text-sm text-slate-800 mb-6">
-                        <li className="flex gap-2 items-start"><Check className="w-4 h-4 text-[#93D152] mt-0.5 shrink-0" /> Everything in Starter, plus:</li>
-                        <li className="flex gap-2 items-start"><Check className="w-4 h-4 text-[#93D152] mt-0.5 shrink-0" /> 5 agent seats, 2,000 tickets/mo</li>
-                        <li className="flex gap-2 items-start"><Check className="w-4 h-4 text-[#93D152] mt-0.5 shrink-0" /> OCR on emailed attachments (Textract)</li>
-                        <li className="flex gap-2 items-start"><Check className="w-4 h-4 text-[#93D152] mt-0.5 shrink-0" /> Priority email support</li>
-                      </ul>
-                    </div>
-                  </div>
-                </motion.div>
-
-                {/* Pro */}
-                <motion.div
-                  initial={{ opacity: 0, y: 60 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
-                >
-                  <div className={`h-full flex flex-col bg-white rounded-2xl border-2 border-[#de2723] overflow-hidden transition-all duration-300 ${activeChannel === 'mail-web-voice' ? 'shadow-2xl scale-105 -translate-y-4 relative z-10' : 'shadow-sm hover:shadow-md opacity-70 hover:opacity-100'}`}>
-                    <div className="bg-transparent text-slate-900 p-6 min-h-[140px] relative">
-                      <div className="absolute top-4 right-4 bg-[#de2723] text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase">
-                        Recommended
-                      </div>
-                      <div className="w-8 h-8 flex items-center justify-center rounded bg-[#de2723]/10 mb-3">
-                        <Headphones className="w-4 h-4 text-[#de2723]" />
-                      </div>
-                      <h3 className="text-xl font-bold mb-1">Pro</h3>
-                      <p className="text-slate-700 text-xs pr-16">For teams with CRM-scale volume across every channel.</p>
-                    </div>
-                    <div className="p-6 flex flex-col flex-1">
-                      <div className="mb-6">
-                        <div className="flex items-end gap-1">
-                          <span className="text-4xl font-bold text-slate-900">$49</span>
-                          <span className="text-sm font-medium text-slate-700 mb-1">/agent/mo</span>
-                        </div>
-                        <div className="text-xs text-slate-600 mt-1">≈ ₹4655 /agent/mo</div>
-                      </div>
-
-                      <div className="grid grid-cols-3 gap-2 border border-slate-200 rounded-lg p-3 mb-6 bg-slate-50">
-                        <div>
-                          <div className="text-sm font-bold text-slate-900">20</div>
-                          <div className="text-[10px] text-slate-700 uppercase">Agents</div>
-                        </div>
-                        <div className="border-l border-slate-200 pl-2">
-                          <div className="text-sm font-bold text-slate-900">10,000</div>
-                          <div className="text-[10px] text-slate-700 uppercase">Tickets/mo</div>
-                        </div>
-                        <div className="border-l border-slate-200 pl-2">
-                          <div className="text-sm font-bold text-slate-900">750 min</div>
-                          <div className="text-[10px] text-slate-700 uppercase">Voice</div>
-                        </div>
-                      </div>
-
-                      <ul className="space-y-3 flex-1 text-sm text-slate-800 mb-6">
-                        <li className="flex gap-2 items-start"><Check className="w-4 h-4 text-[#de2723] mt-0.5 shrink-0" /> Everything in Basic, plus:</li>
-                        <li className="flex gap-2 items-start"><Check className="w-4 h-4 text-[#de2723] mt-0.5 shrink-0" /> 20 agent seats, 10,000 tickets/mo</li>
-                        <li className="flex gap-2 items-start"><Check className="w-4 h-4 text-[#de2723] mt-0.5 shrink-0" /> Multi-language replies (Translate + Comprehend)</li>
-                        <li className="flex gap-2 items-start"><Check className="w-4 h-4 text-[#de2723] mt-0.5 shrink-0" /> Custom domain + SSL for your help center</li>
-                        <li className="flex gap-2 items-start"><Check className="w-4 h-4 text-[#de2723] mt-0.5 shrink-0" /> Priority chat support</li>
-                      </ul>
-                    </div>
-                  </div>
-                </motion.div>
-
-                {/* Enterprise */}
-                <motion.div
-                  initial={{ opacity: 0, y: 60 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.7, delay: 0.6, ease: "easeOut" }}
-                >
-                  <div className="h-full flex flex-col bg-white rounded-2xl border-2 border-[#b38e12] shadow-sm hover:shadow-md opacity-70 hover:opacity-100 overflow-hidden transition-all duration-300">
-                    <div className="bg-transparent text-slate-900 p-6 min-h-[140px]">
-                      <div className="w-8 h-8 flex items-center justify-center rounded bg-[#b38e12]/10 mb-3">
-                        <Briefcase className="w-4 h-4 text-[#b38e12]" />
-                      </div>
-                      <h3 className="text-xl font-bold mb-1">Enterprise</h3>
-                      <p className="text-slate-700 text-xs">For organizations building support systems at scale.</p>
-                    </div>
-                    <div className="p-6 flex flex-col flex-1">
-                      <div className="mb-6">
-                        <div className="flex items-end gap-1">
-                          <span className="text-sm font-medium text-slate-700 mb-2">Custom, from</span>
-                          <span className="text-4xl font-bold text-slate-900">$89</span>
-                          <span className="text-sm font-medium text-slate-700 mb-1">/agent/mo</span>
-                        </div>
-                        <div className="text-xs text-slate-600 mt-1">≈ ₹8455 /agent/mo</div>
-                      </div>
-
-                      <div className="grid grid-cols-3 gap-2 border border-slate-200 rounded-lg p-3 mb-6 bg-slate-50">
-                        <div>
-                          <div className="text-sm font-bold text-slate-900">50+</div>
-                          <div className="text-[10px] text-slate-700 uppercase">Agents</div>
-                        </div>
-                        <div className="border-l border-slate-200 pl-2">
-                          <div className="text-sm font-bold text-slate-900">30,000+</div>
-                          <div className="text-[10px] text-slate-700 uppercase">Tickets/mo</div>
-                        </div>
-                        <div className="border-l border-slate-200 pl-2">
-                          <div className="text-sm font-bold text-slate-900">6,000+ min</div>
-                          <div className="text-[10px] text-slate-700 uppercase">Voice</div>
-                        </div>
-                      </div>
-
-                      <ul className="space-y-3 flex-1 text-sm text-slate-800 mb-6">
-                        <li className="flex gap-2 items-start"><Check className="w-4 h-4 text-[#b38e12] mt-0.5 shrink-0" /> Everything in Pro, plus:</li>
-                        <li className="flex gap-2 items-start"><Check className="w-4 h-4 text-[#b38e12] mt-0.5 shrink-0" /> 50+ agent seats, custom ticket volume</li>
-                        <li className="flex gap-2 items-start"><Check className="w-4 h-4 text-[#b38e12] mt-0.5 shrink-0" /> SSO & role-based access control (RBAC)</li>
-                        <li className="flex gap-2 items-start"><Check className="w-4 h-4 text-[#b38e12] mt-0.5 shrink-0" /> Dedicated onboarding & support</li>
-                        <li className="flex gap-2 items-start"><Check className="w-4 h-4 text-[#b38e12] mt-0.5 shrink-0" /> Custom SLAs</li>
-                      </ul>
-                    </div>
-                  </div>
-                </motion.div>
-
-              </div>
-
-              {/* Overage Section */}
-              <div className="max-w-[1400px] mx-auto text-left mb-16">
-                <h4 className="text-sm font-bold text-slate-900 mb-4">Overage, all plans</h4>
-                <div className="flex flex-col gap-2">
-                  <div className="border border-slate-200 rounded-lg p-4 bg-white flex justify-between items-center text-sm">
-                    <span className="text-slate-600">Extra ticket beyond plan limit</span>
-                    <span className="font-bold text-slate-900">~$0.02 <span className="text-slate-400 font-normal">(₹1.90)</span> each</span>
-                  </div>
-                  <div className="border border-slate-200 rounded-lg p-4 bg-white flex justify-between items-center text-sm">
-                    <span className="text-slate-600">Extra web session beyond limit</span>
-                    <span className="font-bold text-slate-900">~$0.02 <span className="text-slate-400 font-normal">(₹1.90)</span> each</span>
-                  </div>
-                  <div className="border border-slate-200 rounded-lg p-4 bg-white flex justify-between items-center text-sm">
-                    <span className="text-slate-600">Extra voice minute beyond bundle</span>
-                    <span className="font-bold text-slate-900">~$0.08-0.12 <span className="text-slate-400 font-normal">/min</span></span>
-                  </div>
-                </div>
-                
-                <p className="text-[10px] text-slate-400 mt-6 leading-relaxed">
-                  Figures sourced from HelpDude's internal Infrastructure Cost & SaaS Pricing documentation (Aug 11, 2026), Section 5, benchmarked against Freshdesk / Zoho Desk / Zendesk-style helpdesk pricing. USD→INR shown at ≈₹95. Actual AWS + AI cost per agent/month runs ~$2-15 at these volumes, so even the Starter tier carries 90%+ gross margin. Enterprise volumes and voice pools are custom — figures shown are "from" pricing.
-                </p>
-              </div>
-
-              {/* Feature Comparison Table */}
-              <div className="max-w-[1400px] mx-auto text-left mb-16 overflow-x-auto bg-white rounded-3xl border border-slate-200 shadow-xl p-8">
-                <h4 className="text-3xl font-display font-black text-slate-900 mb-8 text-center">Compare features</h4>
-                <table className="w-full text-sm text-left">
-                  <thead>
-                    <tr>
-                      <th className="py-4 px-6 font-bold text-slate-900 bg-white sticky left-0 z-10 w-1/3 border-b-2 border-slate-200"></th>
-                      <th className="py-4 px-6 font-bold text-center text-slate-900 w-1/6 border-b-2 border-slate-200">Starter</th>
-                      <th className="py-4 px-6 font-bold text-center text-slate-900 w-1/6 border-b-2 border-slate-200">Basic</th>
-                      <th className="py-4 px-6 font-bold text-center text-[#de2723] w-1/6 border-b-2 border-slate-200">Pro</th>
-                      <th className="py-4 px-6 font-bold text-center text-slate-900 w-1/6 border-b-2 border-slate-200">Enterprise</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {/* Category: Core Ticketing */}
-                    <tr>
-                      <td colSpan={5} className="py-4 px-6 font-bold text-[#de2723] bg-white text-base">Core Ticketing & Channels</td>
-                    </tr>
-                    <tr className="border-b border-slate-100 hover:bg-slate-50 transition-colors">
-                      <td className="py-3 px-6 text-slate-700 bg-white sticky left-0 z-10 font-medium">Email ticketing</td>
-                      <td className="py-3 px-6 text-center"><Check className="w-5 h-5 mx-auto text-slate-900" /></td>
-                      <td className="py-3 px-6 text-center"><Check className="w-5 h-5 mx-auto text-slate-900" /></td>
-                      <td className="py-3 px-6 text-center"><Check className="w-5 h-5 mx-auto text-slate-900" /></td>
-                      <td className="py-3 px-6 text-center"><Check className="w-5 h-5 mx-auto text-slate-900" /></td>
-                    </tr>
-                    <tr className="border-b border-slate-100 bg-slate-50/50 hover:bg-slate-50 transition-colors">
-                      <td className="py-3 px-6 text-slate-700 bg-slate-50/50 sticky left-0 z-10 font-medium">Live chat widget</td>
-                      <td className="py-3 px-6 text-center text-slate-300">—</td>
-                      <td className="py-3 px-6 text-center"><Check className="w-5 h-5 mx-auto text-slate-900" /></td>
-                      <td className="py-3 px-6 text-center"><Check className="w-5 h-5 mx-auto text-slate-900" /></td>
-                      <td className="py-3 px-6 text-center"><Check className="w-5 h-5 mx-auto text-slate-900" /></td>
-                    </tr>
-                    <tr className="border-b border-slate-100 hover:bg-slate-50 transition-colors">
-                      <td className="py-3 px-6 text-slate-700 bg-white sticky left-0 z-10 font-medium">Inbound call handling</td>
-                      <td className="py-3 px-6 text-center text-slate-300">—</td>
-                      <td className="py-3 px-6 text-center"><Check className="w-5 h-5 mx-auto text-slate-900" /></td>
-                      <td className="py-3 px-6 text-center"><Check className="w-5 h-5 mx-auto text-slate-900" /></td>
-                      <td className="py-3 px-6 text-center"><Check className="w-5 h-5 mx-auto text-slate-900" /></td>
-                    </tr>
-                    <tr className="border-b border-slate-100 bg-slate-50/50 hover:bg-slate-50 transition-colors">
-                      <td className="py-3 px-6 text-slate-700 bg-slate-50/50 sticky left-0 z-10 font-medium">WhatsApp integration</td>
-                      <td className="py-3 px-6 text-center text-slate-300">—</td>
-                      <td className="py-3 px-6 text-center text-slate-300">—</td>
-                      <td className="py-3 px-6 text-center"><Check className="w-5 h-5 mx-auto text-slate-900" /></td>
-                      <td className="py-3 px-6 text-center"><Check className="w-5 h-5 mx-auto text-slate-900" /></td>
-                    </tr>
-
-                    {/* Category: AI & Automation */}
-                    <tr>
-                      <td colSpan={5} className="py-4 px-6 font-bold text-[#de2723] bg-white text-base border-t border-slate-200 mt-4">AI & Automation</td>
-                    </tr>
-                    <tr className="border-b border-slate-100 hover:bg-slate-50 transition-colors">
-                      <td className="py-3 px-6 text-slate-700 bg-white sticky left-0 z-10 font-medium">AI Co-Pilot (drafts)</td>
-                      <td className="py-3 px-6 text-center"><Check className="w-5 h-5 mx-auto text-slate-900" /></td>
-                      <td className="py-3 px-6 text-center"><Check className="w-5 h-5 mx-auto text-slate-900" /></td>
-                      <td className="py-3 px-6 text-center"><Check className="w-5 h-5 mx-auto text-slate-900" /></td>
-                      <td className="py-3 px-6 text-center"><Check className="w-5 h-5 mx-auto text-slate-900" /></td>
-                    </tr>
-                    <tr className="border-b border-slate-100 bg-slate-50/50 hover:bg-slate-50 transition-colors">
-                      <td className="py-3 px-6 text-slate-700 bg-slate-50/50 sticky left-0 z-10 font-medium">AI Autopilot (auto-reply)</td>
-                      <td className="py-3 px-6 text-center text-slate-300">—</td>
-                      <td className="py-3 px-6 text-center text-slate-300">—</td>
-                      <td className="py-3 px-6 text-center"><Check className="w-5 h-5 mx-auto text-slate-900" /></td>
-                      <td className="py-3 px-6 text-center"><Check className="w-5 h-5 mx-auto text-slate-900" /></td>
-                    </tr>
-                    <tr className="border-b border-slate-100 hover:bg-slate-50 transition-colors">
-                      <td className="py-3 px-6 text-slate-700 bg-white sticky left-0 z-10 font-medium">Multi-language translation</td>
-                      <td className="py-3 px-6 text-center text-slate-300">—</td>
-                      <td className="py-3 px-6 text-center text-slate-300">—</td>
-                      <td className="py-3 px-6 text-center"><Check className="w-5 h-5 mx-auto text-slate-900" /></td>
-                      <td className="py-3 px-6 text-center"><Check className="w-5 h-5 mx-auto text-slate-900" /></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </section>
-          </motion.div>
-          </PricingGate>
-        )}
-      </AnimatePresence>
+        
     </main>
   );
 };

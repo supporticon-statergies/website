@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 
 class ErrorBoundary extends Component<{ children: ReactNode }, { error: Error | null }> {
@@ -55,6 +55,7 @@ const Privacy = lazy(() => import("./pages/Privacy"));
 const ResourceDetail = lazy(() => import("./pages/ResourceDetail"));
 const CaseStudyDetail = lazy(() => import("./pages/CaseStudyDetail"));
 const FAQ = lazy(() => import("./pages/FAQ"));
+const Pricing = lazy(() => import("./pages/Pricing"));
 const Terms = lazy(() => import("./pages/Terms"));
 const Legal = lazy(() => import("./pages/Legal"));
 import SiteHeader from "./components/layout/SiteHeader";
@@ -199,11 +200,12 @@ function App() {
                   <Route path="/features" element={<Features />} />
                   <Route path="/product" element={<Product />} />
                   <Route path="/product/freshdesk" element={<ProductFreshdesk />} />
-                  <Route path="/product/freshdesk/pricing" element={<ProductFreshdesk initialTab="pricing" />} />
+                  <Route path="/product/freshdesk/pricing" element={<Navigate to="/pricing?tab=plugin" replace />} />
                   <Route path="/product/standalone" element={<ProductStandalone />} />
-                  <Route path="/product/standalone/pricing" element={<ProductStandalone initialTab="pricing" />} />
+                  <Route path="/product/standalone/pricing" element={<Navigate to="/pricing?tab=standalone" replace />} />
                   <Route path="/product/manufacturing" element={<ProductManufacturing />} />
-                  <Route path="/product/manufacturing/pricing" element={<ProductManufacturing initialTab="pricing" />} />
+                  <Route path="/product/manufacturing/pricing" element={<Navigate to="/pricing" replace />} />
+                  <Route path="/pricing" element={<Pricing />} />
                   <Route path="/faq" element={<FAQ />} />
                   <Route path="/resources" element={<Resources />} />
                   <Route path="/events" element={<Events />} />
